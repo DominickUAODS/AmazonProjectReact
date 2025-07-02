@@ -1,42 +1,127 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.text-main { /* temp */
+  color: var(--main-text);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.text-minor { /* temp */
+  color: var(--minor-text);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header-1 {
+  font-weight: 600;
+  letter-spacing: -2%;
+  line-height: 48px;
+  size: 40px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.header-2 {
+  font-weight: 600;
+  letter-spacing: -1.5%;
+  line-height: 36px;
+  size: 32px;
 }
 
-.card {
-  padding: 2em;
+.header-3 {
+  font-weight: 500;
+  letter-spacing: -1.5%;
+  line-height: 28px;
+  size: 24px;
 }
 
-.read-the-docs {
-  color: #888;
+.text-1 {
+  font-weight: 700;
+  letter-spacing: 2%;
+  line-height: 28px;
+  size: 18px;
+}
+
+.text-2 {
+  font-weight: 400;
+  letter-spacing: 2%;
+  line-height: 28px;
+  size: 18px;
+}
+
+.text-3 {
+  font-weight: 700;
+  letter-spacing: 2%;
+  line-height: 24px;
+  size: 16px;
+}
+
+.text-4, .button-primary, .button-primary-icon {
+  font-weight: 400;
+  letter-spacing: 2%;
+  line-height: 24px;
+  size: 16px;
+}
+
+.text-5 {
+  font-weight: 400;
+  letter-spacing: 2%;
+  line-height: 24px;
+  size: 14px;
+}
+
+.button {
+  color: var(--minor-text);
+  border-radius: 4px;
+  padding: 8px 32px 8px 32px;
+}
+
+.button:disabled {
+  opacity: 50%;
+}
+
+.button-icon {
+  border-radius: 4px;
+  padding: 12px;
+}
+
+.button-primary {
+  border: 2.5px solid var(--main-primary);
+}
+
+.button-primary:hover {
+  background-color: var(--minor-pr-hover);
+  border: 2.5px solid var(--main-primary);
+}
+
+.button-primary:active {
+  background-color: var(--minor-pr-press);
+}
+
+.button-secondary {
+  border: 2.5px solid var(--main-secondary);
+}
+
+.button-secondary:hover {
+  box-shadow: 0px 1px 7px -5px color-mix(in srgb, var(--minor-dark-blue) 45%, transparent);
+}
+
+.button-secondary:active {
+  background-color: var(--minor-blue);
+}
+
+.button-tertiary {
+  background-color: transparent;
+}
+
+.button-tertiary:hover {
+  background-color: var(--minor-light-blue);
+}
+
+.button-tertiary:active {
+  background-color: var(--minor-blue);
+}
+
+.button-destructive {
+  border: 2.5px solid var(--minor-destructive);
+}
+
+.button-destructive:hover {
+  box-shadow: 0px 1px 7px -5px color-mix(in srgb, var(--minor-dark-red) 50%, transparent);
+}
+
+.button-destructive:active {
+  background-color: var(--minor-light-red);
 }
