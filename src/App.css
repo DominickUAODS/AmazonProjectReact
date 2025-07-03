@@ -1,9 +1,17 @@
-.text-main { /* temp */
+.text-main {
   color: var(--main-text);
 }
 
-.text-minor { /* temp */
+.text-minor {
   color: var(--minor-text);
+}
+
+.bg-secondary {
+  background-color: var(--main-secondary);
+}
+
+.bg-dark-blue {
+  background-color: var(--minor-dark-blue);
 }
 
 .header-1 {
@@ -48,14 +56,14 @@
   size: 16px;
 }
 
-.text-4, .button-primary, .button-primary-icon {
+.text-4, .button, .label {
   font-weight: 400;
   letter-spacing: 2%;
   line-height: 24px;
   size: 16px;
 }
 
-.text-5 {
+.text-5, .input {
   font-weight: 400;
   letter-spacing: 2%;
   line-height: 24px;
@@ -64,21 +72,23 @@
 
 .button {
   color: var(--minor-text);
+  border: none;
+  outline: none;
   border-radius: 4px;
-  padding: 8px 32px 8px 32px;
+  padding: 8px 32px;
 }
 
 .button:disabled {
   opacity: 50%;
+  pointer-events: none;
 }
 
 .button-icon {
-  border-radius: 4px;
   padding: 12px;
 }
 
 .button-primary {
-  border: 2.5px solid var(--main-primary);
+  background-color: var(--main-primary);
 }
 
 .button-primary:hover {
@@ -87,6 +97,7 @@
 }
 
 .button-primary:active {
+  border: none;
   background-color: var(--minor-pr-press);
 }
 
@@ -99,6 +110,7 @@
 }
 
 .button-secondary:active {
+  box-shadow: none;
   background-color: var(--minor-blue);
 }
 
@@ -123,5 +135,44 @@
 }
 
 .button-destructive:active {
+  box-shadow: none;
   background-color: var(--minor-light-red);
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-container label {
+  background-color: var(--minor-objects);
+  color: var(--minor-text);
+  padding: 0 4px;
+  position: absolute;
+  top: -12px;
+  left: 20px;
+}
+
+.input-container input {
+  border: 1.5px solid color-mix(in srgb, var(--minor-text) 50%, transparent);
+  border-radius: 4px;
+  padding: 12px 20px;
+  color: var(--minor-text);
+  background-color: var(--minor-objects);
+}
+
+.input-container input::placeholder {
+  color: color-mix(in srgb, var(--minor-text) 25%, transparent);
+}
+
+.input-container input:focus {
+  outline: none;
+  border: 2px solid var(--minor-text);
+}
+
+.icon-main-text svg * {
+  stroke: var(--main-text);
+}
+
+.icon-main-text:hover svg * {
+  stroke: var(--minor-blue);
 }
