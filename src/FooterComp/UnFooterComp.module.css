@@ -1,0 +1,44 @@
+.unFooterCont {
+    position: fixed;
+    bottom: 0; 
+    left: 0;
+    width: 100%;
+    height: 72px;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    background-color: rgba(32, 80, 173, 1);
+    z-index: 1000;
+  }
+  
+
+.unFooterContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 380px;
+    max-height: 40px;
+    gap:32px;
+}
+
+.cryptography{
+    max-width:247px;
+    max-height: 24px;
+    align-self: center;
+}
+
+.cryptography p{
+    margin: 0;
+    color:rgba(242, 244, 248, 1);
+    font-family: 'Mulish';
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.32px;
+    white-space: nowrap;
+    overflow: hidden;
+   
+
+
+}
