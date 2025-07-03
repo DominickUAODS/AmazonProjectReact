@@ -1,5 +1,5 @@
 .preFooterCont {
-    position: fixed;
+    position: static;
     bottom: 72px; 
     left: 0;
     width: 100%;

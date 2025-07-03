@@ -13,6 +13,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  width:100%;
+  margin: 0!important;
+  max-width: 100%;
+
+}
 a {
   font-weight: 500;
   color: #646cff;
@@ -24,16 +30,26 @@ a:hover {
 
 body {
   margin: 0;
+
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
 
 }
-body {
-  padding-bottom: 258px;
+
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0 !important ; 
 }
 
+.pageContent {
+  flex-grow: 1;
+}
 h1 {
   font-size: 3.2em;
   line-height: 1.1;

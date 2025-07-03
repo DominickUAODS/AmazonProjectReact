@@ -1,0 +1,10 @@
+{
+    "customer": {
+      "id": 1,
+      "name": "Emily Carter",
+      "profilePhoto": "https://randomuser.me/api/portraits/women/44.jpg",
+      "email": "emily.carter@example.com",
+      "password": "SuperSecure123!"
+    }
+  }
+  
