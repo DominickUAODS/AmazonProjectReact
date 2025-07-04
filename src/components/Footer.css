@@ -22,10 +22,11 @@
 
 .footer-upper-inner-column a {
     text-decoration: none;
+    width: fit-content;
 }
 
 .footer-upper-inner-column a:hover {
-    color: var(--minor-blue);
+    color: var(--minor-blue) !important;
 }
 
 .footer-lower {

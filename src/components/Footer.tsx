@@ -41,7 +41,9 @@ function Footer() {
       </div>
       <div className='footer-lower bg-dark-blue'>
         <div className='footer-lower-inner'>
-          <ReactSVG className='logo-main-text footer-logo' src='/img/logo.svg' />
+          <a href=''>
+            <ReactSVG className='logo-main-text footer-logo' src='/img/logo.svg' />
+          </a>
           <p className='text-main text-5'>
             © 2024 Du Soleil. All rights reserved.
           </p>
