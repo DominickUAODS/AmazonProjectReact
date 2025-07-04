@@ -176,3 +176,11 @@
 .icon-main-text:hover svg * {
   stroke: var(--minor-blue);
 }
+
+.logo-main-text svg * {
+  fill: var(--main-text);
+}
+
+.logo-main-text:hover svg * {
+  fill: var(--minor-blue);
+}

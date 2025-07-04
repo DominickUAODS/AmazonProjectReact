@@ -26,10 +26,6 @@
     height: 32px;
 }
 
-.header-icon svg:hover {
-    cursor: pointer;
-}
-
 .header-logo {
     width: 102px;
     height: 40px;
@@ -39,14 +35,12 @@
 }
 
 .header-logo * {
-    fill: var(--main-text);
     width: 82px;
     height: 20px;
 }
 
 .header-form {
     display: flex;
-    align-items: center;
     flex-grow: 1;
     overflow: hidden;
     border-radius: 4px;
@@ -58,7 +52,6 @@
 
 .header-form input {
     flex-grow: 1;
-    padding-right: 75px;
     border: none;
     border-radius: 0;
 }
@@ -68,10 +61,7 @@
 }
 
 .header-button-search {
-    height: 100%;
     padding: 0 16px;
-    position: absolute;
-    right: 0;
     border-radius: 0;
 }
 

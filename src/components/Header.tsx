@@ -5,8 +5,12 @@ function Header() {
   return (
     <div className='header bg-secondary'>
       <div className='header-logo-container'>
-        <ReactSVG className='icon-main-text header-icon' src="/icons/menu.svg" />
-        <ReactSVG className='header-logo' src="/img/logo.svg" />
+        <a href=''>
+          <ReactSVG className='icon-main-text header-icon' src="/icons/menu.svg" />
+        </a>
+        <a href=''>
+          <ReactSVG className='logo-main-text header-logo' src="/img/logo.svg" />
+        </a>
       </div>
       <form className='input-container header-form'>
         <input name='search' placeholder='Search...' />
@@ -15,8 +19,12 @@ function Header() {
         </button>
       </form>
       <div className='header-nav-container'>
-        <ReactSVG className='icon-main-text header-icon' src="/icons/user.svg" />
-        <ReactSVG className='icon-main-text header-icon' src="/icons/cart_empty.svg" />
+        <a href=''>
+          <ReactSVG className='icon-main-text header-icon' src="/icons/user.svg" />
+        </a>
+        <a href=''>
+          <ReactSVG className='icon-main-text header-icon' src="/icons/cart_empty.svg" />
+        </a>
       </div>
     </div>
   );

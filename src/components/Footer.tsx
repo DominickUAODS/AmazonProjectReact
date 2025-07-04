@@ -20,18 +20,28 @@ function Footer() {
           <div className='footer-upper-inner-column'>
             <p className='text-main text-2'>Social media</p>
             <div className='footer-icons-container'>
-              <ReactSVG className='icon-main-text footer-icon' src='/icons/facebook.svg' />
-              <ReactSVG className='icon-main-text footer-icon' src='/icons/x.svg' />
-              <ReactSVG className='icon-main-text footer-icon' src='/icons/instagram.svg' />
-              <ReactSVG className='icon-main-text footer-icon' src='/icons/gmail.svg' />
-              <ReactSVG className='icon-main-text footer-icon' src='/icons/telegram.svg' />
+              <a href=''>
+                <ReactSVG className='icon-main-text footer-icon' src='/icons/facebook.svg' />
+              </a>
+              <a href=''>
+                <ReactSVG className='icon-main-text footer-icon' src='/icons/x.svg' />
+              </a>
+              <a href=''>
+                <ReactSVG className='icon-main-text footer-icon' src='/icons/instagram.svg' />
+              </a>
+              <a href=''>
+                <ReactSVG className='icon-main-text footer-icon' src='/icons/gmail.svg' />
+              </a>
+              <a href=''>
+                <ReactSVG className='icon-main-text footer-icon' src='/icons/telegram.svg' />
+              </a>
             </div>
           </div>
         </div>
       </div>
       <div className='footer-lower bg-dark-blue'>
         <div className='footer-lower-inner'>
-          <ReactSVG className='footer-logo' src='/img/logo.svg' />
+          <ReactSVG className='logo-main-text footer-logo' src='/img/logo.svg' />
           <p className='text-main text-5'>
             © 2024 Du Soleil. All rights reserved.
           </p>
