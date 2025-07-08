@@ -1,10 +1,10 @@
 .header {
-    padding: 12px 160px 12px 160px;
+    padding: 0 160px;
+    height: 64px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 32px;
-    height: 64px;
 }
 
 .header-logo-container {

@@ -26,6 +26,10 @@
   background-color: var(--minor-text) !important;
 }
 
+.bg-objects {
+  background-color: var(--minor-objects) !important;
+}
+
 .header-1 {
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -85,8 +89,18 @@
 .button {
   border: none;
   outline: none;
+  text-decoration: none;
   border-radius: 4px;
   padding: 8px 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.button div, .button svg {
+  width: 24px;
+  height: 24px;
 }
 
 .button:hover {
@@ -110,7 +124,7 @@
   color: var(--minor-text);
 }
 
-.button-secondary svg * {
+.button-primary svg * {
   stroke: var(--minor-text);
 }
 
@@ -217,10 +231,34 @@ a .icon-main-text:hover svg * {
   stroke: var(--minor-blue);
 }
 
+.icon-minor-text svg * {
+  stroke: var(--minor-text);
+}
+
+a .icon-minor-text:hover svg * {
+  stroke: var(--minor-dark-blue);
+}
+
+.logo-minor-text svg * {
+  fill: var(--minor-text);
+}
+
+a .logo-minor-text:hover svg * {
+  fill: var(--minor-dark-blue);
+}
+
 .logo-main-text svg * {
   fill: var(--main-text);
 }
 
 a .logo-main-text:hover svg * {
   fill: var(--minor-blue);
+}
+
+.logo-primary svg * {
+  fill: var(--main-primary);
+}
+
+a .logo-primary:hover svg * {
+  fill: var(--minor-pr-press);
 }

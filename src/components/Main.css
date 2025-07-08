@@ -1,43 +1,6 @@
 .main {
     padding: 40px 160px;
-}
-
-.main-carousel {
-    position: relative;
-}
-
-.main-carousel-banners {
     display: flex;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-}
-
-.main-carousel-banners img {
-    width: 100%;
-}
-
-.main-carousel-controls {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.main-carousel-button {
-    background-color: var(--main-text);
-    width: 40px;
-    height: 40px;
-}
-
-.main-carousel-button-icon, .main-carousel-button-icon svg {
-    width: 24px;
-    height: 24px;
-}
-
-.main-carousel-button-icon svg * {
-    stroke-width: 4px;
+    flex-direction: column;
+    gap: 24px;
 }
