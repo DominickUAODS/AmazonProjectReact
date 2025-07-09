@@ -20,7 +20,7 @@
 }
 
 .login-banner-message-block p {
-    text-align: center;
+    white-space: nowrap;
 }
 
 .login-banner-title {

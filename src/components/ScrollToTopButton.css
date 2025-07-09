@@ -1,0 +1,28 @@
+.button-scrolltotop {
+    position: sticky;
+    bottom: 32px;
+    visibility: hidden;
+    opacity: 0;
+    align-self: flex-end;
+    transform: translateX(104px);
+}
+
+.button-scrolltotop.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.button-scrolltotop, .button-scrolltotop div {
+    width: 48px;
+    height: 48px;
+}
+
+.button-scrolltotop div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-scrolltotop svg * {
+    stroke-width: 2px;
+}

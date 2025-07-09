@@ -44,6 +44,10 @@
     height: 40px;
 }
 
+.product-card-discount-icon svg {
+    filter: drop-shadow(0px 4px 8px 0px color-mix(in srgb, var(--minor-text) 25%, transparent));
+}
+
 .product-card-discount-percent {
     font-weight: 700;
     position: absolute;

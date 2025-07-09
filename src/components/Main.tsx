@@ -3,6 +3,7 @@ import { MainCarousel } from './MainCarousel';
 import { CategoryLine } from './CategoryLine';
 import { ProductLine } from './ProductLine';
 import { LoginBanner } from './LoginBanner';
+import { ScrollToTopButton } from './ScrollToTopButton';
 
 function Main() {
   const banners = [
@@ -25,6 +26,7 @@ function Main() {
       <ProductLine type='sale' pageSize={productsPageSize} />
       <hr className='main-separator' />
       <LoginBanner />
+      <ScrollToTopButton />
     </div>
   );
 }
