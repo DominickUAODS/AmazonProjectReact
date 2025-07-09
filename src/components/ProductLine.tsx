@@ -59,40 +59,43 @@ function ProductLine({ type, pageSize }: Params) {
     }
 
     return (
-        <div className='product-line-container'>
-            <div className='product-line' ref={lineRef}>
-                {products.slice(pageSize * (type === 'trending' ? 0 : 1), Math.min(pageSize * (type === 'trending' ? 1 : 2), products.length)).map((value, index) =>
-                    <ProductCard
-                        key={index}
-                        image={value.image}
-                        id={value.id}
-                        title={value.title}
-                        rating={value.rating}
-                        comments={value.comments}
-                        cost={value.cost}
-                        old_cost={value.old_cost}                        
-                    />
-                )}
-            </div>
-            <div className='product-line-controls'>
-                <button
-                    className='button button-icon button-secondary product-line-button'
-                    onMouseDown={() => startScroll('left')}
-                    onMouseUp={stopScroll}
-                    onMouseLeave={stopScroll}
-                    disabled={!canScrollLeft}
-                >
-                    <ReactSVG src='/icons/arrow_left.svg' />
-                </button>
-                <button
-                    className='button button-icon button-secondary product-line-button'
-                    onMouseDown={() => startScroll('right')}
-                    onMouseUp={stopScroll}
-                    onMouseLeave={stopScroll}
-                    disabled={!canScrollRight}
-                >
-                    <ReactSVG src='/icons/arrow_right.svg' />
-                </button>
+        <div>
+            <p className='product-line-title text-minor header-2'>{type[0].toUpperCase() + type.slice(1)}</p>
+            <div className='product-line-container'>
+                <div className='product-line' ref={lineRef}>
+                    {products.slice(pageSize * (type === 'trending' ? 0 : 1), Math.min(pageSize * (type === 'trending' ? 1 : 2), products.length)).map((value, index) =>
+                        <ProductCard
+                            key={index}
+                            image={value.image}
+                            id={value.id}
+                            title={value.title}
+                            rating={value.rating}
+                            comments={value.comments}
+                            cost={value.cost}
+                            old_cost={value.old_cost}                        
+                        />
+                    )}
+                </div>
+                <div className='product-line-controls'>
+                    <button
+                        className='button button-icon button-secondary product-line-button'
+                        onMouseDown={() => startScroll('left')}
+                        onMouseUp={stopScroll}
+                        onMouseLeave={stopScroll}
+                        disabled={!canScrollLeft}
+                    >
+                        <ReactSVG src='/icons/arrow_left.svg' />
+                    </button>
+                    <button
+                        className='button button-icon button-secondary product-line-button'
+                        onMouseDown={() => startScroll('right')}
+                        onMouseUp={stopScroll}
+                        onMouseLeave={stopScroll}
+                        disabled={!canScrollRight}
+                    >
+                        <ReactSVG src='/icons/arrow_right.svg' />
+                    </button>
+                </div>
             </div>
         </div>
     );

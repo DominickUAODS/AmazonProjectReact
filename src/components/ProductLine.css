@@ -1,3 +1,7 @@
+.product-line-title {
+    margin-bottom: 16px;
+}
+
 .product-line-container {
     position: relative;
     overflow: hidden;
