@@ -1,10 +1,11 @@
 import './ProductCard.css';
 import { ReactSVG } from 'react-svg';
 import type { Product } from '../types/Product';
+import { Link } from 'react-router-dom';
 
 function ProductCard({ id, image, title, rating, comments, cost, old_cost }: Product) {
     return (
-        <a className='product-card bg-objects' href={`/products/${id}`}>
+        <Link className='product-card bg-objects' to={`/products/${id}`}>
             <div className='product-card-image-frame'>
                 <img src={image} alt={title} />
                 {old_cost && <>
@@ -32,7 +33,7 @@ function ProductCard({ id, image, title, rating, comments, cost, old_cost }: Pro
                     <span className='product-card-cost product-card-old-cost text-minor text-4'>${old_cost.toFixed(2)}</span>
                 </>}
             </div>
-        </a>
+        </Link>
     );
 }
 

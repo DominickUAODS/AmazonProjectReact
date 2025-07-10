@@ -1,14 +1,20 @@
 import './App.css'
-import { Header } from './components/Header'
+import { BrowserRouter, Routes, Route, } from "react-router-dom";
 import { Main } from './components/Main'
-import { Footer } from './components/Footer'
+import { Layout } from './components/Layout';
+import { ProductList } from './components/ProductList';
 
 function App() {
   return (
     <>
-      <Header />
-      <Main />
-      <Footer />
+      <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Main />} />
+              <Route path="products" element={<ProductList />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
     </>
   )
 }

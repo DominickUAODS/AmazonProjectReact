@@ -1,30 +1,31 @@
-import { ReactSVG } from 'react-svg';
 import './Header.css'
+import { ReactSVG } from 'react-svg';
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (
     <div className='header bg-secondary'>
       <div className='header-logo-container'>
-        <a href=''>
+        <Link to=''>
           <ReactSVG className='icon-main-text header-icon' src="/icons/menu.svg" />
-        </a>
-        <a href=''>
+        </Link>
+        <Link to=''>
           <ReactSVG className='logo-main-text header-logo' src="/img/logo.svg" />
-        </a>
+        </Link>
       </div>
-      <form className='input-container header-form'>
+      <form action='/products' method='get' className='input-container header-form'>
         <input name='search' placeholder='Search...' />
         <button className='button header-button-search button-primary' type='submit'>
           <ReactSVG className='header-search-icon' src='/icons/search.svg' />
         </button>
       </form>
       <div className='header-nav-container'>
-        <a href=''>
+        <Link to=''>
           <ReactSVG className='icon-main-text header-icon' src="/icons/user.svg" />
-        </a>
-        <a href=''>
+        </Link>
+        <Link to=''>
           <ReactSVG className='icon-main-text header-icon' src="/icons/cart_empty.svg" />
-        </a>
+        </Link>
       </div>
     </div>
   );
