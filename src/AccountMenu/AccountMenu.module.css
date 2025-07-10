@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: flex-start;
     gap:40px;
-    
+    padding-bottom: 100px;
 }
 
 .breadCrumbs{
@@ -13,6 +13,7 @@
     justify-content: flex-start;
     gap:6px;
     align-items: center;
+    padding: 24px 16px;
 }
 
 .bcText{
@@ -44,13 +45,13 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
-    height: 100%;
+    height: 912px;
     padding: 24px 16px;
     display: flex;
     gap:24px;
-    border: 0;
-    border-right: 1.5px;
+    border-right: 1.5px solid;
     border-color: rgba(204, 221, 255, 1);
+    margin-bottom: 28px;
 }
 
 .accountInfo{

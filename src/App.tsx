@@ -1,4 +1,5 @@
 
+import AccountSettings from './AccountComp/AccountSettings';
 import AccountMenu from './AccountMenu/AccountMenu'
 import './App.css'
 import Footer from './FooterComp/Footer'
@@ -10,7 +11,7 @@ function App() {
     <div className="pageWrapper">
       <Header />
       <main className="pageContent">
-        <AccountMenu />
+        <AccountSettings/>
       </main>
       <Footer />
     </div>
