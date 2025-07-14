@@ -1,17 +1,15 @@
-
 import './App.css'
-import Footer from './FooterComp/Footer'
-
-import Header from './HeaderComp/Header'
+// import Header from './components/HeaderComp/Header'
+import AdminPanel from './components/AdminComp/AdminPanel'
 
 function App() {
 
-  return (
-    <>
-      <Header/> 
-      <Footer/>
-    </>
-  )
+	return (
+		<>
+			{/* <Header /> */}
+			<AdminPanel />
+		</>
+	)
 }
 
 export default App

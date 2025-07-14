@@ -1,0 +1,76 @@
+/*.header {
+	 position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background-color: rgba(74, 123, 217, 1);
+	padding-left: 160px;
+	padding-right: 160px;
+	gap: 32px;
+	width: 100%;
+	height: 64px;
+	margin: 0; */
+	/* display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 160px;
+	gap: 32px;
+background-color: rgba(74, 123, 217, 1);
+	position: absolute;
+	width: 100%;
+	height: 64px;
+	left: calc(50% - 100%/2);
+	top: 0px;
+} */
+	.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: rgba(74, 123, 217, 1);
+	padding: 12px 160px;
+	gap: 32px;
+	width: 100%;
+	height: 64px;
+	box-sizing: border-box;
+}
+
+
+.mainLogoCont {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	gap: 12px;
+	height: 40px;
+}
+
+
+
+.iconsCont {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	max-width: 88px;
+	max-height: 40px;
+	padding: 0px;
+	gap: 8px;
+}
+
+.userButton {
+padding: 0px;
+	/* padding-right: 0; */
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: 40px;
+	max-height: 40px;
+	background-color: rgba(74, 123, 217, 1);
+}

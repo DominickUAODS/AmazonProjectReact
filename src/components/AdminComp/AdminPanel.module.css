@@ -1,0 +1,27 @@
+.panel {
+	padding: 64px;
+}
+
+.header {
+	/* display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 16px; */
+
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	padding: 0px;
+	gap: 16px;
+
+	/* position: absolute; */
+	width: 80%;
+	height: 48px;
+	left: 160px;
+	top: 104px;
+}
+
+.title {
+	font-size: 24px;
+	font-weight: 600;
+}
