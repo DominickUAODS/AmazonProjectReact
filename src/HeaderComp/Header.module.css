@@ -91,3 +91,59 @@
     max-height: 40px;
     background-color:  rgba(74, 123, 217, 1);
 }
+
+
+@media (max-width: 768px) {
+  .header {
+    padding: 10px 16px;
+    gap: 12px;
+  }
+
+  .logo{
+    display: none;
+  }
+
+  .mainLogoCont {
+    gap: 8px;
+  }
+
+  .searchCont {
+    width: 75%;
+    max-width: unset;
+  }
+
+  .input {
+    padding-left: 12px;
+    font-size: 14px;
+  }
+
+  .searchButton {
+    padding: 0 12px;
+    max-width: 44px;
+
+  }
+
+  .iconsCont {
+    gap: 4px;
+  }
+
+  .userButton {
+    display: none; 
+  }
+
+  .cartButton {
+    padding: 8px;
+    max-width: 36px;
+    max-height: 36px;
+  }
+
+  .logo svg {
+    width: 72px;
+    height: auto;
+  }
+
+  .menu svg {
+    width: 24px;
+    height: 24px;
+  }
+}

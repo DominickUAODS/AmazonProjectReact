@@ -1,0 +1,50 @@
+.accOrdersPage{
+    background-color: rgba(242, 244, 248, 1);
+    padding-left: 160px;
+    padding-right: 160px;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+
+}
+
+
+.accOrdersTitle p{
+    font-family: 'Mulish';
+    font-size: 32px;
+    font-style: bold;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin: 0;
+    text-align: left;
+
+}
+
+.accOrdersTitle{
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1.5px solid;
+    border-color: rgba(204, 221, 255, 1);
+}
+
+
+.accOrders{
+    display: flex;
+    flex-direction: column;
+    padding-top: 104px;
+    padding-left: 41px;
+
+    height: auto;
+
+}
+
+.accountOrdersSet{
+    display: flex;
+    flex-direction: column;
+    width: calc(100vw - 700px);
+    max-height: 528px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    flex: 1 1 auto;
+}

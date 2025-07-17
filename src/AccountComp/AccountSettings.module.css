@@ -113,7 +113,7 @@ button span{
     cursor: pointer;
     background-image:
     linear-gradient(rgba(242, 244, 248, 1), rgba(242, 244, 248, 1)), 
-      linear-gradient(98.13deg, rgba(74, 123, 217, 1) 0%, rgba(74, 123, 217, 1) 100%); /* градиент бордера */
+      linear-gradient(98.13deg, rgba(74, 123, 217, 1) 0%, rgba(74, 123, 217, 1) 100%); 
     background-origin: padding-box, border-box;
     background-clip: padding-box, border-box;
     transition: background-image 0.2s ease;
@@ -129,12 +129,13 @@ button span{
 
 .secondaryButton:active {
     background-image:
-    linear-gradient(rgba(242, 244, 248, 1), rgba(242, 244, 248, 1)), 
+    linear-gradient(rgba(204, 221, 255, 1), rgba(204, 221, 255, 1)), 
       linear-gradient(98.13deg, #0E3F9D 1.78%, #4A7BD9 100%);
   }
   
 
-.secondaryButton:disabled {
+.secondaryButton:disabled, 
+.setBlockWh .secondaryButton:disabled{
     background-image:
     linear-gradient(white,white), 
     linear-gradient(98.13deg, #AAA 0%, #CCC 100%);
@@ -152,8 +153,14 @@ button span{
 .setBlockWh .secondaryButton:hover{
     background-image:
     linear-gradient(rgba(244, 250, 255, 1),rgba(244, 250, 255, 1)), 
-  linear-gradient(98.13deg, #2C5DBB 1.78%, #6899F7 100%);
+  linear-gradient(98.13deg, #2C5DBB 1.78%, #6899F7 100%) !important;
 }
+
+.setBlockWh .secondaryButton:active {
+    background-image:
+    linear-gradient(rgba(204, 221, 255, 1), rgba(204, 221, 255, 1)), 
+      linear-gradient(98.13deg, #0E3F9D 1.78%, #4A7BD9 100%) !important;
+  }
 
 .butIcon{
     background-color: transparent;
@@ -211,3 +218,16 @@ button span{
     position: relative;
     display: inline-block;
   }
+
+
+.destructiveButton:hover{
+    box-shadow:0 1 7px -5px rgba(194, 32, 32, 0.5) !important;
+}
+
+.destructiveButton:active{
+    background-color: rgba(255, 204, 204, 1);
+}
+
+.destructiveButton:disabled{
+    opacity: 50%;
+}
