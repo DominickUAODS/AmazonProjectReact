@@ -1,5 +1,5 @@
-import { ReactSVG } from 'react-svg';
 import './ScrollToTopButton.css'
+import { ReactSVG } from 'react-svg';
 import { useEffect, useState } from 'react';
 
 function ScrollToTopButton() {

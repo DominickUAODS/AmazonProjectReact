@@ -5,8 +5,3 @@
     gap: 24px;
 }
 
-.main-separator {
-    height: 2.5px;
-    border: none;
-    background-color: var(--minor-blue);
-}

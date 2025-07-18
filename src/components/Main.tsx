@@ -18,13 +18,13 @@ function Main() {
     <div className='main'>
       <MainCarousel banners={banners} />
       <CategoryLine page={1} pageSize={categoriesPageSize} />
-      <hr className='main-separator' />
+      <hr className='hr-separator' />
       <ProductLine type='trending' pageSize={productsPageSize} />
-      <hr className='main-separator' />
+      <hr className='hr-separator' />
       <CategoryLine page={2} pageSize={categoriesPageSize} />
-      <hr className='main-separator' />
+      <hr className='hr-separator' />
       <ProductLine type='sale' pageSize={productsPageSize} />
-      <hr className='main-separator' />
+      <hr className='hr-separator' />
       <LoginBanner />
       <ScrollToTopButton />
     </div>

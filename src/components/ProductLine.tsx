@@ -65,6 +65,7 @@ function ProductLine({ type, pageSize }: Params) {
                 <div className='product-line' ref={lineRef}>
                     {products.slice(pageSize * (type === 'trending' ? 0 : 1), Math.min(pageSize * (type === 'trending' ? 1 : 2), products.length)).map((value, index) =>
                         <ProductCard
+                            card_size='small'
                             key={index}
                             image={value.image}
                             id={value.id}

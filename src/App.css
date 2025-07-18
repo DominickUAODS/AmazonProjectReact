@@ -1,3 +1,29 @@
+.hr-separator {
+  height: 2.5px;
+  border: none;
+  background-color: var(--minor-blue);
+}
+
+.empty {
+  flex-grow: 1;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 13px;
+}
+
+.breadcrumb div, .breadcrumb svg {
+  width: 24px;
+  height: 24px;
+}
+
+.breadcrumb svg * {
+  stroke-width: 2px;
+}
+
 .text-main {
   color: var(--main-text) !important;
 }
@@ -72,14 +98,14 @@
   font-size: 16px;
 }
 
-.text-4, .button, .label {
+.text-4, .button, label {
   font-weight: 400;
   letter-spacing: 0.02em;
   line-height: 24px;
   font-size: 16px;
 }
 
-.text-5, .input {
+.text-5, input, select {
   font-weight: 400;
   letter-spacing: 0.02em;
   line-height: 24px;
@@ -114,9 +140,24 @@
 
 .button-icon {
   padding: 0;
+}
+
+.button-icon, .button-icon div {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.button-group {
+  display: flex;
+}
+
+.button-group *:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.button-group *:last-child {
+  border-radius: 0 4px 4px 0;
 }
 
 .button-primary {
@@ -206,7 +247,7 @@
   left: 20px;
 }
 
-.input-container input {
+.input-container input, .input-container select {
   border: 1.5px solid color-mix(in srgb, var(--minor-text) 50%, transparent);
   border-radius: 4px;
   padding: 12px 20px;
@@ -214,13 +255,30 @@
   background-color: var(--minor-objects);
 }
 
+.input-container select {
+  padding: 8px 20px;
+}
+
 .input-container input::placeholder {
   color: color-mix(in srgb, var(--minor-text) 25%, transparent);
 }
 
-.input-container input:focus {
+.input-container input:focus, .input-container select:focus {
   outline: none;
   border: 2px solid var(--minor-text);
+}
+
+.input-container select {
+  appearance: none;
+  background-image: url('/icons/arrow_down.svg');
+  background-repeat: no-repeat;
+  background-position: right 18px top 50%;
+  background-size: 24px;
+  padding-right: 3rem;
+}
+
+.input-container select:open {
+  background-image: url('/icons/arrow_up.svg');
 }
 
 .icon-main-text svg * {
