@@ -231,3 +231,48 @@ button span{
 .destructiveButton:disabled{
     opacity: 50%;
 }
+
+
+@media (max-width: 768px) {
+    .menu{
+        display: none;
+    }
+
+    .acSetBlock{
+        background-color: rgba(242, 244, 248, 1);
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 24px;
+        gap:12px;
+        height: 100%;
+    }
+
+    .accSettings{
+        display: flex;
+        flex-direction: column;
+        padding-top: 24px;
+        padding-left: 16px;
+    
+    }
+
+    .settingsSet{
+        width: 358px;
+        max-height: 528px;
+        margin: 0 auto;
+        box-sizing: border-box;
+        flex: 1 1 auto;
+    }
+
+    .setBlockButtons{
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+        margin-left: auto;
+    
+    }
+
+    .butIcon{
+        display: none;
+    }
+  }

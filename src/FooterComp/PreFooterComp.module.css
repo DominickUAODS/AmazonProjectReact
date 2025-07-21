@@ -70,3 +70,33 @@
     display: flex;
     gap:8px;
 }
+
+@media (max-width: 768px) {
+
+    .preFooterCont{
+        flex-direction: column;
+        padding: 16px;
+        max-width: 100%;
+        width:398px;
+        height: 348px;
+        justify-content: flex-start;
+        align-items: flex-start;
+        
+        
+    }
+
+
+    .footerContent{
+        flex-direction: column;
+        gap:32px;
+        align-items: flex-start;
+        text-align: left;
+        justify-content: flex-start;
+
+    }
+
+    .fcBlok3{
+        padding-bottom: 16px;
+    }
+  }
+  

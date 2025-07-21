@@ -6,3 +6,13 @@
 
 
 
+
+
+@media (max-width: 768px) {
+
+    .footer{
+        height:394px;
+        width:100%;
+    }
+  }
+  

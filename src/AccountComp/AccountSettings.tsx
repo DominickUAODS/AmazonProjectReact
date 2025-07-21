@@ -23,8 +23,9 @@ export default function AccountSettings() {
   
 	return (
 		<div className={styles.acSetBlock}>
-
+			<div className={styles.menu}>
 			<AccountMenu/>
+			</div>
 
 
 
