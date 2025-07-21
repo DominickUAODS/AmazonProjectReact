@@ -1,0 +1,46 @@
+.product-line-title {
+    margin-bottom: 16px;
+}
+
+.product-line-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.product-line {
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    padding: 0 88px;
+    gap: 16px;
+}
+
+.product-line-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    padding: 0 27px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-line-button {
+    background-color: var(--main-text);
+    width: 32px;
+    height: 32px;
+}
+
+.product-line-button div {
+    display: flex;
+}
+
+.product-line-button div, .product-line-button svg {
+    width: 16px;
+    height: 16px;
+}
+
+.product-line-button svg * {
+    stroke-width: 6px;
+}

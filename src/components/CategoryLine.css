@@ -1,0 +1,42 @@
+.category-line-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.category-line {
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    padding: 0 23px;
+    gap: 23px;
+}
+
+.category-line-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.category-line-button {
+    background-color: var(--main-text);
+    width: 32px;
+    height: 32px;
+}
+
+.category-line-button div {
+    display: flex;
+}
+
+.category-line-button div, .category-line-button svg {
+    width: 16px;
+    height: 16px;
+}
+
+.category-line-button svg * {
+    stroke-width: 6px;
+}

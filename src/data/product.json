@@ -1,0 +1,104 @@
+[
+    {
+      "id": 1,
+      "title": "Wireless Noise Cancelling Over-Ear Bluetooth Headphones with 40-Hour Battery Life",
+      "image": "https://hataplus.com.ua/image/cache/catalog/products/mobilni-aksesuary/audio/bezdrotovi-navushnyky/Navushnyky%20apple%20airpods%20max/4308B18B-73FE-4A09-95FE-2A3D57FE9A21-700x700.jpg",
+      "reviews": 213,
+      "rating": 5,
+      "price": 119.99,
+      "discount": true,
+      "oldPrice": 149.99
+    },
+    {
+      "id": 2,
+      "title": "Smart LED TV 55-Inch 4K Ultra HD with Voice Control and Streaming Apps",
+      "image": "https://ergo-ua.com/img/products/1796341/3201548.jpg",
+      "reviews": 578,
+      "rating": 5,
+      "price": 499.99,
+      "discount": true,
+      "oldPrice": 649.99
+    },
+    {
+      "id": 3,
+      "title": "Professional Stainless Steel 16-Piece Cookware Set for Induction and Gas Stoves",
+      "image": "https://images.prom.ua/1722981119_w600_h600_1722981119.jpg",
+      "reviews": 134,
+      "rating": 4,
+      "price": 89.99,
+      "discount": false,
+      "oldPrice": null
+    },
+    {
+      "id": 4,
+      "title": "Ergonomic Office Chair with Adjustable Lumbar Support and Breathable Mesh Back",
+      "image": "https://images.prom.ua/5673691325_w600_h600_5673691325.jpg",
+      "reviews": 341,
+      "rating": 4,
+      "price": 139.99,
+      "discount": true,
+      "oldPrice": 179.99
+    },
+    {
+      "id": 5,
+      "title": "Portable Espresso Machine for Travel and Outdoor Use – Manual Hand Pump",
+      "image": "https://content2.rozetka.com.ua/goods/images/big/314351721.jpg",
+      "reviews": 89,
+      "rating": 3,
+      "price": 54.95,
+      "discount": false,
+      "oldPrice": null
+    },
+    {
+      "id": 6,
+      "title": "Ultra Lightweight Water-Resistant Packable Travel Backpack for Hiking and Camping",
+      "image": "https://content1.rozetka.com.ua/goods/images/big/503196885.jpg",
+      "reviews": 152,
+      "rating": 4,
+      "price": 29.99,
+      "discount": true,
+      "oldPrice": 39.99
+    },
+    {
+      "id": 7,
+      "title": "Automatic Pet Feeder with Voice Recorder and Programmable Meal Times – 6L Capacity",
+      "image": "https://content.rozetka.com.ua/goods/images/big/518045629.png",
+      "reviews": 204,
+      "rating": 5,
+      "price": 64.99,
+      "discount": false,
+      "oldPrice": null
+    },
+    {
+      "id": 8,
+      "title": "Smartphone Gimbal Stabilizer with 3-Axis Anti-Shake and Object Tracking",
+      "image": "https://www.androidplanet.nl/wp-content/uploads/2024/10/motorola-moto-g55-review-7.jpg",
+      "reviews": 311,
+      "rating": 4,
+      "price": 99.00,
+      "discount": true,
+      "oldPrice": 129.00
+    },
+    {
+      "id": 9,
+      "title": "Cordless Electric Screwdriver with LED Light and 45-Piece Accessory Kit",
+      "image": "https://m.media-amazon.com/images/I/51LDHG5G69L._AC_.jpg",
+      "reviews": 76,
+      "rating": 3,
+      "price": 34.50,
+      "discount": false,
+      "oldPrice": null
+    },
+    {
+      "id": 10,
+      "title": "Luxury Egyptian Cotton 6-Piece Bath Towel Set – Soft, Absorbent and Durable",
+      "image": "https://xcdn.next.co.uk/common/items/default/default/itemimages/3_4Ratio/product/lge/559757s.jpg?im=Resize,width=750",
+      "reviews": 198,
+      "rating": 5,
+      "price": 59.99,
+      "discount": true,
+      "oldPrice": 74.99
+    }
+  ]
+  
+  
