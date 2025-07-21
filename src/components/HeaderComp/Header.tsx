@@ -19,17 +19,13 @@ export default function Header() {
 				</div>
 			</div>
 			<div className={styles.searchCont}>
-				<div className={styles.inputCont}>
 					<input type="text" placeholder="Search..." className={styles.input}></input>
-				</div>
-				<div className={styles.sbCont}>
 					<button className={styles.searchButton}>
 						<svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M14.6857 14.1056C13.6057 15.5216 11.1157 16.1996 9.99971 16.1996C6.51971 16.1996 3.69971 13.3796 3.69971 9.89961C3.69971 6.41961 6.51971 3.59961 9.99971 3.59961C13.4797 3.59961 16.2997 6.41961 16.2997 9.89961C16.2997 10.5836 16.1917 11.2436 15.9877 11.8616" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 							<path d="M21.6998 20.3995L14.6858 14.1055" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 						</svg>
 					</button>
-				</div>
 			</div>
 			<div className={styles.iconsCont}>
 				<button className={styles.userButton}>

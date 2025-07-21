@@ -1,0 +1,191 @@
+.order{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 94px;
+	box-sizing: border-box;
+	width: 100%;
+  padding: 16px;
+}
+
+
+.evenOrder {
+  background-color: rgba(244, 250, 255, 1); 
+}
+
+.orderInfo{
+    display: flex;
+    flex-direction: column;
+   justify-content: center;
+    flex: 1; 
+
+}
+
+
+.orderInfo0{
+    display: flex;
+    gap:16px;
+    align-items: center;
+    text-wrap: nowrap;
+}
+
+.orderNum{
+    font-family: 'Mulish';
+    color:rgba(14, 32, 66, 1);
+    font-size:18px;
+    font-weight: 400;
+    letter-spacing: 0.4px;
+    margin: 0;
+}
+
+.orderStatus{
+    font-family: 'Mulish';
+    color:rgba(74, 123, 217, 1);
+    font-size:16px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    margin: 0;
+}
+
+
+.orderDate{
+    font-family: 'Mulish';
+    color:rgba(14, 32, 66, 0.5);
+    font-size:16px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    text-align: left;
+    margin: 0;
+}
+
+.orderPrice{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end; 
+	gap: 8px;
+	width: 150px;
+
+}
+
+.numOrder{
+    margin: 0;
+    font-family: 'Mulish';
+    color:rgba(14, 32, 66, 0.5);
+    font-size:16px;
+    font-weight: 400;
+    text-align: right;
+
+
+}
+
+.orderPrice0{
+    display: flex;
+    gap:24px;
+}
+
+.dollar {
+    font-size: 24px;
+    vertical-align: baseline;
+    font-weight: 500;
+    letter-spacing: -0.4px;
+    color:rgba(14, 32, 66, 1);
+    font-weight: bold;
+  }
+  
+  .main {
+    font-size: 24px;
+    letter-spacing: -0.4px;
+    font-weight: 500;
+    color:rgba(14, 32, 66, 1);
+    font-weight: bold;
+  }
+  
+.cents {
+  font-size: 16px;
+  vertical-align: super;
+  margin-left: 2px;
+  letter-spacing: 0.4px;
+  color: rgba(14, 32, 66, 1);
+  font-weight: bold;
+}
+
+
+.secondaryButtonEven{
+  background-image:
+  linear-gradient( rgba(244, 250, 255, 1),  rgba(244, 250, 255, 1)),
+  linear-gradient(98.13deg, rgba(74, 123, 217, 1) 0%, rgba(74, 123, 217, 1) 100%) !important; 
+}
+
+.secondaryButtonEven:hover {
+  background-image:
+      linear-gradient( rgba(244, 250, 255, 1),  rgba(244, 250, 255, 1)), 
+    linear-gradient(98.13deg, #2C5DBB 1.78%, #6899F7 100%) !important;
+}
+
+
+.secondaryButtonEven:active {
+  background-image:
+  linear-gradient( rgba(244, 250, 255, 1),  rgba(244, 250, 255, 1)), 
+    linear-gradient(98.13deg, #0E3F9D 1.78%, #4A7BD9 100%) !important;
+}
+
+
+.secondaryButtonEven:disabled {
+  background-image:
+  linear-gradient( rgba(244, 250, 255, 1),  rgba(244, 250, 255, 1)), 
+  linear-gradient(98.13deg, #AAA 0%, #CCC 100%) !important;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+.secondaryButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 2.5px solid transparent;
+  border-radius: 4px;
+  width: 77px;
+  height: 34px;
+  padding: 8px 16px;
+  cursor: pointer;
+  background-image:
+    linear-gradient(rgba(242, 244, 248, 1), rgba(242, 244, 248, 1)),
+    linear-gradient(98.13deg, rgba(74, 123, 217, 1) 0%, rgba(74, 123, 217, 1) 100%);
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  transition: background-image 0.2s ease;
+
+  color: rgba(14, 32, 66, 1);
+  font-family: 'Mulish';
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  margin: 0;
+  text-align: center;
+}
+
+  
+
+.secondaryButton:hover {
+    background-image:
+        linear-gradient(rgba(242, 244, 248, 1), rgba(242, 244, 248, 1)), 
+      linear-gradient(98.13deg, #2C5DBB 1.78%, #6899F7 100%);
+  }
+  
+
+.secondaryButton:active {
+    background-image:
+    linear-gradient(rgba(242, 244, 248, 1), rgba(242, 244, 248, 1)), 
+      linear-gradient(98.13deg, #0E3F9D 1.78%, #4A7BD9 100%);
+  }
+  
+
+.secondaryButton:disabled {
+    background-image:
+    linear-gradient(white,white), 
+    linear-gradient(98.13deg, #AAA 0%, #CCC 100%);
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
