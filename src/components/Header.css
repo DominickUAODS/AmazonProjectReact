@@ -1,0 +1,81 @@
+.header {
+    padding: 0 160px;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+}
+
+.header-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-icon, .header-icon div {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.header-logo {
+    width: 102px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-logo * {
+    width: 82px;
+    height: 20px;
+}
+
+.header-form {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.header-form:focus-within {
+    border: 2px solid var(--minor-text);
+}
+
+.header-form input {
+    flex-grow: 1;
+    border: none;
+    border-radius: 0;
+}
+
+.header-form input:focus {
+    border: none;
+}
+
+.header-button-search {
+    padding: 0 16px;
+    border-radius: 0;
+}
+
+.header-button-search:hover {
+    border: none;
+}
+
+.header-search-icon, .header-search-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.header-nav-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
