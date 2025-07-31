@@ -1,9 +1,9 @@
 import './Main.css';
-import { MainCarousel } from './MainCarousel';
-import { CategoryLine } from './CategoryLine';
-import { ProductLine } from './ProductLine';
-import { LoginBanner } from './LoginBanner';
-import { ScrollToTopButton } from './ScrollToTopButton';
+import { MainCarousel } from './ProductComp/MainCarousel';
+import { CategoryLine } from './ProductComp/CategoryLine';
+import { ProductLine } from './ProductComp/ProductLine';
+import { LoginBanner } from './ProductComp/LoginBanner';
+import { ScrollToTopButton } from './ProductComp/ScrollToTopButton';
 
 function Main() {
   const banners = [

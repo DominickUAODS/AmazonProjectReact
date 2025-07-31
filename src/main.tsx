@@ -2,9 +2,19 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import { BrowserRouter, useLocation } from 'react-router-dom';
 
-createRoot(document.getElementById('root')!).render(
+function AppWrapper() {
+	const location = useLocation();
+	const background = location.state?.background;
+  
+	return <App location={location} background={background} />;
+  }
+  
+  createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<App />
-	</StrictMode>,
-)
+	  <BrowserRouter>
+		<AppWrapper />
+	  </BrowserRouter>
+	</StrictMode>
+  );

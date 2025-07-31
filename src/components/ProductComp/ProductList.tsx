@@ -4,7 +4,7 @@ import { ProductCard } from './ProductCard';
 import { ReactSVG } from 'react-svg';
 import { useEffect, useState } from 'react';
 
-import { products } from '../data (temp)/products';
+import { products } from '../../data (temp)/products';
 import { ScrollToTopButton } from './ScrollToTopButton';
 
 

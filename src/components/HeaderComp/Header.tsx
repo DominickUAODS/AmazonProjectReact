@@ -1,6 +1,13 @@
+import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './Header.module.css'
 
 export default function Header() {
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	const openSignUp = () => {
+		navigate('/signUp', { state: { background: location } });
+	};
 	return (
 		<div className={styles.header}>
 			<div className={styles.mainLogoCont}>
@@ -28,7 +35,7 @@ export default function Header() {
 					</button>
 			</div>
 			<div className={styles.iconsCont}>
-				<button className={styles.userButton}>
+				<button className={styles.userButton}  onClick={openSignUp}>
 					<svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M26.4118 27.9913C26.4118 24.0953 24.8758 19.5273 21.2518 17.5113C20.5158 17.1033 19.6918 16.7993 18.7798 16.6233C18.7798 16.6233 16.9238 16.0953 13.9318 16.6233C13.0198 16.7833 12.1958 17.1033 11.4598 17.5113C7.8358 19.5273 6.2998 24.0953 6.2998 27.9913" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 						<path d="M16.5159 4.75C19.0928 4.75001 21.1819 6.83906 21.1819 9.41602C21.1819 11.993 19.0928 14.082 16.5159 14.082C13.9389 14.082 11.8499 11.993 11.8499 9.41602C11.8499 6.83906 13.9389 4.75 16.5159 4.75Z" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />

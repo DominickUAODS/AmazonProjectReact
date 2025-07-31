@@ -2,9 +2,9 @@ import './ProductLine.css';
 import { useEffect, useRef, useState } from 'react';
 import { ReactSVG } from 'react-svg';
 import { ProductCard } from './ProductCard';
-import type { LineScrollDirection } from '../types/LineScrollDirection';
+import type { LineScrollDirection } from '../../types/LineScrollDirection';
 
-import { products } from '../data (temp)/products';
+import { products } from '../../data (temp)/products';
 
 type Params = {
     type: 'trending' | 'sale',

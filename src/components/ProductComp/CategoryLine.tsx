@@ -2,9 +2,9 @@ import './CategoryLine.css';
 import { useEffect, useRef, useState } from 'react';
 import { ReactSVG } from 'react-svg';
 import { CategoryCard } from './CategoryCard';
-import type { LineScrollDirection } from '../types/LineScrollDirection';
+import type { LineScrollDirection } from '../../types/LineScrollDirection';
 
-import { categories } from '../data (temp)/categories';
+import { categories } from '../../data (temp)/categories';
 
 type Params = {
     page: number,
