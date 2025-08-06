@@ -5,8 +5,13 @@ import commonStyles from '../common.module.css';
 
 
 
-
-export default function EnterCodeFromGmail({ background }: { background: Location }) {
+export default function EnterCodeFromGmail({
+    background,
+    isPasswordReset,
+  }: {
+    background: Location;
+    isPasswordReset: boolean;
+  }) {
     const navigate = useNavigate();
     const closeModal = () => navigate(-1); 
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
@@ -14,6 +19,11 @@ export default function EnterCodeFromGmail({ background }: { background: Locatio
     const openFinalSignUp = () => {
 		navigate('/finalSignUp', { state: { background } });
 	};
+
+    const handlePasswordReset = () => {
+        navigate('/resetPassword', { state: { background } });
+      };
+      
     
 
     const handleBackdropClick = (e:any) => {
@@ -97,8 +107,11 @@ export default function EnterCodeFromGmail({ background }: { background: Locatio
                                 </button>
                             </div>
 
-                            <button className={commonStyles.nextStepButton} onClick={openFinalSignUp}>
-                                Continue
+                            <button
+                                className={commonStyles.nextStepButton}
+                                onClick={isPasswordReset ? handlePasswordReset : openFinalSignUp}
+                            >
+                             Continue
                             </button>
                         </div>
                     </div>

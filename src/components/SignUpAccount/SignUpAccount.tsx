@@ -8,7 +8,7 @@ import commonStyles from '../common.module.css';
 export default function SignUpAccount() {
     const navigate = useNavigate();
 	const location = useLocation();
-    const closeModal = () => navigate(-1); 
+    const closeModal = () => navigate("/"); 
 
 
     const handleBackdropClick = (e:any) => {

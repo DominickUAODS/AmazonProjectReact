@@ -3,11 +3,17 @@ import styles from './LogInAccount.module.css'
 import commonStyles from '../common.module.css';
 
 
-export default function LogInAccount() {
+export default function LogInAccount({ background }: { background: Location }) {
     const navigate = useNavigate();
-	const location = useLocation();
-    const closeModal = () => navigate(-1); 
+    const closeModal = () => navigate("/"); 
 
+	const openSignUp = () => {
+		navigate('/signUp',{ state: { background } });
+	};
+
+	const openForgotPassword = () => {
+		navigate('/forgotPassword',{ state: { background } });
+	};
 
     const handleBackdropClick = (e:any) => {
 		if (e.target === e.currentTarget) {
@@ -30,6 +36,7 @@ export default function LogInAccount() {
                                 </span>
                         </div>
 
+
 						<div className={styles.inputDataBlock}>
 							<fieldset className={commonStyles.inputWrapper}>
                                 <legend>Email</legend>
@@ -39,7 +46,7 @@ export default function LogInAccount() {
 							<fieldset className={commonStyles.inputWrapper}>
 								<legend>Password</legend>
 								<input type="password" placeholder="Enter your password" />
-								<button className={styles.showButton}>
+								<button className={commonStyles.showButton}>
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M3 11.2207C4.938 14.1307 8.244 16.0507 12 16.0507C15.756 16.0507 19.062 14.1307 21 11.2207" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 										<path d="M12 16.4102V19.2902" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -47,13 +54,34 @@ export default function LogInAccount() {
 										<path d="M5.66999 14.1602L3.63599 16.2002" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 									</svg>
 								</button>
-						</fieldset>
+							</fieldset>
+							
 
+							<div className={styles.stayLogInblock}>
+								<label className={styles.checkboxLabel}>
+									<input type="checkbox" />
+									Stay signed in
+								</label>
+								<a onClick = {openForgotPassword} className={styles.forgotPassword}>Forgot password?</a>
+							</div>
 
 						</div>
-					</div>
-					</div>
 
+						<div className={styles.logInButtonBlock}>
+							<button className={commonStyles.nextStepButton}>
+                                Log in
+                            </button>
+							<div className={styles.wantToSignUp}>
+                        		<span>
+									Don’t have an account?
+                        			<a onClick={openSignUp}> Sign up</a>
+                        		</span>
+                			</div>
+						</div>
+
+
+					</div>
+					</div>
 					<img className = {styles.imgReactangle} src='public\img\Rectangle 413.png'></img>
 				</div>
 			</div>

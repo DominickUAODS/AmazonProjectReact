@@ -5,7 +5,7 @@ import commonStyles from '../common.module.css';
 
 export default function SignUpFinal({ background }: { background: Location }) {
     const navigate = useNavigate();
-    const closeModal = () => navigate(-1); 
+    const closeModal = () => navigate("/"); 
 
 
     const handleBackdropClick = (e:any) => {

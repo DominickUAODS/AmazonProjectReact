@@ -17,6 +17,8 @@ import LogInAccount from './components/LogInAccount/LogInAccount';
 import EnterCodeFromGmail from './components/SignUpAccount/EnterCodeFromGmail';
 import SignUpFinal from './components/SignUpAccount/SignUpFinal';
 import Congrats from './components/SignUpAccount/Congrats';
+import ForgotPassword from './components/LogInAccount/ForgotPassword';
+import ResetPassword from './components/LogInAccount/ResetPassword';
 
 function App({ location, background } : any) {
   return (
@@ -32,9 +34,22 @@ function App({ location, background } : any) {
 
       {background && (
         <Routes>
+          {/* log in modal windows */}
+          <Route path = "/login" element = {<LogInAccount background={location.state?.background}/>}/>
+          <Route path="/forgotPassword" element={<ForgotPassword background={location.state?.background}/>}/>
+          <Route
+            path="/checkInForPassword"
+            element={<EnterCodeFromGmail background={location.state?.background} isPasswordReset={true} />}
+          />
+          <Route path="/resetPassword" element={<ResetPassword background={location.state?.background}/>}/>
+          
+
+          {/* sign up modal windows */}
           <Route path="/signUp" element={<SignUpAccount />} />
-          <Route path = "/login" element = {<LogInAccount/>}/>
-          <Route path="/checkIn" element={<EnterCodeFromGmail background={location.state?.background}/>}/>
+          <Route
+            path="/checkIn"
+            element={<EnterCodeFromGmail background={location.state?.background} isPasswordReset={false} />}
+          />
           <Route path="/finalSignUp" element={<SignUpFinal background={location.state?.background}/>}/>
           <Route path="/congrats" element={<Congrats/>}/>
         </Routes>

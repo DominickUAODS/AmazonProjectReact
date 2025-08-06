@@ -19,13 +19,74 @@
 	flex-direction: column;
 	gap:16px;
 	justify-content: center;
+	margin-top:101px;
+	margin-bottom: 101px;
+	width:440px;
 }
 
 
-.showButton{
-	background: transparent;
-	border: none;
-	padding: 0 !important;
-   
-   
+.stayLogInblock{
+	display: flex;
+	gap:10px;
+	justify-content: space-between;
+	max-width: 440px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+
+
+.checkboxLabel {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 14px;
+	line-height: 24px;
+	letter-spacing: 0.3px;
+	cursor: pointer;
+	color:rgba(14, 32, 66, 1);
+	font-weight: 400;
+}
+
+.checkboxLabel input{
+	border: 1.5px solid rgba(14, 32, 66, 0.5);
+	background-color: rgba(244, 250, 255, 1) !important;
+	border-radius: 2px;
+	width:16px;
+	height: 16px;
+}
+  
+.forgotPassword {
+	font-size: 14px;
+	line-height: 24px;
+	letter-spacing: 0.3px;
+	cursor: pointer;
+	color:rgba(14, 32, 66, 1);
+	font-weight: 400;
+	text-decoration: none;
+}
+  
+.forgotPassword:hover {
+	text-decoration: none;
+	color:rgba(14, 32, 66, 1);
+}
+
+.logInButtonBlock{
+	display: flex;
+	flex-direction: column;
+	gap:16px;
+	width:100%;
+}
+
+.wantToSignUp{
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.3px;
+}
+
+
+.wantToSignUp a{
+  cursor: pointer;
 }
