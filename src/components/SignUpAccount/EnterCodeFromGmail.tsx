@@ -6,11 +6,14 @@ import commonStyles from '../common.module.css';
 
 
 
-export default function EnterCodeFromGmail() {
+export default function EnterCodeFromGmail({ background }: { background: Location }) {
     const navigate = useNavigate();
-	const location = useLocation();
     const closeModal = () => navigate(-1); 
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
+
+    const openFinalSignUp = () => {
+		navigate('/finalSignUp', { state: { background } });
+	};
     
 
     const handleBackdropClick = (e:any) => {
@@ -63,11 +66,11 @@ export default function EnterCodeFromGmail() {
                     <div className={styles.modalCodeBlock0}>
                         <div className={styles.modalCodeBlock}>
 
-                            <div className={styles.sendCodeInfo}>
-                                <span className={styles.sCmainInfo}>
+                            <div className={commonStyles.info}>
+                                <span className={commonStyles.infoSpan0}>
                                     Send code
                                 </span>
-                                <span className={styles.sCaddInfo}>
+                                <span className={commonStyles.infoSpan1}>
                                     Enter the code to confirm your email
                                 </span>
                             </div>
@@ -94,7 +97,7 @@ export default function EnterCodeFromGmail() {
                                 </button>
                             </div>
 
-                            <button className={commonStyles.nextStepButton}>
+                            <button className={commonStyles.nextStepButton} onClick={openFinalSignUp}>
                                 Continue
                             </button>
                         </div>

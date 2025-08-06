@@ -15,6 +15,8 @@ import AccountWishlist from './components/AccountComp/AccountWishlist';
 import SignUpAccount from './components/SignUpAccount/SignUpAccount';
 import LogInAccount from './components/LogInAccount/LogInAccount';
 import EnterCodeFromGmail from './components/SignUpAccount/EnterCodeFromGmail';
+import SignUpFinal from './components/SignUpAccount/SignUpFinal';
+import Congrats from './components/SignUpAccount/Congrats';
 
 function App({ location, background } : any) {
   return (
@@ -32,7 +34,9 @@ function App({ location, background } : any) {
         <Routes>
           <Route path="/signUp" element={<SignUpAccount />} />
           <Route path = "/login" element = {<LogInAccount/>}/>
-          <Route path="/checkIn" element={<EnterCodeFromGmail/>}/>
+          <Route path="/checkIn" element={<EnterCodeFromGmail background={location.state?.background}/>}/>
+          <Route path="/finalSignUp" element={<SignUpFinal background={location.state?.background}/>}/>
+          <Route path="/congrats" element={<Congrats/>}/>
         </Routes>
       )}
     </>

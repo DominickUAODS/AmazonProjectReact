@@ -1,0 +1,19 @@
+
+.modalFSBlock0{
+    padding-left: 119px;
+    padding-right: 119px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 40px;
+
+}
+
+.modalFSBlock{
+    display: flex;
+    margin-top:189px;
+    margin-bottom: 189px;
+    flex-direction: column;
+    justify-content: space-between;
+    gap:120px;
+}
+

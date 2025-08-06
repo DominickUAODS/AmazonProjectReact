@@ -1,3 +1,4 @@
+/* buttons */
 .nextStepButton{
     width:100%;
     height: 52px;
@@ -11,6 +12,7 @@
     letter-spacing: 0.3px;
 }
 
+/* modal windows */
 .modalBackdrop {
 	position: fixed;
 	top:60px;
@@ -40,4 +42,75 @@
     gap: 24px;
     display: flex;
    
+}
+
+/* modal windows input */
+.inputWrappersBlock{
+    margin-bottom: 5.3125rem;
+}
+
+.inputWrapper {
+    border: 1.5px solid rgba(14, 32, 66, 0.5);
+    border-radius: 4px;
+    position: relative;
+    height: 58px;
+    margin: 0 !important;
+    padding: 8px 20px 18px 20px !important;
+    display: flex;
+    align-items: center; 
+    box-sizing: border-box;
+  }
+  
+  .inputWrapper legend {
+    padding: 0 4px;
+    font-size: 16px;
+    font-family: 'Mulish';
+    line-height: 24px;
+    letter-spacing: 0.3px;
+    color: rgba(14, 32, 66, 1);
+  }
+    
+  .inputWrapper input {
+    width: 100%;
+    padding-right: 48px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 0 !important;
+    font-family: 'Mulish';
+    line-height: 24px;
+    letter-spacing: 0.3px;
+    color: rgba(14, 32, 66, 1);
+    align-self: center;
+    background-color: rgba(244, 250, 255, 1);
+
+  }
+
+  
+  /* modal windows span */
+.info{
+	display: flex;
+    flex-direction: column;
+    gap:6px;
+    justify-content: center;
+}
+
+.infoSpan0{
+	font-family: 'Mulish';
+    font-weight: 600;
+    font-size: 40px;
+    margin:0;
+    text-align: center;
+    letter-spacing: -0.8px;
+    line-height: 48px;
+}
+
+.infoSpan1{
+	font-family: 'Mulish';
+    font-weight: 500;
+    font-size: 24px;
+    margin:0;
+    text-align: center;
+    letter-spacing: -0.5px;
+    line-height: 28px;
 }

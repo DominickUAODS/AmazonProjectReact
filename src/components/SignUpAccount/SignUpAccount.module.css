@@ -5,41 +5,21 @@
     padding-right: 70px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 
 }
 
 .modalSignUpBlock{
+    margin-top: 56px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-.signUpInfo{
-    display: flex;
-    flex-direction: column;
-    gap:6px;
     justify-content: center;
 }
 
-.signUpInfoSpan0{
-    font-family: 'Mulish';
-    font-weight: 600;
-    font-size: 40px;
-    margin:0;
-    text-align: center;
-    letter-spacing: -0.8px;
-    line-height: 48px;
-}
 
-.signUpInfoSpan1{
-    font-family: 'Mulish';
-    font-weight: 500;
-    font-size: 24px;
-    margin:0;
-    text-align: center;
-    letter-spacing: -0.5px;
-    line-height: 28px;
-}
+
+
 
 .signUpForm{
     margin-top: 5.3125rem; ;

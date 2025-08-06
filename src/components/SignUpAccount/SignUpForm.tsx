@@ -17,14 +17,14 @@ export default function SignUpForm({ background }: { background: Location }) {
 
 	return (
 		<div className={styles.signUpForm}>
-            <div className={styles.inputWrappersBlock}>
-                <fieldset className={styles.inputWrapper}>
+            <div className={commonStyles.inputWrappersBlock}>
+                <fieldset className={commonStyles.inputWrapper}>
                     <legend>Email</legend>
                     <input type="email" placeholder="Enter your email" />
                 </fieldset>
 
 
-                <fieldset className={styles.inputWrapper}>
+                <fieldset className={commonStyles.inputWrapper}>
                     <legend>Password</legend>
                     <input type="password" placeholder="Enter your password" />
                     <button className={styles.showButton}>
@@ -37,7 +37,7 @@ export default function SignUpForm({ background }: { background: Location }) {
                     </button>
                 </fieldset>
 
-                <fieldset className={styles.inputWrapper}>
+                <fieldset className={commonStyles.inputWrapper}>
                     <legend>Confirm password</legend>
                     <input type="password" placeholder="Repeat your password" />
                     <button className={styles.showButton}>

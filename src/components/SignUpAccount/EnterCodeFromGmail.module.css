@@ -36,33 +36,6 @@
 
 
 
-.sendCodeInfo{
-    display: flex;
-    flex-direction: column;
-    gap:6px;
-    justify-content: center;
-}
-
-.sCmainInfo{
-    color: rgba(14, 32, 66, 1);
-    font-family: 'Mulish';
-    font-weight: 600;
-    font-size: 40px;
-    line-height: 48px;
-    letter-spacing:-0.8px ;
-    text-align: center;
-}
-
-.sCaddInfo{
-    color: rgba(14, 32, 66, 1);
-    font-family: 'Mulish';
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 28px;
-    text-align: center;
-    letter-spacing:-0.4px ;
-}
-
 .enterCodeBlock{
     margin-top: 139px;
     margin-bottom: 139px;

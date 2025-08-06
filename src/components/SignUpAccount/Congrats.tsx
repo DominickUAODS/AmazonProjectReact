@@ -1,15 +1,15 @@
-
-import { useLocation, useNavigate } from 'react-router-dom';
-import styles from './SignUpAccount.module.css'
-import SignUpForm from './SignUpForm';
+import { useNavigate, useLocation } from 'react-router-dom';
+import styles from './Congrats.module.css'
 import commonStyles from '../common.module.css';
 
 
-export default function SignUpAccount() {
+export default function Congrats() {
     const navigate = useNavigate();
-	const location = useLocation();
     const closeModal = () => navigate(-1); 
 
+    const openMain = () => {
+		navigate('/');
+	};
 
     const handleBackdropClick = (e:any) => {
 		if (e.target === e.currentTarget) {
@@ -20,28 +20,28 @@ export default function SignUpAccount() {
 	return (
 		<div className={commonStyles.modalBackdrop} onClick={handleBackdropClick}>
 			<div className={commonStyles.modal} onClick={(e) => e.stopPropagation()}>
-				<div className={commonStyles.modalBlock}>
-                    <div className={styles.modalSignUpBlock0}>
-                        <div className={styles.modalSignUpBlock}>
+                <div className={commonStyles.modalBlock}>
+                    <div className={styles.modalFSBlock0}>
+                        <div className={styles.modalFSBlock}>
+
                             <div className={commonStyles.info}>
                                 <span className={commonStyles.infoSpan0}>
-                                    Create account
+                                    Congratulations!
                                 </span>
                                 <span className={commonStyles.infoSpan1}>
-                                    Shop in the marketplace while traveling
+                                    The registration was completed
                                 </span>
                             </div>
-                            <div className={styles.signUpForm}>
-                                <SignUpForm background={location.state?.background} />
-                            </div>
-                            <span className={styles.tAp}>
-                            By clicking “Continue”, you agree with <a>PERRY Terms and Conditions</a>
-                            </span>
+
+
+                            <button className={commonStyles.nextStepButton} onClick={openMain}>
+                                Let`s start shopping
+                            </button>
                         </div>
                     </div>
+
                     <img className = {styles.imgReactangle} src='public\img\Rectangle 413.png'></img>
                 </div>
-                
 			</div>
 		</div>
 	);
