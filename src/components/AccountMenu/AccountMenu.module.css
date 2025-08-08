@@ -115,6 +115,8 @@
     max-width: 350px;
     max-height: 56px;
     padding: 16px 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .menuChoice p{
@@ -128,3 +130,8 @@
     margin: 0;
     text-align: left;
 }
+
+.active {
+    background-color:rgba(224, 235, 255, 1);
+    border-radius: 4px;
+  }

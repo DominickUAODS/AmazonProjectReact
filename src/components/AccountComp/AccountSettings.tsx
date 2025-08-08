@@ -3,6 +3,7 @@ import customerData from '../../data/customers.json';
 import AccountMenu from '../AccountMenu/AccountMenu';
 import { useEffect, useRef, useState } from 'react';
 import SettingsInfo from './SeetingsInfo';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
 
@@ -10,6 +11,32 @@ import SettingsInfo from './SeetingsInfo';
 export default function AccountSettings() {
 	const [isOpen, setIsOpen] = useState(false);
 	const ref = useRef<HTMLDivElement>(null);
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	const openChangeName = () => {
+		navigate('/changeName', { state: { background: location } });
+	};
+
+	const openChangePassword = () => {
+		navigate('/changePassword', { state: { background: location } });
+	};
+
+	
+	const openChangeEmail = () => {
+		navigate('/changeEmail', { state: { background: location } });
+	};
+
+	const openLogOut = () => {
+		navigate('/logOut', { state: { background: location } });
+	};
+
+
+	const openDeleteAcc = () => {
+		navigate('/delete?', { state: { background: location } });
+	};
+
+
 
 	useEffect(() => {
 	  const handleClickOutside = (event: MouseEvent) => {
@@ -91,7 +118,7 @@ export default function AccountSettings() {
 						<div className={styles.nameDisplay}>
 							<span className={styles.nameText}>{customerData.customer.name}</span>
 						</div>
-						<button className={`${styles.changeNameButton} ${styles.secondaryButton}`}>
+						<button onClick={openChangeName} className={`${styles.changeNameButton} ${styles.secondaryButton}`}>
 								<span>
 									Change name
 								</span>
@@ -114,7 +141,7 @@ export default function AccountSettings() {
 						<div className={styles.emailDisplay}>
 							<span className={styles.emailText}>{customerData.customer.email}</span>
 						</div>
-						<button className={`${styles.changeEmailButton} ${styles.secondaryButton}`}>
+						<button onClick={openChangeEmail} className={`${styles.changeEmailButton} ${styles.secondaryButton}`}>
 								<span>
 									Change email
 								</span>
@@ -137,7 +164,7 @@ export default function AccountSettings() {
 						<div className={styles.emailDisplay}>
 							<span className={styles.passwordText}>{customerData.customer.password}</span>
 						</div>
-						<button className={`${styles.changePasswordButton} ${styles.secondaryButton}`}>
+						<button onClick={openChangePassword} className={`${styles.changePasswordButton} ${styles.secondaryButton}`}>
 								<span>
 									Change password
 								</span>
@@ -157,7 +184,7 @@ export default function AccountSettings() {
 							</p>
 						</div>
 						<div className={styles.setBlockButtons}>
-						<button className={`${styles.changePasswordButton} ${styles.secondaryButton}`}>
+						<button onClick={openLogOut} className={`${styles.changePasswordButton} ${styles.secondaryButton}`}>
 								<span>
 									Log out
 								</span>
@@ -176,7 +203,7 @@ export default function AccountSettings() {
 							</p>
 						</div>
 						<div className={styles.setBlockButtons}>
-						<button className={`${styles.deleteButton} ${styles.destructiveButton}`}>
+						<button onClick = {openDeleteAcc} className={`${styles.deleteButton} ${styles.destructiveButton}`}>
 								<span>
 									Delete
 								</span>

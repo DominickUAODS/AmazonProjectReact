@@ -1,7 +1,7 @@
 /* buttons */
 .nextStepButton{
     width:100%;
-    height: 52px;
+    max-height: 52px;
     background-color: rgba(184, 234, 72, 1);
     padding: 14px 12px;
     border-radius: 4px;
@@ -12,12 +12,58 @@
     letter-spacing: 0.3px;
 }
 
-.showButton{
+.showButton,
+.hideButton{
     background: transparent;
     border: none;
-    padding: 0 !important;
-   
-   
+    padding: 0 !important;  
+}
+
+.buttonGroup{
+    display: flex;
+    width: 100%;
+    gap:14px;
+}
+
+.sendCodeAgainBtn{
+    background-color: transparent;
+    border: none;
+}
+
+.sendCodeAgainBtn span{
+    font-family: 'Mulish';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.3px;
+    color:rgba(14, 32, 66, 1);
+}
+
+
+.secondaryButton{
+    width:100%;
+    max-height: 52px;
+    background-color: transparent;
+    padding: 14px 12px;
+    border-radius: 4px;
+    border: 2.5px solid rgba(74, 123, 217, 1);
+    font-size: 16px;
+    color: rgba(14, 32, 66, 1);
+    line-height: 24px;
+    letter-spacing: 0.3px;
+
+}
+
+
+/* pagination */
+.fixedPagination {
+    position: static;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 64px;
+    z-index: 1000;
+    min-width: 400px;
 }
 
 /* modal windows */
@@ -50,6 +96,20 @@
     gap: 24px;
     display: flex;
    
+}
+
+.cnModal{
+    background:rgba(244, 250, 255, 1);
+	padding: 24px;
+	border-radius: 8px;
+	position: relative;
+	max-width: 565px;
+    width:100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+
 }
 
 /* modal windows input */
@@ -94,6 +154,30 @@
 
   }
 
+  .enterCode{
+    display: flex;
+    gap:8px;
+    max-width: 292px;
+    justify-content: center;
+    margin-left: 74px;
+    margin-right: 74px;
+}
+
+.codeInput,
+.codeInput:active{
+    background-color: transparent;
+    border: 1.5px solid rgba(14, 32, 66, 0.5);
+    width: 42px;
+    height: 48px;
+    border-radius: 4px;
+    font-family: 'Mulish';
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    letter-spacing: -0.4px;
+}
+
   
   /* modal windows span */
 .info{
@@ -121,4 +205,19 @@
     text-align: center;
     letter-spacing: -0.5px;
     line-height: 28px;
+}
+
+.modalInfoSpan{
+    font-family: 'Mulish';
+    font-weight: 600;
+    font-size: 32px;
+    margin:0;
+    letter-spacing: -0.5px;
+    line-height: 36px;
+}
+
+.modalInfo{
+    padding-bottom: 14px;
+    border-bottom: 1.5px solid rgba(204, 221, 255, 1);
+    width:100%;
 }

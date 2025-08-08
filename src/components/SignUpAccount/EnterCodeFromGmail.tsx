@@ -2,6 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './EnterCodeFromGmail.module.css'
 import { useRef } from 'react';
 import commonStyles from '../common.module.css';
+import CodeInput from './CodeInput';
 
 
 
@@ -86,23 +87,12 @@ export default function EnterCodeFromGmail({
                             </div>
 
                             <div className={styles.enterCodeBlock}>
-                                <div className={styles.enterCode}>
-                                        {Array.from({ length: 6 }).map((_, i) => (
-                                        <input
-                                            key={i}
-                                            type="text"
-                                            maxLength={1}
-                                            ref={(el) => {
-                                                inputsRef.current[i] = el;
-                                              }}                                              
-                                            onChange={(e) => handleChange(i, e.target.value)}
-                                            onKeyDown={(e) => handleKeyDown(e, i)}
-                                            className={styles.codeInput}
-                                        />
-                                        ))}
-                                </div>
+                            <CodeInput
+                                inputClassName={commonStyles.codeInput}
+                                wrapperClassName={commonStyles.enterCode}
+                            />
 
-                                <button className={styles.sendCodeAgainBtn}>
+                                <button className={commonStyles.sendCodeAgainBtn}>
                                     <span>Send Code</span>
                                 </button>
                             </div>

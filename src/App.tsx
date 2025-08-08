@@ -19,6 +19,12 @@ import SignUpFinal from './components/SignUpAccount/SignUpFinal';
 import Congrats from './components/SignUpAccount/Congrats';
 import ForgotPassword from './components/LogInAccount/ForgotPassword';
 import ResetPassword from './components/LogInAccount/ResetPassword';
+import AccountOrders from './components/AccountComp/AccountOrders';
+import ChangeNameModal from './components/AccountModalWindows/ChnageNameModal';
+import ChangePasswordModal from './components/AccountModalWindows/ChangePasswordModal';
+import ChangeEmailModal from './components/AccountModalWindows/ChangeEmailModal';
+import LogOutModal from './components/AccountModalWindows/LogOutModal';
+import DeleteAccountModal from './components/AccountModalWindows/DeleteAccountModal';
 
 function App({ location, background } : any) {
   return (
@@ -29,6 +35,7 @@ function App({ location, background } : any) {
           <Route path="products" element={<ProductList />} />
           <Route path="settings" element={<AccountSettings />} />
           <Route path="wishlist" element={<AccountWishlist />} />
+          <Route path="orders" element={<AccountOrders />} />
         </Route>
       </Routes>
 
@@ -52,6 +59,14 @@ function App({ location, background } : any) {
           />
           <Route path="/finalSignUp" element={<SignUpFinal background={location.state?.background}/>}/>
           <Route path="/congrats" element={<Congrats/>}/>
+
+
+          {/* user settings modal windows */}
+          <Route path="/changeName" element={<ChangeNameModal/>}/>
+          <Route path="/changePassword" element={<ChangePasswordModal/>}/>
+          <Route path="/changeEmail" element={<ChangeEmailModal/>}/>
+          <Route path="/logOut" element={<LogOutModal/>}/>
+          <Route path="/delete?" element={<DeleteAccountModal/>}/>
         </Routes>
       )}
     </>

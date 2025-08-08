@@ -38,12 +38,12 @@ export default function SignUpFinal({ background }: { background: Location }) {
                                 <div className={commonStyles.inputWrappersBlock}>
                                     <fieldset className={commonStyles.inputWrapper}>
                                         <legend>First name</legend>
-                                        <input type="email" placeholder="Enter your first name" />
+                                        <input type="text" placeholder="Enter your first name" />
                                     </fieldset>
 
                                     <fieldset className={commonStyles.inputWrapper}>
                                         <legend>Last name</legend>
-                                        <input type="email" placeholder="Enter your last name" />
+                                        <input type="text" placeholder="Enter your last name" />
                                     </fieldset>
                                 </div>
                             </div>

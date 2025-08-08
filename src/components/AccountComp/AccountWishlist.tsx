@@ -2,12 +2,21 @@ import styles from './AccountWishlist.module.css'
 import AccountMenu from '../AccountMenu/AccountMenu';
 import WishlistCard from './WishlistCard';
 import products from '../../data/product.json';
+import { useState } from 'react';
+import Pagination from '../Pagination/Pagination';
+import commonStyles from "../common.module.css"
 
 
 
 
 export default function AccountWishlist() {
-	
+    const [currentPage, setCurrentPage] = useState(1);
+	const itemsPerPage = 10;
+	const totalPages = Math.ceil(products.length / itemsPerPage);
+
+	const startIndex = (currentPage - 1) * itemsPerPage;
+	const endIndex = startIndex + itemsPerPage;
+	const visibleProducts = products.slice(startIndex, endIndex);
   
 	return (
 		<div className={styles.acWishBlock}>
@@ -31,10 +40,18 @@ export default function AccountWishlist() {
 				</div>
 
                 <div className={styles.wishlistSet}>
-                    {products.map(product => (
-				        <WishlistCard key={product.id} product={product} />
-			        ))}
+                    {visibleProducts.map(product => (
+						<WishlistCard key={product.id} product={product} />
+					))}
                 </div>
+
+                <div className={commonStyles.fixedPagination}>
+					<Pagination
+						currentPage={currentPage}
+						totalPages={totalPages}
+						onPageChange={(page) => setCurrentPage(page)}
+					/>
+				</div>
             </div>
 
 		</div>

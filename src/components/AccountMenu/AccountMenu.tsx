@@ -1,11 +1,15 @@
 
 import styles from './AccountMenu.module.css'
 import customerData from '../../data/customers.json';
+import { useLocation } from 'react-router-dom';
 
 
 
 
 export default function AccountMenu() {
+    const location = useLocation();
+
+    const isActive = (path: string) => location.pathname.startsWith(path);
 	return (
 		<div className={styles.menuBlock}>
             <div className={styles.breadCrumbs}>
@@ -46,29 +50,24 @@ export default function AccountMenu() {
 
 
                     <div className={styles.accMenu}>
-                        <div className={styles.menuChoice}>
-                            <a href='/'>
-                                <p>
-                                    My orders
-                                </p>
+                        <div className={`${styles.menuChoice} ${isActive('/orders') ? styles.active : ''}`}>
+                            <a href="/orders">
+                            <p>My orders</p>
                             </a>
                         </div>
-                        <div className={styles.menuChoice}>
-                            <a href='/'>
-                                <p>
-                                    Wishlist
-                                </p>
+                        <div className={`${styles.menuChoice} ${isActive('/wishlist') ? styles.active : ''}`}>
+                            <a href="/wishlist">
+                            <p>Wishlist</p>
                             </a>
                         </div>
-                        <div className={styles.menuChoice}>
-                            <a href='/'>
-                                <p>
-                                    Account settings
-                                </p>
+                        <div className={`${styles.menuChoice} ${isActive('/settings') ? styles.active : ''}`}>
+                            <a href="/settings">
+                            <p>Account settings</p>
                             </a>
                         </div>
-
                     </div>
+
+                    
                 </div>
 
             </div>

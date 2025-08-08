@@ -1,0 +1,16 @@
+.loInfoSpan{
+    text-align: center;
+}
+
+.loModalInfo{
+    justify-content: center;
+    display: flex;
+}
+
+.loModal{
+    max-width: 464px;
+}
+
+.logOutSpan{
+    
+}
