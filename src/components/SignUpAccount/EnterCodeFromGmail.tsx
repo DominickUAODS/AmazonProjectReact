@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './EnterCodeFromGmail.module.css'
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import commonStyles from '../common.module.css';
 import CodeInput from './CodeInput';
 
@@ -13,54 +13,64 @@ export default function EnterCodeFromGmail({
     background: Location;
     isPasswordReset: boolean;
   }) {
+
+    const [verificationCode, setVerificationCode] = useState('');
     const navigate = useNavigate();
     const closeModal = () => navigate(-1); 
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
+    const location = useLocation();
+    const { email } = location.state || {};
 
-    const openFinalSignUp = () => {
-		navigate('/finalSignUp', { state: { background } });
+    const handleVerify = async () => {
+    if (!verificationCode || !email) {
+        alert("Введите код и убедитесь, что email передан.");
+        return;
+    }
+
+    try {
+        const res = await fetch('http://localhost:5000/api/Auth/verify', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, code: verificationCode }),
+        });
+
+        if (res.ok) {
+        if (isPasswordReset) {
+            handlePasswordReset();
+        } else {
+            openFinalSignUp();
+        }
+        } else {
+        const errMsg = await res.text();
+        alert(`Ошибка: ${errMsg}`);
+        }
+    } catch (err) {
+        console.error('Ошибка при отправке кода:', err);
+    }
+        };
+
+        const openFinalSignUp = () => {
+            navigate('/finalSignUp', { state: { background } });
+        };
+
+        const handlePasswordReset = () => {
+            navigate('/resetPassword', { state: { background } });
+        };
+        
+        
+
+        const handleBackdropClick = (e:any) => {
+            if (e.target === e.currentTarget) {
+                closeModal();
+            }
+        };
+
+        const handleBack = () => {
+            navigate(-1);
 	};
 
-    const handlePasswordReset = () => {
-        navigate('/resetPassword', { state: { background } });
-      };
-      
-    
-
-    const handleBackdropClick = (e:any) => {
-		if (e.target === e.currentTarget) {
-			closeModal();
-		}
-	};
-
-    const handleBack = () => {
-		navigate(-1);
-	};
-
-    
-
-    const handleChange = (index: number, value: string) => {
-        if (!/^[0-9a-zA-Z]?$/.test(value)) return;
-        if (value.length > 1) return;
-
-        const input = inputsRef.current[index];
-        if (input) input.value = value;
-
-        if (value && index < 5) {
-            inputsRef.current[index + 1]?.focus();
-        }
-
-        const code = inputsRef.current.map((input) => input?.value || '').join('');
-        if (code.length === 6) {
-            console.log('Code entered:', code);
-        }
-    };
-
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
-        if (e.key === 'Backspace' && !inputsRef.current[index]?.value && index > 0) {
-            inputsRef.current[index - 1]?.focus();
-        }
-    };
 
 	return (
 		<div className={commonStyles.modalBackdrop} onClick={handleBackdropClick}>
@@ -90,6 +100,7 @@ export default function EnterCodeFromGmail({
                             <CodeInput
                                 inputClassName={commonStyles.codeInput}
                                 wrapperClassName={commonStyles.enterCode}
+                                onComplete={(code) => setVerificationCode(code)}
                             />
 
                                 <button className={commonStyles.sendCodeAgainBtn}>
@@ -99,7 +110,7 @@ export default function EnterCodeFromGmail({
 
                             <button
                                 className={commonStyles.nextStepButton}
-                                onClick={isPasswordReset ? handlePasswordReset : openFinalSignUp}
+                                onClick={isPasswordReset ? handlePasswordReset : handleVerify}
                             >
                              Continue
                             </button>

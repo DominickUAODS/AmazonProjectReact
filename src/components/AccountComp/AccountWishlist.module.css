@@ -89,14 +89,15 @@
   }
 
 
-.wishlistSet{
+  .wishlistSet {
     padding: 24px;
-    display: flex;
-    flex-direction: row;
+    display: grid;
     gap: 5.25px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-	row-gap: 7px;
+    grid-template-columns: repeat(5, 1fr); 
+    row-gap: 7px;
+}
 
-
+.wishlistSet > * {
+    max-width: 200px; 
+    margin: 0 auto; 
 }

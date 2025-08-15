@@ -1,0 +1,26 @@
+.loModalInfo{
+    justify-content: center;
+    display: flex;
+}
+
+.loModal{
+    max-width: 464px;
+}
+
+.delSpans{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: center;
+}
+
+.delSpans span{
+    text-align: center;
+    font-family: 'Mulish';
+    font-weight: 400;
+    font-size: 18px;
+    margin:0;
+    text-align: center;
+    letter-spacing: 0.3px;
+    line-height: 28px;
+}

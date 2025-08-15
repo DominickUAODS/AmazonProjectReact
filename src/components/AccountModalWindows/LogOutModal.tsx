@@ -24,7 +24,7 @@ export default function LogOutModal() {
                 </div>
 
                 <span className={styles.logOutSpan}>
-                    This action will remove this item from your wishlist.
+                    You will log out of your account on this device.
                 </span>
 
                 <div className={commonStyles.buttonGroup}>
