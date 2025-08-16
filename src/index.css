@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
 
-* {
+
 :root {
   font-family: 'Mulish', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -19,8 +19,6 @@
 #root {
   width:100%;
   margin: 0!important;
-
-
 }
 
 
@@ -93,5 +91,4 @@ a:hover {
   --minor-light-red: #ffcccc;
   --minor-dark-red: #c22020;
   --minor-objects: #f4faff;
-}
 }
