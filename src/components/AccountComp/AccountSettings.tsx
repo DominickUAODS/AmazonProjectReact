@@ -1,12 +1,9 @@
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './AccountSettings.module.css'
 import customerData from '../../data/customers.json';
 import AccountMenu from '../AccountMenu/AccountMenu';
-import { useEffect, useRef, useState } from 'react';
 import SettingsInfo from './SeetingsInfo';
-import { useNavigate, useLocation } from 'react-router-dom';
-
-
-
 
 export default function AccountSettings() {
 	const [isOpen, setIsOpen] = useState(false);

@@ -1,16 +1,13 @@
-
-//import AccountOrders from './components/AccountComp/AccountOrders';
-import AccountSettings from './components/AccountComp/AccountSettings';
-//import AccountWishlist from './components/AccountComp/AccountWishlist';
 //import AccountMenu from './components/AccountMenu/AccountMenu'
 import './App.css'
-import { BrowserRouter, Routes, Route, useLocation, } from "react-router-dom";
+import Layout from './components/Layout';
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Main } from './components/Main'
-import  Layout  from './components/Layout';
 import { ProductList } from './components/ProductComp/ProductList';
 
-import { createRoot } from 'react-dom/client';
-import { StrictMode } from 'react';
+//import { createRoot } from 'react-dom/client';
+//import { StrictMode } from 'react';
+import AccountSettings from './components/AccountComp/AccountSettings';
 import AccountWishlist from './components/AccountComp/AccountWishlist';
 import SignUpAccount from './components/SignUpAccount/SignUpAccount';
 import LogInAccount from './components/LogInAccount/LogInAccount';
@@ -25,52 +22,51 @@ import ChangePasswordModal from './components/AccountModalWindows/ChangePassword
 import ChangeEmailModal from './components/AccountModalWindows/ChangeEmailModal';
 import LogOutModal from './components/AccountModalWindows/LogOutModal';
 import DeleteAccountModal from './components/AccountModalWindows/DeleteAccountModal';
+import type { ModalState } from './types/ModalState';
 
-function App({ location, background } : any) {
-  return (
-    <>
-      <Routes location={background || location}>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Main />} />
-          <Route path="products" element={<ProductList />} />
-          <Route path="settings" element={<AccountSettings />} />
-          <Route path="wishlist" element={<AccountWishlist />} />
-          <Route path="orders" element={<AccountOrders />} />
-        </Route>
-      </Routes>
+function App() {
+	const location = useLocation();
+	const state = location.state as ModalState | undefined;
+	const background = state?.background;
 
-      {background && (
-        <Routes>
-          {/* log in modal windows */}
-          <Route path = "/login" element = {<LogInAccount background={location.state?.background}/>}/>
-          <Route path="/forgotPassword" element={<ForgotPassword background={location.state?.background}/>}/>
-          <Route
-            path="/checkInForPassword"
-            element={<EnterCodeFromGmail background={location.state?.background} isPasswordReset={true} />}
-          />
-          <Route path="/resetPassword" element={<ResetPassword background={location.state?.background}/>}/>
-          
+	return (
+		<>
+			<Routes location={background || location}>
+				<Route path="/" element={<Layout />}>
+					<Route index element={<Main />} />
+					<Route path="products" element={<ProductList />} />
+					<Route path="settings" element={<AccountSettings />} />
+					<Route path="wishlist" element={<AccountWishlist />} />
+					<Route path="orders" element={<AccountOrders />} />
+				</Route>
+			</Routes>
 
-          {/* sign up modal windows */}
-          <Route path="/signUp" element={<SignUpAccount />} />
-          <Route
-            path="/checkIn"
-            element={<EnterCodeFromGmail background={location.state?.background} isPasswordReset={false} />}
-          />
-          <Route path="/finalSignUp" element={<SignUpFinal background={location.state?.background}/>}/>
-          <Route path="/congrats" element={<Congrats/>}/>
+			{background && (
+				<Routes>
+					{/* log in modal windows */}
+					<Route path="/login" element={<LogInAccount background={background} />} />
+					<Route path="/forgotPassword" element={<ForgotPassword background={background} />} />
+					<Route path="/checkInForPassword" element={<EnterCodeFromGmail background={background} isPasswordReset={true} />} />
+					<Route path="/resetPassword" element={<ResetPassword background={background} />} />
 
 
-          {/* user settings modal windows */}
-          <Route path="/changeName" element={<ChangeNameModal/>}/>
-          <Route path="/changePassword" element={<ChangePasswordModal/>}/>
-          <Route path="/changeEmail" element={<ChangeEmailModal/>}/>
-          <Route path="/logOut" element={<LogOutModal/>}/>
-          <Route path="/delete?" element={<DeleteAccountModal/>}/>
-        </Routes>
-      )}
-    </>
-  );
+					{/* sign up modal windows */}
+					<Route path="/signUp" element={<SignUpAccount />} />
+					<Route path="/checkIn" element={<EnterCodeFromGmail background={background} isPasswordReset={false} />} />
+					<Route path="/finalSignUp" element={<SignUpFinal background={background} />} />
+					<Route path="/congrats" element={<Congrats />} />
+
+
+					{/* user settings modal windows */}
+					<Route path="/changeName" element={<ChangeNameModal />} />
+					<Route path="/changePassword" element={<ChangePasswordModal />} />
+					<Route path="/changeEmail" element={<ChangeEmailModal />} />
+					<Route path="/logOut" element={<LogOutModal />} />
+					<Route path="/delete?" element={<DeleteAccountModal />} />
+				</Routes>
+			)}
+		</>
+	);
 }
 
 export default App;
