@@ -10,7 +10,6 @@ export default function SignUpAccount() {
 	const location = useLocation();
 	const closeModal = () => navigate("/");
 
-
 	const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		if (e.target === e.currentTarget) {
 			closeModal();
@@ -41,7 +40,6 @@ export default function SignUpAccount() {
 					</div>
 					<img className={styles.imgReactangle} src='public\img\Rectangle 413.png'></img>
 				</div>
-
 			</div>
 		</div>
 	);

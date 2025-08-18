@@ -11,7 +11,8 @@ export default function SignUpFinal({ background }: { background: Location }) {
 	const closeModal = () => navigate("/");
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
-	const [, setError] = useState('');
+
+	const [errors, setErrors] = useState<{ firstName?: string; lastName?: string; general?: string }>({});
 
 	const { email } = location.state || {};
 
@@ -21,40 +22,43 @@ export default function SignUpFinal({ background }: { background: Location }) {
 		}
 	};
 
-	const handleSubmit = async () => {
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
 
-		if (!firstName.trim() || !lastName.trim()) {
-			setError('Please enter both first and last names');
-			return;
+		const newErrors: typeof errors = {};
+
+		if (!firstName) {
+			newErrors.firstName = 'First name missing';
 		}
-		console.log(`${email} + ${firstName} + ${lastName}`)
-		if (!email) {
-			setError('Missing email or password data');
+
+		if (!firstName) {
+			newErrors.lastName = 'Last name missing';
+		}
+
+		if (Object.keys(newErrors).length > 0) {
+			setErrors(newErrors);
 			return;
 		}
 
 		try {
 			//console.log('background.state:', background.state);
-			const res = await fetch(`${API_SERVER}/auth/register/complete`, {
+			const response = await fetch(`${API_SERVER}/auth/register/complete`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					email,
-					firstName,
-					lastName,
-				}),
+				body: JSON.stringify({ email, first_name: firstName, last_name: lastName }),
 			});
-			console.log(res)
-			if (!res.ok) {
-				const text = await res.text();
-				setError(text);
+			console.log(response)
+			if (!response.ok) {
+				const err = await response.json();
+				setErrors({ general: err.message || 'Sign up failed' });
 				return;
 			}
-			console.log("Переходим на /congrats");
+			//console.log("Переходим на /congrats");
 			navigate('/congrats', { state: { background } });
+
 		} catch (err) {
-			setError('Ошибка подключения к серверу');
 			console.error(err);
+			setErrors({ general: 'Ошибка подключения к серверу' });
 		}
 	};
 
@@ -77,14 +81,38 @@ export default function SignUpFinal({ background }: { background: Location }) {
 							<div className={styles.enterFSblock}>
 								<div className={commonStyles.inputWrappersBlock}>
 									<fieldset className={commonStyles.inputWrapper}>
-										<legend>First name</legend>
-										<input type="text" placeholder="Enter your first name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+										<legend className={errors.firstName ? commonStyles.errorLegend : ''}>First name</legend>
+										<input
+											type="text"
+											placeholder="Enter your first name"
+											value={firstName}
+											onChange={(e) => {
+												setFirstName(e.target.value);
+												if (errors.firstName) {
+													setErrors(prev => ({ ...prev, password: undefined }));
+												}
+											}}
+										/>
 									</fieldset>
+									{errors.firstName && <div className={commonStyles.errorText}>{errors.firstName}</div>}
+
 
 									<fieldset className={commonStyles.inputWrapper}>
-										<legend>Last name</legend>
-										<input type="text" placeholder="Enter your last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+										<legend className={errors.lastName ? commonStyles.errorLegend : ''}>Last name</legend>
+										<input
+											type="text"
+											placeholder="Enter your last name"
+											value={lastName}
+											onChange={(e) => {
+												setLastName(e.target.value);
+												if (errors.lastName) {
+													setErrors(prev => ({ ...prev, password: undefined }));
+												}
+											}}
+										/>
 									</fieldset>
+									{errors.lastName && <div className={commonStyles.errorText}>{errors.lastName}</div>}
+
 								</div>
 							</div>
 

@@ -1,9 +1,10 @@
 export interface UserType {
   id: string;
-  name: string;
+  first_name: string;
+  last_name: string;
   email: string;
   role: 'Customer' | 'Administrator';
   status: 'Active' | 'Deleted';
-  avatar: string;
-  registered: string;
+  profile_photo?: string | null;
+  registered?: string;
 };

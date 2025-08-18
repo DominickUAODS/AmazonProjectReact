@@ -13,28 +13,42 @@ export default function EnterCodeFromGmail({ background, isPasswordReset }: { ba
 	//const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
 	const { email } = location.state || {};
 
+	const [errors, setErrors] = useState<{ verificationCode?: string; general?: string }>({});
+
 	const handleVerify = async () => {
 
-		if (!verificationCode || !email) {
-			alert("Введите код и убедитесь, что email передан.");
+		const newErrors: typeof errors = {};
+
+		if (!verificationCode) {
+			newErrors.verificationCode = 'Missing verification code';
+		}
+
+		if (Object.keys(newErrors).length > 0) {
+			setErrors(newErrors);
 			return;
 		}
 
 		try {
-			const res = await fetch(`${API_SERVER}/auth/verify`, {
+			const response = await fetch(`${API_SERVER}/auth/verify`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json', },
 				body: JSON.stringify({ email, code: verificationCode }),
 			});
 
-			if (res.ok) {
+			if (!response.ok) {
+				const err = await response.json();
+				setErrors({ general: err.message || 'Incorrect code, try again' });
+				return;
+			}
+
+			if (response.ok) {
 				if (isPasswordReset) {
 					handlePasswordReset();
 				} else {
 					openFinalSignUp();
 				}
 			} else {
-				const errMsg = await res.text();
+				const errMsg = await response.text();
 				alert(`Ошибка: ${errMsg}`);
 			}
 		} catch (err) {
@@ -43,7 +57,7 @@ export default function EnterCodeFromGmail({ background, isPasswordReset }: { ba
 	};
 
 	const openFinalSignUp = () => {
-		navigate('/finalSignUp', { state: { background, email } });
+		navigate('/finalSignUp', { state: { background, email, code: verificationCode } });
 	};
 
 	const handlePasswordReset = () => {
@@ -88,8 +102,18 @@ export default function EnterCodeFromGmail({ background, isPasswordReset }: { ba
 								<CodeInput
 									inputClassName={commonStyles.codeInput}
 									wrapperClassName={commonStyles.enterCode}
+									onChange={(code) => {
+										setVerificationCode(code);
+										if (errors.verificationCode || errors.general) {
+											setErrors({});
+										}
+									}}
 									onComplete={(code) => setVerificationCode(code)}
 								/>
+
+								{(errors.verificationCode || errors.general) && (
+									<div className={commonStyles.errorCode}>{errors.verificationCode || errors.general}</div>
+								)}
 
 								<button className={commonStyles.sendCodeAgainBtn}>
 									<span>Send Code</span>

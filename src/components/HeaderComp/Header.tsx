@@ -1,13 +1,20 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../Helpers/AuthContext';
 import styles from './Header.module.css'
 
 export default function Header() {
 	const navigate = useNavigate();
 	const location = useLocation();
+	const { isAuthenticated } = useAuth();
 
 	const openSignUp = () => {
-		navigate('/signUp', { state: { background: location } });
+		if (isAuthenticated) {
+			navigate("/settings");
+		} else {
+			navigate("/signUp", { state: { background: location } });
+		}
 	};
+
 	return (
 		<div className={styles.header}>
 			<div className={styles.mainLogoCont}>
@@ -25,17 +32,19 @@ export default function Header() {
 					</svg>
 				</div>
 			</div>
+
 			<div className={styles.searchCont}>
-					<input type="text" placeholder="Search..." className={styles.input}></input>
-					<button className={styles.searchButton}>
-						<svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M14.6857 14.1056C13.6057 15.5216 11.1157 16.1996 9.99971 16.1996C6.51971 16.1996 3.69971 13.3796 3.69971 9.89961C3.69971 6.41961 6.51971 3.59961 9.99971 3.59961C13.4797 3.59961 16.2997 6.41961 16.2997 9.89961C16.2997 10.5836 16.1917 11.2436 15.9877 11.8616" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-							<path d="M21.6998 20.3995L14.6858 14.1055" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-						</svg>
-					</button>
+				<input type="text" placeholder="Search..." className={styles.input}></input>
+				<button className={styles.searchButton}>
+					<svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M14.6857 14.1056C13.6057 15.5216 11.1157 16.1996 9.99971 16.1996C6.51971 16.1996 3.69971 13.3796 3.69971 9.89961C3.69971 6.41961 6.51971 3.59961 9.99971 3.59961C13.4797 3.59961 16.2997 6.41961 16.2997 9.89961C16.2997 10.5836 16.1917 11.2436 15.9877 11.8616" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+						<path d="M21.6998 20.3995L14.6858 14.1055" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</button>
 			</div>
+
 			<div className={styles.iconsCont}>
-				<button className={styles.userButton}  onClick={openSignUp}>
+				<button className={styles.userButton} onClick={openSignUp}>
 					<svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M26.4118 27.9913C26.4118 24.0953 24.8758 19.5273 21.2518 17.5113C20.5158 17.1033 19.6918 16.7993 18.7798 16.6233C18.7798 16.6233 16.9238 16.0953 13.9318 16.6233C13.0198 16.7833 12.1958 17.1033 11.4598 17.5113C7.8358 19.5273 6.2998 24.0953 6.2998 27.9913" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 						<path d="M16.5159 4.75C19.0928 4.75001 21.1819 6.83906 21.1819 9.41602C21.1819 11.993 19.0928 14.082 16.5159 14.082C13.9389 14.082 11.8499 11.993 11.8499 9.41602C11.8499 6.83906 13.9389 4.75 16.5159 4.75Z" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -49,8 +58,8 @@ export default function Header() {
 						<path d="M22.6275 26.2575C23.6128 26.2575 24.4115 25.4587 24.4115 24.4735C24.4115 23.4882 23.6128 22.6895 22.6275 22.6895C21.6422 22.6895 20.8435 23.4882 20.8435 24.4735C20.8435 25.4587 21.6422 26.2575 22.6275 26.2575Z" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 					</svg>
 				</button>
-
 			</div>
+
 		</div>
 	);
 }

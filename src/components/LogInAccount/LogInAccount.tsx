@@ -3,10 +3,12 @@ import { useState } from 'react';
 import styles from './LogInAccount.module.css'
 import commonStyles from '../common.module.css';
 import PasswordInput from '../SignUpAccount/PasswordInput';
+import { useAuth } from '../Helpers/AuthContext';
 
 
 export default function LogInAccount({ background }: { background: Location }) {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
+	const { login } = useAuth();
 	const navigate = useNavigate();
 	const closeModal = () => navigate("/");
 
@@ -66,6 +68,9 @@ export default function LogInAccount({ background }: { background: Location }) {
 			// Сохраняем токены
 			storage.setItem('accessToken', data.access_token);
 			storage.setItem('refreshToken', data.refresh_token);
+			storage.setItem('user', JSON.stringify(data.user));
+
+			login(data.user, { access: data.access_token, refresh: data.refresh_token }, staySignedIn);
 
 			navigate('/'); // или на dashboard
 

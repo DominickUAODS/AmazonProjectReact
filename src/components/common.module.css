@@ -248,3 +248,13 @@
 .errorLegend {
 	color: #EA4848 !important;
 }
+
+.errorCode {
+	display: block;
+	width: 100%;
+	color: #EA4848 !important;
+	font-size: 14px;
+	letter-spacing: 2%;
+	line-height: 24px;
+	text-align: center;
+}

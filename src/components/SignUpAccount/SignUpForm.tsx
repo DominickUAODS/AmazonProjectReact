@@ -11,39 +11,47 @@ export default function SignUpForm({ background }: { background: Location }) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
-	const [, setError] = useState('');
 
-	const handleContinue = async () => {
+	const [errors, setErrors] = useState<{ email?: string; password?: string; confirmPassword?: string; general?: string }>({});
 
-		if (!email || !password || !confirmPassword) {
-			setError('Заполните все поля');
-			return;
+	const handleContinue = async (e: React.FormEvent) => {
+		e.preventDefault();
+
+		const newErrors: typeof errors = {};
+
+		if (!email) {
+			newErrors.email = 'Missing email address';
 		}
-		if (password !== confirmPassword) {
-			setError('Пароли не совпадают');
+		if (!password) {
+			newErrors.password = 'Missing password';
+		}
+		if (!confirmPassword) {
+			newErrors.confirmPassword = 'Missing confirm password';
+		}
+
+		if (Object.keys(newErrors).length > 0) {
+			setErrors(newErrors);
 			return;
 		}
 
 		try {
-			const responce = await fetch(`${API_SERVER}/Auth/register/start`, {
+			const response = await fetch(`${API_SERVER}/Auth/register/start`, {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
+				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ email, password })
 			});
 
-			if (!responce.ok) {
-				const text = await responce.text();
-				setError(text);
+			if (!response.ok) {
+				const err = await response.json();
+				setErrors({ general: err.message || 'Sign up failed' });
 				return;
 			}
 
 			// Успех — переходим на экран ввода кода
-			navigate('/checkIn', { state: { email, password, background } });
+			navigate('/checkIn', { state: { background, email } });
 		} catch (err) {
 			console.error(err);
-			setError('Ошибка подключения к серверу');
+			setErrors({ general: 'Ошибка подключения к серверу' });
 		}
 	};
 
@@ -57,31 +65,59 @@ export default function SignUpForm({ background }: { background: Location }) {
 		<div className={styles.signUpForm}>
 			<div className={commonStyles.inputWrappersBlock}>
 				<fieldset className={commonStyles.inputWrapper}>
-					<legend>Email</legend>
-					<input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
+					<legend className={errors.email ? commonStyles.errorLegend : ''}>Email</legend>
+					<input
+						type="email"
+						placeholder="Enter your email"
+						value={email}
+						onChange={(e) => {
+							setEmail(e.target.value);
+							if (errors.email) {
+								setErrors(prev => ({ ...prev, email: undefined }));
+							}
+						}}
+					/>
 				</fieldset>
+				{errors.email && <div className={commonStyles.errorText}>{errors.email}</div>}
 
 
 				<fieldset className={commonStyles.inputWrapper}>
-					<legend>Password</legend>
+					<legend className={errors.password ? commonStyles.errorLegend : ''}>Password</legend>
 					<PasswordInput
 						placeholder="Enter your password"
 						name="password"
 						value={password}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+						onChange={(e) => {
+							setPassword(e.target.value);
+							if (errors.password) {
+								setErrors(prev => ({ ...prev, password: undefined }));
+							}
+						}}
 					/>
 				</fieldset>
+				{errors.password && <div className={commonStyles.errorText}>{errors.password}</div>}
+
 
 				<fieldset className={commonStyles.inputWrapper}>
-					<legend>Confirm password</legend>
+					<legend className={errors.confirmPassword ? commonStyles.errorLegend : ''}>Confirm password</legend>
 					<PasswordInput
 						placeholder="Repeat your password"
 						name="password"
 						value={confirmPassword}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
+						onChange={(e) => {
+							setConfirmPassword(e.target.value);
+							if (errors.confirmPassword) {
+								setErrors(prev => ({ ...prev, confirmPassword: undefined }));
+							}
+						}}
 					/>
 				</fieldset>
+				{errors.confirmPassword && <div className={commonStyles.errorText}>{errors.confirmPassword}</div>}
+
 			</div>
+
+			{errors.general && <p className={commonStyles.errorText}>{errors.general}</p>}
+
 			<div className={styles.buttonBlock}>
 				<button className={commonStyles.nextStepButton} onClick={handleContinue}>
 					Continue

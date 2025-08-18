@@ -23,6 +23,8 @@ import ChangeEmailModal from './components/AccountModalWindows/ChangeEmailModal'
 import LogOutModal from './components/AccountModalWindows/LogOutModal';
 import DeleteAccountModal from './components/AccountModalWindows/DeleteAccountModal';
 import type { ModalState } from './types/ModalState';
+import { AuthProvider } from './components/Helpers/AuthContext';
+import RequireAuth from './components/Helpers/RequireAuth';
 
 function App() {
 	const location = useLocation();
@@ -31,40 +33,49 @@ function App() {
 
 	return (
 		<>
-			<Routes location={background || location}>
-				<Route path="/" element={<Layout />}>
-					<Route index element={<Main />} />
-					<Route path="products" element={<ProductList />} />
-					<Route path="settings" element={<AccountSettings />} />
-					<Route path="wishlist" element={<AccountWishlist />} />
-					<Route path="orders" element={<AccountOrders />} />
-				</Route>
-			</Routes>
+			<AuthProvider>
+				<Routes location={background || location}>
+					<Route path="/" element={<Layout />}>
+						<Route index element={<Main />} />
 
-			{background && (
-				<Routes>
-					{/* log in modal windows */}
-					<Route path="/login" element={<LogInAccount background={background} />} />
-					<Route path="/forgotPassword" element={<ForgotPassword background={background} />} />
-					<Route path="/checkInForPassword" element={<EnterCodeFromGmail background={background} isPasswordReset={true} />} />
-					<Route path="/resetPassword" element={<ResetPassword background={background} />} />
-
-
-					{/* sign up modal windows */}
-					<Route path="/signUp" element={<SignUpAccount />} />
-					<Route path="/checkIn" element={<EnterCodeFromGmail background={background} isPasswordReset={false} />} />
-					<Route path="/finalSignUp" element={<SignUpFinal background={background} />} />
-					<Route path="/congrats" element={<Congrats />} />
-
-
-					{/* user settings modal windows */}
-					<Route path="/changeName" element={<ChangeNameModal />} />
-					<Route path="/changePassword" element={<ChangePasswordModal />} />
-					<Route path="/changeEmail" element={<ChangeEmailModal />} />
-					<Route path="/logOut" element={<LogOutModal />} />
-					<Route path="/delete?" element={<DeleteAccountModal />} />
+						{/* Приватные маршруты */}
+						<Route element={<RequireAuth />}>
+							<Route path="products" element={<ProductList />} />
+							<Route path="settings" element={<AccountSettings />} />
+							<Route path="wishlist" element={<AccountWishlist />} />
+							<Route path="orders" element={<AccountOrders />} />
+						</Route>
+					</Route>
 				</Routes>
-			)}
+
+
+				{background && (
+					<Routes>
+						{/* log in modal windows */}
+						<Route path="/login" element={<LogInAccount background={background} />} />
+						<Route path="/forgotPassword" element={<ForgotPassword background={background} />} />
+						<Route path="/checkInForPassword" element={<EnterCodeFromGmail background={background} isPasswordReset={true} />} />
+						<Route path="/resetPassword" element={<ResetPassword background={background} />} />
+
+
+						{/* sign up modal windows */}
+						<Route path="/signUp" element={<SignUpAccount />} />
+						<Route path="/checkIn" element={<EnterCodeFromGmail background={background} isPasswordReset={false} />} />
+						<Route path="/finalSignUp" element={<SignUpFinal background={background} />} />
+						<Route path="/congrats" element={<Congrats />} />
+
+
+						{/* user settings modal windows */}
+						<Route element={<RequireAuth />}>
+							<Route path="/changeName" element={<ChangeNameModal />} />
+							<Route path="/changePassword" element={<ChangePasswordModal />} />
+							<Route path="/changeEmail" element={<ChangeEmailModal />} />
+							<Route path="/logOut" element={<LogOutModal />} />
+							<Route path="/delete?" element={<DeleteAccountModal />} />
+						</Route>
+					</Routes >
+				)}
+			</AuthProvider>
 		</>
 	);
 }
