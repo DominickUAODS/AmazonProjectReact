@@ -48,22 +48,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	};
 
 	const logout = () => {
-		localStorage.removeItem('user');
-		localStorage.removeItem('accessToken');
-		localStorage.removeItem('refreshToken');
-		sessionStorage.removeItem('user');
-		sessionStorage.removeItem('accessToken');
-		sessionStorage.removeItem('refreshToken');
+		['user', 'accessToken', 'refreshToken'].forEach((key) => {
+			localStorage.removeItem(key);
+			sessionStorage.removeItem(key);
+		});
 
 		setUser(null);
 		setAccessToken(null);
 		setRefreshToken(null);
-		navigate("/");
+		navigate('/');
 	};
 
 	// Автообновление accessToken через refreshToken
 	const refreshAccessToken = async (): Promise<string | null> => {
-		if (!refreshToken) return null;
+		if (!refreshToken) {
+			logout();
+			return null;
+		}
 		try {
 			const res = await fetch('/auth/refresh', {
 				method: 'POST',
@@ -71,15 +72,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 				body: JSON.stringify({ refresh_token: refreshToken }),
 			});
 
-			if (!res.ok) throw new Error('Failed to refresh token');
+			if (!res.ok) {
+				logout();
+				return null;
+			}
 
 			const data = await res.json();
+			if (!data.access_token) {
+				logout();
+				return null;
+			}
+
 			setAccessToken(data.access_token);
 
 			// Обновляем хранилище
 			if (localStorage.getItem('refreshToken') === refreshToken) {
 				localStorage.setItem('accessToken', data.access_token);
-			} else if (sessionStorage.getItem('refreshToken') === refreshToken) {
+			} else {
 				sessionStorage.setItem('accessToken', data.access_token);
 			}
 
@@ -92,32 +101,51 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 	// Умный fetch для авторизованных запросов
 	const authFetch = async (input: RequestInfo, init: RequestInit = {}) => {
-		if (!accessToken) throw new Error('No access token');
+		if (!accessToken) {
+			logout();
+			throw new Error('Unauthorized');
+		}
 
-		init.headers = {
-			...init.headers,
-			Authorization: `Bearer ${accessToken}`,
+		const withAuth = {
+			...init,
+			headers: {
+				...init.headers,
+				Authorization: `Bearer ${accessToken}`,
+			},
 		};
 
-		let res = await fetch(input, init);
+		let res = await fetch(input, withAuth);
 
+		// Если токен протух — пробуем обновить
 		if (res.status === 401) {
 			const newAccessToken = await refreshAccessToken();
 			if (!newAccessToken) throw new Error('Unauthorized');
 
-			init.headers = {
-				...init.headers,
-				Authorization: `Bearer ${newAccessToken}`,
+			const retryWithAuth = {
+				...init,
+				headers: {
+					...init.headers,
+					Authorization: `Bearer ${newAccessToken}`,
+				},
 			};
-
-			res = await fetch(input, init);
+			res = await fetch(input, retryWithAuth);
 		}
 
 		return res;
 	};
 
 	return (
-		<AuthContext.Provider value={{ user, accessToken, refreshToken, isAuthenticated: !!user, login, logout, authFetch }}>
+		<AuthContext.Provider
+			value={{
+				user,
+				accessToken,
+				refreshToken,
+				isAuthenticated: !!user,
+				login,
+				logout,
+				authFetch,
+			}}
+		>
 			{children}
 		</AuthContext.Provider>
 	);

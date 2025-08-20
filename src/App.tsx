@@ -17,7 +17,7 @@ import Congrats from './components/SignUpAccount/Congrats';
 import ForgotPassword from './components/LogInAccount/ForgotPassword';
 import ResetPassword from './components/LogInAccount/ResetPassword';
 import AccountOrders from './components/AccountComp/AccountOrders';
-import ChangeNameModal from './components/AccountModalWindows/ChnageNameModal';
+import ChangeNameModal from './components/AccountModalWindows/ChangeNameModal';
 import ChangePasswordModal from './components/AccountModalWindows/ChangePasswordModal';
 import ChangeEmailModal from './components/AccountModalWindows/ChangeEmailModal';
 import LogOutModal from './components/AccountModalWindows/LogOutModal';
@@ -25,6 +25,7 @@ import DeleteAccountModal from './components/AccountModalWindows/DeleteAccountMo
 import type { ModalState } from './types/ModalState';
 import { AuthProvider } from './components/Helpers/AuthContext';
 import RequireAuth from './components/Helpers/RequireAuth';
+import ChangePhotoModal from './components/AccountModalWindows/ChangePhotoModal';
 
 function App() {
 	const location = useLocation();
@@ -38,7 +39,7 @@ function App() {
 					<Route path="/" element={<Layout />}>
 						<Route index element={<Main />} />
 
-						{/* Приватные маршруты */}
+						{/* private routes */}
 						<Route element={<RequireAuth />}>
 							<Route path="products" element={<ProductList />} />
 							<Route path="settings" element={<AccountSettings />} />
@@ -67,6 +68,7 @@ function App() {
 
 						{/* user settings modal windows */}
 						<Route element={<RequireAuth />}>
+							<Route path="/changePhoto" element={<ChangePhotoModal />} />
 							<Route path="/changeName" element={<ChangeNameModal />} />
 							<Route path="/changePassword" element={<ChangePasswordModal />} />
 							<Route path="/changeEmail" element={<ChangeEmailModal />} />

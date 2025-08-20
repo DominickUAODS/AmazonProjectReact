@@ -1,15 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './AccountSettings.module.css'
-import customerData from '../../data/customers.json';
+//import customerData from '../../data/customers.json';
 import AccountMenu from '../AccountMenu/AccountMenu';
 import SettingsInfo from './SettingsInfo';
+//import UploadImage from '../Helpers/UploadImage';
 
 export default function AccountSettings() {
 	const [isOpen, setIsOpen] = useState(false);
+	//const [isModalOpen, setIsModalOpen] = useState(false);
 	const ref = useRef<HTMLDivElement>(null);
 	const navigate = useNavigate();
 	const location = useLocation();
+	
+	const storedData = localStorage.getItem("user");
+	const user = storedData ? JSON.parse(storedData) : null;
+
+	const openChangePhoto = () => {
+		navigate('/changePhoto', { state: { background: location } });
+	};
 
 	const openChangeName = () => {
 		navigate('/changeName', { state: { background: location } });
@@ -19,7 +28,6 @@ export default function AccountSettings() {
 		navigate('/changePassword', { state: { background: location } });
 	};
 
-
 	const openChangeEmail = () => {
 		navigate('/changeEmail', { state: { background: location } });
 	};
@@ -28,11 +36,9 @@ export default function AccountSettings() {
 		navigate('/logOut', { state: { background: location } });
 	};
 
-
 	const openDeleteAcc = () => {
 		navigate('/delete?', { state: { background: location } });
 	};
-
 
 
 	useEffect(() => {
@@ -68,12 +74,18 @@ export default function AccountSettings() {
 								Change your profile picture.
 							</p>
 						</div>
+
+
+
 						<div className={styles.setBlockButtons}>
-							<button className={`${styles.changePhButton} ${styles.secondaryButton}`}>
+
+							<button onClick={openChangePhoto} className={`${styles.changePhButton} ${styles.secondaryButton}`} >
 								<span>
 									Change photo
 								</span>
 							</button>
+
+
 							<div className={styles.wrapper} ref={ref}>
 								<button
 									className={`${styles.butIcon} ${isOpen ? styles.active : ''}`}
@@ -102,6 +114,8 @@ export default function AccountSettings() {
 						</div>
 					</div>
 
+
+
 					<div className={`${styles.setBlock} ${styles.setBlockWh}`}>
 						<div className={styles.setBlockTitle}>
 							<p className={styles.sbMainTitle}>
@@ -113,7 +127,7 @@ export default function AccountSettings() {
 						</div>
 						<div className={styles.setBlockButtons}>
 							<div className={styles.nameDisplay}>
-								<span className={styles.nameText}>{customerData.customer.name}</span>
+								<span className={styles.nameText}>{user.first_name} {user.last_name}</span>
 							</div>
 							<button onClick={openChangeName} className={`${styles.changeNameButton} ${styles.secondaryButton}`}>
 								<span>
@@ -136,7 +150,7 @@ export default function AccountSettings() {
 						</div>
 						<div className={styles.setBlockButtons}>
 							<div className={styles.emailDisplay}>
-								<span className={styles.emailText}>{customerData.customer.email}</span>
+								<span className={styles.emailText}>{user.email}</span>
 							</div>
 							<button onClick={openChangeEmail} className={`${styles.changeEmailButton} ${styles.secondaryButton}`}>
 								<span>
@@ -159,7 +173,7 @@ export default function AccountSettings() {
 						</div>
 						<div className={styles.setBlockButtons}>
 							<div className={styles.emailDisplay}>
-								<span className={styles.passwordText}>{customerData.customer.password}</span>
+								<span className={styles.passwordText}>{user.id}</span>
 							</div>
 							<button onClick={openChangePassword} className={`${styles.changePasswordButton} ${styles.secondaryButton}`}>
 								<span>
@@ -190,6 +204,7 @@ export default function AccountSettings() {
 					</div>
 
 
+
 					<div className={`${styles.setBlock} ${styles.setBlockWh}`}>
 						<div className={styles.setBlockTitle}>
 							<p className={styles.sbMainTitle}>
@@ -207,9 +222,6 @@ export default function AccountSettings() {
 							</button>
 						</div>
 					</div>
-
-
-
 				</div>
 			</div>
 		</div>

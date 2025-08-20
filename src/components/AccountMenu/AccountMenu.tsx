@@ -1,13 +1,16 @@
 import { useLocation } from 'react-router-dom';
 import styles from './AccountMenu.module.css'
-import customerData from '../../data/customers.json';
-
+//import customerData from '../../data/customers.json';
 
 
 export default function AccountMenu() {
 	const location = useLocation();
 
 	const isActive = (path: string) => location.pathname.startsWith(path);
+
+	const storedData = localStorage.getItem("user");
+	const user = storedData ? JSON.parse(storedData) : null;
+
 	return (
 		<div className={styles.menuBlock}>
 			<div className={styles.breadCrumbs}>
@@ -32,16 +35,19 @@ export default function AccountMenu() {
 					<div className={styles.accountInfo}>
 
 						<div className={styles.cusPhoto}>
-							<img src={customerData.customer.profilePhoto} alt={customerData.customer.name} />
+							<img
+								src={user?.profile_photo || "/images/default-user.png"}
+								alt={user ? `${user.first_name} ${user.last_name}` : "User"}
+							/>
 						</div>
 
 
 						<div className={styles.cusInfo}>
 							<p className={styles.cusName}>
-								{customerData.customer.name}
+								{user ? `${user.first_name} ${user.last_name}` : "Guest"}
 							</p>
 							<p className={styles.cusRole}>
-								Customer
+								{user?.role || "Unknown"}
 							</p>
 						</div>
 					</div>
