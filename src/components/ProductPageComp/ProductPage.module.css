@@ -1,0 +1,9 @@
+.pp{
+    background-color: rgba(242, 244, 248, 1);
+    padding-left: 160px;
+    padding-right: 160px;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+}

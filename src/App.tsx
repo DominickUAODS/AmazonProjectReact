@@ -25,6 +25,7 @@ import ChangePasswordModal from './components/AccountModalWindows/ChangePassword
 import ChangeEmailModal from './components/AccountModalWindows/ChangeEmailModal';
 import LogOutModal from './components/AccountModalWindows/LogOutModal';
 import DeleteAccountModal from './components/AccountModalWindows/DeleteAccountModal';
+import ProductPage from './components/ProductPageComp/ProductPage';
 
 function App({ location, background } : any) {
   return (
@@ -36,6 +37,7 @@ function App({ location, background } : any) {
           <Route path="settings" element={<AccountSettings />} />
           <Route path="wishlist" element={<AccountWishlist />} />
           <Route path="orders" element={<AccountOrders />} />
+          <Route path="productpage" element={<ProductPage/>}/>
         </Route>
       </Routes>
 

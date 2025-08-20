@@ -55,6 +55,18 @@
 
 }
 
+.tetriatyButton{
+    width:100%;
+    max-height: 52px;
+    background-color: transparent;
+    padding: 14px 12px;
+    border-radius: 4px;
+    font-size: 16px;
+    color: rgba(14, 32, 66, 1);
+    line-height: 24px;
+    letter-spacing: 0.3px;
+}
+
 .destructiveButton{
     width:100%;
     max-height: 52px;

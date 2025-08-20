@@ -1,0 +1,45 @@
+.pdpp{
+    border-bottom: 2.5px solid rgba(204, 221, 255, 1);
+    padding-bottom: 48px;
+    gap:24px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.pdMainSpan{
+    font-weight: 500;
+    color: rgba(14, 32, 66, 1);
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+}
+
+.detailsBlock{
+    display: flex;
+    gap:160px;
+    flex-wrap: wrap;
+}
+
+.oneDetailBlock{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+    max-width: 382px;
+}
+
+.oneDMainSpan{
+    font-weight: 700;
+    color: rgba(14, 32, 66, 1);
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.3px;
+}
+
+.oneDAddedSpan{
+    font-weight: 400;
+    color: rgba(79, 79, 79, 1);
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.3px;
+}

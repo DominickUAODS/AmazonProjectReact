@@ -1,0 +1,7 @@
+.ppfb{
+    display: flex;
+    gap:48px;
+    margin-bottom: 24px;
+    border-bottom: 2.5px solid rgba(204, 221, 255, 1);
+    padding-bottom: 48px;
+}
