@@ -1,5 +1,6 @@
 import styles from './CommentsBlock.module.css'
 import RatingProduct from './RatingProduct';
+import StartsComments from './StartsComments';
 
 
 export default function CommentsBlock() {
@@ -10,12 +11,14 @@ export default function CommentsBlock() {
                 Customer reviews
             </span>
 
+            <div className={styles.ppcbB}>
+                <div className={styles.ppcb0}>
+                    <RatingProduct />
+                </div>
 
-            <div className={styles.ppcb0}>
-                <RatingProduct   average={4}
-                    totalReviews={242}
-                    ratings={[65, 16, 10, 4, 5]}/>
-
+                <div className={styles.ppcb11}>
+                    <StartsComments/>
+                </div>
             </div>
 
 			

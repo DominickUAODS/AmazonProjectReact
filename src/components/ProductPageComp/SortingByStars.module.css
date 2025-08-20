@@ -1,0 +1,17 @@
+.sortingByStars{
+    display: flex;
+    gap:8px;
+}
+
+.sortingByStars button{
+ display: flex !important;
+ height: 48px;
+ width: 86px;
+ justify-content: center;
+ align-items: center;
+ gap:2px;
+}
+
+.sortingByStars button.active{
+    background-color: rgba(204, 221, 255, 1);
+}

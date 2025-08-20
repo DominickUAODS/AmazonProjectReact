@@ -16,3 +16,14 @@
     display: flex;
     gap:24px;
 }
+
+.ppcb11{
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+}
+
+.ppcbB{
+    display: flex;
+    gap:24px;
+}

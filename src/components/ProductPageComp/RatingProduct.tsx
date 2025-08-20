@@ -1,15 +1,14 @@
+import PFTag from './PFTag';
 import styles from './RatingProduct.module.css'
 
 
-type RatingProductProps = {
-    average: number; 
-    totalReviews: number; 
-    ratings: number[]; 
-  };
 
-export default function RatingProduct({ average, totalReviews, ratings}: RatingProductProps) {
+export default function RatingProduct() {
+    const average=4
+    const totalReviews=242
+    const ratings=[65, 16, 10, 4, 5]
     const roundedStars = Math.ceil(average);
-
+    const tags = ["Actual price", "Fast delivery", "High quality", "Fits the description", "Worth the price", "Matches the photos", "Exceeds expectations"]
 
     const FullStar = () => (
         <svg
@@ -127,6 +126,11 @@ export default function RatingProduct({ average, totalReviews, ratings}: RatingP
 
             <div className={styles.rp1}>
                 <span className={styles.rp1MainSpan}>Frequent tags</span>
+                <div className={styles.tagsBlock}>
+                {tags.map((tag, index) => (
+                    <PFTag key={index} title={tag} />
+                ))}
+                </div>
 
             </div>
 

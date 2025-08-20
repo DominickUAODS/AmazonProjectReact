@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './DetailsBProductPage.module.css'
+import { useState, useRef, useEffect } from 'react';
 
 type Detail = {
     title: string;
@@ -7,6 +8,7 @@ type Detail = {
   };
   
   export default function DetailsBProductPage({ details }: { details: Detail[] }) {
+
     return (
       <div className={styles.pdpp}>
         <span className={styles.pdMainSpan}>Product details</span>

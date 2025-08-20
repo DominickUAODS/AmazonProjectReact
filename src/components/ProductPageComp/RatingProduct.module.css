@@ -6,6 +6,8 @@
     padding: 24px;
     gap:24px;
     border-radius: 8px;
+    max-width: 653px;
+    max-height: 390px;
     
 }
 
@@ -156,3 +158,10 @@
     line-height: 28px;
     letter-spacing: 0.4px;
 }
+
+.tagsBlock{
+    display: flex;
+    gap:8px;
+    flex-wrap: wrap;
+}
+
