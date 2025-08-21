@@ -1,0 +1,28 @@
+.pp{
+    background-color: rgba(242, 244, 248, 1);
+    padding-left: 160px;
+    padding-right: 160px;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+}
+
+
+.pp .lasCarDiv{
+    border-bottom: 2.5px solid rgba(204, 221, 255, 1);
+}
+
+.topButton {
+    background-color: rgba(154, 204, 42, 1);
+    width: 48px;
+    height: 48px;
+    border-color: rgba(184, 234, 72, 1);
+    opacity: 100%;
+    margin-bottom: 32px;
+    display: block;
+    margin-left: auto;
+    text-align: center;
+
+    line-height: 48px; 
+}

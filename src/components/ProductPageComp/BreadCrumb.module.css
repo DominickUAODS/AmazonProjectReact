@@ -1,0 +1,16 @@
+.breadCrumbs{
+    display: flex;
+    max-height: 24px;
+    align-items: center;
+
+}
+
+.breadCrumbs div{
+    display: flex;
+}
+
+.breadCrumbs p{
+    margin: 0 !important;
+    text-align: center;
+    margin-left:6px !important;
+}

@@ -36,7 +36,7 @@ export default function AccountMenu() {
 
 						<div className={styles.cusPhoto}>
 							<img
-								src={user?.profile_photo || "/images/default-user.png"}
+								src={user?.profile_photo || "/img/default-user.svg"}
 								alt={user ? `${user.first_name} ${user.last_name}` : "User"}
 							/>
 						</div>

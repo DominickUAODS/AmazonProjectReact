@@ -1,0 +1,181 @@
+.rp{
+    background-color: rgba(244, 250, 255, 1);
+    box-shadow: 0 4px 11.5px -5px rgba(32, 80, 173, 0.25);
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    gap:24px;
+    border-radius: 8px;
+    max-width: 653px;
+    max-height: 410px;
+    
+}
+
+.rp0{
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+    width:605px;
+    border-bottom: 2.5px solid rgba(204, 221, 255, 1);
+}
+
+.rpStarsBlock{
+    display: flex;
+    gap:56px;
+    margin-left: 56px;
+}
+
+.asr{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.avgNumber{
+    color:rgba(14, 32, 66, 1);
+    font-weight: 600;
+    font-size: 80px;
+    line-height: 64px;
+    letter-spacing: 12.8px;
+}
+
+.avgOutOf{
+    color:rgba(14, 32, 66, 1);
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 64px;
+    letter-spacing: 12.8px;
+}
+
+.totalReviews{
+    color:rgba(14, 32, 66, 1);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.3px;
+}
+
+.rpBars {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .barRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .starLabel {
+    color:rgba(14, 32, 66, 1);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    margin-right: 14px;
+  }
+  
+  .barWrapper {
+    flex: 1;
+    background: rgba(14, 32, 66, 1);
+    height: 12px;
+    border-radius: 50px;
+    overflow: hidden;
+  }
+  
+  .barFill {
+    height: 100%;
+    background: rgba(141, 211, 52, 1);
+  }
+  
+  .percent {
+    color:rgba(14, 32, 66, 1);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+    margin-left: 25px;
+  }
+
+
+.aoB{
+
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.aoB0{
+    display: flex;
+    gap:8px;
+}
+
+.aoB0 span{
+    color:rgba(14, 32, 66, 1);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+}
+
+.aoB1{
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+}
+
+.aoB1Button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:8px;
+}
+
+.aoB1Button a{
+    color:rgba(14, 32, 66, 1);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+    text-decoration: none;
+}
+
+.rp1{
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap:14px;
+}
+
+.rp1MainSpan{
+    color:rgba(14, 32, 66, 1);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.4px;
+}
+
+.tagsBlock{
+    display: flex;
+    gap:8px;
+    flex-wrap: wrap;
+}
+
+
+
+.tag{
+    background-color: rgba(224, 235, 255, 1);
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    
+}
+
+.activeTag{
+    background-color: rgba(204, 221, 255, 1);
+    cursor: pointer;
+}

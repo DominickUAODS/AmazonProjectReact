@@ -1,0 +1,47 @@
+.cc{
+    display: flex;
+    flex-direction: column;
+    gap:16px;
+}
+
+.mainSpancc{
+    font-weight:600 ;
+    font-size: 32px;
+    letter-spacing: -0.3px;
+    line-height: 36px;
+    color:rgba(14, 32, 66, 1);
+}
+
+.spanSeeAll{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+.seeAllButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    gap:8px;
+    background-color: transparent;
+    font-weight:400 ;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    line-height: 20px;
+    color:rgba(14, 32, 66, 1);
+
+}
+
+.carousel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:27px;
+}
+
+.productMap{
+    display: flex;
+    gap:16px;
+}

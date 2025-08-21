@@ -1,0 +1,38 @@
+.feature{
+    display:flex;
+    flex-direction: column;
+    padding: 24px;
+    border-radius: 8px;
+    gap:16px;
+    background-color: rgba(244, 250, 255, 1);
+    max-width: 652px;
+    box-shadow: 0 4px 11.5px -5px rgba(32, 80, 173, 0.25);
+}
+
+.featureB1{
+    display: flex;
+    justify-content: space-between;
+}
+
+.featureB1Span{
+    color:rgba(14, 32, 66, 1);
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.featureB2Span{
+    color:rgba(79, 79, 79, 1);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
+.tag{
+    background-color: rgba(224, 235, 255, 1);
+    padding: 8px 20px;
+    border-radius: 4px;
+    
+}

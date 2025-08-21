@@ -1,0 +1,142 @@
+.comment{
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+    padding-bottom: 24px;
+    border-bottom: 2.5px solid rgba(204, 221, 255, 1);
+}
+
+.commentMainBlock{
+    display: flex;
+    flex-direction: column;
+    gap:16px;
+}
+
+.userComment{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+}
+
+.userDate{
+    display: flex;
+    justify-content: space-between;
+    width:932px;
+}
+
+.userNI{
+    display: flex;
+    gap:12px;
+    align-items: center;
+}
+
+.userNI img{
+ width: 40px;
+ height: 40px;
+ border-radius:50%;
+}
+
+.userNI span{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.3px;
+    color:rgba(14, 32, 66, 1);
+}
+
+.date{
+    display: flex;
+    gap:8px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.3px;
+    color:rgba(14, 32, 66, 1);
+}
+
+.stars{
+    display:flex;
+}
+
+.titleContent{
+    display:flex;
+    flex-direction: column;
+    gap:8px;
+}
+
+.spanTitle{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.3px;
+    color:rgba(14, 32, 66, 1);
+}
+
+.spanContent{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.3px;
+    color:rgba(14, 32, 66, 1);
+}
+
+
+.tagsBlock{
+    display: flex ;
+    flex-wrap: wrap;
+    gap:8px;
+}
+
+
+.buttonsBlock{
+    display: flex;
+    justify-content: space-between;
+    width:932px;
+    align-items: center;
+}
+
+.buttons{
+    display: flex;
+}
+
+.buttons button{
+    width:124px;
+    height: 40px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.helpfulButton{
+    padding-right: 16px;
+    margin-right: 16px;
+    border-right:2.5px solid rgba(204, 221, 255, 1); ;
+}
+
+.imagesBlock{
+    display: flex;
+    gap:16px;
+}
+
+.imagesBlock img{
+    width:111px;
+    height: 111px;
+    border-radius: 4px;
+    object-fit: cover; 
+}
+
+.buttonsBlock span{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.3px;
+    color:rgba(14, 32, 66, 1);
+}
+
+.tag{
+    background-color: rgba(224, 235, 255, 1);
+    padding: 8px 20px;
+    border-radius: 4px;
+    
+}

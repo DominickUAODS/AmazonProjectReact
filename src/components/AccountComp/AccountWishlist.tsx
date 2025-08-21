@@ -41,7 +41,7 @@ export default function AccountWishlist() {
 
                 <div className={styles.wishlistSet}>
                     {visibleProducts.map(product => (
-						<WishlistCard key={product.id} product={product} />
+						<WishlistCard key={product.id}  actionSlot={<button className={commonStyles.removeBtn}>Remove</button>}  product={product} />
 					))}
                 </div>
 

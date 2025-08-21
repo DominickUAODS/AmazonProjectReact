@@ -22,6 +22,7 @@ import ChangePasswordModal from './components/AccountModalWindows/ChangePassword
 import ChangeEmailModal from './components/AccountModalWindows/ChangeEmailModal';
 import LogOutModal from './components/AccountModalWindows/LogOutModal';
 import DeleteAccountModal from './components/AccountModalWindows/DeleteAccountModal';
+import ProductPage from './components/ProductPageComp/ProductPage';
 import type { ModalState } from './types/ModalState';
 import { AuthProvider } from './components/Helpers/AuthContext';
 import RequireAuth from './components/Helpers/RequireAuth';
@@ -37,7 +38,10 @@ function App() {
 			<AuthProvider>
 				<Routes location={background || location}>
 					<Route path="/" element={<Layout />}>
+						
+						{/* main pages */}
 						<Route index element={<Main />} />
+						<Route path="productpage" element={<ProductPage />} />
 
 						{/* private routes */}
 						<Route element={<RequireAuth />}>
@@ -54,15 +58,15 @@ function App() {
 					<Routes>
 						{/* log in modal windows */}
 						<Route path="/login" element={<LogInAccount background={background} />} />
-						<Route path="/forgot-Password" element={<ForgotPassword background={background} />} />
-						<Route path="/checkInForPassword" element={<EnterCodeFromGmail background={background} isPasswordReset={true} />} />
+						<Route path="/forgot-password" element={<ForgotPassword background={background} />} />
+						<Route path="/checkin-for-password" element={<EnterCodeFromGmail background={background} isPasswordReset={true} />} />
 						<Route path="/reset-Password" element={<ResetPassword background={background} />} />
 
 
 						{/* sign up modal windows */}
-						<Route path="/signUp" element={<SignUpAccount />} />
-						<Route path="/checkIn" element={<EnterCodeFromGmail background={background} isPasswordReset={false} />} />
-						<Route path="/final-signUp" element={<SignUpFinal background={background} />} />
+						<Route path="/signup" element={<SignUpAccount />} />
+						<Route path="/checkin" element={<EnterCodeFromGmail background={background} isPasswordReset={false} />} />
+						<Route path="/final-signup" element={<SignUpFinal background={background} />} />
 						<Route path="/congrats" element={<Congrats />} />
 
 
@@ -72,7 +76,7 @@ function App() {
 							<Route path="/change-name" element={<ChangeNameModal />} />
 							<Route path="/change-password" element={<ChangePasswordModal />} />
 							<Route path="/change-email" element={<ChangeEmailModal />} />
-							<Route path="/logOut" element={<LogOutModal />} />
+							<Route path="/logout" element={<LogOutModal />} />
 							<Route path="/delete?" element={<DeleteAccountModal />} />
 						</Route>
 					</Routes >

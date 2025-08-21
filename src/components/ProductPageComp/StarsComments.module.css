@@ -1,0 +1,48 @@
+.sc{
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+}
+
+.sorting{
+    display: flex;
+    padding-bottom: 24px;
+    border-bottom: 2.5px solid rgba(204, 221, 255, 1);
+    justify-content: space-between;
+    height: 72px;
+    width:932px;
+}
+
+.comments{
+
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+
+}
+
+.commentsButton button{
+    display: flex;
+    align-items: flex-start;
+    align-items: center;
+    gap:12px;
+}
+
+.cBlock{
+    display: flex;
+    flex-direction: column;
+    gap:32px;
+}
+
+.seeMoreButton{
+    height: 40px;
+    width:124px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.cBlock > div:last-of-type {
+    border-bottom: none;
+}
