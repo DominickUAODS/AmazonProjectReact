@@ -12,29 +12,6 @@
     position: relative;
 }
 
-.removeBtn {
-	position: absolute;
-	top: 12px;
-	right: 8px;
-	background-color: rgba(244, 250, 255, 1);
-	border: 1.5px solid rgba(74, 123, 217, 1);
-	border-radius: 2px;
-	font-family: 'Mulish';
-	font-size: 14px;
-	padding: 0;
-	cursor: pointer;
-	transition: all 0.2s ease-in-out;
-    width:85px;
-    height: 30px;
-    letter-spacing: 0.3px;
-    font-weight: 400;
-    text-align: center;
-    color: rgba(14, 32, 66, 1);
-}
-
-.removeBtn:hover {
-	background-color: rgba(14, 32, 66, 0.05);
-}
 
 .productImg{
     padding: 6px;
@@ -42,6 +19,7 @@
     border-radius: 6px;
     width:193px;
     height:193px;
+    object-fit: cover; 
     
 }
 

@@ -22,6 +22,8 @@ export default function ProductPageMainBlock() {
                 ]}
             />
             <CommentsBlock/>
+            
+
 			
 		</div>
 	);

@@ -2,6 +2,8 @@
     display: flex;
     gap:24px;
     flex-direction: column;
+    border-bottom: 2.5px solid rgba(204, 221, 255, 1);
+    padding-bottom: 48px;
 }
 
 .ppcbSpan{

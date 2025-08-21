@@ -3,13 +3,17 @@ import type Product from '../../interfaces/ProductInterface';
 
 
 
-
-export default function WishlistCard({ product }: { product: Product }) {
+interface WishlistCardProps {
+	product: Product;
+	actionSlot?: React.ReactNode; 
+  }
+export default function WishlistCard({ product, actionSlot }: WishlistCardProps) {
 	const [dollars, cents] = product.price.toFixed(2).split('.');
 
 	return (
 		<div className={styles.wishlistCard}>
-			<button className={styles.removeBtn}>Remove</button>
+			 {actionSlot && <div className={styles.actionWrapper}>{actionSlot}</div>}
+
             <img className = {styles.productImg} src={product.image} alt="Product Img"></img>
 			<div className={styles.titleRat}>
 				<p>{product.title}</p>

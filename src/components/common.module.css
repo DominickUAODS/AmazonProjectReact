@@ -11,7 +11,18 @@
     line-height: 24px;
     letter-spacing: 0.3px;
 }
+.anchorButton{
 
+    height: 32px;
+    opacity: 50%;
+    background-color: transparent;
+    border: 1.5px solid rgba(74, 123, 217, 1);
+    padding: 8px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .showButton,
 .hideButton{
     background: transparent;
@@ -24,6 +35,36 @@
     width: 100%;
     gap:14px;
 }
+.discountBlock{
+    position: absolute;
+	top: 12px;
+	right: 8px;
+}
+
+.removeBtn {
+	position: absolute;
+	top: 12px;
+	right: 8px;
+	background-color: rgba(244, 250, 255, 1);
+	border: 1.5px solid rgba(74, 123, 217, 1);
+	border-radius: 2px;
+	font-family: 'Mulish';
+	font-size: 14px;
+	padding: 0;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+    width:85px;
+    height: 30px;
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    text-align: center;
+    color: rgba(14, 32, 66, 1);
+}
+
+.removeBtn:hover {
+	background-color: rgba(14, 32, 66, 0.05);
+}
+
 
 .sendCodeAgainBtn{
     background-color: transparent;
@@ -247,3 +288,4 @@
     border-bottom: 1.5px solid rgba(204, 221, 255, 1);
     width:100%;
 }
+
