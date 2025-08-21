@@ -57,11 +57,11 @@ export default function EnterCodeFromGmail({ background, isPasswordReset }: { ba
 	};
 
 	const openFinalSignUp = () => {
-		navigate('/finalSignUp', { state: { background, email, code: verificationCode } });
+		navigate('/final-signup', { state: { background, email, code: verificationCode } });
 	};
 
 	const handlePasswordReset = () => {
-		navigate('/resetPassword', { state: { background, email, code: verificationCode } });
+		navigate('/reset-password', { state: { background, email, code: verificationCode } });
 	};
 
 	const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {

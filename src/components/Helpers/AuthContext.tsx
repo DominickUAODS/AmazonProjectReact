@@ -7,6 +7,7 @@ interface AuthContextType {
 	accessToken: string | null;
 	refreshToken: string | null;
 	isAuthenticated: boolean;
+	loading: boolean;
 	login: (user: UserType, tokens: { access: string; refresh: string }, staySignedIn?: boolean) => void;
 	logout: () => void;
 	authFetch: (input: RequestInfo, init?: RequestInit) => Promise<Response>;
@@ -21,6 +22,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const [accessToken, setAccessToken] = useState<string | null>(null);
 	const [refreshToken, setRefreshToken] = useState<string | null>(null);
 
+	const [loading, setLoading] = useState(true);
+
 	// Проверка хранилища при монтировании
 	useEffect(() => {
 		const storedUser = localStorage.getItem('user') || sessionStorage.getItem('user');
@@ -32,6 +35,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 			setAccessToken(storedAccess);
 			setRefreshToken(storedRefresh);
 		}
+		
+		setLoading(false);
+
 	}, []);
 
 	const saveToStorage = (user: UserType, tokens: { access: string; refresh: string }, staySignedIn: boolean) => {
@@ -142,6 +148,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 				accessToken,
 				refreshToken,
 				isAuthenticated: !!user,
+				loading,
 				login,
 				logout,
 				authFetch,

@@ -35,22 +35,26 @@ export default function SignUpForm({ background }: { background: Location }) {
 		}
 
 		try {
-			const response = await fetch(`${API_SERVER}/Auth/register-start`, {
+			const response = await fetch(`${API_SERVER}/auth/register-start`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ email, password })
 			});
 
+			//console.log(response);
+
 			if (!response.ok) {
 				const err = await response.json();
-				setErrors({ general: err.message || 'Sign up failed' });
+				//console.log(err.error);
+				setErrors({ general: err.error || 'Sign up failed' });
 				return;
 			}
 
 			// Успех — переходим на экран ввода кода
-			navigate('/checkIn', { state: { background, email } });
+			navigate('/checkin', { state: { background, email } });
 		} catch (err) {
 			console.error(err);
+			//console.log(err);
 			setErrors({ general: 'Ошибка подключения к серверу' });
 		}
 	};

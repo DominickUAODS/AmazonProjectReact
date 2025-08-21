@@ -38,14 +38,14 @@ function App() {
 			<AuthProvider>
 				<Routes location={background || location}>
 					<Route path="/" element={<Layout />}>
-						
+
 						{/* main pages */}
 						<Route index element={<Main />} />
+						<Route path="products" element={<ProductList />} />
 						<Route path="productpage" element={<ProductPage />} />
 
 						{/* private routes */}
 						<Route element={<RequireAuth />}>
-							<Route path="products" element={<ProductList />} />
 							<Route path="settings" element={<AccountSettings />} />
 							<Route path="wishlist" element={<AccountWishlist />} />
 							<Route path="orders" element={<AccountOrders />} />

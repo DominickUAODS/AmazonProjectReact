@@ -17,23 +17,23 @@ export default function AccountSettings() {
 	const user = storedData ? JSON.parse(storedData) : null;
 
 	const openChangePhoto = () => {
-		navigate('/changePhoto', { state: { background: location } });
+		navigate('/change-photo', { state: { background: location } });
 	};
 
 	const openChangeName = () => {
-		navigate('/changeName', { state: { background: location } });
+		navigate('/change-name', { state: { background: location } });
 	};
 
 	const openChangePassword = () => {
-		navigate('/changePassword', { state: { background: location } });
+		navigate('/change-password', { state: { background: location } });
 	};
 
 	const openChangeEmail = () => {
-		navigate('/changeEmail', { state: { background: location } });
+		navigate('/change-email', { state: { background: location } });
 	};
 
 	const openLogOut = () => {
-		navigate('/logOut', { state: { background: location } });
+		navigate('/logout', { state: { background: location } });
 	};
 
 	const openDeleteAcc = () => {

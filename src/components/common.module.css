@@ -291,11 +291,12 @@
 
 /* error */
 .errorText {
+	display: flex;
 	color: #EA4848;
 	padding-left: 18px;
 	font-size: 14px;
-	letter-spacing: 2%;
 	line-height: 24px;
+	justify-content: center;
 }
 
 .errorLegend {

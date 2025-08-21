@@ -33,7 +33,7 @@ export default function ForgotPassword({ background }: { background: Location })
 				return;
 			}
 
-			navigate('/checkInForPassword', { state: { background, email } });
+			navigate('/checkin-for-password', { state: { background, email } });
 
 		} catch (err) {
 			console.error(err);

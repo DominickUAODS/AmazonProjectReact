@@ -8,9 +8,9 @@ import { useState } from 'react';
 export default function LogOutModal() {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const navigate = useNavigate();
-	const { refreshToken, logout } = useAuth();
+	const { accessToken, refreshToken, logout } = useAuth();
 	const closeModal = () => navigate("/settings");
-	
+
 	const [errors, setErrors] = useState<{ general?: string }>({});
 
 	const handleBackdropClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -32,7 +32,7 @@ export default function LogOutModal() {
 		try {
 			const response = await fetch(`${API_SERVER}/auth/logout`, {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
+				headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${accessToken}` },
 				body: JSON.stringify({ refresh_token: refreshToken }),
 			});
 
@@ -67,8 +67,8 @@ export default function LogOutModal() {
 
 					<button onClick={handleLogOut} className={commonStyles.nextStepButton}>Log out</button>
 				</div>
+				{errors.general && <div className={commonStyles.errorText}>{errors.general}</div>}
 			</div>
-			{errors.general && <div className={commonStyles.errorText}>{errors.general}</div>}
 		</div>
 	);
 }

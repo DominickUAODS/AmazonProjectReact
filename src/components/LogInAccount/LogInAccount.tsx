@@ -19,11 +19,11 @@ export default function LogInAccount({ background }: { background: Location }) {
 	const [staySignedIn, setStaySignedIn] = useState(false);
 
 	const openSignUp = () => {
-		navigate('/signUp', { state: { background } });
+		navigate('/signup', { state: { background } });
 	};
 
 	const openForgotPassword = () => {
-		navigate('/forgotPassword', { state: { background } });
+		navigate('/forgot-password', { state: { background } });
 	};
 
 	const handleBackdropClick = (e: React.MouseEvent<HTMLElement>) => {
