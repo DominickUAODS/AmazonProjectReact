@@ -109,21 +109,37 @@ const comments: CommentType[] = [
     },
   ];
 
-export default function StartsComments() {
+  type StartsCommentsProps = {
+    selectedTags: string[];
+    filterMode?: "AND" | "OR";
+  };
 
-
+export default function StartsComments( {
+  selectedTags,
+  filterMode = "OR",
+}: StartsCommentsProps)  {
     const [starFilter, setStarFilter] = useState<number | null>(null); // null = All
     const [sortType, setSortType] = useState<"top" | "recent" | "older">("recent");
+    const [visibleCount, setVisibleCount] = useState(5);
+ 
   
     const filteredAndSorted = useMemo(() => {
       let result = [...comments];
   
-
       if (starFilter !== null) {
         result = result.filter(c => Math.ceil(c.stars) === starFilter);
       }
   
-
+      if (selectedTags.length > 0) {
+        result = result.filter(c => {
+          if (!c.tags) return false;
+          return filterMode === "AND"
+            ? selectedTags.every(tag => c.tags?.includes(tag))
+            : selectedTags.some(tag => c.tags?.includes(tag));
+        });
+      }
+  
+      // сортировка
       switch (sortType) {
         case "top":
           result.sort((a, b) => (b.helPeople ?? 0) - (a.helPeople ?? 0));
@@ -145,7 +161,10 @@ export default function StartsComments() {
       }
   
       return result;
-    }, [comments, starFilter, sortType]);
+    }, [starFilter, sortType, selectedTags, filterMode]);
+
+    const visibleComments = filteredAndSorted.slice(0, visibleCount);
+    const hasMore = visibleCount < filteredAndSorted.length;
 
 
     return (
@@ -167,10 +186,18 @@ export default function StartsComments() {
             </div>
 
             <div className={styles.cBlock}>
-                    {filteredAndSorted.map((c, i) => (
-                        <OneComment key={i} {...c} />
-                    ))}
+              {visibleComments.map((c, i) => (
+                <OneComment key={i} {...c} />
+              ))}
 
+              {hasMore && (
+                <button
+                  className={`${commonStyles.secondaryButton} ${styles.seeMoreButton}`}
+                  onClick={() => setVisibleCount(prev => prev + 5)}
+                >
+                  See more
+                </button>
+              )}
             </div>
 
         </div>

@@ -141,7 +141,7 @@ export type CommentType = {
             {tags && tags.length > 0 && (
             <div className={styles.tagsBlock}>
                 {tags.map((tag, index) => (
-                <PFTag key={index} title={tag} />
+                <PFTag key={index} title={tag} className={styles.tag}/>
                 ))}
             </div>
             )}

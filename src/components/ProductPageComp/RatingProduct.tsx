@@ -3,7 +3,13 @@ import styles from './RatingProduct.module.css'
 
 
 
-export default function RatingProduct() {
+export default function RatingProduct({
+    onTagSelect,
+    selectedTags,
+  }: {
+    onTagSelect: (tags: string[]) => void;
+    selectedTags: string[];
+  }) {
     const average=4
     const totalReviews=242
     const ratings=[65, 16, 10, 4, 5]
@@ -48,6 +54,14 @@ export default function RatingProduct() {
           />
         </svg>
       );
+
+      const toggleTag = (tag: string) => {
+        if (selectedTags.includes(tag)) {
+          onTagSelect(selectedTags.filter(t => t !== tag));
+        } else {
+          onTagSelect([...selectedTags, tag]);
+        }
+      };
   
 	
 	return (
@@ -128,8 +142,15 @@ export default function RatingProduct() {
                 <span className={styles.rp1MainSpan}>Frequent tags</span>
                 <div className={styles.tagsBlock}>
                 {tags.map((tag, index) => (
-                    <PFTag key={index} title={tag} />
-                ))}
+                    <PFTag
+                        key={index}
+                        title={tag}
+                        className={`${styles.tag} ${
+                        selectedTags.includes(tag) ? styles.activeTag : ""
+                        }`}
+                        onClick={() => toggleTag(tag)}
+                    />
+                    ))}
                 </div>
 
             </div>

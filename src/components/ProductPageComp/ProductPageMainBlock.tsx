@@ -16,6 +16,9 @@ export default function ProductPageMainBlock() {
                     { title: "Care instructions", text: "Machine wash" },
                     { title: "Color", text: "Blue" },
                     { title: "Country", text: "Made in Italy" },
+                    { title: "Country", text: "Made in Italy" },
+                    { title: "Country", text: "Made in Italy" },
+                    { title: "Country", text: "Made in Italy" },
                 ]}
             />
             <CommentsBlock/>

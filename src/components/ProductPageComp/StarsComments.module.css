@@ -33,3 +33,16 @@
     flex-direction: column;
     gap:32px;
 }
+
+.seeMoreButton{
+    height: 40px;
+    width:124px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.cBlock > div:last-of-type {
+    border-bottom: none;
+}

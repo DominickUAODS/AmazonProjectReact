@@ -29,3 +29,10 @@
     font-weight: 400;
     letter-spacing: 0.3px;
 }
+
+.tag{
+    background-color: rgba(224, 235, 255, 1);
+    padding: 8px 20px;
+    border-radius: 4px;
+    
+}
