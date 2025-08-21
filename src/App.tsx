@@ -54,24 +54,24 @@ function App() {
 					<Routes>
 						{/* log in modal windows */}
 						<Route path="/login" element={<LogInAccount background={background} />} />
-						<Route path="/forgotPassword" element={<ForgotPassword background={background} />} />
+						<Route path="/forgot-Password" element={<ForgotPassword background={background} />} />
 						<Route path="/checkInForPassword" element={<EnterCodeFromGmail background={background} isPasswordReset={true} />} />
-						<Route path="/resetPassword" element={<ResetPassword background={background} />} />
+						<Route path="/reset-Password" element={<ResetPassword background={background} />} />
 
 
 						{/* sign up modal windows */}
 						<Route path="/signUp" element={<SignUpAccount />} />
 						<Route path="/checkIn" element={<EnterCodeFromGmail background={background} isPasswordReset={false} />} />
-						<Route path="/finalSignUp" element={<SignUpFinal background={background} />} />
+						<Route path="/final-signUp" element={<SignUpFinal background={background} />} />
 						<Route path="/congrats" element={<Congrats />} />
 
 
 						{/* user settings modal windows */}
 						<Route element={<RequireAuth />}>
-							<Route path="/changePhoto" element={<ChangePhotoModal />} />
-							<Route path="/changeName" element={<ChangeNameModal />} />
-							<Route path="/changePassword" element={<ChangePasswordModal />} />
-							<Route path="/changeEmail" element={<ChangeEmailModal />} />
+							<Route path="/change-photo" element={<ChangePhotoModal />} />
+							<Route path="/change-name" element={<ChangeNameModal />} />
+							<Route path="/change-password" element={<ChangePasswordModal />} />
+							<Route path="/change-email" element={<ChangeEmailModal />} />
 							<Route path="/logOut" element={<LogOutModal />} />
 							<Route path="/delete?" element={<DeleteAccountModal />} />
 						</Route>

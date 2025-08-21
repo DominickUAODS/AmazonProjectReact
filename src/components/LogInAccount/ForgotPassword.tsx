@@ -21,7 +21,7 @@ export default function ForgotPassword({ background }: { background: Location })
 		e.preventDefault();
 
 		try {
-			const response = await fetch(`${API_SERVER}/auth/reset/start`, {
+			const response = await fetch(`${API_SERVER}/auth/reset-start`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ email }),

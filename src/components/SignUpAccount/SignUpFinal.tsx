@@ -42,7 +42,7 @@ export default function SignUpFinal({ background }: { background: Location }) {
 
 		try {
 			//console.log('background.state:', background.state);
-			const response = await fetch(`${API_SERVER}/auth/register/complete`, {
+			const response = await fetch(`${API_SERVER}/auth/register-complete`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ email, first_name: firstName, last_name: lastName }),

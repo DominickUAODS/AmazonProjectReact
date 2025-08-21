@@ -32,7 +32,7 @@ export default function ResetPassword({ background }: { background: Location }) 
 		}
 
 		try {
-			const response = await fetch(`${API_SERVER}/auth/reset/complete`, {
+			const response = await fetch(`${API_SERVER}/auth/reset-complete`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ email, code, new_password: newPassword }),

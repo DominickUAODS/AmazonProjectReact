@@ -75,6 +75,7 @@ const UploadImage: React.FC<UploadImageProps> = ({
 			if (onUploadComplete) {
 				onUploadComplete(result);
 			}
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
 			setUploading(false);
 			if (onError) {

@@ -15,6 +15,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
+	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const navigate = useNavigate();
 	const [user, setUser] = useState<UserType | null>(null);
 	const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -66,7 +67,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 			return null;
 		}
 		try {
-			const res = await fetch('/auth/refresh', {
+			const res = await fetch(`${API_SERVER}/auth/refresh`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ refresh_token: refreshToken }),
