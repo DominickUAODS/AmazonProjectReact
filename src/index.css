@@ -1,97 +1,98 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
 
-* {
+
 :root {
-  font-family: 'Mulish', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+	font-family: 'Mulish', system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+	color-scheme: light dark;
+	color: rgba(255, 255, 255, 0.87);
+	background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 #root {
-  width:100%;
-  margin: 0!important;
+	width: 100%;
+	margin: 0 !important;
 
 
 }
 
 
 body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Mulish", sans-serif;
-  background-color: var(--main-text);
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Mulish", sans-serif;
+	background-color: var(--main-text);
 }
 
 #root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 
 
 .pageWrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
 
 .pageContent {
-  flex-grow: 1;
-  padding-top: 64px;
+	flex-grow: 1;
+	padding-top: 64px;
 }
+
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+	font-size: 3.2em;
+	line-height: 1.1;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+	border-radius: 8px;
+	border: 1px solid transparent;
+	padding: 0.6em 1.2em;
+	font-size: 1em;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: #1a1a1a;
+	cursor: pointer;
+	transition: border-color 0.25s;
 }
 
 
 
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+	font-weight: 500;
+	color: #646cff;
+	text-decoration: inherit;
 }
+
 a:hover {
-  color: #535bf2;
+	color: #535bf2;
 }
 
 :root {
-  --main-primary: #b8ea48;
-  --main-secondary: #4a7bd9;
-  --main-text: #f2f4f8;
-  --minor-text: #0e2042;
-  --minor-pr-hover: #cdfa6a;
-  --minor-pr-press: #8dd334;
-  --minor-dark-blue: #2050ad;
-  --minor-blue: #ccddff;
-  --minor-light-blue: #e0ebff;
-  --minor-destructive: #ea4848;
-  --minor-light-red: #ffcccc;
-  --minor-dark-red: #c22020;
-  --minor-objects: #f4faff;
-}
+	--main-primary: #b8ea48;
+	--main-secondary: #4a7bd9;
+	--main-text: #f2f4f8;
+	--minor-text: #0e2042;
+	--minor-pr-hover: #cdfa6a;
+	--minor-pr-press: #8dd334;
+	--minor-dark-blue: #2050ad;
+	--minor-blue: #ccddff;
+	--minor-light-blue: #e0ebff;
+	--minor-destructive: #ea4848;
+	--minor-light-red: #ffcccc;
+	--minor-dark-red: #c22020;
+	--minor-objects: #f4faff;
 }

@@ -1,6 +1,7 @@
 .login-banner {
     box-shadow: 0px 4px 11.5px -3px color-mix(in srgb, var(--minor-dark-blue) 25%, transparent);
     position: relative;
+    border-radius: 8px;
 }
 
 .login-banner img {
@@ -9,9 +10,9 @@
 
 .login-banner-message-block {
     position: absolute;
-    top: 50%;
+    top: 20%;
     left: 12.5%;
-    transform: translateY(-50%);
+    /* transform: translateY(-50%); */
     width: 25%;
     height: 50%;
     display: flex;
