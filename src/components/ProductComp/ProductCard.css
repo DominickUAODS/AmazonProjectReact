@@ -1,5 +1,5 @@
 .product-card {
-    padding: 16px;
+    padding: 14px;
     width: 225px;
     height: 361px;
     border-radius: 8px;
@@ -9,6 +9,7 @@
     gap: 12px;
     flex-shrink: 0;
     text-decoration: none;
+    border: 2px solid var(--minor-objects);
 }
 
 .product-card-big {
@@ -22,7 +23,7 @@
 }
 
 .product-card:hover {
-    border: 2px solid var(--minor-blue);
+    border-color: var(--minor-blue);
 }
 
 .product-card-image-frame {

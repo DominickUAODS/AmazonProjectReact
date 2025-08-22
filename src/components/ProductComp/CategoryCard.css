@@ -1,5 +1,5 @@
 .category-card {
-    padding: 16px;
+    padding: 14px;
     width: 239px;
     height: 264px;
     border-radius: 8px;
@@ -8,10 +8,11 @@
     flex-direction: column;
     gap: 8px;
     flex-shrink: 0;
+    border: 2px solid var(--minor-objects);
 }
 
 .category-card:hover {
-    border: 2px solid var(--minor-blue);
+    border-color: var(--minor-blue);
 }
 
 .category-card img {
