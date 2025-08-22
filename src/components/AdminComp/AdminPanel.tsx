@@ -61,23 +61,24 @@ const AdminPanel = () => {
 	const filtered = users.filter(
 		(u) =>
 			(roleFilter === 'All' || u.role === roleFilter) &&
-			(u.name.toLowerCase().includes(search.toLowerCase()) ||
-				u.email.toLowerCase().includes(search.toLowerCase()))
+			((u.first_name?.toLowerCase() ?? "").includes(search.toLowerCase())
+				|| (u.last_name?.toLowerCase() ?? "").includes(search.toLowerCase())
+				|| (u.email?.toLowerCase() ?? "").includes(search.toLowerCase()))
 	);
 
 	return (
 		<div className={styles.panel}>
 			<AdminHeader />
 			<div className={styles.header}>
-				<h2 className={styles.title}>Role</h2>
+				<div className={styles.title}>Role</div>
+				<Filters
+					roleFilter={roleFilter}
+					setRoleFilter={setRoleFilter}
+					search={search}
+					setSearch={setSearch}
+				/>
 				<ColumnSelector columns={columns} setColumns={setColumns} />
 			</div>
-			<Filters
-				roleFilter={roleFilter}
-				setRoleFilter={setRoleFilter}
-				search={search}
-				setSearch={setSearch}
-			/>
 
 			{selectedUserIds.size >= 2 && (
 				<div className={styles.bulkMenu}>

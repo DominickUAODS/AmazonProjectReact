@@ -20,9 +20,9 @@ export default function Header() {
 			<div className={styles.mainLogoCont}>
 				<div className={styles.menu}>
 					<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M4 9.55273H28" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-						<path d="M4 15.9512H28" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-						<path d="M4 22.4473H28" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+						<path d="M4 9.55273H28" stroke="#F2F4F8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+						<path d="M4 15.9512H28" stroke="#F2F4F8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+						<path d="M4 22.4473H28" stroke="#F2F4F8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 					</svg>
 				</div>
 				<div className={styles.logo}>
@@ -37,8 +37,8 @@ export default function Header() {
 				<input type="text" placeholder="Search..." className={styles.input}></input>
 				<button className={styles.searchButton}>
 					<svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M14.6857 14.1056C13.6057 15.5216 11.1157 16.1996 9.99971 16.1996C6.51971 16.1996 3.69971 13.3796 3.69971 9.89961C3.69971 6.41961 6.51971 3.59961 9.99971 3.59961C13.4797 3.59961 16.2997 6.41961 16.2997 9.89961C16.2997 10.5836 16.1917 11.2436 15.9877 11.8616" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-						<path d="M21.6998 20.3995L14.6858 14.1055" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+						<path d="M14.6857 14.1056C13.6057 15.5216 11.1157 16.1996 9.99971 16.1996C6.51971 16.1996 3.69971 13.3796 3.69971 9.89961C3.69971 6.41961 6.51971 3.59961 9.99971 3.59961C13.4797 3.59961 16.2997 6.41961 16.2997 9.89961C16.2997 10.5836 16.1917 11.2436 15.9877 11.8616" stroke="#0E2042" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+						<path d="M21.6998 20.3995L14.6858 14.1055" stroke="#0E2042" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 					</svg>
 				</button>
 			</div>
@@ -46,16 +46,16 @@ export default function Header() {
 			<div className={styles.iconsCont}>
 				<button className={styles.userButton} onClick={openSignUp}>
 					<svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M26.4118 27.9913C26.4118 24.0953 24.8758 19.5273 21.2518 17.5113C20.5158 17.1033 19.6918 16.7993 18.7798 16.6233C18.7798 16.6233 16.9238 16.0953 13.9318 16.6233C13.0198 16.7833 12.1958 17.1033 11.4598 17.5113C7.8358 19.5273 6.2998 24.0953 6.2998 27.9913" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-						<path d="M16.5159 4.75C19.0928 4.75001 21.1819 6.83906 21.1819 9.41602C21.1819 11.993 19.0928 14.082 16.5159 14.082C13.9389 14.082 11.8499 11.993 11.8499 9.41602C11.8499 6.83906 13.9389 4.75 16.5159 4.75Z" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+						<path d="M26.4118 27.9913C26.4118 24.0953 24.8758 19.5273 21.2518 17.5113C20.5158 17.1033 19.6918 16.7993 18.7798 16.6233C18.7798 16.6233 16.9238 16.0953 13.9318 16.6233C13.0198 16.7833 12.1958 17.1033 11.4598 17.5113C7.8358 19.5273 6.2998 24.0953 6.2998 27.9913" stroke="#F2F4F8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+						<path d="M16.5159 4.75C19.0928 4.75001 21.1819 6.83906 21.1819 9.41602C21.1819 11.993 19.0928 14.082 16.5159 14.082C13.9389 14.082 11.8499 11.993 11.8499 9.41602C11.8499 6.83906 13.9389 4.75 16.5159 4.75Z" stroke="#F2F4F8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 					</svg>
 				</button>
 				<button className={styles.cartButton}>
 					<svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M4.69971 5.74414H7.73971C10.4197 5.74414 9.65171 9.51214 9.26771 11.1361C8.74771 13.3201 8.90771 15.6481 11.5077 16.2801C12.0277 16.4081 12.5637 16.4481 13.0917 16.4481H22.3237C22.3237 16.4481 22.5797 16.4481 22.9637 16.4961C25.6757 16.8241 25.4677 20.3761 22.7397 20.4001C22.7077 20.4001 22.6677 20.4001 22.6357 20.4001H12.2757" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-						<path d="M12.7239 6.63281H27.3559C28.4199 6.63281 29.0599 7.82481 28.4679 8.71281L24.7479 14.2888" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-						<path d="M13.7078 26.2575C14.6931 26.2575 15.4918 25.4587 15.4918 24.4735C15.4918 23.4882 14.6931 22.6895 13.7078 22.6895C12.7226 22.6895 11.9238 23.4882 11.9238 24.4735C11.9238 25.4587 12.7226 26.2575 13.7078 26.2575Z" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-						<path d="M22.6275 26.2575C23.6128 26.2575 24.4115 25.4587 24.4115 24.4735C24.4115 23.4882 23.6128 22.6895 22.6275 22.6895C21.6422 22.6895 20.8435 23.4882 20.8435 24.4735C20.8435 25.4587 21.6422 26.2575 22.6275 26.2575Z" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+						<path d="M4.69971 5.74414H7.73971C10.4197 5.74414 9.65171 9.51214 9.26771 11.1361C8.74771 13.3201 8.90771 15.6481 11.5077 16.2801C12.0277 16.4081 12.5637 16.4481 13.0917 16.4481H22.3237C22.3237 16.4481 22.5797 16.4481 22.9637 16.4961C25.6757 16.8241 25.4677 20.3761 22.7397 20.4001C22.7077 20.4001 22.6677 20.4001 22.6357 20.4001H12.2757" stroke="#F2F4F8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+						<path d="M12.7239 6.63281H27.3559C28.4199 6.63281 29.0599 7.82481 28.4679 8.71281L24.7479 14.2888" stroke="#F2F4F8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+						<path d="M13.7078 26.2575C14.6931 26.2575 15.4918 25.4587 15.4918 24.4735C15.4918 23.4882 14.6931 22.6895 13.7078 22.6895C12.7226 22.6895 11.9238 23.4882 11.9238 24.4735C11.9238 25.4587 12.7226 26.2575 13.7078 26.2575Z" stroke="#F2F4F8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+						<path d="M22.6275 26.2575C23.6128 26.2575 24.4115 25.4587 24.4115 24.4735C24.4115 23.4882 23.6128 22.6895 22.6275 22.6895C21.6422 22.6895 20.8435 23.4882 20.8435 24.4735C20.8435 25.4587 21.6422 26.2575 22.6275 26.2575Z" stroke="#F2F4F8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 					</svg>
 				</button>
 			</div>

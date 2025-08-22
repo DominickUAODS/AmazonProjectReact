@@ -27,6 +27,7 @@ import type { ModalState } from './types/ModalState';
 import { AuthProvider } from './components/Helpers/AuthContext';
 import RequireAuth from './components/Helpers/RequireAuth';
 import ChangePhotoModal from './components/AccountModalWindows/ChangePhotoModal';
+import AdminPanel from './components/AdminComp/AdminPanel';
 
 function App() {
 	const location = useLocation();
@@ -49,6 +50,11 @@ function App() {
 							<Route path="settings" element={<AccountSettings />} />
 							<Route path="wishlist" element={<AccountWishlist />} />
 							<Route path="orders" element={<AccountOrders />} />
+						</Route>
+
+						{/* admin panel */}
+						<Route element={<RequireAuth />}>
+							<Route path="/-/admin-dashboard" element={<AdminPanel />} />
 						</Route>
 					</Route>
 				</Routes>
