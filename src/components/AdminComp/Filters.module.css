@@ -1,19 +1,19 @@
 .filters {
 	display: flex;
 	gap: 12px;
-	margin-bottom: 16px;
-	width: 80%;
+	/* margin-bottom: 16px; */
+	width: 85%;
 }
 
 .select {
 	padding: 8px;
-	border: 1px solid #ccc;
-	border-radius: 6px;
+	border: 2px solid #ccc;
+	border-radius: 4px;
 }
 
 .input {
 	padding: 8px;
-	border: 1px solid #ccc;
-	border-radius: 6px;
+	border: 2px solid #ccc;
+	border-radius: 4px;
 	width: 100%;
 }

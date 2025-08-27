@@ -25,21 +25,21 @@
 }
 
 .status {
-	padding: 4px 8px;
-	border-radius: 12px;
-	font-size: 12px;
+	padding: 8px 12px;
+	border-radius: 4px;
+	font-size: 16px;
 	display: inline-block;
-	font-weight: 500;
+	font-weight: 400;
 }
 
 .active {
-	background-color: #e2f4e9;
-	color: #2d8a5d;
+	background-color: #CCDDFF;
+	/* color: #2d8a5d; */
 }
 
 .deleted {
-	background-color: #ffe2e2;
-	color: #cc2e2e;
+	background-color: #FFCCCC;
+	/* color: #cc2e2e; */
 }
 
 .actionsCell {

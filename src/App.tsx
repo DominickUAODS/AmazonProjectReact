@@ -28,6 +28,8 @@ import { AuthProvider } from './components/Helpers/AuthContext';
 import RequireAuth from './components/Helpers/RequireAuth';
 import ChangePhotoModal from './components/AccountModalWindows/ChangePhotoModal';
 import AdminPanel from './components/AdminComp/AdminPanel';
+import LoginAdmin from './components/AdminComp/LoginAdmin';
+import RequireAdmin from './components/Helpers/RequireAdmin';
 
 function App() {
 	const location = useLocation();
@@ -52,13 +54,18 @@ function App() {
 							<Route path="orders" element={<AccountOrders />} />
 						</Route>
 
-						{/* admin panel */}
-						<Route element={<RequireAuth />}>
-							<Route path="/-/admin-dashboard" element={<AdminPanel />} />
-						</Route>
+
+
 					</Route>
 				</Routes>
 
+				{/* admin panel */}
+				<Routes>
+					<Route path="/-/login-admin" element={<LoginAdmin />} />
+					<Route element={<RequireAdmin />}>
+						<Route path="/-/admin-panel" element={<AdminPanel />} />
+					</Route>
+				</Routes>
 
 				{background && (
 					<Routes>
@@ -83,7 +90,7 @@ function App() {
 							<Route path="/change-password" element={<ChangePasswordModal />} />
 							<Route path="/change-email" element={<ChangeEmailModal />} />
 							<Route path="/logout" element={<LogOutModal />} />
-							<Route path="/delete?" element={<DeleteAccountModal />} />
+							<Route path="/delete" element={<DeleteAccountModal />} />
 						</Route>
 					</Routes >
 				)}

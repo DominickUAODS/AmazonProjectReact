@@ -4,8 +4,9 @@ import Filters from './Filters';
 import AdminHeader from './AdminHeader';
 import UserList from './UserList';
 import ColumnSelector from './ColumnSelector';
-import userData from '../../../data.json';
 import type { UserType } from '../../types/UserType';
+import { useAuth } from '../Helpers/AuthContext';
+import Pagination from '../Pagination/Pagination';
 
 export type ColumnVisibility = {
 	status: boolean;
@@ -13,25 +14,67 @@ export type ColumnVisibility = {
 	email: boolean;
 };
 
+
 const AdminPanel = () => {
+	const API_SERVER = import.meta.env.VITE_API_SERVER;
+	const PAGE_SIZE = Number(import.meta.env.VITE_PAGE_SIZE);
+	const SEARCH_DEBOUNCE = Number(import.meta.env.VITE_SEARCH_DEBOUNCE);
 	const [users, setUsers] = useState<UserType[]>([]);
 	const [roleFilter, setRoleFilter] = useState<'All' | 'Customer' | 'Administrator'>('All');
 	const [search, setSearch] = useState<string>('');
-	const [columns, setColumns] = useState<ColumnVisibility>({
-		status: true,
-		registered: true,
-		email: true,
-	});
+	const [columns, setColumns] = useState<ColumnVisibility>({ status: true, registered: true, email: true, });
 	const [selectedUserIds, setSelectedUserIds] = useState<Set<string>>(new Set());
 
+	const [currentPage, setCurrentPage] = useState<number>(1);
+
+	const [debouncedSearch, setDebouncedSearch] = useState<string>('');
+
+	const { accessToken, authFetch } = useAuth();
+
+
 	useEffect(() => {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const converted = (userData as any[]).map((u) => ({
-			...u,
-			id: String(u.id),
-		}));
-		setUsers(converted as UserType[]);
-	}, []);
+		const timeout = setTimeout(() => setDebouncedSearch(search), SEARCH_DEBOUNCE);
+		return () => clearTimeout(timeout);
+	}, [search, SEARCH_DEBOUNCE]);
+
+	// useEffect(() => {
+	// 	const timeout = setTimeout(() => setRoleFilter(roleFilter), SEARCH_DEBOUNCE);
+	// 	return () => clearTimeout(timeout);
+	// }, [roleFilter, SEARCH_DEBOUNCE]);
+
+
+	useEffect(() => {
+		const fetchUsers = async () => {
+			try {
+				const params = new URLSearchParams();
+				if (roleFilter !== 'All') params.append('role', roleFilter);
+				if (debouncedSearch) params.append('search', debouncedSearch);
+
+				const url = `${API_SERVER}/users?${params.toString()}`;
+				const response = await authFetch(url, {
+					headers: { Authorization: `Bearer ${accessToken}` }
+				});
+
+				const data: UserType[] = await response.json();
+
+				setUsers(
+					data.map((u) => ({
+						...u,
+						id: String(u.id),
+						status: u.isActive ? 'Active' : 'Deleted',
+					}))
+				);
+
+				setCurrentPage(1);
+			} catch (err) {
+				console.error(err);
+			}
+		};
+
+		fetchUsers();
+	}, [API_SERVER, accessToken, authFetch, debouncedSearch, roleFilter]);
+
+
 
 	const toggleUserSelect = (id: string) => {
 		setSelectedUserIds((prev) => {
@@ -42,41 +85,75 @@ const AdminPanel = () => {
 		});
 	};
 
+
 	const handleBulkAction = (action: 'delete' | 'deactivate' | 'restore') => {
-		setUsers((prev) => prev.map((u) => selectedUserIds.has(u.id) ? { ...u, status: action === 'delete' || action === 'deactivate' ? 'Deleted' : 'Active', } : u));
+		setUsers((prev) =>
+			prev.map((u) =>
+				selectedUserIds.has(u.id)
+					? { ...u, status: action === 'delete' || action === 'deactivate' ? 'Deleted' : 'Active' }
+					: u
+			)
+		);
 		setSelectedUserIds(new Set());
 	};
 
-	const handleUserAction = (userId: string, action: 'toggleRole' | 'toggleStatus') => {
-		setUsers((prev) =>
-			prev.map((u) => {
-				if (u.id !== userId) return u;
-				if (action === 'toggleRole') { return { ...u, role: u.role === 'Administrator' ? 'Customer' : 'Administrator', }; }
-				if (action === 'toggleStatus') { return { ...u, status: u.status === 'Deleted' ? 'Active' : 'Deleted', }; }
-				return u;
-			})
-		);
+
+	const handleUserAction = async (userId: string, action: 'toggleRole' | 'toggleStatus') => {
+		// setUsers((prev) =>
+		// 	prev.map((u) => {
+		// 		if (u.id !== userId) return u;
+		// 		if (action === 'toggleRole') return { ...u, role: u.role === 'Administrator' ? 'Customer' : 'Administrator' };
+		// 		if (action === 'toggleStatus') return { ...u, status: u.isActive ? 'Active' : 'Deleted' };
+		// 		return u;
+		// 	})
+		// );
+		try {
+			// Найдем пользователя в текущем списке
+			const user = users.find(u => u.id === userId);
+			if (!user) return;
+
+			console.log(userId);
+
+			let togglePath = '';
+			if (action === 'toggleRole') {
+				togglePath = 'toggle-role';
+			}
+			if (action === 'toggleStatus') {
+				togglePath = 'toggle-status';
+			}
+
+			const url = `${API_SERVER}/users/${userId}/${togglePath}`;
+			const response = await authFetch(url, {
+				method: 'PATCH',
+				headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` }
+			});
+
+			if (!response.ok) throw new Error('Failed to update user');
+
+			const updatedUser: UserType = await response.json();
+
+			setUsers(prev =>
+				prev.map(u => (u.id === userId ? { ...u, ...updatedUser, id: String(updatedUser.id) } : u))
+			);
+
+		} catch (err) {
+			console.error(err);
+		}
 	};
 
-	const filtered = users.filter(
-		(u) =>
-			(roleFilter === 'All' || u.role === roleFilter) &&
-			((u.first_name?.toLowerCase() ?? "").includes(search.toLowerCase())
-				|| (u.last_name?.toLowerCase() ?? "").includes(search.toLowerCase())
-				|| (u.email?.toLowerCase() ?? "").includes(search.toLowerCase()))
-	);
+
+	const totalPages = Math.ceil(users.length / PAGE_SIZE);
+	const paginatedUsers = users.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+	//console.log(setSearch)
 
 	return (
 		<div className={styles.panel}>
 			<AdminHeader />
+
 			<div className={styles.header}>
 				<div className={styles.title}>Role</div>
-				<Filters
-					roleFilter={roleFilter}
-					setRoleFilter={setRoleFilter}
-					search={search}
-					setSearch={setSearch}
-				/>
+				<Filters roleFilter={roleFilter} setRoleFilter={setRoleFilter} search={search} setSearch={setSearch} />
 				<ColumnSelector columns={columns} setColumns={setColumns} />
 			</div>
 
@@ -89,12 +166,13 @@ const AdminPanel = () => {
 			)}
 
 			<UserList
-				users={filtered}
+				users={paginatedUsers}
 				visibleColumns={columns}
 				selectedUserIds={selectedUserIds}
 				toggleUserSelect={toggleUserSelect}
 				onUserAction={handleUserAction}
 			/>
+			{totalPages > 1 && (<Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />)}
 		</div>
 	);
 };

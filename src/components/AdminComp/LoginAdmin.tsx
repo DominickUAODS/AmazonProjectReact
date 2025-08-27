@@ -1,36 +1,36 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import styles from './LogInAccount.module.css'
+import styles from './LoginAdmin.module.css'
 import commonStyles from '../common.module.css';
 import PasswordInput from '../SignUpAccount/PasswordInput';
 import { useAuth } from '../Helpers/AuthContext';
 
 
-export default function LogInAccount({ background }: { background: Location }) {
+export default function LoginAdmin() {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const { login } = useAuth();
 	const navigate = useNavigate();
-	const closeModal = () => navigate("/");
+	// const closeModal = () => navigate("/");
 
 	const [errors, setErrors] = useState<{ email?: string; password?: string; general?: string }>({});
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [staySignedIn, setStaySignedIn] = useState(false);
+	// const [staySignedIn, setStaySignedIn] = useState(false);
 
-	const openSignUp = () => {
-		navigate('/signup', { state: { background } });
-	};
+	// const openSignUp = () => {
+	// 	navigate('/signup', { state: { background } });
+	// };
 
-	const openForgotPassword = () => {
-		navigate('/forgot-password', { state: { background } });
-	};
+	// const openForgotPassword = () => {
+	// 	navigate('/forgot-password', { state: { background } });
+	// };
 
-	const handleBackdropClick = (e: React.MouseEvent<HTMLElement>) => {
-		if (e.target === e.currentTarget) {
-			closeModal();
-		}
-	};
+	// const handleBackdropClick = (e: React.MouseEvent<HTMLElement>) => {
+	// 	if (e.target === e.currentTarget) {
+	// 		closeModal();
+	// 	}
+	// };
 
 	const handleLogin = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -58,22 +58,21 @@ export default function LogInAccount({ background }: { background: Location }) {
 
 			if (!response.ok) {
 				const err = await response.json();
-				//console.log(err)
-				setErrors({ general: err.error || 'Login failed' });
+				setErrors({ general: err.message || 'Login failed' });
 				return;
 			}
 
 			const data = await response.json();
-			const storage = staySignedIn ? localStorage : sessionStorage;
+			const storage = localStorage;
 
 			// Сохраняем токены
 			storage.setItem('accessToken', data.access_token);
 			storage.setItem('refreshToken', data.refresh_token);
 			storage.setItem('user', JSON.stringify(data.user));
 
-			login(data.user, { access: data.access_token, refresh: data.refresh_token }, staySignedIn);
+			login(data.user, { access: data.access_token, refresh: data.refresh_token }, true);
 
-			navigate('/'); // или на dashboard
+			navigate('/-/admin-panel');
 
 		} catch (err) {
 			console.error(err);
@@ -83,14 +82,14 @@ export default function LogInAccount({ background }: { background: Location }) {
 
 
 	return (
-		<div className={commonStyles.modalBackdrop} onClick={handleBackdropClick}>
-			<div className={commonStyles.modal} onClick={(e) => e.stopPropagation()}>
-				<div className={commonStyles.modalBlock}>
+		// <div className={commonStyles.modalBackdrop} onClick={handleBackdropClick}>
+			// <div className={commonStyles.modal} onClick={(e) => e.stopPropagation()}>
+				<div className={commonStyles.modalBlock0}>
 					<div className={styles.loginBlock0}>
 						<div className={styles.loginBlock}>
 							<div className={commonStyles.info}>
 								<span className={commonStyles.infoSpan0}>
-									Welcome back
+									Welcome to admin panel
 								</span>
 								<span className={commonStyles.infoSpan1}>
 									Login into your account
@@ -123,7 +122,7 @@ export default function LogInAccount({ background }: { background: Location }) {
 								{errors.password && <div className={commonStyles.errorText}>{errors.password}</div>}
 
 
-								<div className={styles.stayLogInblock}>
+								{/* <div className={styles.stayLogInblock}>
 									<label className={styles.checkboxLabel}>
 										<input
 											type="checkbox"
@@ -132,7 +131,7 @@ export default function LogInAccount({ background }: { background: Location }) {
 										Stay signed in
 									</label>
 									<a onClick={openForgotPassword} className={styles.forgotPassword}>Forgot password?</a>
-								</div>
+								</div> */}
 
 							</div>
 
@@ -142,20 +141,20 @@ export default function LogInAccount({ background }: { background: Location }) {
 								<button className={commonStyles.nextStepButton} onClick={handleLogin}>
 									Log in
 								</button>
-								<div className={styles.wantToSignUp}>
+								{/* <div className={styles.wantToSignUp}>
 									<span>
 										Don’t have an account?
 										<a onClick={openSignUp}> Sign up</a>
 									</span>
-								</div>
+								</div> */}
 							</div>
 
 
 						</div>
 					</div>
-					<img className={styles.imgReactangle} src='public\img\Rectangle 413.png'></img>
+					{/* <img className={styles.imgReactangle} src='public\img\Rectangle 413.png'></img> */}
 				</div>
-			</div>
-		</div>
+			// </div>
+		//</div>
 	);
 }

@@ -8,7 +8,7 @@ interface FiltersProps {
 	setSearch: (value: string) => void;
 }
 
-const Filters: React.FC<FiltersProps> = ({ roleFilter, setRoleFilter, search, setSearch }) => {
+const Filters: React.FC<FiltersProps> = ({ roleFilter, setRoleFilter, search, setSearch}) => {
 	return (
 		<div className={styles.filters}>
 			<select
