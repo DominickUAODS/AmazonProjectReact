@@ -2,6 +2,7 @@ import styles from "./MainMenu.module.css";
 import commonStyles from '../common.module.css';
 import { useLocation, useNavigate } from "react-router-dom";
 import UserInMainMenu from "./UserInMainMenu";
+import ProductCatalog from "./ProductCatalog";
 
 export default function MainMenu({ background }: { background: Location }){
     const location = useLocation();
@@ -26,6 +27,7 @@ export default function MainMenu({ background }: { background: Location }){
             <div className={styles.menu}>
                 <div className={styles.menuInner}>
                     <UserInMainMenu background={background}/>
+                    <ProductCatalog/>
                 </div>
             </div>
         </div>

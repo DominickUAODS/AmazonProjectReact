@@ -10,6 +10,7 @@
     background-color: rgba(244, 250, 255, 1);
     padding: 24px;
     gap:10px;
+    user-select: none;
 }
 
 .menuInner{
