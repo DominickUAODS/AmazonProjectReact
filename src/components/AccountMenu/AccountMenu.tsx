@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import styles from './AccountMenu.module.css'
+import commonStyles from '../common.module.css';
 //import customerData from '../../data/customers.json';
 
 
@@ -34,7 +35,7 @@ export default function AccountMenu() {
 				<div className={styles.AMblock0}>
 					<div className={styles.accountInfo}>
 
-						<div className={styles.cusPhoto}>
+						<div className={commonStyles.cusPhoto}>
 							<img
 								src={user?.profile_photo || "/img/default-user.svg"}
 								alt={user ? `${user.first_name} ${user.last_name}` : "User"}
@@ -42,11 +43,11 @@ export default function AccountMenu() {
 						</div>
 
 
-						<div className={styles.cusInfo}>
-							<p className={styles.cusName}>
+						<div className={commonStyles.cusInfo}>
+							<p className={commonStyles.cusName}>
 								{user ? `${user.first_name} ${user.last_name}` : "Guest"}
 							</p>
-							<p className={styles.cusRole}>
+							<p className={commonStyles.cusRole}>
 								{user?.role || "Unknown"}
 							</p>
 						</div>

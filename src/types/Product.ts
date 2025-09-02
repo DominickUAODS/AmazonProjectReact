@@ -1,11 +1,12 @@
-type Product = {
-    id: number,
-    image: string,
-    title: string,
-    rating: number,
-    comments: number,
-    cost: number,
-    old_cost: number | null,
-};
+type ProductCardSize = "big" | "small";
 
-export type { Product };
+export type Product = {
+  id: string;
+  name: string;
+  price: number;
+  discount: number | null;
+  display: string;
+  rating: number;
+  comments: number;
+  old_cost?: number;
+}

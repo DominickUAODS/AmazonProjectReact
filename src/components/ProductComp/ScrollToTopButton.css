@@ -21,3 +21,10 @@
 .button-scrolltotop svg * {
     stroke-width: 2px;
 }
+
+
+@media (max-width: 400px) {
+    .button-scrolltotop{
+        display: none ;
+    }
+}

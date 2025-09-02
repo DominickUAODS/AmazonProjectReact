@@ -16,6 +16,9 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+html, body{
+	overflow-x: hidden;
+}
 #root {
 	width: 100%;
 	margin: 0 !important;
@@ -49,6 +52,8 @@ body {
 .pageContent {
 	flex-grow: 1;
 	padding-top: 64px;
+	width:100%;
+
 }
 
 h1 {

@@ -6,9 +6,12 @@ import commonStyles from '../common.module.css';
 export default function ForgotPassword({ background }: { background: Location }) {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const navigate = useNavigate();
-	const closeModal = () => navigate("/");
 	const [email, setEmail] = useState('');
 	const [, setError] = useState('');
+
+	const closeModal = () => {
+        navigate(background.pathname || "/");
+    };
 
 	const handleBackdropClick = (e: React.MouseEvent<HTMLElement>) => {
 		if (e.target === e.currentTarget) {

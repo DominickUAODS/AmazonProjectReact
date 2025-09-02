@@ -40,3 +40,14 @@
 .category-line-button svg * {
     stroke-width: 6px;
 }
+
+
+@media (max-width: 400px) {
+    .category-line {
+        padding: 0 ;
+    }
+
+    .category-line-container{
+        max-width: 390px;
+    }
+}

@@ -1,0 +1,31 @@
+.customerBlock{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+}
+
+.cusNameRole{
+    display: flex;
+    flex-direction: column;
+}
+
+.cusNameRole p{
+    margin: 0;
+}
+
+.userName{
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+}
+
+.userRole{
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.authButtons{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+}

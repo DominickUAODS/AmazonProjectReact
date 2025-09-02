@@ -28,6 +28,7 @@ import { AuthProvider } from './components/Helpers/AuthContext';
 import RequireAuth from './components/Helpers/RequireAuth';
 import ChangePhotoModal from './components/AccountModalWindows/ChangePhotoModal';
 import AdminPanel from './components/AdminComp/AdminPanel';
+import MainMenu from './components/MainMenu/MainMenu';
 
 function App() {
 	const location = useLocation();
@@ -70,7 +71,7 @@ function App() {
 
 
 						{/* sign up modal windows */}
-						<Route path="/signup" element={<SignUpAccount />} />
+						<Route path="/signup" element={<SignUpAccount background={background}/>} />
 						<Route path="/checkin" element={<EnterCodeFromGmail background={background} isPasswordReset={false} />} />
 						<Route path="/final-signup" element={<SignUpFinal background={background} />} />
 						<Route path="/congrats" element={<Congrats />} />
@@ -85,6 +86,10 @@ function App() {
 							<Route path="/logout" element={<LogOutModal />} />
 							<Route path="/delete?" element={<DeleteAccountModal />} />
 						</Route>
+
+
+						{/*menu modal*/}
+						<Route path="/menu" element={<MainMenu background={background}/>} />
 					</Routes >
 				)}
 			</AuthProvider>

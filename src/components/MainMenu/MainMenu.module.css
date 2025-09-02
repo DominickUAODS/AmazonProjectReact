@@ -1,0 +1,21 @@
+.menuModal{
+    justify-content: flex-start;
+    z-index: 2000;
+    top: 0;
+
+}
+.menu{
+    height: 100%;
+    width:365px;
+    background-color: rgba(244, 250, 255, 1);
+    padding: 24px;
+    gap:10px;
+}
+
+.menuInner{
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+    margin-top: 24px;
+}
+

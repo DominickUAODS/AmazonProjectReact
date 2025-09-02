@@ -1,14 +1,12 @@
 import './ProductCard.css';
 import { ReactSVG } from 'react-svg';
-import type { Product } from '../types/Product';
+import type { Product } from '../../types/Product';
 import { Link } from 'react-router-dom';
 import type { ProductCardSize } from '../types/ProductCardSize';
 
-interface Params extends Product {
-    card_size: ProductCardSize,
-}
 
-function ProductCard({ card_size, id, image, title, rating, comments, cost, old_cost }: Params) {
+
+function ProductCard({ id, image, title, rating, comments, cost, old_cost, card_size }: Product) {
     return (
         <Link className={`product-card ${card_size === 'big' ? 'product-card-big' : ''} bg-objects`} to={`/products/${id}`}>
             <div className='product-card-image-frame'>

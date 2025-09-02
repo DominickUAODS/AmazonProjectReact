@@ -56,3 +56,26 @@
 .category-card a svg * {
 	stroke-width: 4px;
 }
+
+@media (max-width: 400px) {
+	.category-card {
+		
+		width: 171px;
+		height: 197px;
+		border-radius: 4px;
+	}
+
+	.category-card img {
+		height: 87px;
+	}
+
+	.text-2{
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	.text-5{
+		font-size: 12px;
+		line-height: 26px;
+	}
+}

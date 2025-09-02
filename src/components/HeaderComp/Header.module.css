@@ -102,3 +102,36 @@
 	max-height: 40px;
 	background-color: rgba(74, 123, 217, 1);
 }
+
+
+@media (max-width: 400px) {
+	.header {
+		padding: 10px 16px;
+		max-height: 52px;
+		gap:20px;
+		width:390px;
+	}
+
+	.userButton{
+		display: none;
+	}
+
+	.logo{
+		display: none;
+	}
+
+	.input {
+		width:240px;
+	}
+
+
+	.searchButton svg{
+		width: 16px !important;
+		height: 16px !important;
+	}
+
+	.searchCont{
+		width:240px;
+	}
+}
+  

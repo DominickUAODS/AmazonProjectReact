@@ -22,6 +22,7 @@
 
 .login-banner-message-block p {
     white-space: nowrap;
+    margin: 0;
 }
 
 .login-banner-title {
@@ -57,4 +58,80 @@
 .button-login:hover {
     border-color: var(--main-secondary);
     color: var(--main-secondary);
+}
+
+
+.login-bann-butt,
+.login-bann-butt2{
+    width: 111px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-bann-butt2{
+    color:rgba(242, 244, 248, 1);
+    border-color:rgba(204, 221, 255, 1);
+}
+
+@media (max-width: 400px) {
+    .login-banner {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+
+    .login-banner img {
+        width: 358px;
+        height: 441px;
+        
+    }
+
+    .login-banner-message-block {
+        position: absolute;
+        top: 16px;
+        /* transform: translateY(-50%); */
+        width: 310px;
+        height: 134px;
+        display: flex;
+        left:24px;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .login-banner-title {
+        color:rgba(14, 32, 66, 1) !important;
+        font-size: 24px;
+        line-height: 28px;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    .login-banner-description {
+        color:rgba(14, 32, 66, 1) !important;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0;
+        margin-top: 12px;
+    }
+
+    .login-banner-buttons {
+        max-height: 40px;
+        margin-top: 36px;
+    }
+
+    .login-bann-butt,
+    .login-bann-butt2{
+        height: 40px;
+        width:105px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-bann-butt2{
+        border-color: rgba(74, 123, 217, 1);
+        color: rgba(14, 32, 66, 1);
+    }
 }
