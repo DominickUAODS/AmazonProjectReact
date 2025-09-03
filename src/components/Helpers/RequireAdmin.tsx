@@ -12,7 +12,7 @@ export default function RequireAdmin() {
 	}
 
 	if (!isAuthenticated) {
-		return <Navigate to="/login" replace />;
+		return <Navigate to="/-/login-admin" replace />;
 	}
 
 	if (user?.role !== "Administrator") {

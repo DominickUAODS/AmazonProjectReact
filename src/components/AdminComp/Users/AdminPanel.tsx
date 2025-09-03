@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import styles from './AdminPanel.module.css';
 import Filters from './Filters';
-import AdminHeader from './AdminHeader';
+import AdminHeader from './../AdminHeader';
 import UserList from './UserList';
 import ColumnSelector from './ColumnSelector';
-import type { UserType } from '../../types/UserType';
-import { useAuth } from '../Helpers/AuthContext';
-import Pagination from '../Pagination/Pagination';
+import type { UserType } from '../../../types/UserType';
+import { useAuth } from '../../Helpers/AuthContext';
+import Pagination from '../../Pagination/Pagination';
+import ConfirmModal from './ConfirmModal';
 
 export type ColumnVisibility = {
 	status: boolean;
@@ -30,6 +31,9 @@ const AdminPanel = () => {
 	const [debouncedSearch, setDebouncedSearch] = useState<string>('');
 
 	const { accessToken, authFetch } = useAuth();
+
+	const [modalOpen, setModalOpen] = useState(false);
+	const [modalAction, setModalAction] = useState<"delete" | "restore" | null>(null);
 
 
 	useEffect(() => {
@@ -85,16 +89,62 @@ const AdminPanel = () => {
 		});
 	};
 
+	const handleBulkAction = (action: "delete" | "restore") => {
+		if (selectedUserIds.size === 0) return;
+		setModalAction(action);
+		setModalOpen(true);
+	};
 
-	const handleBulkAction = (action: 'delete' | 'deactivate' | 'restore') => {
-		setUsers((prev) =>
-			prev.map((u) =>
-				selectedUserIds.has(u.id)
-					? { ...u, status: action === 'delete' || action === 'deactivate' ? 'Deleted' : 'Active' }
-					: u
-			)
-		);
-		setSelectedUserIds(new Set());
+
+	// const handleBulkAction = (action: 'delete' | 'deactivate' | 'restore') => {
+	// 	setUsers((prev) =>
+	// 		prev.map((u) =>
+	// 			selectedUserIds.has(u.id)
+	// 				? { ...u, status: action === 'delete' || action === 'deactivate' ? 'Deleted' : 'Active' }
+	// 				: u
+	// 		)
+	// 	);
+	// 	setSelectedUserIds(new Set());
+	// };
+
+	const handleConfirmAction = async () => {
+		if (!modalAction) return;
+
+		try {
+
+			const updatedUsers: UserType[] = [];
+
+			for (const userId of selectedUserIds) {
+				const url = `${API_SERVER}/users/${userId}/toggle-status`;
+
+				const response = await authFetch(url, {
+					method: "PATCH",
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${accessToken}`
+					}
+				});
+
+				if (!response.ok) throw new Error(`Failed to update user ${userId}`);
+
+				const updatedUser: UserType = await response.json();
+				updatedUsers.push(updatedUser);
+			}
+
+			setUsers(prev =>
+				prev.map(u => {
+					const updated = updatedUsers.find(upd => upd.id === u.id);
+					return updated ? { ...u, ...updated, id: String(updated.id) } : u;
+				})
+			);
+
+			setSelectedUserIds(new Set());
+		} catch (err) {
+			console.error(err);
+		} finally {
+			setModalOpen(false);
+			setModalAction(null);
+		}
 	};
 
 
@@ -157,22 +207,32 @@ const AdminPanel = () => {
 				<ColumnSelector columns={columns} setColumns={setColumns} />
 			</div>
 
-			{selectedUserIds.size >= 2 && (
-				<div className={styles.bulkMenu}>
-					<button onClick={() => handleBulkAction('delete')}>Delete</button>
-					<button onClick={() => handleBulkAction('deactivate')}>Deactivate</button>
-					<button onClick={() => handleBulkAction('restore')}>Restore</button>
-				</div>
-			)}
-
 			<UserList
 				users={paginatedUsers}
 				visibleColumns={columns}
 				selectedUserIds={selectedUserIds}
 				toggleUserSelect={toggleUserSelect}
 				onUserAction={handleUserAction}
+				onBulkAction={handleBulkAction}
 			/>
-			{totalPages > 1 && (<Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />)}
+
+			{totalPages > 1 && (
+				<Pagination
+					currentPage={currentPage}
+					totalPages={totalPages}
+					onPageChange={setCurrentPage}
+				/>
+			)}
+
+			<ConfirmModal
+				open={modalOpen}
+				action={modalAction}
+				count={selectedUserIds.size}
+				onConfirm={handleConfirmAction}
+				onCancel={() => setModalOpen(false)}
+			/>
+
+
 		</div>
 	);
 };

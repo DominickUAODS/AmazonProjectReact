@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './LoginAdmin.module.css'
-import commonStyles from '../common.module.css';
-import PasswordInput from '../SignUpAccount/PasswordInput';
-import { useAuth } from '../Helpers/AuthContext';
+import commonStyles from '../../common.module.css';
+import PasswordInput from '../../SignUpAccount/PasswordInput';
+import { useAuth } from '../../Helpers/AuthContext';
 
 
 export default function LoginAdmin() {

@@ -1,0 +1,88 @@
+.treeContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 12px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.categoryItem {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 12px;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+.categoryItem:hover {
+	background: #f7f7f7;
+}
+
+.activeCategory {
+	background: #eef4ff;
+	border: 1px solid #c7d8ff;
+}
+
+.categoryName {
+	font-size: 15px;
+	font-weight: 500;
+	color: #333;
+}
+
+.categoryIcon {
+	width: 20px;
+	height: 20px;
+	margin-right: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #666;
+}
+
+.subcategories {
+	margin-left: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.borderBottom {
+	margin: 12px 0;
+	height: 1px;
+	background: #ddd;
+}
+
+.selectedCategory {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 12px;
+	background: #f9f9f9;
+	border-radius: 6px;
+	border: 1px solid #e1e1e1;
+}
+
+.selectedName {
+	font-size: 16px;
+	font-weight: 600;
+	color: #222;
+}
+
+.addButton {
+	background: #4a90e2;
+	color: #fff;
+	border: none;
+	padding: 6px 12px;
+	font-size: 14px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+.addButton:hover {
+	background: #357ab7;
+}

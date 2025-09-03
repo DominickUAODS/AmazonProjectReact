@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const [refreshToken, setRefreshToken] = useState<string | null>(null);
 
 	const [loading, setLoading] = useState(true);
-
+ 
 	// Проверка хранилища при монтировании
 	useEffect(() => {
 		const storedUser = localStorage.getItem('user') || sessionStorage.getItem('user');
@@ -89,6 +89,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 				logout();
 				return null;
 			}
+
+			console.log(data.access_token);
 
 			setAccessToken(data.access_token);
 

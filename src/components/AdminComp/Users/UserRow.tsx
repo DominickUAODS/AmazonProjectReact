@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import styles from './UserRow.module.css';
-import type { UserType } from '../../types/UserType';
+import type { UserType } from '../../../types/UserType';
 import type { ColumnVisibility } from './AdminPanel';
 import dayjs from 'dayjs';
 

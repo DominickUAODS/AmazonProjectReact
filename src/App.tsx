@@ -1,12 +1,9 @@
-//import AccountMenu from './components/AccountMenu/AccountMenu'
 import './App.css'
 import Layout from './components/Layout';
 import { Routes, Route, useLocation } from "react-router-dom";
+
 import { Main } from './components/Main'
 import { ProductList } from './components/ProductComp/ProductList';
-
-//import { createRoot } from 'react-dom/client';
-//import { StrictMode } from 'react';
 import AccountSettings from './components/AccountComp/AccountSettings';
 import AccountWishlist from './components/AccountComp/AccountWishlist';
 import SignUpAccount from './components/SignUpAccount/SignUpAccount';
@@ -27,14 +24,19 @@ import type { ModalState } from './types/ModalState';
 import { AuthProvider } from './components/Helpers/AuthContext';
 import RequireAuth from './components/Helpers/RequireAuth';
 import ChangePhotoModal from './components/AccountModalWindows/ChangePhotoModal';
-import AdminPanel from './components/AdminComp/AdminPanel';
-import LoginAdmin from './components/AdminComp/LoginAdmin';
+import AdminPanel from './components/AdminComp/Users/AdminPanel';
+import LoginAdmin from './components/AdminComp/Users/LoginAdmin';
 import RequireAdmin from './components/Helpers/RequireAdmin';
+import CategoriesPage from './components/AdminComp/Products/CategoriesPage';
 
 function App() {
 	const location = useLocation();
 	const state = location.state as ModalState | undefined;
 	const background = state?.background;
+	
+	// console.log(`location: ${location}`);
+	// console.log(`state: ${state}`);
+	// console.log(`background: ${background}`);
 
 	return (
 		<>
@@ -64,6 +66,7 @@ function App() {
 					<Route path="/-/login-admin" element={<LoginAdmin />} />
 					<Route element={<RequireAdmin />}>
 						<Route path="/-/admin-panel" element={<AdminPanel />} />
+						<Route path="/-/admin-category" element={<CategoriesPage />} />
 					</Route>
 				</Routes>
 
