@@ -1,6 +1,6 @@
 import styles from "./ProductCatalog.module.css";
 import commonStyles from '../common.module.css';
-import { useNavigate } from "react-router-dom";
+
 import type { ProductCategoryMain } from "../../types/ProductCategoryMain";
 import OneProductCategory from "./OneProductCategory";
 import { useState } from "react";
@@ -38,7 +38,6 @@ export default function ProductCatalog(){
     const [visibleCount, setVisibleCount] = useState(5);
     const visibleDetails = pc.slice(0, visibleCount);
     const hasMore = visibleCount < pc.length;
-    const navigate = useNavigate();
 
     return(
         <div className={styles.productCatalog}>

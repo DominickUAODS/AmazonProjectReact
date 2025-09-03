@@ -6,11 +6,23 @@
     padding-bottom: 24px;
 }
 
+.phMobile{
+    display: flex;
+    justify-content: space-between;
+}
+
+.closeMenuMobile{
+    cursor: pointer;
+}
+
 .cusNameRole{
     display: flex;
     flex-direction: column;
 }
 
+.closeMenuMobile{
+    display: none;
+}
 .cusNameRole p{
     margin: 0;
 }
@@ -30,4 +42,26 @@
     display: flex;
     flex-direction: column;
     gap:8px;
+}
+
+@media (max-width: 768px) {
+    .closeMenuMobile{
+        display:inline-block;
+    }
+
+    .userName{
+        font-size: 16px;
+        line-height: 20px;
+        margin-top: 8px !important;
+    }
+
+    .userRole{
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    .customerBlock{
+        padding-bottom: 16px;
+    }
+    
 }

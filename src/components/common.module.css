@@ -366,3 +366,21 @@
 	line-height: 24px;
 	text-align: center;
 }
+
+@media (max-width: 768px) {
+	.cusPhoto img{
+		width: 48px;
+		height: 48px;
+
+	}
+
+	.secondaryButton{
+		border-radius: 8px;
+		border: 1.5px solid rgba(74, 123, 217, 1);
+		padding: 10px 12px;
+		font-size: 14px;
+		line-height: 18px;
+		color:rgba(14, 32, 66, 1);
+		
+	}
+}
