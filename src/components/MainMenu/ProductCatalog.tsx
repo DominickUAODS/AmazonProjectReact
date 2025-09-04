@@ -1,44 +1,31 @@
 import styles from "./ProductCatalog.module.css";
 import commonStyles from '../common.module.css';
+import { fetchRootCategories } from "../../services/categoryService";
 
 import type { ProductCategoryMain } from "../../types/ProductCategoryMain";
 import OneProductCategory from "./OneProductCategory";
-import { useState } from "react";
-const pc:ProductCategoryMain[]=[
-    {
-        icon:"https://cdn-icons-png.flaticon.com/512/5390/5390264.png",
-        name: "Fashion"
-    },
-    {
-        icon:"https://cdn-icons-png.flaticon.com/512/5390/5390264.png",
-        name: "Electronics"
-    },
-    {
-        icon:"https://cdn-icons-png.flaticon.com/512/5390/5390264.png",
-        name: "Household"
-    },
-    {
-        icon:"https://cdn-icons-png.flaticon.com/512/5390/5390264.png",
-        name: "Furniture"
-    },
-    {
-        icon:"https://cdn-icons-png.flaticon.com/512/5390/5390264.png",
-        name: "Electronics"
-    },
-    {
-        icon:"https://cdn-icons-png.flaticon.com/512/5390/5390264.png",
-        name: "Work tools"
-    }
+import { useEffect, useState } from "react";
+import type { Category } from "../../types/Category";
 
-]
 
 export default function ProductCatalog(){
     
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [visibleCount, setVisibleCount] = useState(5);
-    const visibleDetails = pc.slice(0, visibleCount);
-    const hasMore = visibleCount < pc.length;
+    const [categories, setCategories] = useState<Category[]>([]);
+    const API_SERVER = import.meta.env.VITE_API_SERVER;
 
+    
+    useEffect(() => {
+        async function loadCategories() {
+        const roots = await fetchRootCategories(API_SERVER);
+        setCategories(roots);
+        }
+        loadCategories();
+    }, [API_SERVER]);
+
+    const visibleDetails = categories.slice(0, visibleCount);
+    const hasMore = visibleCount < categories.length;
     return(
         <div className={styles.productCatalog}>
             <div className={styles.pCMainBlock}>
@@ -68,7 +55,6 @@ export default function ProductCatalog(){
                         <OneProductCategory
                             key={i}
                             name={f.name}
-                            icon={f.icon}
                         />
                     ))}
                     {hasMore && (
