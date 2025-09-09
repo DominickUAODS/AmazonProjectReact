@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
 
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Mulish", sans-serif;
+	background-color: var(--main-text);
+}
 
 :root {
 	font-family: 'Mulish', system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -22,25 +29,10 @@ html, body{
 #root {
 	width: 100%;
 	margin: 0 !important;
-
-
-}
-
-
-body {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: "Mulish", sans-serif;
-	background-color: var(--main-text);
-}
-
-#root {
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 }
-
 
 .pageWrapper {
 	display: flex;
@@ -68,13 +60,10 @@ button {
 	font-size: 1em;
 	font-weight: 500;
 	font-family: inherit;
-	background-color: #1a1a1a;
+	/* background-color: #1a1a1a; */
 	cursor: pointer;
 	transition: border-color 0.25s;
 }
-
-
-
 
 a {
 	font-weight: 500;

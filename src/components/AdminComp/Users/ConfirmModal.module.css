@@ -1,0 +1,22 @@
+.loInfoSpan {
+	text-align: center;
+}
+
+.loModalInfo {
+	justify-content: center;
+	display: flex;
+}
+
+.loModal {
+	max-width: 464px;
+}
+
+.logOutSpan {
+	font-family: 'Mulish';
+	font-weight: 400;
+	font-size: 18px;
+	margin: 0;
+	text-align: center;
+	letter-spacing: 0.3px;
+	line-height: 28px;
+}

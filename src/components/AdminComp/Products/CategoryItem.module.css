@@ -1,0 +1,41 @@
+.categoryItem {
+    /* margin-left: 16px; */
+}
+
+.btnExp {
+    background-color: transparent;
+    padding-right: 8px;
+    border: 0 transparent;
+
+}
+
+.leftPart{
+    display: flex;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 28px;
+    margin: 4px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.checkbox {
+    width: 24px;
+    height: 24px;
+}
+
+.titleItem {
+    margin-left: 10px;
+    font-size: 18px;
+    letter-spacing: 2%;
+}
+
+.childrenItem {
+    margin-left: 16px;
+    padding-left: 8px;
+}

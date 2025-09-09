@@ -1,323 +1,332 @@
 .hr-separator {
-  height: 2.5px;
-  border: none;
-  background-color: var(--minor-blue);
-  margin: 0;
+	height: 2.5px;
+	border: none;
+	background-color: var(--minor-blue);
+	margin: 0;
 }
 
 .empty {
-  flex-grow: 1;
+	flex-grow: 1;
 }
 
 .breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-bottom: 13px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	margin-bottom: 13px;
 }
 
-.breadcrumb div, .breadcrumb svg {
-  width: 24px;
-  height: 24px;
+.breadcrumb div,
+.breadcrumb svg {
+	width: 24px;
+	height: 24px;
 }
 
 .breadcrumb svg * {
-  stroke-width: 2px;
+	stroke-width: 2px;
 }
 
 .text-main {
-  color: var(--main-text) !important;
+	color: var(--main-text) !important;
 }
 
 .text-minor {
-  color: var(--minor-text) !important;
+	color: var(--minor-text) !important;
 }
 
 .bg-primary {
-  background-color: var(--main-primary) !important;
+	background-color: var(--main-primary) !important;
 }
 
 .bg-secondary {
-  background-color: var(--main-secondary) !important;
+	background-color: var(--main-secondary) !important;
 }
 
 .bg-dark-blue {
-  background-color: var(--minor-dark-blue) !important;
+	background-color: var(--minor-dark-blue) !important;
 }
 
 .bg-main-text {
-  background-color: var(--main-text) !important;
+	background-color: var(--main-text) !important;
 }
 
 .bg-minor-text {
-  background-color: var(--minor-text) !important;
+	background-color: var(--minor-text) !important;
 }
 
 .bg-objects {
-  background-color: var(--minor-objects) !important;
+	background-color: var(--minor-objects) !important;
 }
 
 .header-1 {
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 48px;
-  font-size: 40px;
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	line-height: 48px;
+	font-size: 40px;
 }
 
 .header-2 {
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 36px;
-  font-size: 32px;
+	font-weight: 600;
+	letter-spacing: -0.015em;
+	line-height: 36px;
+	font-size: 32px;
 }
 
 .header-3 {
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  line-height: 28px;
-  font-size: 24px;
+	font-weight: 500;
+	letter-spacing: -0.015em;
+	line-height: 28px;
+	font-size: 24px;
 }
 
 .text-1 {
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 28px;
-  font-size: 18px;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	line-height: 28px;
+	font-size: 18px;
 }
 
 .text-2 {
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 28px;
-  font-size: 18px;
+	font-weight: 400;
+	letter-spacing: 0.02em;
+	line-height: 28px;
+	font-size: 18px;
 }
 
 .text-3 {
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 24px;
-  font-size: 16px;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	line-height: 24px;
+	font-size: 16px;
 }
 
-.text-4, .button, label {
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 24px;
-  font-size: 16px;
+.text-4,
+.button,
+label {
+	font-weight: 400;
+	letter-spacing: 0.02em;
+	line-height: 24px;
+	font-size: 16px;
 }
 
-.text-5, input, select {
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 24px;
-  font-size: 14px;
+.text-5,
+input,
+select {
+	font-weight: 400;
+	letter-spacing: 0.02em;
+	line-height: 24px;
+	font-size: 14px;
 }
 
 .button {
-  border: none;
-  outline: none;
-  text-decoration: none;
-  border-radius: 4px;
-  padding: 8px 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
+	border: none;
+	outline: none;
+	text-decoration: none;
+	border-radius: 4px;
+	padding: 8px 32px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
 }
 
-.button div, .button svg {
-  width: 24px;
-  height: 24px;
+.button div,
+.button svg {
+	width: 24px;
+	height: 24px;
 }
 
 .button:hover {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .button:disabled {
-  opacity: 50%;
-  pointer-events: none;
+	opacity: 50%;
+	pointer-events: none;
 }
 
 .button-icon {
-  padding: 0;
+	padding: 0;
 }
 
-.button-icon, .button-icon div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.button-icon,
+.button-icon div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .button-group {
-  display: flex;
+	display: flex;
 }
 
 .button-group *:first-child {
-  border-radius: 4px 0 0 4px;
+	border-radius: 4px 0 0 4px;
 }
 
 .button-group *:last-child {
-  border-radius: 0 4px 4px 0;
+	border-radius: 0 4px 4px 0;
 }
 
 .button-primary {
-  background-color: var(--main-primary);
-  color: var(--minor-text);
+	background-color: var(--main-primary);
+	color: var(--minor-text);
 }
 
 .button-primary svg * {
-  stroke: var(--minor-text);
+	stroke: var(--minor-text);
 }
 
 .button-primary:hover {
-  background-color: var(--minor-pr-hover);
-  border: 2.5px solid var(--main-primary);
+	background-color: var(--minor-pr-hover);
+	border: 2.5px solid var(--main-primary);
 }
 
 .button-primary:active {
-  border: none;
-  background-color: var(--minor-pr-press);
+	border: none;
+	background-color: var(--minor-pr-press);
 }
 
 .button-secondary {
-  border: 2.5px solid var(--main-secondary);
-  background-color: transparent;
-  color: var(--minor-text);
+	border: 2.5px solid var(--main-secondary);
+	background-color: transparent;
+	color: var(--minor-text);
 }
 
 .button-secondary svg * {
-  stroke: var(--main-secondary);
+	stroke: var(--main-secondary);
 }
 
 .button-secondary:hover {
-  box-shadow: 0px 1px 7px -5px color-mix(in srgb, var(--minor-dark-blue) 45%, transparent);
+	box-shadow: 0px 1px 7px -5px color-mix(in srgb, var(--minor-dark-blue) 45%, transparent);
 }
 
 .button-secondary:active {
-  box-shadow: none;
-  background-color: var(--minor-blue);
+	box-shadow: none;
+	background-color: var(--minor-blue);
 }
 
 .button-tertiary {
-  background-color: transparent;
-  color: var(--minor-text);
+	background-color: transparent;
+	color: var(--minor-text);
 }
 
 .button-tertiary svg * {
-  stroke: var(--main-secondary);
+	stroke: var(--main-secondary);
 }
 
 .button-tertiary:hover {
-  background-color: var(--minor-light-blue);
+	background-color: var(--minor-light-blue);
 }
 
 .button-tertiary:active {
-  background-color: var(--minor-blue);
+	background-color: var(--minor-blue);
 }
 
 .button-destructive {
-  border: 2.5px solid var(--minor-destructive);
-  background-color: transparent;
-  color: var(--minor-text);
+	border: 2.5px solid var(--minor-destructive);
+	background-color: transparent;
+	color: var(--minor-text);
 }
 
 .button-destructive svg * {
-  stroke: var(--minor-destructive);
+	stroke: var(--minor-destructive);
 }
 
 .button-destructive:hover {
-  box-shadow: 0px 1px 7px -5px color-mix(in srgb, var(--minor-dark-red) 50%, transparent);
+	box-shadow: 0px 1px 7px -5px color-mix(in srgb, var(--minor-dark-red) 50%, transparent);
 }
 
 .button-destructive:active {
-  box-shadow: none;
-  background-color: var(--minor-light-red);
+	box-shadow: none;
+	background-color: var(--minor-light-red);
 }
 
 .input-container {
-  position: relative;
+	position: relative;
 }
 
 .input-container label {
-  background-color: var(--minor-objects);
-  color: var(--minor-text);
-  padding: 0 4px;
-  position: absolute;
-  top: -12px;
-  left: 20px;
+	background-color: var(--minor-objects);
+	color: var(--minor-text);
+	padding: 0 4px;
+	position: absolute;
+	top: -12px;
+	left: 20px;
 }
 
-.input-container input, .input-container select {
-  border: 1.5px solid color-mix(in srgb, var(--minor-text) 50%, transparent);
-  border-radius: 4px;
-  padding: 12px 20px;
-  color: var(--minor-text);
-  background-color: var(--minor-objects);
+.input-container input,
+.input-container select {
+	border: 1.5px solid color-mix(in srgb, var(--minor-text) 50%, transparent);
+	border-radius: 4px;
+	padding: 12px 20px;
+	color: var(--minor-text);
+	background-color: var(--minor-objects);
 }
 
 .input-container select {
-  padding: 8px 20px;
+	padding: 8px 20px;
 }
 
 .input-container input::placeholder {
-  color: color-mix(in srgb, var(--minor-text) 25%, transparent);
+	color: color-mix(in srgb, var(--minor-text) 25%, transparent);
 }
 
-.input-container input:focus, .input-container select:focus {
-  outline: none;
-  border: 2px solid var(--minor-text);
+.input-container input:focus,
+.input-container select:focus {
+	outline: none;
+	border: 2px solid var(--minor-text);
 }
 
 .input-container select {
-  appearance: none;
-  background-image: url('/icons/arrow_down.svg');
-  background-repeat: no-repeat;
-  background-position: right 18px top 50%;
-  background-size: 24px;
-  padding-right: 3rem;
+	appearance: none;
+	background-image: url('/icons/arrow_down.svg');
+	background-repeat: no-repeat;
+	background-position: right 18px top 50%;
+	background-size: 24px;
+	padding-right: 3rem;
 }
 
 .input-container select:open {
-  background-image: url('/icons/arrow_up.svg');
+	background-image: url('/icons/arrow_up.svg');
 }
 
 .icon-main-text svg * {
-  stroke: var(--main-text);
+	stroke: var(--main-text);
 }
 
 a .icon-main-text:hover svg * {
-  stroke: var(--minor-blue);
+	stroke: var(--minor-blue);
 }
 
 .icon-minor-text svg * {
-  stroke: var(--minor-text);
+	stroke: var(--minor-text);
 }
 
 a .icon-minor-text:hover svg * {
-  stroke: var(--minor-dark-blue);
+	stroke: var(--minor-dark-blue);
 }
 
 .logo-minor-text svg * {
-  fill: var(--minor-text);
+	fill: var(--minor-text);
 }
 
 a .logo-minor-text:hover svg * {
-  fill: var(--minor-dark-blue);
+	fill: var(--minor-dark-blue);
 }
 
 .logo-main-text svg * {
-  fill: var(--main-text);
+	fill: var(--main-text);
 }
 
 a .logo-main-text:hover svg * {
-  fill: var(--minor-blue);
+	fill: var(--minor-blue);
 }
 
 .logo-primary svg * {
-  fill: var(--main-primary);
+	fill: var(--main-primary);
 }
 
 a .logo-primary:hover svg * {
-  fill: var(--minor-pr-press);
+	fill: var(--minor-pr-press);
 }

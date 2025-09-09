@@ -250,6 +250,19 @@
 	box-sizing: border-box;
 }
 
+.inputWrapper2 {
+	border: 1.5px solid rgba(14, 32, 66, 0.5);
+	border-radius: 4px;
+	position: relative;
+	/* height: 82px; */
+	margin: 0 !important;
+	padding: 20px 18px 20px !important;
+	display: flex;
+	align-items: start;
+	box-sizing: border-box;
+}
+
+
 .inputWrapper legend {
 	padding: 0 4px;
 	font-size: 16px;
@@ -271,6 +284,23 @@
 	letter-spacing: 0.3px;
 	color: rgba(14, 32, 66, 1);
 	align-self: center;
+	background-color: rgba(244, 250, 255, 1);
+
+}
+
+.inputWrapper2 textarea {
+	/* height: 80px; */
+	width: 100%;
+	padding-right: 48px;
+	border: none;
+	outline: none;
+	font-size: 14px;
+	padding: 0 !important;
+	font-family: 'Mulish';
+	line-height: 80px;
+	letter-spacing: 0.3px;
+	color: rgba(14, 32, 66, 1);
+	align-self: flex-start;
 	background-color: rgba(244, 250, 255, 1);
 
 }
@@ -350,7 +380,7 @@
 	padding-left: 18px;
 	font-size: 14px;
 	line-height: 24px;
-	justify-content: center;
+	justify-content: flex-start;
 }
 
 .errorLegend {

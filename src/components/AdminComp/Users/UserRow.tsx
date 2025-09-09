@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import styles from './UserRow.module.css';
-import type { UserType } from '../../types/UserType';
+import type { UserType } from '../../../types/UserType';
 import type { ColumnVisibility } from './AdminPanel';
+import dayjs from 'dayjs';
 
 interface UserRowProps {
 	user: UserType;
@@ -30,24 +31,29 @@ const UserRow: React.FC<UserRowProps> = ({ user, visibleColumns, selected, toggl
 		setMenuOpen(false);
 	};
 
+	const fullName = `${user.first_name} ${user.last_name}`;
+	const statusText = user.isActive ? 'Active' : 'Deleted';
+	const formattedDate = user.registrationDate ? dayjs(user.registrationDate).format('DD MMMM YYYY') : '—';
+	const profile_photo = user.profile_photo !== "" ? user.profile_photo : "/img/default-user.svg";
+
 	return (
 		<tr className={styles.row}>
 			<td><input type="checkbox" checked={selected} onChange={toggleSelect} /></td>
 			<td className={styles.nameCell}>
-				<img src={user.avatar} alt={user.name} className={styles.avatar} />
+				<img src={profile_photo} alt={fullName} className={styles.avatar} />
 				<div>
-					<div>{user.name}</div>
+					<div>{fullName}</div>
 					<div className={styles.role}>{user.role}</div>
 				</div>
 			</td>
 			{visibleColumns.status && (
 				<td>
-					<span className={`${styles.status} ${user.status === 'Active' ? styles.active : styles.deleted}`}>
-						{user.status}
+					<span className={`${styles.status} ${user.isActive ? styles.active : styles.deleted}`}>
+						{statusText}
 					</span>
 				</td>
 			)}
-			{visibleColumns.registered && <td>{new Date(user.registered).toLocaleDateString()}</td>}
+			{visibleColumns.registered && <td>{formattedDate}</td>}
 			{visibleColumns.email && <td>{user.email}</td>}
 			<td className={styles.actionsCell}>
 				<button className={styles.actionsButton} onClick={() => setMenuOpen(!menuOpen)}>⋯</button>
@@ -57,7 +63,7 @@ const UserRow: React.FC<UserRowProps> = ({ user, visibleColumns, selected, toggl
 							{user.role === 'Administrator' ? 'Make customer' : 'Make administrator'}
 						</div>
 						<div className={styles.menuItem} onClick={() => handleMenuClick('toggleStatus')}>
-							{user.status === 'Deleted' ? 'Restore' : 'Delete'}
+							{user.isActive ? 'Delete' : 'Restore'}
 						</div>
 						<hr className={styles.menuDivider} />
 						<div className={styles.menuItem}>View orders</div>

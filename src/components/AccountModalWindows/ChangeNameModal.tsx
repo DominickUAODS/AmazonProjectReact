@@ -58,7 +58,7 @@ export default function ChangeNameModal() {
 
 			if (!response.ok) {
 				const err = await response.json();
-				setErrors({ general: err.message || 'Update photo failed' });
+				setErrors({ general: err.message || 'Change names failed' });
 				return;
 			}
 

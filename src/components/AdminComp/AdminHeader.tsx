@@ -1,10 +1,20 @@
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './AdminHeader.module.css'
 
 const AdminHeader = () => {
+
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	const openAdminMenu = () => {
+		const bg = location.state?.background || location;
+		navigate("/-/admin-panel/menu", { state: { background: bg } });
+	  };
+
 	return (
 		<div className={styles.header}>
 			<div className={styles.mainLogoCont}>
-				<div className={styles.menu}>
+				<div className={styles.menu} onClick={openAdminMenu}>
 					<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M4 9.55273H28" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 						<path d="M4 15.9512H28" stroke="#F2F4F8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />

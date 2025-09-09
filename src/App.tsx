@@ -1,12 +1,9 @@
-//import AccountMenu from './components/AccountMenu/AccountMenu'
 import './App.css'
 import Layout from './components/Layout';
 import { Routes, Route, useLocation } from "react-router-dom";
+
 import { Main } from './components/Main'
 import { ProductList } from './components/ProductComp/ProductList';
-
-//import { createRoot } from 'react-dom/client';
-//import { StrictMode } from 'react';
 import AccountSettings from './components/AccountComp/AccountSettings';
 import AccountWishlist from './components/AccountComp/AccountWishlist';
 import SignUpAccount from './components/SignUpAccount/SignUpAccount';
@@ -27,13 +24,23 @@ import type { ModalState } from './types/ModalState';
 import { AuthProvider } from './components/Helpers/AuthContext';
 import RequireAuth from './components/Helpers/RequireAuth';
 import ChangePhotoModal from './components/AccountModalWindows/ChangePhotoModal';
-import AdminPanel from './components/AdminComp/AdminPanel';
+
+import CategoriesPage from './components/AdminComp/Products/CategoriesPage';
+import RequireAdmin from './components/Helpers/RequireAdmin';
+import LoginAdmin from './components/AdminComp/Users/LoginAdmin';
 import MainMenu from './components/MainMenu/MainMenu';
+import AdminPanel from './components/AdminComp/Users/AdminPanel';
+import AdminMenu from './components/AdminComp/AdminMenu/AdminMenu';
+import AdminLayout from './components/AdminLayout';
 
 function App() {
 	const location = useLocation();
 	const state = location.state as ModalState | undefined;
 	const background = state?.background;
+	
+	// console.log(`location: ${location}`);
+	// console.log(`state: ${state}`);
+	// console.log(`background: ${background}`);
 
 	return (
 		<>
@@ -53,13 +60,21 @@ function App() {
 							<Route path="orders" element={<AccountOrders />} />
 						</Route>
 
-						{/* admin panel */}
-						<Route element={<RequireAuth />}>
-							<Route path="/-/admin-dashboard" element={<AdminPanel />} />
+					</Route>
+				</Routes>
+
+				{/* admin panel */}
+				<Routes location={background || location}>
+					<Route  path="/-/" element={<AdminLayout />}>
+						<Route path="/-/login-admin" element={<LoginAdmin />} />
+						<Route element={<RequireAdmin />}>
+							<Route path="/-/admin-panel" element={<AdminPanel />} />
+							<Route path="/-/admin-category" element={<CategoriesPage />} />
 						</Route>
 					</Route>
 				</Routes>
 
+			
 
 				{background && (
 					<Routes>
@@ -84,12 +99,13 @@ function App() {
 							<Route path="/change-password" element={<ChangePasswordModal />} />
 							<Route path="/change-email" element={<ChangeEmailModal />} />
 							<Route path="/logout" element={<LogOutModal />} />
-							<Route path="/delete?" element={<DeleteAccountModal />} />
+							<Route path="/delete" element={<DeleteAccountModal />} />
 						</Route>
 
 
 						{/*menu modal*/}
 						<Route path="/menu" element={<MainMenu background={background}/>} />
+						<Route path='/-/admin-panel/menu' element={<AdminMenu background={background}/>}/>
 					</Routes >
 				)}
 			</AuthProvider>
