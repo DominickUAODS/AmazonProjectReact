@@ -4,6 +4,7 @@ import styles from './LogInAccount.module.css'
 import commonStyles from '../common.module.css';
 import PasswordInput from '../SignUpAccount/PasswordInput';
 import { useAuth } from '../Helpers/AuthContext';
+import { emailFilter } from '../../filters/LiSuFilters';
 
 
 export default function LogInAccount({ background }: { background: Location }) {
@@ -36,54 +37,52 @@ export default function LogInAccount({ background }: { background: Location }) {
 
 	const handleLogin = async (e: React.FormEvent) => {
 		e.preventDefault();
-
+	
 		const newErrors: typeof errors = {};
-
+	
 		if (!email) {
-			newErrors.email = 'Missing email address';
+			newErrors.email = 'This field is necessary to continue!';
+		} else {
+			const emailError = emailFilter(email);
+			if (emailError) newErrors.email = emailError;
 		}
+	
 		if (!password) {
-			newErrors.password = 'Missing password';
+			newErrors.password = 'This field is necessary to continue!';
 		}
-
+	
 		if (Object.keys(newErrors).length > 0) {
 			setErrors(newErrors);
 			return;
 		}
-
+	
 		try {
 			const response = await fetch(`${API_SERVER}/auth/login`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ email, password }),
 			});
-
+	
+			const data = await response.json();
+	
 			if (!response.ok) {
-				const err = await response.json();
-				//console.log(err)
-				setErrors({ general: err.error || 'Login failed' });
+				setErrors({ general: data.error || 'Incorrect email or password' });
 				return;
 			}
-
-			const data = await response.json();
+	
 			const storage = staySignedIn ? localStorage : sessionStorage;
-
-			// Сохраняем токены
 			storage.setItem('accessToken', data.access_token);
 			storage.setItem('refreshToken', data.refresh_token);
 			storage.setItem('user', JSON.stringify(data.user));
-
+	
 			login(data.user, { access: data.access_token, refresh: data.refresh_token }, staySignedIn);
-
-			navigate('/'); // или на dashboard
-
+			navigate('/');
+	
 		} catch (err) {
 			console.error(err);
 			setErrors({ general: 'Ошибка подключения к серверу' });
 		}
 	};
-
-
 	return (
 		<div className={commonStyles.modalBackdrop} onClick={handleBackdropClick}>
 			<div className={commonStyles.modal} onClick={(e) => e.stopPropagation()}>

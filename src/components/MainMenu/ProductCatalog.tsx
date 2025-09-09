@@ -20,8 +20,11 @@ export default function ProductCatalog(){
         async function loadCategories() {
         const roots = await fetchRootCategories(API_SERVER);
         setCategories(roots);
+        console.log("Категории с API:", roots);
         }
+        
         loadCategories();
+        
     }, [API_SERVER]);
 
     const visibleDetails = categories.slice(0, visibleCount);
@@ -55,6 +58,7 @@ export default function ProductCatalog(){
                         <OneProductCategory
                             key={i}
                             name={f.name}
+                            icon={f.icon ?? undefined}
                         />
                     ))}
                     {hasMore && (
