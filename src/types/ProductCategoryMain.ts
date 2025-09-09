@@ -1,4 +1,4 @@
 export type ProductCategoryMain={
-    icon?:string;
+    icon?:number;
     name:string;
 }

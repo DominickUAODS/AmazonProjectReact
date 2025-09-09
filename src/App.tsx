@@ -24,11 +24,10 @@ import type { ModalState } from './types/ModalState';
 import { AuthProvider } from './components/Helpers/AuthContext';
 import RequireAuth from './components/Helpers/RequireAuth';
 import ChangePhotoModal from './components/AccountModalWindows/ChangePhotoModal';
-import AdminPanel from './components/AdminComp/Users/AdminPanel';
-import LoginAdmin from './components/AdminComp/Users/LoginAdmin';
-import RequireAdmin from './components/Helpers/RequireAdmin';
-import CategoriesPage from './components/AdminComp/Products/CategoriesPage';
 import MainMenu from './components/MainMenu/MainMenu';
+import AdminPanel from './components/AdminComp/Users/AdminPanel';
+import AdminMenu from './components/AdminComp/AdminMenu/AdminMenu';
+import AdminLayout from './components/AdminLayout';
 
 function App() {
 	const location = useLocation();
@@ -57,19 +56,21 @@ function App() {
 							<Route path="orders" element={<AccountOrders />} />
 						</Route>
 
-
-
 					</Route>
 				</Routes>
 
 				{/* admin panel */}
-				<Routes>
-					<Route path="/-/login-admin" element={<LoginAdmin />} />
-					<Route element={<RequireAdmin />}>
-						<Route path="/-/admin-panel" element={<AdminPanel />} />
-						<Route path="/-/admin-category" element={<CategoriesPage />} />
+				<Routes location={background || location}>
+					<Route  path="/-/" element={<AdminLayout />}>
+						<Route path="/-/login-admin" element={<LoginAdmin />} />
+						<Route element={<RequireAdmin />}>
+							<Route path="/-/admin-panel" element={<AdminPanel />} />
+							<Route path="/-/admin-category" element={<CategoriesPage />} />
+						</Route>
 					</Route>
 				</Routes>
+
+			
 
 				{background && (
 					<Routes>
@@ -100,6 +101,7 @@ function App() {
 
 						{/*menu modal*/}
 						<Route path="/menu" element={<MainMenu background={background}/>} />
+						<Route path='/-/admin-panel/menu' element={<AdminMenu background={background}/>}/>
 					</Routes >
 				)}
 			</AuthProvider>
