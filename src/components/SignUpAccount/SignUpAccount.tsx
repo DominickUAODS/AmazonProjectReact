@@ -5,10 +5,12 @@ import SignUpForm from './SignUpForm';
 import commonStyles from '../common.module.css';
 
 
-export default function SignUpAccount() {
+export default function SignUpAccount({background}:{background:Location}) {
 	const navigate = useNavigate();
 	const location = useLocation();
-	const closeModal = () => navigate("/");
+	const closeModal = () => {
+        navigate(background.pathname || "/");
+    };
 
 	const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		if (e.target === e.currentTarget) {

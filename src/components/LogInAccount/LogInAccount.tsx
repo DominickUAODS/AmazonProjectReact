@@ -10,7 +10,9 @@ export default function LogInAccount({ background }: { background: Location }) {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const { login } = useAuth();
 	const navigate = useNavigate();
-	const closeModal = () => navigate("/");
+	const closeModal = () => {
+        navigate(background.pathname || "/");
+    };
 
 	const [errors, setErrors] = useState<{ email?: string; password?: string; general?: string }>({});
 

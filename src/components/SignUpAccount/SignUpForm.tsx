@@ -54,7 +54,7 @@ export default function SignUpForm({ background }: { background: Location }) {
 			navigate('/checkin', { state: { background, email } });
 		} catch (err) {
 			console.error(err);
-			//console.log(err);
+			console.log(err);
 			setErrors({ general: 'Ошибка подключения к серверу' });
 		}
 	};

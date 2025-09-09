@@ -28,6 +28,7 @@ import AdminPanel from './components/AdminComp/Users/AdminPanel';
 import LoginAdmin from './components/AdminComp/Users/LoginAdmin';
 import RequireAdmin from './components/Helpers/RequireAdmin';
 import CategoriesPage from './components/AdminComp/Products/CategoriesPage';
+import MainMenu from './components/MainMenu/MainMenu';
 
 function App() {
 	const location = useLocation();
@@ -80,7 +81,7 @@ function App() {
 
 
 						{/* sign up modal windows */}
-						<Route path="/signup" element={<SignUpAccount />} />
+						<Route path="/signup" element={<SignUpAccount background={background}/>} />
 						<Route path="/checkin" element={<EnterCodeFromGmail background={background} isPasswordReset={false} />} />
 						<Route path="/final-signup" element={<SignUpFinal background={background} />} />
 						<Route path="/congrats" element={<Congrats />} />
@@ -95,6 +96,10 @@ function App() {
 							<Route path="/logout" element={<LogOutModal />} />
 							<Route path="/delete" element={<DeleteAccountModal />} />
 						</Route>
+
+
+						{/*menu modal*/}
+						<Route path="/menu" element={<MainMenu background={background}/>} />
 					</Routes >
 				)}
 			</AuthProvider>

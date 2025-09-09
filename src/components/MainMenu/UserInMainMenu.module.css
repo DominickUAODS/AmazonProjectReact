@@ -1,0 +1,67 @@
+.customerBlock{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+    border-bottom: 2.5px solid rgba(204, 221, 255, 1);
+    padding-bottom: 24px;
+}
+
+.phMobile{
+    display: flex;
+    justify-content: space-between;
+}
+
+.closeMenuMobile{
+    cursor: pointer;
+}
+
+.cusNameRole{
+    display: flex;
+    flex-direction: column;
+}
+
+.closeMenuMobile{
+    display: none;
+}
+.cusNameRole p{
+    margin: 0;
+}
+
+.userName{
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+}
+
+.userRole{
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.authButtons{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+}
+
+@media (max-width: 768px) {
+    .closeMenuMobile{
+        display:inline-block;
+    }
+
+    .userName{
+        font-size: 16px;
+        line-height: 20px;
+        margin-top: 8px !important;
+    }
+
+    .userRole{
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    .customerBlock{
+        padding-bottom: 16px;
+    }
+    
+}

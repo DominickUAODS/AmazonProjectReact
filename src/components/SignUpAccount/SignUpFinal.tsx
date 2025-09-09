@@ -8,13 +8,17 @@ export default function SignUpFinal({ background }: { background: Location }) {
 
 	const location = useLocation();
 	const navigate = useNavigate();
-	const closeModal = () => navigate("/");
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
+
 
 	const [errors, setErrors] = useState<{ firstName?: string; lastName?: string; general?: string }>({});
 
 	const { email } = location.state || {};
+
+	const closeModal = () => {
+        navigate(background.pathname || "/");
+    };
 
 	const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		if (e.target === e.currentTarget) {

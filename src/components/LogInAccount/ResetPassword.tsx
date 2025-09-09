@@ -15,7 +15,9 @@ export default function ResetPassword({ background }: { background: Location }) 
 
 	const { email, code } = location.state || {};
 
-	const closeModal = () => navigate('/');
+	const closeModal = () => {
+        navigate(background.pathname || "/");
+    };
 
 	const handleBackdropClick = (e: React.MouseEvent<HTMLElement>) => {
 		if (e.target === e.currentTarget) {

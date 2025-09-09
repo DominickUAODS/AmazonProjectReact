@@ -1,0 +1,76 @@
+.menuModal{
+    justify-content: flex-start;
+    z-index: 2000;
+    top: 0;
+
+}
+
+.openCloseMenu{
+    background-color: rgba(244, 250, 255, 1);
+    margin-left: 24px;
+    cursor: pointer;
+    margin-top:-42%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+
+}
+
+.menu {
+    max-height: 100vh; 
+    overflow-y: auto;  
+    -ms-overflow-style: none; 
+    scrollbar-width: none;      
+}
+
+  
+.menu::-webkit-scrollbar {
+    display: none;
+}
+
+.mobileLogoBlock{
+    gap:16px;
+    display: flex;
+    border-top: 2.5px solid rgba(204, 221, 255, 1);
+    margin-top: auto; 
+    flex-shrink: 0;
+    padding-top: 16px;
+    justify-content: center;
+    padding-bottom: 24px;
+}
+.menu{
+    width:365px;
+    background-color: rgba(244, 250, 255, 1);
+    padding: 24px;
+    gap:10px;
+    user-select: none;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.menuInner{
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+    margin-top: 24px;
+    flex: 1;
+}
+
+.openCloseMenu{
+    display: flex;
+}
+@media (max-width: 768px) {
+    .openCloseMenu{
+        display: none;
+    
+    }
+    
+    .menu{
+        padding: 0 16px 0 16px;
+    }
+}

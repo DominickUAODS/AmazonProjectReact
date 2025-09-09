@@ -3,20 +3,42 @@ import { useEffect, useRef, useState } from 'react';
 import { ReactSVG } from 'react-svg';
 import { ProductCard } from './ProductCard';
 import type { LineScrollDirection } from '../../types/LineScrollDirection';
+import commonStyles from "../common.module.css";
 
 import { products } from '../../data (temp)/products';
+import type { Product } from '../../types/Product';
 
 type Params = {
     type: 'trending' | 'sale',
     pageSize: number,
+
 };
 
 function ProductLine({ type, pageSize }: Params) {
+    const API_SERVER = import.meta.env.VITE_API_SERVER;
+    const [products, setProducts] = useState<Product[]>([]);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(false);
 
     const lineRef = useRef<HTMLDivElement>(null);
     const scrollRef = useRef<number | null>(null);
+
+
+    useEffect(() => {
+        const loadProducts = async () => {
+          try {
+            const res = await fetch(`${API_SERVER}/product`);
+            if (!res.ok) throw new Error("Ошибка при загрузке продуктов");
+            const data: Product[] = await res.json();
+            console.log("Полученные продукты:", data);
+            setProducts(data);
+          } catch (err) {
+            console.error("Ошибка загрузки:", err);
+          }
+        };
+      
+        loadProducts();
+      }, [API_SERVER]);
 
     const checkControls = () => {
         if (lineRef.current === null) return;
@@ -30,7 +52,7 @@ function ProductLine({ type, pageSize }: Params) {
         return () => {
             lineRef.current?.removeEventListener('scroll', checkControls);
         };
-    }, []);
+    }, [products]);
 
     const scrollLeft = () => {
         lineRef.current!.scrollBy({
@@ -58,25 +80,36 @@ function ProductLine({ type, pageSize }: Params) {
         }
     }
 
+
     return (
-        <div>
+        <div className="product-line-div">
             <p className='product-line-title text-minor header-2'>{type[0].toUpperCase() + type.slice(1)}</p>
             <div className='product-line-container'>
                 <div className='product-line' ref={lineRef}>
                     {products.slice(pageSize * (type === 'trending' ? 0 : 1), Math.min(pageSize * (type === 'trending' ? 1 : 2), products.length)).map((value, index) =>
-                        <ProductCard
-                            card_size='small'
-                            key={index}
-                            image={value.image}
-                            id={value.id}
-                            title={value.title}
-                            rating={value.rating}
-                            comments={value.comments}
-                            cost={value.cost}
-                            old_cost={value.old_cost}                        
-                        />
+                       <ProductCard
+                       key={value.id}
+                       display={value.display}        
+                       id={value.id}
+                       name={value.name}          
+                       rating={0}
+                       comments={0}
+                       price={value.price}
+                       discount={value.discount}           
+                       old_cost={value.discount ? value.price + value.discount : undefined}
+                     />
+                     
+                      
                     )}
                 </div>
+
+                <button
+                  className={`${commonStyles.secondaryButton} ${commonStyles.seeMoreButton} ${"see-more-button"}`}
+                  
+                >
+                  See all
+                </button>
+
                 <div className='product-line-controls'>
                     <button
                         className='button button-icon button-secondary product-line-button'
