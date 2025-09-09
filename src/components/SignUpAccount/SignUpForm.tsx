@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styles from './SignUpForm.module.css'
 import commonStyles from '../common.module.css';
 import PasswordInput from './PasswordInput';
+import { emailFilter, passwordFilter } from '../../filters/LiSuFilters';
 
 export default function SignUpForm({ background }: { background: Location }) {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
@@ -19,14 +20,26 @@ export default function SignUpForm({ background }: { background: Location }) {
 
 		const newErrors: typeof errors = {};
 
+
 		if (!email) {
 			newErrors.email = 'Missing email address';
+		} else {
+			const emailError = emailFilter(email);
+			if (emailError) newErrors.email = emailError;
 		}
+		
 		if (!password) {
 			newErrors.password = 'Missing password';
+		} else {
+			const passwordError = passwordFilter(password);
+			if (passwordError) newErrors.password = passwordError;
 		}
+	
+		// Проверка confirmPassword
 		if (!confirmPassword) {
 			newErrors.confirmPassword = 'Missing confirm password';
+		} else if (password && confirmPassword !== password) {
+			newErrors.confirmPassword = 'Passwords must match';
 		}
 
 		if (Object.keys(newErrors).length > 0) {
