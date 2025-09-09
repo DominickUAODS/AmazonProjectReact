@@ -10,12 +10,13 @@ import commonStyles from "../common.module.css"
 
 
 export default function AccountWishlist() {
+	const API_SERVER = import.meta.env.VITE_API_SERVER;
+	const PAGE_SIZE = Number(import.meta.env.VITE_PAGE_SIZE);
     const [currentPage, setCurrentPage] = useState(1);
-	const itemsPerPage = 10;
-	const totalPages = Math.ceil(products.length / itemsPerPage);
+	const totalPages = Math.ceil(products.length / PAGE_SIZE);
 
-	const startIndex = (currentPage - 1) * itemsPerPage;
-	const endIndex = startIndex + itemsPerPage;
+	const startIndex = (currentPage - 1) * PAGE_SIZE;
+	const endIndex = startIndex + PAGE_SIZE;
 	const visibleProducts = products.slice(startIndex, endIndex);
   
 	return (
