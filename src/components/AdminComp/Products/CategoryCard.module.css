@@ -1,10 +1,11 @@
 .mainPosition {
 	display: flex;
 	flex-direction: column;
-	background: #F4FAFF;
+	background: rgba(244, 250, 255, 1);
 	padding: 24px;
 	margin-top: 32px;
 	border-radius: 8px;
+	box-shadow: 0 4px 11.5px -5px rgba(32, 80, 173, 0.25);
 	gap: 10px;
 	width: 520px;
 	height: 816px;

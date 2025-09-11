@@ -14,7 +14,8 @@ const CategoryTree: React.FC<CategoryTreeProps> = ({
 	categories,
 	selectedIds,
 	onSelectCategory,
-	onToggleSelect
+	onToggleSelect,
+	selectedCategory
 }) => {
 	return (
 		<div>
@@ -24,6 +25,7 @@ const CategoryTree: React.FC<CategoryTreeProps> = ({
 					category={category}
 					selectedIds={selectedIds}
 					onSelectCategory={onSelectCategory}
+					selectedCategoryId={selectedCategory?.id}
 					onToggleSelect={onToggleSelect}
 				/>
 			))}

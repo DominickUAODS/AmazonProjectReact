@@ -11,6 +11,7 @@ interface CategoryCardProps {
 
 const CategoryCard: React.FC<CategoryCardProps> = ({ category, parentCategoryName, onEdit, onDelete }) => {
 	const isSubcategory = !!category.parent_id;
+	console.log(category.image, category.description, category.name);
 
 	return (
 		<div className={styles.mainPosition}>

@@ -1,0 +1,21 @@
+.empMainPosition{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emCCDiv{
+    background-color: rgba(224, 235, 255, 1);
+    padding: 8px 20px;
+    border-radius: 4px;
+    position: sticky;
+    top: 0; 
+    z-index: 10; 
+}
+
+.emCCDiv span{
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.3px;
+    color:rgba(14, 32, 66, 1);
+}

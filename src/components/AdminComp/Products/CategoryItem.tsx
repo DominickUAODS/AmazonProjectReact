@@ -7,11 +7,13 @@ interface CategoryItemProps {
 	selectedIds: string[];
 	onToggleSelect: (category: Category, checked: boolean, childrenIds: string[]) => void;
 	onSelectCategory?: (category: Category) => void;
+	selectedCategoryId?: string;
 }
 
 const CategoryItem: React.FC<CategoryItemProps> = ({
 	category,
 	selectedIds,
+	selectedCategoryId,
 	onToggleSelect,
 	onSelectCategory,
 }) => {
@@ -40,8 +42,18 @@ const CategoryItem: React.FC<CategoryItemProps> = ({
 		return ids;
 	};
 
+
+
+		const isSelected = selectedCategoryId === category.id;
+
+
+		const shouldHighlight = isSelected;
+
 	return (
-		<div className={styles.categoryItem}>
+		<div className={styles.categoryItem}  style={{
+			backgroundColor: shouldHighlight ? "rgba(224, 76, 76, 0.3)" : "transparent",
+			cursor: "pointer",
+		  }}>
 			<div className={styles.row} onClick={() => onSelectCategory?.(category)} >
 				<div className={styles.leftPart}>
 					<input
@@ -87,13 +99,14 @@ const CategoryItem: React.FC<CategoryItemProps> = ({
 			</div>
 
 			{isExpanded && hasChildren && (
-				<div className={styles.childrenItem}>
+				<div className={styles.childrenItem} >
 					{children.map((sub) => (
 						<CategoryItem
 							key={sub.id}
 							category={sub}
 							selectedIds={selectedIds}
 							onToggleSelect={onToggleSelect}
+							selectedCategoryId={selectedCategoryId}
 							onSelectCategory={onSelectCategory}
 						/>
 					))}

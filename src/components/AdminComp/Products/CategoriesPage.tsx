@@ -6,6 +6,9 @@ import Filters from './Filters';
 import CreateEditCategoryModal from './CreateEditCategoryModal';
 import type { Category } from '../../../types/Category';
 import styles from './CategoriesPage.module.css';
+import EmtyCategoryTree from './EmptyCategoryTree';
+import EmtyCategoryCard from './EmptyCategoryCard';
+import AddSubCategoryToEmty from './AddSubCategoryToEmty';
 
 interface CategoryFormData {
 	name: string;
@@ -30,6 +33,10 @@ const CategoriesPage = () => {
 	const [loading, setLoading] = useState(true);
 
 	const [debouncedSearch, setDebouncedSearch] = useState<string>('');
+	useEffect(() => {
+
+		setSelectedCategory(null);
+	  }, [categoryFilter]);
 
 	useEffect(() => {
 		async function fetchCategories() {
@@ -310,35 +317,44 @@ const CategoriesPage = () => {
 						
 					</div>
 				)}
-
-				<div className={styles.borderBottom}></div>
-
-				{categoryFilter !== "" ? (
-				<CategoryTree
-					categories={visibleCategories}
-					selectedIds={selectedIds}
-					selectedCategory={selectedCategory}
-					onSelectCategory={handleSelectCategory}
-					onToggleSelect={handleToggleSelect}
-				/>
-				) : (
-				<div className={styles.emptyTreePlaceholder}></div>
+				
+				{categoryFilter === "" ? null : (
+					<div className={styles.borderBottom}></div>
 				)}
+
+				
+
+						<div>
+						{categoryFilter === "" ? (
+							<EmtyCategoryTree />
+						) : visibleCategories.length > 0 ? (
+							<CategoryTree
+							categories={visibleCategories}
+							selectedIds={selectedIds}
+							selectedCategory={selectedCategory}
+							onSelectCategory={handleSelectCategory}
+							onToggleSelect={handleToggleSelect}
+							/>
+						) : (
+							<>
+								<AddSubCategoryToEmty/>
+							</> 
+						)}
+						</div>
 
 			</div>
 			<div className={styles.section2}>
 				{categoryFilter === "" ? (
-					// Если Choose category...
+					
 					<>
-					<div className={styles.placeholderDiv}> {/* Пока пустой див */}</div>
-					<div className={styles.placeholderDiv}></div>
+					<EmtyCategoryCard/>
 					</>
 				) : (
 
-					selectedCategory && (
+					(selectedCategory || selectedParent) && (
 					<CategoryCard
-						category={selectedCategory}
-						parentCategoryName={selectedCategory.parentName ?? undefined}
+						category={(selectedCategory || selectedParent)!}
+						parentCategoryName={selectedCategory?.parentName ?? undefined}
 						onEdit={handleEditCategory}
 						onDelete={handleDeleteCategory}
 					/>
