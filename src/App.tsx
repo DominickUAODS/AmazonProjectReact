@@ -65,14 +65,15 @@ function App() {
 
 				{/* admin panel */}
 				<Routes location={background || location}>
-					<Route  path="/-/" element={<AdminLayout />}>
-						<Route path="/-/login-admin" element={<LoginAdmin />} />
+					<Route path="/-/" element={<AdminLayout />}>
+						<Route path="login-admin" element={<LoginAdmin />} />
 						<Route element={<RequireAdmin />}>
-							<Route path="/-/admin-panel" element={<AdminPanel />} />
-							<Route path="/-/admin-category" element={<CategoriesPage />} />
+						<Route path="admin-panel" element={<AdminPanel />} />
+						<Route path="admin-category" element={<CategoriesPage />} />
 						</Route>
 					</Route>
 				</Routes>
+
 
 			
 

@@ -1,19 +1,17 @@
-import styles from "./AdminMenu.module.css";
-import menuStyles from "../../MainMenu/MainMenu.module.css";
-import commonStyles from '../../common.module.css';
+
 import { useLocation, useNavigate } from "react-router-dom";
-import UserInMainMenu from "../../MainMenu/UserInMainMenu";
-import ProductCatalog from "../../MainMenu/ProductCatalog";
 import prStyles from "../../MainMenu/ProductCatalog.module.css";
-import MenuSettingsBlock from "../../MainMenu/MenuSettingsBlock";
-import type { OneCategoryMenu } from "../../../types/OneCategoryMenu";
-import { useState, useEffect } from "react";
-import { fetchRootCategories } from "../../../services/categoryService";
-import type { Category } from "../../../types/Category";
 
 
 
-export default function CategoryMenu(){   
+
+export default function CategoryMenu(){  
+    const navigate = useNavigate(); 
+
+    const openCategoryAdmin= () => {
+		navigate('/-/admin-category');
+	};
+
     return(
         <div className={prStyles.productCatalog}>
             <div style={{ cursor: "pointer" }} className={prStyles.pCMainBlock}>
@@ -29,7 +27,7 @@ export default function CategoryMenu(){
                 </div>
             </div>
 
-            <div style={{ cursor: "pointer" }} className={prStyles.pCMainBlock}>
+            <div style={{ cursor: "pointer" }} onClick = {openCategoryAdmin} className={prStyles.pCMainBlock}>
                 <div className={prStyles.pcSpanBlock}>
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9.37581 4.27148H8.87981C6.18908 4.27148 4.00781 6.45275 4.00781 9.14348V9.63948C4.00781 12.3302 6.18908 14.5115 8.87981 14.5115H9.37581C12.0665 14.5115 14.2478 12.3302 14.2478 9.63948V9.14348C14.2478 6.45275 12.0665 4.27148 9.37581 4.27148Z" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

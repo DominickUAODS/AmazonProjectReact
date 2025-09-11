@@ -290,30 +290,30 @@ const CategoriesPage = () => {
 
 				<div className={styles.borderBottom}></div>
 
-				{selectedParent ? (
+				{categoryFilter !== "" && selectedParent ? (
 					<div className={styles.selectedCategoryBar}>
 						<div className={styles.selectedCategoryName}>{selectedParent.name}</div>
 						<button
-							type="button"
-							className={styles.addSubcategoryBtn}
-							onClick={() => openAddSubcategory(selectedParent)}
-							aria-label="Add subcategory"
-							title="Add subcategory"
+						type="button"
+						className={styles.addSubcategoryBtn}
+						onClick={() => openAddSubcategory(selectedParent)}
+						aria-label="Add subcategory"
+						title="Add subcategory"
 						>
-							{/* Иконка плюс */}
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-								<path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-							</svg>
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+							<path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+						</svg>
 						</button>
 					</div>
-				) : (
+					) : (
 					<div className={styles.selectedCategoryPlaceholder}>
-						Select a category to view its subcategories
+						
 					</div>
 				)}
 
 				<div className={styles.borderBottom}></div>
 
+				{categoryFilter !== "" ? (
 				<CategoryTree
 					categories={visibleCategories}
 					selectedIds={selectedIds}
@@ -321,16 +321,28 @@ const CategoriesPage = () => {
 					onSelectCategory={handleSelectCategory}
 					onToggleSelect={handleToggleSelect}
 				/>
-			</div>
+				) : (
+				<div className={styles.emptyTreePlaceholder}></div>
+				)}
 
+			</div>
 			<div className={styles.section2}>
-				{selectedCategory && (
+				{categoryFilter === "" ? (
+					// Если Choose category...
+					<>
+					<div className={styles.placeholderDiv}> {/* Пока пустой див */}</div>
+					<div className={styles.placeholderDiv}></div>
+					</>
+				) : (
+
+					selectedCategory && (
 					<CategoryCard
 						category={selectedCategory}
 						parentCategoryName={selectedCategory.parentName ?? undefined}
 						onEdit={handleEditCategory}
 						onDelete={handleDeleteCategory}
 					/>
+					)
 				)}
 			</div>
 
