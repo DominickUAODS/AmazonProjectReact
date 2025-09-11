@@ -1,7 +1,7 @@
 export default interface Order {
-	id: number;
-	status: string;
-	date: string; 
+	id: string;
+	status: number;
+	date: string;
 	total: number;
 	itemsCount: number;
 }

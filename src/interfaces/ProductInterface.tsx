@@ -1,12 +1,12 @@
 export default interface Product {
-	id: number;
+	id: string;
 	title: string;
 	image: string;
 	reviews: number;
 	rating: number;
 	price: number;
-	discount?: boolean;
-	oldPrice?: number | null;
+	discount?: number;
+	old_price?: number | null;
 }
 
 

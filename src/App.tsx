@@ -28,6 +28,9 @@ import MainMenu from './components/MainMenu/MainMenu';
 import AdminPanel from './components/AdminComp/Users/AdminPanel';
 import AdminMenu from './components/AdminComp/AdminMenu/AdminMenu';
 import AdminLayout from './components/AdminLayout';
+import RequireAdmin from './components/Helpers/RequireAdmin';
+import LoginAdmin from './components/AdminComp/Users/LoginAdmin';
+import CategoriesPage from './components/AdminComp/Products/CategoriesPage';
 
 function App() {
 	const location = useLocation();
