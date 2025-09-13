@@ -50,7 +50,7 @@ function App() {
 						{/* main pages */}
 						<Route index element={<Main />} />
 						<Route path="products" element={<ProductList />} />
-						<Route path="productpage" element={<ProductPage />} />
+						<Route path="product/:id" element={<ProductPage />} />
 
 						{/* private routes */}
 						<Route element={<RequireAuth />}>
@@ -60,15 +60,16 @@ function App() {
 						</Route>
 
 					</Route>
-				</Routes>
+				{/* </Routes> */}
 
 				{/* admin panel */}
-				<Routes location={background || location}>
+				
+				{/* <Routes location={background || location}> */}
 					<Route  path="/-/" element={<AdminLayout />}>
-						<Route path="/-/login-admin" element={<LoginAdmin />} />
+						<Route path="login-admin" element={<LoginAdmin />} />
 						<Route element={<RequireAdmin />}>
-							<Route path="/-/admin-panel" element={<AdminPanel />} />
-							<Route path="/-/admin-category" element={<CategoriesPage />} />
+							<Route path="admin-panel" element={<AdminPanel />} />
+							<Route path="admin-category" element={<CategoriesPage />} />
 						</Route>
 					</Route>
 				</Routes>

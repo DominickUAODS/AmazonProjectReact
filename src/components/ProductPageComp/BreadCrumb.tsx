@@ -1,4 +1,3 @@
-import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './BreadCrumb.module.css'
 
 export default function BreadCrumb() {

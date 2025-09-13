@@ -1,30 +1,31 @@
-import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './ProductPageMainBlock.module.css'
 import ProductPageFB from './ProductPageFB';
 import DetailsBProductPage from './DetailsBProductPage';
 import CommentsBlock from './CommentsBlock';
+import type { Product, ProductDetail } from '../../types/Product';
 
+interface ProductPageMainBlockProps {
+	product: Product;
+}
 
-export default function ProductPageMainBlock() {
-	
+export default function ProductPageMainBlock({ product }: ProductPageMainBlockProps) {
+
 	return (
 		<div className={styles.ppmb}>
-            <ProductPageFB/>
-            <DetailsBProductPage
-                details={[
-                    { title: "Fabric type", text: "49% rayon, 34% polyester, 17% nylon" },
-                    { title: "Care instructions", text: "Machine wash" },
-                    { title: "Color", text: "Blue" },
-                    { title: "Country", text: "Made in Italy" },
-                    { title: "Country", text: "Made in Italy" },
-                    { title: "Country", text: "Made in Italy" },
-                    { title: "Country", text: "Made in Italy" },
-                ]}
-            />
-            <CommentsBlock/>
-            
-
-			
+			<ProductPageFB
+				product={product}
+				images={product.displays}
+				price={product.price}
+				stock={product.number > 0 ? "In stock" : "Out of stock"}
+				features={product.features}
+			/>
+			<DetailsBProductPage
+				details={product.details.map((d: ProductDetail) => ({
+					title: d.property_key,
+					text: d.attribute
+				}))}
+			/>
+			<CommentsBlock />
 		</div>
 	);
 }

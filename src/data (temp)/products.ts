@@ -1,6 +1,6 @@
-import type { Product } from "../types/Product";
+import type { ProductsList } from "../types/Product";
 
-const products: Product[] = [
+const products: ProductsList[] = [
     {
         id: 1,
         image: 'https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Rockerz_551_ANC_Pro.347_1.jpg?v=1737546044',
