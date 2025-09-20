@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { Category } from '../../../types/Category';
 import styles from './CategoryCard.module.css'
+
 
 interface CategoryCardProps {
 	category: Category;
@@ -10,46 +11,91 @@ interface CategoryCardProps {
 }
 
 const CategoryCard: React.FC<CategoryCardProps> = ({ category, parentCategoryName, onEdit, onDelete }) => {
+	const [fullCategory, setFullCategory] = useState<Category>(category);
+	const [parentName, setParentName] = useState<string | null>(null);
 	const isSubcategory = !!category.parent_id;
-	console.log(category.image, category.description, category.name);
+
+	useEffect(() => {
+		if (!category.id) return;
+
+		const fetchCategoryDetails = async () => {
+			try {
+				const response = await fetch(`${import.meta.env.VITE_API_SERVER}/category/${category.id}`);
+				const data = await response.json();
+
+				setFullCategory(prev => ({ ...prev, ...data }));
+
+				console.log("Category details fetched:", data);
+				if (data.parent_id) {
+					const parentRes = await fetch(`${import.meta.env.VITE_API_SERVER}/category/${data.parent_id}`);
+					const parentData: Category = await parentRes.json();
+					setParentName(parentData.name);
+				  } else {
+					setParentName(null);
+				  }
+			} catch (err) {
+				console.error("Ошибка загрузки деталей категории:", err);
+			}
+		};
+
+		fetchCategoryDetails();
+	}, [category.id]);
+
 
 	return (
 		<div className={styles.mainPosition}>
-			<div className={styles.categoryImage}>
-				{category.image && <img src={category.image} alt={category.name} />}
-			</div>
+			<div className={styles.catInfo}>
+				<div className={styles.categoryImage}>
+					{fullCategory.image && <img src={fullCategory.image} alt={fullCategory.name} />}
+				</div>
 
-			<div className={styles.categoryName}>
-				<span>
+				<div className={styles.categoryName}>
 					<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M15.6703 20.7199L6.08026 26.1399C4.73026 26.8999 4.61026 28.8699 5.92026 29.6899C6.25026 29.8999 6.64026 30.0199 7.08026 30.0199H26.1603H32.9003C33.3403 30.0199 33.7303 29.8999 34.0603 29.6899C35.3703 28.8699 35.2503 26.8999 33.9003 26.1399L32.4803 25.3399C28.4603 23.0799 24.3803 21.3699 20.4703 19.1299C19.8103 18.7499 18.7403 18.0399 18.6203 17.8499C17.5203 16.1899 20.9803 16.5099 22.3703 14.9999C24.4403 12.7599 22.1803 10.0599 20.3003 9.98995C18.5203 9.91995 17.1703 11.2499 17.2103 12.8899" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 					</svg>
-					{category.name}
-				</span>
-			</div>
-
-			<div className={styles.borderBottom}></div>
-
-			<div className={styles.categoryDescription}>
-				<span>
-					{category.description}
-				</span>
-			</div>
-
-			<div className={styles.borderBottom}></div>
-
-			<div className={styles.statusRole}>
-				<span className={styles.statusRoleSub}>
-					Status: {category.is_active ? 'Active' : 'Inactive'}
-				</span>
-				<span className={styles.statusRoleSub}>
-					Role: {isSubcategory ? 'Subcategory' : 'Parent category'}
-				</span>
-				{isSubcategory && parentCategoryName && (
-					<span className={styles.statusRoleSub}>
-						Parent: {parentCategoryName}
+					<span>
+						{fullCategory.name}
 					</span>
-				)}
+				</div>
+
+				<div className={styles.borderBottom}></div>
+
+				<div className={styles.categoryDescription}>
+					<span>
+						{fullCategory.description}
+					</span>
+				</div>
+
+				<div className={styles.borderBottom}></div>
+
+				<div className={styles.statusRole}>
+					<div className={styles.statusSpans}>
+						<span className={styles.statusRoleSubSpan1}>
+							Status
+						</span>
+						<span className={styles.statusRoleSubSpan2}>
+							{fullCategory.is_active ? 'Active' : 'Inactive'}
+						</span>
+					</div>
+					<div className={styles.statusSpans}>
+						<span className={styles.statusRoleSubSpan1}>
+							Role
+						</span>
+						<span className={styles.statusRoleSubSpan2}>
+						{isSubcategory ? 'Subcategory' : 'Parent category'}
+						</span>
+					</div>
+					{isSubcategory && parentName && (
+						<div className={styles.statusSpans}>
+						<span className={styles.statusRoleSubSpan1}>
+							Parent
+						</span>
+						<span className={styles.statusRoleSubSpan2}>
+						{parentName}
+						</span>
+					</div>
+					)}
+				</div>
 			</div>
 
 			<div className={styles.btnGroup}>
