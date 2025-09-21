@@ -232,8 +232,8 @@ const CategoriesPage = () => {
 	  };
 
 	const openAddSubcategory = (parent: Category) => {
-		setModalCategory(null);           // создаём новую
-		setPendingParentId(parent.id);    // проставим parent_id
+		setModalCategory(null);           
+		setPendingParentId(parent.id);    
 		setShowModal(true);
 	};
 
@@ -302,7 +302,7 @@ const CategoriesPage = () => {
 
 						<div>
 						{categoryFilter === "" ? (
-							<EmtyCategoryTree />
+							<EmtyCategoryTree spanTitle={"Subcategory not found"}/>
 						) : visibleCategories.length > 0 ? (
 							<CategoryTree
 							categories={visibleCategories}
@@ -342,7 +342,9 @@ const CategoriesPage = () => {
 			show={showModal}
 			onClose={() => setShowModal(false)}
 			onCreate={(data: CategoryFormData) => handleModalSubmit(data)}
-			category={modalCategory || ({} as Category)}
+			category={modalCategory}
+			parentId={modalCategory?.parent_id ?? pendingParentId ?? null}
+
 			/>
 		</div>
 	);

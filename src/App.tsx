@@ -32,6 +32,7 @@ import MainMenu from './components/MainMenu/MainMenu';
 import AdminPanel from './components/AdminComp/Users/AdminPanel';
 import AdminMenu from './components/AdminComp/AdminMenu/AdminMenu';
 import AdminLayout from './components/AdminLayout';
+import ProductByCategory from './components/AdminComp/ProductByCategory/ProductByCategory';
 
 function App() {
 	const location = useLocation();
@@ -70,6 +71,7 @@ function App() {
 						<Route element={<RequireAdmin />}>
 						<Route path="admin-panel" element={<AdminPanel />} />
 						<Route path="admin-category" element={<CategoriesPage />} />
+						<Route path="admin-product" element={<ProductByCategory />} />
 						</Route>
 					</Route>
 				</Routes>

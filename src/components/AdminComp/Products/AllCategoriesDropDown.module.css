@@ -5,6 +5,7 @@
 .allCatDropDown{
     position: relative;
     width: 100%; 
+    z-index: 10;
 }
 .dropdownTree{
     position:absolute;
@@ -23,10 +24,15 @@
 
 }
 
+.inputCat{
+    height:44px;
+}
+
 .formGroup input{
     color: rgba(136, 136, 136, 1);
     font-size: 16px;
     line-height: 100%;
+    background-color: transparent;
 }
 
 .categoryName{

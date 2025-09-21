@@ -4,10 +4,10 @@ import commonStyles from '../../common.module.css';
 import { IconOptions, type IconOption } from "../../../types/IconOptions";
 import type { CategoryFormData } from "./CategoriesPage";
 import type { Category } from "../../../types/Category";
-import UploadImage from "../../Helpers/UploadImage";
 import { generateCloudinarySignature, type CloudinaryParams } from "../../Helpers/Signature";
-import { main } from "@cloudinary/url-gen/qualifiers/videoCodecProfile";
 import AllCategoriesDropDown from "./AllCatgoriesDropdown";
+import OnePropertyKey from "./OnePropertyKey";
+import type { PropertyKeyType } from "../../../types/PropertyCase";
 
 interface CreateEditCategoryModalProps {
 	show: boolean;
@@ -33,7 +33,12 @@ const CreateEditCategoryModal: React.FC<CreateEditCategoryModalProps> = ({ show,
 	const CLOUD_API = import.meta.env.VITE_CLOUD_API;
 	const CLOUD_SECRET = import.meta.env.VITE_CLOUD_SECRET;
 	const isSubcategory = !!category?.parent_id;
+	const [propertyKeys, setPropertyKeys] = useState<PropertyKeyType[]>([]);
 
+
+	const addPropertyKey = () => {
+		setPropertyKeys(prev => [...prev, { name: "" }]);
+	};
 
 	useEffect(() => {
 		const fetchCategoryDetails = async () => {
@@ -46,6 +51,7 @@ const CreateEditCategoryModal: React.FC<CreateEditCategoryModalProps> = ({ show,
 			setImage(undefined);
 			setSelected(IconOptions[0]);
 			setParentName(null);
+			setPropertyKeys([]);
 			return;
 		  }
 	  
@@ -68,6 +74,7 @@ const CreateEditCategoryModal: React.FC<CreateEditCategoryModalProps> = ({ show,
 			setDescription(data.description || "");
 			setStatus(data.is_active ?? true);
 			setImage(data.image || undefined);
+			setPropertyKeys(data.propertyKeys || []);
 	  
 			const foundIcon = IconOptions.find(opt => opt.value === data.icon);
 			if (foundIcon) {
@@ -99,7 +106,7 @@ const CreateEditCategoryModal: React.FC<CreateEditCategoryModalProps> = ({ show,
 				description,
 				isActive: status,
 				icon: selected.value,
-				parentId: category?.parent_id ?? parentId ?? null,
+				parentId:  category ? category?.parent_id ?? null : parentId,
 				image,
 			  });
 			onClose();
@@ -108,21 +115,24 @@ const CreateEditCategoryModal: React.FC<CreateEditCategoryModalProps> = ({ show,
 
 	if (!show) return null;
 
-
+	console.log("PK", propertyKeys)
 
 	const getLabels = () => {
 		if (category) {
+		  // редактирование
 		  return category.parent_id
 			? { title: "Edit subcategory", button: "Save changes" }
 			: { title: "Edit category", button: "Save changes" };
+		} else {
+		  // создание
+		  return parentId
+			? { title: "Create subcategory", button: "Create subcategory" }
+			: { title: "Create category", button: "Create category" };
 		}
-		return parentId
-		  ? { title: "Create subcategory", button: "Create subcategory" }
-		  : { title: "Create category", button: "Create category" };
 	  };
-	
-	const { title: mainTitle, button: actionButton } = getLabels();
 
+
+	const { title: mainTitle, button: actionButton } = getLabels();
 
 	const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files && event.target.files[0]) {
@@ -352,20 +362,48 @@ const CreateEditCategoryModal: React.FC<CreateEditCategoryModalProps> = ({ show,
 						</div>
 					)}
 
-					{category?.parent_id && (
+					{(isSubcategory || parentId) ? (
 					<>
 						<div className={styles.formGroup}>
-							<AllCategoriesDropDown isLegend={true} my_value={parentName || "Choose category"} onChange={(value) => setParentName(value)}/>
+						<AllCategoriesDropDown
+							isLegend={true}
+							my_value={parentName || "Choose category"}
+							onChange={(value) => setParentName(value)}
+						/>
 						</div>
 						<div className={styles.propertyKeys}>
-							<span>Property keys</span>
+						<span>Property keys</span>
 						</div>
-							{category ? (<div className={styles.addPropertyKeys}>
+						{!category ? (
+						<div className={styles.addPropertyKeys} >
+							<button className={`${commonStyles.secondaryButton} ${styles.addPKbutton}`} onClick={addPropertyKey}>
+								<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M14 3.45801V12.201" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M24.5008 13.958H15.7578" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M3.5 13.958H12.243C13.216 13.958 14 14.742 14 15.715V24.458" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+								<span>Add property key</span>
+							</button>
 
-							</div>) : (<></>)}
-						
+							<div className={styles.pkList}>
+								{propertyKeys.map((pk,idx) => (
+								<OnePropertyKey key={pk.id ?? idx} />
+								))}
+							</div>
+						</div>
+						):(
+						<div className={styles.pkList}>
+							<div className={styles.pkList}>
+								{propertyKeys.map((pk, idx) => (
+									<OnePropertyKey key={pk.id ?? idx} name={pk.name} />
+								))}
+							</div>
+
+
+						</div>)}
 					</>
-					)}
+					) : null}
+
 
 					<div className={styles.actions}>
 						<button onClick={onClose} className={styles.secondaryButton}>

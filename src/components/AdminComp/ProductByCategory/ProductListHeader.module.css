@@ -1,0 +1,47 @@
+.plHeader{
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1025px;
+}
+
+
+.checkbox {
+    width: 24px;
+    height: 24px;
+}
+
+.productCheck{
+    gap:12px;
+    display: flex;
+    align-items: center;
+}
+
+.checkNamewoSvg{
+    gap:16px;
+    display: flex;
+    align-items: center;
+}
+
+.prName,
+.prRat,
+.prPrice{
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.3px;
+}
+
+.prRat{
+    margin-right: 180px;
+}
+
+.prPrice{
+    margin-right: 140px;
+}
+
+.ratingPrice{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

@@ -71,7 +71,7 @@ export default function AllCategoriesDropDown({isLegend, my_value, onChange}:All
               <span
                 className={styles.categoryName}
                 onClick={() => {
-                  onChange(cat.name);
+                  onChange(cat.id);
                   setOpen(false);
                 }}
               >
@@ -123,7 +123,7 @@ export default function AllCategoriesDropDown({isLegend, my_value, onChange}:All
 	return (
         <div className={styles.allCatDropDown}>
         <div className={styles.formGroup}>
-          <fieldset className={commonStyles.inputWrapper}>
+          <fieldset className={`${commonStyles.inputWrapper} ${styles.inputCat}`}>
             {isLegend && <legend>Category</legend>}
             <input
               type="text"

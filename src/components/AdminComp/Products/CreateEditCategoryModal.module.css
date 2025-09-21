@@ -102,6 +102,26 @@
 	cursor: pointer;
 }
 
+.addPropertyKeys{
+	margin-top: 24px;
+	margin-bottom: 24px;
+}
+
+.addPKbutton{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap:12px;
+}
+
+.pkList{
+	display: flex;
+	flex-direction: column;
+	z-index: 0;
+	position: relative;
+
+}
+
 
 .infoBlock{
 	display: flex;
