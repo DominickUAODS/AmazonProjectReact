@@ -2,7 +2,8 @@ import styles from './ProductPageFB.module.css'
 import ImageCarousel from './ImageCarousel';
 import FeaturesProductBlock from './FeaturesProductBlock';
 import QuantityProductPrice from './QuantityProductPrice';
-import type { Product, ProductFeature } from '../../types/Product';
+import type { ProductFeature } from '../../types/Product';
+import type Product from '../../types/Product';
 
 interface ProductPageFBProps {
 	product: Product;

@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./QuantityProductPrice.module.css";
 import commonStyles from "../common.module.css";
+import { useParams } from "react-router-dom";
+import { useAuth } from '../Helpers/AuthContext';
+import type Product from "../../interfaces/ProductInterface";
 
 interface QuantityProductPriceProps {
 	price: number;
@@ -8,13 +11,57 @@ interface QuantityProductPriceProps {
 }
 
 export default function QuantityProductPrice({ price, status }: QuantityProductPriceProps) {
+	const API_SERVER = import.meta.env.VITE_API_SERVER;
+	const { id: productId } = useParams<{ id: string }>();
+	const { authFetch, accessToken } = useAuth();
 	const [quantity, setQuantity] = useState(1);
+	const [isInWishlist, setIsInWishlist] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	const increase = () => setQuantity((prev) => prev + 1);
 	const decrease = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
 	const total = (price * quantity).toFixed(2);
 	const [dollars, cents] = total.split(".");
+
+	useEffect(() => {
+		async function checkWishlist() {
+			if (!productId || !accessToken) return;
+			try {
+				const responce = await authFetch(`${API_SERVER}/users/wishlist`,
+					{
+						headers: { Authorization: `Bearer ${accessToken}` },
+					});
+				if (!responce.ok) throw new Error("Failed to load wishlist");
+				const data = await responce.json();
+				setIsInWishlist(data.some((p: Product) => p.id === productId));
+			} catch (err) {
+				console.error(err);
+			} finally {
+				setLoading(false);
+			}
+		}
+		checkWishlist();
+	}, [productId, accessToken, API_SERVER, authFetch])
+
+	const handleToggleWishlist = async () => {
+		if (!productId || !accessToken) return;
+
+		try {
+			const response = await authFetch(`${API_SERVER}/users/wishlist/${productId}/toggle`,
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json", Authorization: `Bearer ${accessToken}`, },
+				}
+			);
+
+			if (!response.ok) throw new Error("Failed to toggle wishlist");
+
+			setIsInWishlist((prev) => !prev);
+		} catch (err) {
+			console.error(err);
+		}
+	};
 
 	return (
 		<div className={styles.qpp}>
@@ -114,7 +161,13 @@ export default function QuantityProductPrice({ price, status }: QuantityProductP
 					<div className={styles.buttonGroup}>
 						<button className={commonStyles.nextStepButton}>Buy now</button>
 						<button className={commonStyles.secondaryButton}>Add to cart</button>
-						<button className={commonStyles.tetriatyButton}>Add to wish list</button>
+						<button
+							onClick={handleToggleWishlist}
+							disabled={loading}
+							className={commonStyles.tetriatyButton}
+						>
+							{isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
+						</button>
 					</div>
 				</div>
 			</div>

@@ -1,3 +1,5 @@
+import type { Category } from "./Category";
+
 export type ProductCardSize = "big" | "small";
 
 export interface ProductsList {
@@ -21,14 +23,19 @@ export interface ProductFeature {
 	description: string;
 }
 
-export interface Product {
+export default interface Product {
+	id: string;
 	name: string;
 	code: string;
-	categoryId: string;
+	category_id: string;
+	category: Category;
 	price: number;
-	discount: number;
+	discount?: number;
+	old_price?: number;
 	number: number;
 	displays: string[];
 	details: ProductDetail[];
 	features: ProductFeature[];
+	stars: number;
+	comments: number;
 }

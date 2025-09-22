@@ -2,7 +2,8 @@ import styles from './ProductPageMainBlock.module.css'
 import ProductPageFB from './ProductPageFB';
 import DetailsBProductPage from './DetailsBProductPage';
 import CommentsBlock from './CommentsBlock';
-import type { Product, ProductDetail } from '../../types/Product';
+import type { ProductDetail } from '../../types/Product';
+import type Product from '../../types/Product';
 
 interface ProductPageMainBlockProps {
 	product: Product;

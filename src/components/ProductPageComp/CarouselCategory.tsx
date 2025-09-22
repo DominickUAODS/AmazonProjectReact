@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import styles from './CarouselCategory.module.css'
-import type Product from "../../interfaces/ProductInterface";
 import commonStyles from "../common.module.css";
 import WishlistCard from '../AccountComp/WishlistCard';
+import type ProductList from '../../interfaces/_ProductInterface';
 
 export type CarouselCategoryType = {
 	categoryName: string;
-	products?: Product[];
+	products?: ProductList[];
 	actionSlot?: React.ReactNode;
 };
 
@@ -47,7 +47,7 @@ export default function CarouselCategory({ categoryName, products, actionSlot }:
 				<span className={styles.mainSpancc}> {categoryName}</span>
 
 				<button className={styles.seeAllButton}>See all
-					<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M5.58398 1.92188L10.9 7.46587C11.24 7.81787 11.24 8.37788 10.9 8.72988L5.58398 14.2579" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /> </svg>
+					<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M5.58398 1.92188L10.9 7.46587C11.24 7.81787 11.24 8.37788 10.9 8.72988L5.58398 14.2579" stroke="#4A7BD9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /> </svg>
 				</button>
 
 			</div>
@@ -55,7 +55,7 @@ export default function CarouselCategory({ categoryName, products, actionSlot }:
 			<div className={styles.carousel}>
 				<button className={commonStyles.anchorButton} onClick={handlePrev} disabled={startIndex === 0}>
 					<svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M11 1.92188L5.68396 7.46587C5.34396 7.81787 5.34396 8.37788 5.68396 8.72988L11 14.2579" stroke="#4A7BD9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+						<path d="M11 1.92188L5.68396 7.46587C5.34396 7.81787 5.34396 8.37788 5.68396 8.72988L11 14.2579" stroke="#4A7BD9" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
 					</svg>
 				</button>
 

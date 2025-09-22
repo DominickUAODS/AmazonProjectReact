@@ -8,7 +8,7 @@ interface FeaturesProductBlockProps {
 }
 
 export default function FeaturesProductBlock({ product, features }: FeaturesProductBlockProps) {
-	const stars = Array.from({ length: 5 }, (_, i) => i < 3);
+	const stars = Array.from({ length: 5 }, (_, i) => i < product.stars);
 
 	return (
 		<div className={styles.fpb}>
@@ -37,7 +37,7 @@ export default function FeaturesProductBlock({ product, features }: FeaturesProd
 										/>
 									</svg>
 								))}
-								<span className={styles.starsCountSpan}>{4}</span>
+								<span className={styles.starsCountSpan}>{stars}</span>
 							</div>
 						</div>
 						<span className={styles.codeSpan}>Code: {product.code}</span>

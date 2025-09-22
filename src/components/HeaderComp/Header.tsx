@@ -19,7 +19,7 @@ export default function Header() {
 		navigate("/");
 	};
 
-	const openMainMenu= () => {
+	const openMainMenu = () => {
 		navigate("/menu", { state: { background: location } });
 	};
 
@@ -42,7 +42,7 @@ export default function Header() {
 			</div>
 
 			<div className={styles.searchCont}>
-				<input type="text" placeholder="Search..." className={styles.input}></input>
+				<input type="text" placeholder="Search..." className={styles.input} id="searchInput" name="search" />
 				<button className={styles.searchButton}>
 					<svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M14.6857 14.1056C13.6057 15.5216 11.1157 16.1996 9.99971 16.1996C6.51971 16.1996 3.69971 13.3796 3.69971 9.89961C3.69971 6.41961 6.51971 3.59961 9.99971 3.59961C13.4797 3.59961 16.2997 6.41961 16.2997 9.89961C16.2997 10.5836 16.1917 11.2436 15.9877 11.8616" stroke="#0E2042" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

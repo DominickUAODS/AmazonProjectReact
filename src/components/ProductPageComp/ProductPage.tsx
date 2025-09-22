@@ -5,14 +5,25 @@ import commonStyles from "../common.module.css";
 import CarouselCategory from './CarouselCategory';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import type { Product } from '../../types/Product';
+import type Product from '../../types/Product';
+import type ProductList from '../../interfaces/_ProductInterface';
+import type { Category } from '../../types/Category';
+
 
 export default function ProductPage() {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const { id } = useParams<{ id: string }>();
 
-	const [product, setProduct] = useState<Product | null>(null);
+	const [product, setProduct] = useState<Product>();
 	const [loading, setLoading] = useState(true);
+
+	const [relatedProducts, setRelatedProducts] = useState<ProductList[]>([]);
+	const [onSaleProducts, setOnSaleProducts] = useState<ProductList[]>([]);
+
+	const [categoriesMap, setCategoriesMap] = useState<Record<string, Category>>({});
+
+	const [currentCategory, setCurrentCategory] = useState<Category>();
+	const [rootCategory, setRootCategory] = useState<Category>();
 
 	useEffect(() => {
 		async function fetchProduct() {
@@ -30,25 +41,73 @@ export default function ProductPage() {
 		if (id) fetchProduct();
 	}, [id, API_SERVER]);
 
-	const scrollToTop = () => {
-		window.scrollTo({ top: 0, behavior: "smooth" });
-	};
+	useEffect(() => {
+		fetch(`${API_SERVER}/category`)
+			.then((res) => res.json())
+			.then((data: Category[]) => {
+				const map: Record<string, Category> = {};
+				data.forEach((cat) => (map[cat.id] = cat));
+				setCategoriesMap(map);
+			});
+	}, [API_SERVER]);
+
+	useEffect(() => {
+		if (!product || Object.keys(categoriesMap).length === 0) return;
+
+		const currCat = categoriesMap[product.category_id];
+		if (!currCat) return;
+
+		// находим корневую категорию
+		let rootCat: Category = currCat;
+		while (rootCat.parent_id) {
+			const parent = categoriesMap[rootCat.parent_id];
+			if (!parent) break;
+			rootCat = parent;
+		}
+
+		setCurrentCategory(currCat);
+		setRootCategory(rootCat);
+
+		async function fetchCarousels() {
+			// Related products (текущая категория)
+			const resRelated = await fetch(`${API_SERVER}/product?categoryId=${currCat.id}`);
+			const related: ProductList[] = await resRelated.json();
+			setRelatedProducts(related);
+
+			// On sale products (все товары корневой категории)
+			const resSale = await fetch(`${API_SERVER}/product?categoryId=${rootCat.id}&OnlyDiscounted=true`);
+			const sale: ProductList[] = await resSale.json();
+			setOnSaleProducts(sale);
+		}
+
+		fetchCarousels();
+	}, [API_SERVER, categoriesMap, product]);
+
+	if (!product || !currentCategory || !rootCategory) return <div>Loading...</div>;
+
+	// const currentCategory = categoriesMap[product.category_id];
+	// let rootCategory: Category = currentCategory;
+	// while (rootCategory.parent_id) {
+	// 	rootCategory = categoriesMap[rootCategory.parent_id];
+	// }
+
+	const scrollToTop = () => { window.scrollTo({ top: 0, behavior: "smooth" }); };
 
 	if (loading) return <p>Loading...</p>;
 	if (!product) return <p>Product not found</p>;
 
 	return (
 		<div className={styles.pp}>
-			<BreadCrumb />
-			<ProductPageMainBlock product={product}/>
-			<CarouselCategory categoryName={"More casual women`s dresses"} />
+			<BreadCrumb category={currentCategory} categoriesMap={categoriesMap} />
+			<ProductPageMainBlock product={product} />
+			<CarouselCategory categoryName={currentCategory?.name || "Current category"} products={relatedProducts.length > 0 ? relatedProducts : undefined} />
 			<CarouselCategory actionSlot={
 				<div className={commonStyles.discountBlock}>
 					<svg width="64" height="40" viewBox="0 0 128 80" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M0.12384 40.2582C0.0858968 39.9434 0.0669252 39.6287 0.0479536 39.3139C-1.16623 19.0895 20.9357 7.26576 36.9477 2.83923C54.781 -2.07914 74.9668 -0.800369 91.4531 8.19042C114.162 20.5847 124.748 46.6914 127.689 71.9325C128.391 78.0117 121.978 82.1824 117.065 78.7789C108.243 72.6998 99.6868 61.4072 88.8161 59.3022C75.8205 56.7839 63.4131 62.9221 51.0436 66.66C32.1858 72.3457 2.36249 64.3386 0.12384 40.2582Z" fill="#B8EA48" />
 					</svg>
 				</div>}
-				categoryName={"Fashion: sale"} />
+				categoryName={rootCategory?.name ? `${rootCategory.name}: sale` : "Sale"} products={onSaleProducts.length > 0 ? onSaleProducts : undefined} />
 
 			<button
 				onClick={scrollToTop}

@@ -1,4 +1,4 @@
-export default interface Product {
+export default interface ProductList {
 	id: string;
 	title: string;
 	image: string;
@@ -8,6 +8,3 @@ export default interface Product {
 	discount?: number;
 	old_price?: number | null;
 }
-
-
-
