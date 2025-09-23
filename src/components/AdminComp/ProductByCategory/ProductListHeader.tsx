@@ -1,6 +1,7 @@
 import styles from './ProductListHeader.module.css'
 import React from "react";
 import type { OneProductProps } from "./OneProduct";
+import { useNavigate } from 'react-router-dom';
 
 interface ProductListHeaderProps {
   products: OneProductProps[];
@@ -10,6 +11,7 @@ interface ProductListHeaderProps {
 
 const ProductListHeader: React.FC<ProductListHeaderProps> = ({ products, selectedIds, setSelectedIds }) => {
   const allChecked = selectedIds.length === products.length && products.length > 0;
+  const navigate = useNavigate();
 
   const handleCheckboxChange = (checked: boolean) => {
     if (checked) {
@@ -18,6 +20,10 @@ const ProductListHeader: React.FC<ProductListHeaderProps> = ({ products, selecte
       setSelectedIds([]);
     }
   };
+
+  const handleCreate = () => {
+		navigate(`/-/product-settings`);
+	};
 
   return (
     <div className={styles.plHeader}>
@@ -39,7 +45,7 @@ const ProductListHeader: React.FC<ProductListHeaderProps> = ({ products, selecte
       <div className={styles.ratingPrice}>
         <span className={styles.prRat}>Rating</span>
         <span className={styles.prPrice}>Price</span>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{"cursor":"pointer"}} onClick={handleCreate}>
             <path d="M12 2.96484V10.4588" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M20.9999 11.9648H13.5059" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M3 11.9648H10.494C11.328 11.9648 12 12.6368 12 13.4708V20.9648" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

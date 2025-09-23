@@ -251,6 +251,7 @@ const CategoriesPage = () => {
 						search={search}
 						setSearch={setSearch}
 						categories={categories}
+						openAddCategory={openAddRootCategory}
 					/>
 				</div>
 
@@ -313,7 +314,7 @@ const CategoriesPage = () => {
 							/>
 						) : (
 							<>
-								<AddSubCategoryToEmty/>
+								<AddSubCategoryToEmty parent = {selectedParent || null} addSub={openAddSubcategory}/>
 							</> 
 						)}
 						</div>

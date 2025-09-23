@@ -12,9 +12,17 @@ export default function CategoryMenu(){
 		navigate('/-/admin-category');
 	};
 
+    const openCategoryUser = () => {
+		navigate('/-/admin-panel');
+	};
+
+    const openCategoryProduct = () => {
+		navigate('/-/admin-product');
+	};
+
     return(
         <div className={prStyles.productCatalog}>
-            <div style={{ cursor: "pointer" }} className={prStyles.pCMainBlock}>
+            <div style={{ cursor: "pointer" }} className={prStyles.pCMainBlock} onClick={openCategoryUser}>
                 <div className={prStyles.pcSpanBlock}>
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11.4012 8.44805C12.9212 8.44805 14.1532 9.68005 14.1532 11.2C14.1532 12.72 12.9212 13.952 11.4012 13.952C9.88122 13.952 8.64922 12.72 8.64922 11.2C8.64922 9.68005 9.88122 8.44805 11.4012 8.44805ZM11.4012 7.24805C9.21722 7.24805 7.44922 9.01605 7.44922 11.2C7.44922 13.384 9.21722 15.152 11.4012 15.152C13.5852 15.152 15.3532 13.384 15.3532 11.2C15.3532 9.01605 13.5852 7.24805 11.4012 7.24805Z" fill="#0E2042"/>
@@ -41,7 +49,7 @@ export default function CategoryMenu(){
                 </div>
             </div>
 
-            <div style={{ cursor: "pointer" }} className={prStyles.pCMainBlock}>
+            <div style={{ cursor: "pointer" }} className={prStyles.pCMainBlock} onClick={openCategoryProduct}>
                 <div className={prStyles.pcSpanBlock}>
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M24.2086 12.6719H25.6086C27.1046 12.6719 28.2406 14.0319 27.9606 15.5039L25.8806 23.4079C25.6726 24.5439 24.6806 25.3679 23.5286 25.3679H8.47264C7.32064 25.3679 6.32864 24.5439 6.12064 23.4079L4.04064 15.5039C3.76864 14.0319 4.89663 12.6719 6.39263 12.6719H7.76064" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

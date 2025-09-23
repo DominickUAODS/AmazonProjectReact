@@ -3,6 +3,7 @@ import type { Category } from '../../../types/Category';
 import styles from './ProductCard.module.css'
 import type { OneProductProps } from './OneProduct';
 import ProductGallery from './ProductGallery';
+import { useNavigate } from 'react-router-dom';
 
 export type ProductFeature={
 	name:string;
@@ -17,7 +18,7 @@ export type ProductDetail = {
 export type ProductFromApi = {
     name: string;
     code: string;
-    categoryId: string;
+    category_id: string;
     price: number;
     discount: number;
     number: number;
@@ -32,8 +33,15 @@ interface ProductCardProps {
 	onDelete?: (productId: string) => void;
 }
 
-const ProductCardAdmin: React.FC<ProductCardProps> = ({ productId, onEdit, onDelete }) => {
+const ProductCardAdmin: React.FC<ProductCardProps> = ({ productId, onDelete }) => {
 	const [product, setProduct] = useState<ProductFromApi | null>(null);
+	const navigate = useNavigate();
+
+	const handleEdit = () => {
+		if (productId) {
+			navigate(`/-/product-settings/${productId}`);
+		}
+	};
 
     useEffect(() => {
         if (!productId) {
@@ -52,6 +60,8 @@ const ProductCardAdmin: React.FC<ProductCardProps> = ({ productId, onEdit, onDel
                 setProduct(null);
             });
     }, [productId]);
+
+	
 	return (
 		<>
 			{productId ? (
@@ -65,7 +75,7 @@ const ProductCardAdmin: React.FC<ProductCardProps> = ({ productId, onEdit, onDel
 					</div>
 					
 					<div className={styles.btnGroup}>
-					<button  className={styles.editBtn}>
+					<button  className={styles.editBtn} onClick={handleEdit}>
 						<svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M20.0692 24.4999H9.42219C6.55919 24.4999 4.24219 22.1829 4.24219 19.3199V8.67285" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 							<path d="M9.42969 3.5H20.0767C22.9397 3.5 25.2567 5.817 25.2567 8.68V19.327" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />

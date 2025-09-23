@@ -33,6 +33,7 @@ import AdminPanel from './components/AdminComp/Users/AdminPanel';
 import AdminMenu from './components/AdminComp/AdminMenu/AdminMenu';
 import AdminLayout from './components/AdminLayout';
 import ProductByCategory from './components/AdminComp/ProductByCategory/ProductByCategory';
+import EditCreateProduct from './components/AdminComp/ProductByCategory/EditCreateProduct';
 
 function App() {
 	const location = useLocation();
@@ -72,6 +73,8 @@ function App() {
 						<Route path="admin-panel" element={<AdminPanel />} />
 						<Route path="admin-category" element={<CategoriesPage />} />
 						<Route path="admin-product" element={<ProductByCategory />} />
+						<Route path="product-settings" element={<EditCreateProduct />} />
+						<Route path="product-settings/:id" element={<EditCreateProduct />} />
 						</Route>
 					</Route>
 				</Routes>

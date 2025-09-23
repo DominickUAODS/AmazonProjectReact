@@ -95,3 +95,13 @@
 	letter-spacing: 0.3px;
 	font-family: 'Mulish';
 }
+
+.optionItem{
+	width:70%;
+	display: flex;
+	align-self: center;
+	align-items: center;
+	gap:12px;
+	margin-left: 8%;
+	margin-top: 20px;
+}

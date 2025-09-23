@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Filters.module.css';
 import type { Category } from '../../../types/Category';
+import commonStyles from '../../common.module.css';
 
 
   
@@ -10,9 +11,10 @@ import type { Category } from '../../../types/Category';
 	search: string;
 	setSearch: (value: string) => void;
 	categories: Category[];
+	openAddCategory: () => void;
   }
 
-  const Filters: React.FC<FiltersProps> = ({ categoryFilter, setCategoryFilter, search, setSearch, categories }) => {
+  const Filters: React.FC<FiltersProps> = ({ categoryFilter, setCategoryFilter, search, setSearch, categories, openAddCategory }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const wrapperRef = useRef<HTMLDivElement>(null);
   
@@ -56,7 +58,19 @@ import type { Category } from '../../../types/Category';
   
 		  {isOpen && (
 			<ul className={styles.optionsList}>
-			  {categories.map(cat => (
+				<li
+					className={`${styles.optionItem} ${commonStyles.secondaryButton}`}
+					onClick={openAddCategory}
+				>
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M12 2.96387V10.4579" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M21.0018 11.9639H13.5078" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M3 11.9639H10.494C11.328 11.9639 12 12.6359 12 13.4699V20.9639" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+
+					Add category
+				</li>
+				{categories.map(cat => (
 				<li
 				  key={cat.id}
 				  className={styles.optionItem}

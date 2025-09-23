@@ -1,12 +1,17 @@
 
 import styles from './EmtyCategoryTree.module.css'
 import this_styles from './AddSubCategoryToEmty.module.css'
+import type { Category } from '../../../types/Category';
 
-
-export default function AddSubCategoryToEmty() {
+type AddSubCategoryToEmtyProps ={
+    parent:Category | null;
+    addSub:(parent:Category)=> void;
+}
+export default function AddSubCategoryToEmty({addSub, parent}:AddSubCategoryToEmtyProps) {
 	return (
 		<div className={styles.emtyCategoryTree}>
-            <div className={this_styles.addSubBlock}>
+            <div className={this_styles.addSubBlock} style={{"cursor":"pointer"}} onClick={() => parent && addSub(parent)}
+            >
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M32 7.90381V27.8878" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M55.9996 31.9038H36.0156" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
