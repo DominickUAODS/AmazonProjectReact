@@ -1,0 +1,78 @@
+.modal {
+    background: rgba(244, 250, 255, 1);
+    border-radius: 8px;
+    position: relative;
+    max-width: 1280px;
+    padding: 0 24px 24px 24px;
+    width: 60%;
+}
+
+.cartModal {
+    color: var(--minor-text);
+}
+
+.cartModalHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cartModalHeaderTitle {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.cartModalHeader svg:hover {
+    cursor: pointer;
+}
+
+.productsInCart {
+    max-height: 512px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.productsInCart::-webkit-scrollbar {
+  display: none;
+}
+
+.firstHr {
+    margin: 0;
+    border-color: color-mix(in srgb, var(--minor-text) 50%, transparent);
+}
+
+.secondHr {
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-color: color-mix(in srgb, var(--minor-text) 50%, transparent);
+}
+
+.topShadow {
+    composes: secondHr;
+    box-shadow: 0 -5px 10px color-mix(in srgb, var(--minor-text) 75%, transparent);
+}
+
+.bottomShadow {
+    composes: firstHr;
+    box-shadow: 0 5px 10px color-mix(in srgb, var(--minor-text) 75%, transparent);
+}
+
+.checkoutGap {
+    flex-grow: 1;
+}
+
+.checkout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.checkout button {
+    width: fit-content;
+}
+
+.checkout sup {
+    font-size: 18px;
+}

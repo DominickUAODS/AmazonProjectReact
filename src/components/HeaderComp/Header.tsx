@@ -1,11 +1,14 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../Helpers/AuthContext';
 import styles from './Header.module.css'
+import { useState } from 'react';
+import CartModal from '../CartModal/CartModal';
 
 export default function Header() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { isAuthenticated } = useAuth();
+	const [isCartOpen, setIsCartOpen] = useState(false);
 
 	const openSignUp = () => {
 		if (isAuthenticated) {
@@ -23,7 +26,15 @@ export default function Header() {
 		navigate("/menu", { state: { background: location } });
 	};
 
-	return (
+	const openCart = () => {
+		setIsCartOpen(true);
+	}
+
+	const closeCart = () => {
+		setIsCartOpen(false);
+	}
+
+	return <>
 		<div className={styles.header}>
 			<div className={styles.mainLogoCont}>
 				<div className={styles.menu} onClick={openMainMenu}>
@@ -58,7 +69,7 @@ export default function Header() {
 						<path d="M16.5159 4.75C19.0928 4.75001 21.1819 6.83906 21.1819 9.41602C21.1819 11.993 19.0928 14.082 16.5159 14.082C13.9389 14.082 11.8499 11.993 11.8499 9.41602C11.8499 6.83906 13.9389 4.75 16.5159 4.75Z" stroke="#F2F4F8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 					</svg>
 				</button>
-				<button className={styles.cartButton}>
+				<button className={styles.cartButton} onClick={openCart}>
 					<svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M4.69971 5.74414H7.73971C10.4197 5.74414 9.65171 9.51214 9.26771 11.1361C8.74771 13.3201 8.90771 15.6481 11.5077 16.2801C12.0277 16.4081 12.5637 16.4481 13.0917 16.4481H22.3237C22.3237 16.4481 22.5797 16.4481 22.9637 16.4961C25.6757 16.8241 25.4677 20.3761 22.7397 20.4001C22.7077 20.4001 22.6677 20.4001 22.6357 20.4001H12.2757" stroke="#F2F4F8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 						<path d="M12.7239 6.63281H27.3559C28.4199 6.63281 29.0599 7.82481 28.4679 8.71281L24.7479 14.2888" stroke="#F2F4F8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -67,7 +78,7 @@ export default function Header() {
 					</svg>
 				</button>
 			</div>
-
 		</div>
-	);
+		{isCartOpen && <CartModal onClose={closeCart} />}
+	</>;
 }
