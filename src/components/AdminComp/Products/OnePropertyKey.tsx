@@ -4,16 +4,20 @@ import styles from './OnePropertyKey.module.css';
 
 type OnePropertyKeyProps = {
     name?: string;
+    isReadOnly?: boolean;
   };
   
-  export default function OnePropertyKey({ name}: OnePropertyKeyProps) {
+  export default function OnePropertyKey({ name, isReadOnly}: OnePropertyKeyProps) {
     const isEmpty = !name;
     const [pkName, setPKname] = useState<string>(name || "");
+
   
     useEffect(() => {
       setPKname(name || "");
+      console.log("Name", name)
     }, [name]);
-  
+
+
   
     return (
       <div className={styles.onePropertyKey}>
@@ -22,9 +26,9 @@ type OnePropertyKeyProps = {
           <input
             type="text"
             placeholder="Enter name of property key..."
-            value={pkName}
+            value={isReadOnly ? (pkName || name) : pkName}
             onChange={(e) => setPKname(e.target.value)}
-            disabled={!isEmpty} // блокируем
+            disabled={isReadOnly} // блокируем
           />
         </fieldset>
         <button className={`${commonStyles.destructiveButton} ${styles.deletePropButton}`}>

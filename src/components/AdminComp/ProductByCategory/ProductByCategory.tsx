@@ -17,7 +17,7 @@ export default function ProductByCategory() {
     const [selectedProductId, setSelectedProductId] = useState<string | null>(null); // для подсветки
 
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 7;
+    const productsPerPage = 5;
   
     const [search, setSearch] = useState('');
     const [categoryFilter, setCategoryFilter] = useState('');

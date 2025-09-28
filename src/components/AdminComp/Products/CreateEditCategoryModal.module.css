@@ -105,6 +105,9 @@
 .addPropertyKeys{
 	margin-top: 24px;
 	margin-bottom: 24px;
+	gap:24px;
+	display: flex;
+	flex-direction: column;
 }
 
 .addPKbutton{

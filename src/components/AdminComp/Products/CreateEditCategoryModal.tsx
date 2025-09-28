@@ -36,6 +36,8 @@ const CreateEditCategoryModal: React.FC<CreateEditCategoryModalProps> = ({ show,
 	const [propertyKeys, setPropertyKeys] = useState<PropertyKeyType[]>([]);
 
 
+
+
 	const addPropertyKey = () => {
 		setPropertyKeys(prev => [...prev, { name: "" }]);
 	};
@@ -58,6 +60,7 @@ const CreateEditCategoryModal: React.FC<CreateEditCategoryModalProps> = ({ show,
 		  try {
 			const response = await fetch(`${import.meta.env.VITE_API_SERVER}/category/${category.id}`);
 			const data: Category = await response.json();
+			console.log("Create/Edit modal propKeys", data.property_keys)
 			setFullCategory(data);
 	  
 			// parent name
@@ -74,7 +77,13 @@ const CreateEditCategoryModal: React.FC<CreateEditCategoryModalProps> = ({ show,
 			setDescription(data.description || "");
 			setStatus(data.is_active ?? true);
 			setImage(data.image || undefined);
-			setPropertyKeys(data.propertyKeys || []);
+			
+			setPropertyKeys(
+				(data.property_keys || []).map(pk => 
+				  typeof pk === "string" ? { name: pk } : pk
+				)
+			  );
+			  
 	  
 			const foundIcon = IconOptions.find(opt => opt.value === data.icon);
 			if (foundIcon) {
@@ -374,33 +383,101 @@ const CreateEditCategoryModal: React.FC<CreateEditCategoryModalProps> = ({ show,
 						<div className={styles.propertyKeys}>
 						<span>Property keys</span>
 						</div>
+
 						{!category ? (
-						<div className={styles.addPropertyKeys} >
-							<button className={`${commonStyles.secondaryButton} ${styles.addPKbutton}`} onClick={addPropertyKey}>
-								<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M14 3.45801V12.201" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-									<path d="M24.5008 13.958H15.7578" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-									<path d="M3.5 13.958H12.243C13.216 13.958 14 14.742 14 15.715V24.458" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<div className={styles.addPropertyKeys}>
+								<button
+								className={`${commonStyles.secondaryButton} ${styles.addPKbutton}`}
+								onClick={addPropertyKey}
+								>
+								<svg
+									width="28"
+									height="28"
+									viewBox="0 0 28 28"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+									d="M14 3.45801V12.201"
+									stroke="#4A7BD9"
+									strokeWidth="1.5"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									/>
+									<path
+									d="M24.5008 13.958H15.7578"
+									stroke="#4A7BD9"
+									strokeWidth="1.5"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									/>
+									<path
+									d="M3.5 13.958H12.243C13.216 13.958 14 14.742 14 15.715V24.458"
+									stroke="#4A7BD9"
+									strokeWidth="1.5"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									/>
 								</svg>
 								<span>Add property key</span>
-							</button>
+								</button>
 
-							<div className={styles.pkList}>
-								{propertyKeys.map((pk,idx) => (
-								<OnePropertyKey key={pk.id ?? idx} />
-								))}
-							</div>
-						</div>
-						):(
-						<div className={styles.pkList}>
-							<div className={styles.pkList}>
+								<div className={styles.pkList}>
 								{propertyKeys.map((pk, idx) => (
 									<OnePropertyKey key={pk.id ?? idx} name={pk.name} />
 								))}
+								</div>
 							</div>
+							) : (
+							<div className={styles.addPropertyKeys}>
+								<div className={styles.pkList}>
+									{propertyKeys.map((pk, idx) => (
+									<OnePropertyKey  isReadOnly={true} key={pk.id ?? idx} name={pk.name} />
+									))}
 
+								
+								</div>
 
-						</div>)}
+								<button
+							className={`${commonStyles.secondaryButton} ${styles.addPKbutton}`}
+							onClick={addPropertyKey}
+							>
+							<svg
+								width="28"
+								height="28"
+								viewBox="0 0 28 28"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+								d="M14 3.45801V12.201"
+								stroke="#4A7BD9"
+								strokeWidth="1.5"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								/>
+								<path
+								d="M24.5008 13.958H15.7578"
+								stroke="#4A7BD9"
+								strokeWidth="1.5"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								/>
+								<path
+								d="M3.5 13.958H12.243C13.216 13.958 14 14.742 14 15.715V24.458"
+								stroke="#4A7BD9"
+								strokeWidth="1.5"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								/>
+							</svg>
+							<span>Add property key</span>
+							</button>
+							
+
+							</div>
+							)}
+
 					</>
 					) : null}
 

@@ -31,22 +31,25 @@ export default function EditCreateProduct() {
         }
     
         fetch(`${import.meta.env.VITE_API_SERVER}/product/${id}`)
-          .then((res) => {
-            if (!res.ok) throw new Error("Ошибка загрузки продукта");
-            return res.json();
-          })
-          .then((data) => {
-            console.log("[EditCreateProduct] Продукт с сервера:", data);
-            setProduct(data);
-            if (data.categoryId) {
-              console.log("[EditCreateProduct] Устанавливаем categoryId:", data.category_id);
-              setCategoryId(data.categoryId); 
-            }
-          })
-          .catch((err) => {
-            console.error("[EditCreateProduct] Ошибка при загрузке продукта:", err);
-            setProduct(null);
-          });
+        .then(async (res) => {
+          console.log("[EditCreateProduct] Response status:", res.status, res.statusText);
+          if (!res.ok) {
+            const text = await res.text();
+            console.error("[EditCreateProduct] Response body:", text);
+            throw new Error("Ошибка загрузки продукта");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          console.log("[EditCreateProduct] Продукт с сервера:", data);
+          setProduct(data);
+          if (data.category_id) setCategoryId(data.category_id);
+        })
+        .catch((err) => {
+          console.error("[EditCreateProduct] Ошибка при загрузке продукта:", err);
+          setProduct(null);
+        });
+      
       }, [id]);
         
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import type { Category } from '../../../types/Category';
 import styles from './CategoryCard.module.css'
+import DeleteCategory from './DeleteCategory';
 
 
 interface CategoryCardProps {
@@ -13,8 +14,18 @@ interface CategoryCardProps {
 const CategoryCard: React.FC<CategoryCardProps> = ({ category, parentCategoryName, onEdit, onDelete }) => {
 	const [fullCategory, setFullCategory] = useState<Category>(category);
 	const [parentName, setParentName] = useState<string | null>(null);
+	const [showModal, setShowModal] = useState(false);
 	const isSubcategory = !!category.parent_id;
+	const [pendingParentId, setPendingParentId] = useState<string | null>(null);
 
+	const handleDeleteClick = () => {
+		if (isSubcategory) {
+		  setPendingParentId(category.parent_id ?? null);
+		} else {
+		  setPendingParentId(null);
+		}
+		setShowModal(true);
+	  };
 	useEffect(() => {
 		if (!category.id) return;
 
@@ -111,15 +122,20 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, parentCategoryNam
 					</svg>
 					<span className={styles.spanInfo}>Edit</span>
 				</button>
-				<button onClick={() => onDelete(category.id)} className={styles.deleteBtn}>
+				<button onClick={handleDeleteClick}  className={styles.deleteBtn}>
 					<svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M22.9405 8.60938L21.0505 23.5194C20.9105 24.5694 20.0005 25.3394 18.9505 25.3394H10.5505C9.50055 25.3394 8.59055 24.5694 8.45055 23.5194L6.56055 8.60938" stroke="#EA4848" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
 						<path d="M22.9405 4.96973H6.56055" stroke="#EA4848" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
 						<path d="M11.5996 4.96984V4.68984C11.5996 3.56984 12.5096 2.58984 13.6996 2.58984H15.8696C16.9896 2.58984 17.9696 3.49984 17.9696 4.68984V4.96984" stroke="#EA4848" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
 					</svg>
-					<span className={styles.spanInfo}>Delete</span>
+					<span  className={styles.spanInfo}>Delete</span>
 				</button>
 			</div>
+			<DeleteCategory
+			show={showModal}
+			onClose={() => setShowModal(false)}
+			parentId={category?.parent_id ?? pendingParentId ?? null}
+			/>
 		</div>
 	);
 };
