@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Pagination.module.css';
+import { useMediaQuery } from 'react-responsive';
 
 interface PaginationProps {
 	currentPage: number;
@@ -9,27 +10,44 @@ interface PaginationProps {
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange, }) => {
 
+	const isMobile = useMediaQuery({ maxWidth: 768 });
+
 	const getPageNumbers = (): (number | string)[] => {
 		const pages: (number | string)[] = [];
-		const maxVisiblePages = 5;
-
-		if (totalPages <= maxVisiblePages + 2) {
+	  
+		if (isMobile) {
+		  // 🔹 мобильная логика (2 цифры + троеточия)
+		  if (totalPages <= 2) {
 			for (let i = 1; i <= totalPages; i++) pages.push(i);
-		} else {
-			pages.push(1);
-			if (currentPage > 3) pages.push('. . .');
-			const start = Math.max(2, currentPage - 1);
-			const end = Math.min(totalPages - 1, currentPage + 1);
-
-			for (let i = start; i <= end; i++) pages.push(i);
-
-			if (currentPage < totalPages - 2) pages.push('. . .');
-			pages.push(totalPages);
+		  } else if (currentPage === 1) {
+			pages.push(1, "...", totalPages);
+		  } else if (currentPage === totalPages) {
+			pages.push(1, "...", totalPages);
+		  } else {
+			pages.push(currentPage, "...", totalPages);
+		  }
+		  return pages;
 		}
-
+	  
+		// 🔹 десктопная логика (5 цифр)
+		const maxVisiblePages = 5;
+	  
+		if (totalPages <= maxVisiblePages + 2) {
+		  for (let i = 1; i <= totalPages; i++) pages.push(i);
+		} else {
+		  pages.push(1);
+		  if (currentPage > 3) pages.push("...");
+		  const start = Math.max(2, currentPage - 1);
+		  const end = Math.min(totalPages - 1, currentPage + 1);
+	  
+		  for (let i = start; i <= end; i++) pages.push(i);
+	  
+		  if (currentPage < totalPages - 2) pages.push("...");
+		  pages.push(totalPages);
+		}
+	  
 		return pages;
-	};
-
+	  };
 
 
 	return (

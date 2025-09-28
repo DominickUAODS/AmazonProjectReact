@@ -32,6 +32,8 @@ import MainMenu from './components/MainMenu/MainMenu';
 import AdminPanel from './components/AdminComp/Users/AdminPanel';
 import AdminMenu from './components/AdminComp/AdminMenu/AdminMenu';
 import AdminLayout from './components/AdminLayout';
+import ProductByCategory from './components/AdminComp/ProductByCategory/ProductByCategory';
+import EditCreateProduct from './components/AdminComp/ProductByCategory/EditCreateProduct';
 
 function App() {
 	const location = useLocation();
@@ -65,14 +67,18 @@ function App() {
 
 				{/* admin panel */}
 				<Routes location={background || location}>
-					<Route  path="/-/" element={<AdminLayout />}>
-						<Route path="/-/login-admin" element={<LoginAdmin />} />
+					<Route path="/-/" element={<AdminLayout />}>
+						<Route path="login-admin" element={<LoginAdmin />} />
 						<Route element={<RequireAdmin />}>
-							<Route path="/-/admin-panel" element={<AdminPanel />} />
-							<Route path="/-/admin-category" element={<CategoriesPage />} />
+						<Route path="admin-panel" element={<AdminPanel />} />
+						<Route path="admin-category" element={<CategoriesPage />} />
+						<Route path="admin-product" element={<ProductByCategory />} />
+						<Route path="product-settings" element={<EditCreateProduct />} />
+						<Route path="product-settings/:id" element={<EditCreateProduct />} />
 						</Route>
 					</Route>
 				</Routes>
+
 
 			
 

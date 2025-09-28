@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './EnterCodeFromGmail.module.css'
 import commonStyles from '../common.module.css';
 import CodeInput from './CodeInput';
@@ -10,19 +10,59 @@ export default function EnterCodeFromGmail({ background, isPasswordReset }: { ba
 	const location = useLocation();
 	const [verificationCode, setVerificationCode] = useState('');
 	const closeModal = () => navigate(-1);
-	//const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
 	const { email } = location.state || {};
-
 	const [errors, setErrors] = useState<{ verificationCode?: string; general?: string }>({});
 
-	const handleVerify = async () => {
+	// Таймер и состояние кнопки
+	const [timeLeft, setTimeLeft] = useState(0);
+	const [isSending, setIsSending] = useState(false);
+	const [sendCodeClicked, setSendCodeClicked] = useState(false);
 
-		const newErrors: typeof errors = {};
+	useEffect(() => {
+		if (timeLeft <= 0) return;
+		const timer = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
+		return () => clearInterval(timer);
+	}, [timeLeft]);
 
-		if (!verificationCode) {
-			newErrors.verificationCode = 'Missing verification code';
+	const startTimer = () => {
+		setTimeLeft(60); // 1 минута
+	};
+
+	const handleSendCode = async () => {
+		if (!email) return;
+
+		const purpose = isPasswordReset ? 'reset' : 'register';
+
+		try {
+			const response = await fetch(`${API_SERVER}/auth/resend-code`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ email, purpose }),
+			});
+
+			if (!response.ok) {
+				const err = await response.json();
+				setErrors({ general: err.error || err || 'Failed to send code' });
+				return;
+			}
+
+			setSendCodeClicked(true); // Показываем кнопку Resend
+			startTimer();
+		} catch (err) {
+			console.error(err);
+			setErrors({ general: 'Ошибка при отправке кода' });
 		}
+	};
 
+	const handleResendCode = async () => {
+		startTimer(); // Сразу перезапускаем таймер
+		await handleSendCode(); // Отправляем код заново
+	};
+
+
+	const handleVerify = async () => {
+		const newErrors: typeof errors = {};
+		if (!verificationCode) newErrors.verificationCode = 'Missing verification code';
 		if (Object.keys(newErrors).length > 0) {
 			setErrors(newErrors);
 			return;
@@ -31,7 +71,7 @@ export default function EnterCodeFromGmail({ background, isPasswordReset }: { ba
 		try {
 			const response = await fetch(`${API_SERVER}/auth/verify`, {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json', },
+				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ email, code: verificationCode }),
 			});
 
@@ -41,18 +81,13 @@ export default function EnterCodeFromGmail({ background, isPasswordReset }: { ba
 				return;
 			}
 
-			if (response.ok) {
-				if (isPasswordReset) {
-					handlePasswordReset();
-				} else {
-					openFinalSignUp();
-				}
+			if (isPasswordReset) {
+				handlePasswordReset();
 			} else {
-				const errMsg = await response.text();
-				alert(`Ошибка: ${errMsg}`);
+				openFinalSignUp();
 			}
 		} catch (err) {
-			console.error('Ошибка при отправке кода:', err);
+			console.error(err);
 		}
 	};
 
@@ -115,9 +150,22 @@ export default function EnterCodeFromGmail({ background, isPasswordReset }: { ba
 									<div className={commonStyles.errorCode}>{errors.verificationCode || errors.general}</div>
 								)}
 
-								<button className={commonStyles.sendCodeAgainBtn}>
+								{!sendCodeClicked && (
+									<button className={commonStyles.sendCodeAgainBtn} onClick={handleSendCode}>
 									<span>Send Code</span>
-								</button>
+									</button>
+								)}
+
+								
+								{sendCodeClicked && (
+									<button
+										className={commonStyles.sendCodeAgainBtn}
+										onClick={handleResendCode}
+										disabled={timeLeft > 0}
+									>
+									{timeLeft > 0 ? `Resend code 0:${timeLeft.toString().padStart(2, '0')}` : 'Resend code'}
+									</button>
+								)}
 							</div>
 
 							<button

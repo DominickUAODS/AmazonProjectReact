@@ -1,0 +1,8 @@
+.tabContent{
+    border-left: 1.5px solid rgba(204, 221, 255, 1);
+    padding-left: 40px;
+    width:100%;
+    padding-right: 100px;
+    flex: 1; 
+    overflow-y: auto;
+}

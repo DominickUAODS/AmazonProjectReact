@@ -1,0 +1,42 @@
+.my_modal{
+    width:464px;
+    display:flex;
+    flex-direction: column;
+    gap:24px;
+}
+
+.areYouSure{
+    padding-bottom: 14px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1.5px solid rgba(204, 221, 255, 1);
+    justify-content: center;
+}
+
+.areYouSure span{
+    font-size: 32px;
+    line-height: 36px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color:rgba(14, 32, 66, 1);
+    text-align: center;
+}
+
+.textDeleteCat{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.textDeleteCat span{
+    text-wrap: wrap;
+    text-align: center;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.3px;
+}
+
+.btnGroup{
+    display: flex;
+    gap:14px;
+}

@@ -101,3 +101,80 @@
     max-width: 200px; 
     margin: 0 auto; 
 }
+
+.backButtonTitleDiv{
+    display: none;
+}
+@media (max-width: 768px) {
+
+    .backButtonDiv{
+        display: flex;
+        gap:8px;
+    }
+    .menu{
+        display: none;
+    }
+    .acWishBlock{
+        padding: 0;
+    }
+    .accWishlist{
+        padding: 0;
+    }
+    .accWishlistTitle p{
+        font-size: 28px;
+
+    }
+
+    .backButtonTitleDiv{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .buttonBack{
+        display: flex;
+        gap:12px;
+        align-items: center;
+    }
+    .accWishlistTitle {
+        margin-bottom: 16px;
+        margin-top: 24px;
+        padding-bottom: 16px;
+        padding-left: 16px;
+        border-bottom: none;
+        gap:24px;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 358px;
+    }
+
+    .searchWishes input{
+        padding: 7px 12px;
+        width: 210px;
+        height: 20px;
+        font-size: 12px;
+    }
+
+    .searchButton{
+        display: none;
+    }
+
+    .sbSubTitle{
+        font-size: 14px;
+    }
+
+    .pkP{
+        display: none;
+    }
+
+    .back{
+        font-size: 16px;
+    }
+
+    .wishlistSet{
+        padding: 0;
+        max-height: 645px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    
+  }
