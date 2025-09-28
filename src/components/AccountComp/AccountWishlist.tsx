@@ -5,17 +5,19 @@ import AccountMenu from '../AccountMenu/AccountMenu';
 import WishlistCard from './WishlistCard';
 import Pagination from '../Pagination/Pagination';
 import { useAuth } from '../Helpers/AuthContext';
-
+import { useMediaQuery } from "react-responsive";
 
 export default function AccountWishlist() {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
-	const PAGE_SIZE = Number(import.meta.env.VITE_PAGE_SIZE);
+	//const PAGE_SIZE = Number(import.meta.env.VITE_PAGE_SIZE);
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const [wishlist, setWishlist] = useState<any[]>([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [loading, setLoading] = useState(true);
 	const [search, setSearch] = useState("");
 	const { authFetch, accessToken } = useAuth();
+	const isMobile = useMediaQuery({ maxWidth: 768 });
+	const itemsPerPage = isMobile ? 4 : 10;
 
 	useEffect(() => {
 		async function fetchWishlist() {
@@ -59,20 +61,31 @@ export default function AccountWishlist() {
 		p.title.toLowerCase().includes(search.toLowerCase())
 	);
 
-	const totalPages = Math.ceil(filteredProducts.length / PAGE_SIZE);
-	const startIndex = (currentPage - 1) * PAGE_SIZE;
-	const endIndex = startIndex + PAGE_SIZE;
+	const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+	const startIndex = (currentPage - 1) * itemsPerPage;
+	const endIndex = startIndex + itemsPerPage;
 	const visibleProducts = filteredProducts.slice(startIndex, endIndex);
 
 	return (
 		<div className={styles.acWishBlock}>
 
-			<AccountMenu />
+			<div className={styles.menu}>
+			<AccountMenu/>
+			</div>
 
 			<div className={styles.accWishlist}>
 
 				<div className={styles.accWishlistTitle}>
-					<p>Wishlist</p>
+					<div className={styles.backButtonTitleDiv}>
+						<div className={styles.buttonBack}>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M15.7501 2.87891L7.77605 11.1949C7.26605 11.7229 7.26605 12.5629 7.77605 13.0909L15.7501 21.3829" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+							<span className={styles.back}>Back</span>
+						</div>
+						<p>Wishlist</p>
+					</div>
+					<p className={styles.pkP}>Wishlist</p>
 					<div className={styles.searchWishes} >
 						<div className={styles.searchWishes}>
 							<input

@@ -1,0 +1,54 @@
+.gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .mainImage img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .thumbnails {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .thumbWrapper {
+    position: relative;
+  }
+  
+  .thumbnail {
+    width: 151px;
+    height: 103px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: transform 0.2s ease;
+  }
+  
+  .thumbnail:hover {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  
+  .active {
+    opacity: 1;
+  }
+  
+  .more {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  

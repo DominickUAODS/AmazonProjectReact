@@ -7,11 +7,13 @@ interface CategoryItemProps {
 	selectedIds: string[];
 	onToggleSelect: (category: Category, checked: boolean, childrenIds: string[]) => void;
 	onSelectCategory?: (category: Category) => void;
+	selectedCategoryId?: string;
 }
 
 const CategoryItem: React.FC<CategoryItemProps> = ({
 	category,
 	selectedIds,
+	selectedCategoryId,
 	onToggleSelect,
 	onSelectCategory,
 }) => {
@@ -40,9 +42,19 @@ const CategoryItem: React.FC<CategoryItemProps> = ({
 		return ids;
 	};
 
+
+
+	const shouldHighlight = selectedCategoryId === category.id;
+
+
+
 	return (
 		<div className={styles.categoryItem}>
-			<div className={styles.row} onClick={() => onSelectCategory?.(category)} >
+			<div className={styles.row}  style={{
+        		backgroundColor: shouldHighlight ? "rgba(224, 235, 255, 1)" : "transparent",
+        		cursor: "pointer",
+      		}}
+	  		onClick={() => onSelectCategory?.(category)} >
 				<div className={styles.leftPart}>
 					<input
 						type="checkbox"
@@ -94,6 +106,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({
 							category={sub}
 							selectedIds={selectedIds}
 							onToggleSelect={onToggleSelect}
+							selectedCategoryId={selectedCategoryId}
 							onSelectCategory={onSelectCategory}
 						/>
 					))}

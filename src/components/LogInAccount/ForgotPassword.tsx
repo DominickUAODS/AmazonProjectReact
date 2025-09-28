@@ -2,12 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './ForgotPassword.module.css'
 import commonStyles from '../common.module.css';
+import { emailFilter } from '../../filters/LiSuFilters';
 
 export default function ForgotPassword({ background }: { background: Location }) {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
-	const [, setError] = useState('');
+	const [errors, setErrors] = useState<{ email?: string; password?: string; general?: string }>({});
 
 	const closeModal = () => {
         navigate(background.pathname || "/");
@@ -20,8 +21,21 @@ export default function ForgotPassword({ background }: { background: Location })
 	};
 
 	const openCheckIn = async (e: React.FormEvent) => {
-
 		e.preventDefault();
+
+		const newErrors: typeof errors = {};
+
+		if (!email) {
+			newErrors.email = 'Missing email address';
+		} else {
+			const emailError = emailFilter(email);
+			if (emailError) newErrors.email = emailError;
+		}
+
+		if (Object.keys(newErrors).length > 0) {
+			setErrors(newErrors);
+			return;
+		}
 
 		try {
 			const response = await fetch(`${API_SERVER}/auth/reset-start`, {
@@ -32,7 +46,7 @@ export default function ForgotPassword({ background }: { background: Location })
 
 			if (!response.ok) {
 				const err = await response.json();
-				alert(err.message || 'Reset password failed');
+				setErrors({ general: err.message || 'Reset password failed' });
 				return;
 			}
 
@@ -40,9 +54,10 @@ export default function ForgotPassword({ background }: { background: Location })
 
 		} catch (err) {
 			console.error(err);
-			setError('Ошибка подключения к серверу');
+			setErrors({ general: 'Ошибка подключения к серверу' });
 		}
 	};
+
 
 	return (
 		<div className={commonStyles.modalBackdrop} onClick={handleBackdropClick}>
@@ -70,6 +85,7 @@ export default function ForgotPassword({ background }: { background: Location })
 										required
 									/>
 								</fieldset>
+								{errors.password && <div className={commonStyles.errorText}>{errors.password}</div>}
 							</div>
 
 

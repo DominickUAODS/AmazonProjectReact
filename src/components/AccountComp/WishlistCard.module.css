@@ -126,3 +126,57 @@
 }
 
 
+@media (max-width: 768px) {
+
+.wishlistCard{
+  width:171px;
+  height: 270px;
+  padding: 14px;
+}
+
+.productImg{
+  width:143px;
+  height: 143px;
+}
+
+.titleRat p{
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.rat{
+  gap:12px;
+  height: 16px;
+}
+
+.stars svg,
+.comm svg{
+  height: 16px !important;
+  width: 16px !important;
+}
+
+.commP,
+.starsP{
+  font-size: 12px !important;
+}
+
+.dollar{
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.main{
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.cents{
+  font-size: 12px;
+}
+
+.oldPrice{
+  font-size: 12px;
+  line-height: 16px;
+}
+
+}

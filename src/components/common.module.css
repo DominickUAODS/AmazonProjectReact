@@ -179,10 +179,12 @@
 
 /* pagination */
 .fixedPagination {
-	position: static;
+	position: sticky;
+	bottom: 31px;
 	margin-left: 50%;
 	transform: translateX(-50%);
-	margin-bottom: 64px;
+	display: flex;
+	align-items: center;
 	z-index: 1000;
 	min-width: 400px;
 }
@@ -412,5 +414,10 @@
 		line-height: 18px;
 		color:rgba(14, 32, 66, 1);
 		
+	}
+
+	.fixedPagination{
+		width:100%;
+		min-width: 0 !important;
 	}
 }

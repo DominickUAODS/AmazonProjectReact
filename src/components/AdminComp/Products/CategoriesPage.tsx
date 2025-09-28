@@ -6,8 +6,11 @@ import Filters from './Filters';
 import CreateEditCategoryModal from './CreateEditCategoryModal';
 import type { Category } from '../../../types/Category';
 import styles from './CategoriesPage.module.css';
+import EmtyCategoryTree from './EmptyCategoryTree';
+import EmtyCategoryCard from './EmptyCategoryCard';
+import AddSubCategoryToEmty from './AddSubCategoryToEmty';
 
-interface CategoryFormData {
+export interface CategoryFormData {
 	name: string;
 	description: string;
 	isActive: boolean;
@@ -28,131 +31,85 @@ const CategoriesPage = () => {
 	const [search, setSearch] = useState<string>('');
 	const [categoryFilter, setCategoryFilter] = useState('');
 	const [loading, setLoading] = useState(true);
+	const [barHighlighted, setBarHighlighted] = useState(false);
 
 	const [debouncedSearch, setDebouncedSearch] = useState<string>('');
+	useEffect(() => {
+
+		setSelectedCategory(null);
+	  }, [categoryFilter]);
+
+	  const [initialized, setInitialized] = useState(false);
 
 	useEffect(() => {
-		async function fetchCategories() {
-			try {
-				const response = await fetch(`${API_SERVER}/category`);
-				const data = await response.json();
+	const fetchCategories = async () => {
+		setLoading(true);
+		try {
+			let url = `${API_SERVER}/category`;
 
-				const flat: Category[] = data.map((cat: Category) => ({
-					id: cat.id,
-					image: cat.image,
-					icon: cat.icon,
-					name: cat.name,
-					is_active: cat.is_active,
-					description: cat.description,
-					parent_id: cat.parent_id,
-					subcategories: [],
-				}));
-
-				// Строим карту
-				const map = new Map<string, Category>();
-				flat.forEach((cat) => map.set(cat.id, { ...cat, subcategories: [] }));
-
-				// Заполняем связи
-				const roots: Category[] = [];
-				flat.forEach((cat) => {
-					//console.log(cat)
-					if (cat.parent_id) {
-						const parent = map.get(cat.parent_id);
-						if (parent) {
-							cat.parentName = parent.name;
-							parent.subcategories.push(map.get(cat.id)!);
-						}
-					} else {
-						roots.push(map.get(cat.id)!);
-					}
-				});
-
-				setCategories(roots);
-			} catch (error) {
-				console.error("Ошибка загрузки категорий:", error);
-			} finally {
-				setLoading(false);
+			if (debouncedSearch || categoryFilter) {
+				url = `${API_SERVER}/category/search?`;
+				if (debouncedSearch) {
+					url += `query=${encodeURIComponent(debouncedSearch)}&`;
+				}
+				if (categoryFilter) {
+					url += `parentId=${categoryFilter}&`;
+				}
+				url = url.replace(/&$/, "");
 			}
+
+			const response = await fetch(url);
+			const data = await response.json();
+			console.log("Raw data from server:", data); 
+			
+
+			const flat: Category[] = data.map((cat: Category) => ({
+				id: cat.id,
+				image: cat.image,
+				icon: cat.icon,
+				name: cat.name,
+				is_active: cat.is_active,
+				description: cat.description,
+				parent_id: cat.parent_id,
+				subcategories: [],
+			}));
+
+			const map = new Map<string, Category>();
+			flat.forEach((cat) => map.set(cat.id, { ...cat, subcategories: [] }));
+
+			const roots: Category[] = [];
+			flat.forEach((cat) => {
+				if (cat.parent_id) {
+					const parent = map.get(cat.parent_id);
+					if (parent) {
+						cat.parentName = parent.name;
+						parent.subcategories.push(map.get(cat.id)!);
+					}
+				} else {
+					roots.push(map.get(cat.id)!);
+				}
+			});
+			console.log("Transformed category tree (roots):", roots);
+			setCategories(roots);
+		} catch (err) {
+			console.error("Ошибка загрузки категорий:", err);
+		} finally {
+			setLoading(false);
+			setInitialized(true);
 		}
+	};
 
+
+	if (!initialized || debouncedSearch || categoryFilter) {
 		fetchCategories();
-	}, [API_SERVER]);
-
+	}
+}, [API_SERVER, debouncedSearch, categoryFilter, initialized]);
 	useEffect(() => {
 		const timeout = setTimeout(() => setDebouncedSearch(search), SEARCH_DEBOUNCE);
 		return () => clearTimeout(timeout);
 	}, [search, SEARCH_DEBOUNCE]);
 
-	useEffect(() => {
-
-		const handleSearch = async () => {
-			setLoading(true);
-
-			try {
-				// const url = categoryFilter
-				// 	? `${API_SERVER}/category/search?query=${encodeURIComponent(debouncedSearch)}&parentId=${categoryFilter}`
-				// 	: `${API_SERVER}/category/search?query=${encodeURIComponent(debouncedSearch)}`;
-				
-				let url = `${API_SERVER}/category`;
-
-				
-				if (debouncedSearch || categoryFilter) {
-					url = `${API_SERVER}/category/search?`;
-
-					if (debouncedSearch) {
-						url += `query=${encodeURIComponent(debouncedSearch)}&`;
-					}
-					if (categoryFilter) {
-						url += `parentId=${categoryFilter}&`;
-					}
-
-					url = url.replace(/&$/, "");
-				}
-
-				const response = await fetch(url);
-				const data = await response.json();
-
-				const flat: Category[] = data.map((cat: Category) => ({
-					id: cat.id,
-					image: cat.image,
-					icon: cat.icon,
-					name: cat.name,
-					is_active: cat.is_active,
-					description: cat.description,
-					parent_id: cat.parent_id,
-					subcategories: [],
-				}));
-
-				// Строим карту
-				const map = new Map<string, Category>();
-				flat.forEach((cat) => map.set(cat.id, { ...cat, subcategories: [] }));
-
-				// Заполняем связи
-				const roots: Category[] = [];
-				flat.forEach((cat) => {
-					if (cat.parent_id) {
-						const parent = map.get(cat.parent_id);
-						if (parent) {
-							cat.parentName = parent.name;
-							parent.subcategories.push(map.get(cat.id)!);
-						}
-					} else {
-						roots.push(map.get(cat.id)!);
-					}
-				});
-
-				setCategories(roots);
-			} catch (err) {
-				console.error("Ошибка при поиске категорий:", err);
-			} finally {
-				setLoading(false);
-			}
-		};
-
-		handleSearch();
-	}, [API_SERVER, debouncedSearch, categoryFilter]);
-
-
+	
 	// утилита поиска узла по id в дереве
 	const findById = (nodes: Category[], id: string): Category | null => {
 		for (const n of nodes) {
@@ -162,6 +119,8 @@ const CategoriesPage = () => {
 		}
 		return null;
 	};
+
+
 
 	// выбранная в фильтре родительская категория
 	const selectedParent = useMemo(
@@ -265,9 +224,16 @@ const CategoriesPage = () => {
 		setModalCategory(null);
 	};
 
+
+	const openAddRootCategory = () => {
+		setModalCategory(null);   
+		setPendingParentId(null); 
+		setShowModal(true);       
+	  };
+
 	const openAddSubcategory = (parent: Category) => {
-		setModalCategory(null);           // создаём новую
-		setPendingParentId(parent.id);    // проставим parent_id
+		setModalCategory(null);           
+		setPendingParentId(parent.id);    
 		setShowModal(true);
 	};
 
@@ -285,60 +251,101 @@ const CategoriesPage = () => {
 						search={search}
 						setSearch={setSearch}
 						categories={categories}
+						openAddCategory={openAddRootCategory}
 					/>
 				</div>
 
 				<div className={styles.borderBottom}></div>
 
-				{selectedParent ? (
-					<div className={styles.selectedCategoryBar}>
+				{categoryFilter !== "" && selectedParent ? (
+						<div
+						className={styles.selectedCategoryBar}
+						style={{
+						backgroundColor: barHighlighted ? "rgba(224, 235, 255, 1)" : "transparent",
+						cursor: "pointer",
+						}}
+						onClick={() => {
+						if (selectedCategory?.id === selectedParent.id) {
+							setBarHighlighted((prev) => !prev); 
+						} else {
+							setSelectedCategory(selectedParent); 
+							setBarHighlighted(true);             
+						}
+						}}
+					>
 						<div className={styles.selectedCategoryName}>{selectedParent.name}</div>
 						<button
-							type="button"
-							className={styles.addSubcategoryBtn}
-							onClick={() => openAddSubcategory(selectedParent)}
-							aria-label="Add subcategory"
-							title="Add subcategory"
+						type="button"
+						className={styles.addSubcategoryBtn}
+						onClick={(e) => {
+							e.stopPropagation();              
+							openAddSubcategory(selectedParent); 
+						  }}
+						aria-label="Add subcategory"
+						title="Add subcategory"
 						>
-							{/* Иконка плюс */}
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-								<path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-							</svg>
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+							<path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+						</svg>
 						</button>
 					</div>
-				) : (
+					) : (
 					<div className={styles.selectedCategoryPlaceholder}>
-						Select a category to view its subcategories
+						
 					</div>
 				)}
+				
+				{categoryFilter === "" ? null : (
+					<div className={styles.borderBottom}></div>
+				)}
 
-				<div className={styles.borderBottom}></div>
+				
 
-				<CategoryTree
-					categories={visibleCategories}
-					selectedIds={selectedIds}
-					selectedCategory={selectedCategory}
-					onSelectCategory={handleSelectCategory}
-					onToggleSelect={handleToggleSelect}
-				/>
+						<div>
+						{categoryFilter === "" ? (
+							<EmtyCategoryTree spanTitle={"Subcategory not found"}/>
+						) : visibleCategories.length > 0 ? (
+							<CategoryTree
+							categories={visibleCategories}
+							selectedIds={selectedIds}
+							selectedCategory={selectedCategory}
+							onSelectCategory={handleSelectCategory}
+							onToggleSelect={handleToggleSelect}
+							/>
+						) : (
+							<>
+								<AddSubCategoryToEmty parent = {selectedParent || null} addSub={openAddSubcategory}/>
+							</> 
+						)}
+						</div>
+
 			</div>
-
 			<div className={styles.section2}>
-				{selectedCategory && (
+				{categoryFilter === "" ? (
+					
+					<>
+					<EmtyCategoryCard/>
+					</>
+				) : (
+
+					(selectedCategory || selectedParent) && (
 					<CategoryCard
-						category={selectedCategory}
-						parentCategoryName={selectedCategory.parentName ?? undefined}
+						category={(selectedCategory || selectedParent)!}
+						parentCategoryName={selectedCategory?.parentName ?? undefined}
 						onEdit={handleEditCategory}
 						onDelete={handleDeleteCategory}
 					/>
+					)
 				)}
 			</div>
 
 			<CreateEditCategoryModal
-				show={showModal}
-				onClose={() => setShowModal(false)}
-				onCreate={handleModalSubmit}
-				category={modalCategory || ({} as Category)}
+			show={showModal}
+			onClose={() => setShowModal(false)}
+			onCreate={(data: CategoryFormData) => handleModalSubmit(data)}
+			category={modalCategory}
+			parentId={modalCategory?.parent_id ?? pendingParentId ?? null}
+
 			/>
 		</div>
 	);

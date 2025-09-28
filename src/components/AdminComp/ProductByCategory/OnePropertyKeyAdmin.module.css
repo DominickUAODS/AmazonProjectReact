@@ -1,0 +1,22 @@
+.oneProp{
+    display: flex;
+    width: 100%;
+    gap:14px;
+    align-items: center;
+}
+
+.inputPk{
+    background-color: transparent !important;
+    opacity: 50%;
+    width: 320px;
+}
+
+.inputAtt{
+    display: flex;
+    flex: 1;
+    
+}
+
+.inputAtt input{
+    background-color: transparent !important;
+}

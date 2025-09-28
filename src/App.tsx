@@ -31,12 +31,14 @@ import AdminLayout from './components/AdminLayout';
 import RequireAdmin from './components/Helpers/RequireAdmin';
 import LoginAdmin from './components/AdminComp/Users/LoginAdmin';
 import CategoriesPage from './components/AdminComp/Products/CategoriesPage';
+import ProductByCategory from './components/AdminComp/ProductByCategory/ProductByCategory';
+import EditCreateProduct from './components/AdminComp/ProductByCategory/EditCreateProduct';
 
 function App() {
 	const location = useLocation();
 	const state = location.state as ModalState | undefined;
 	const background = state?.background;
-	
+
 	// console.log(`location: ${location}`);
 	// console.log(`state: ${state}`);
 	// console.log(`background: ${background}`);
@@ -60,21 +62,25 @@ function App() {
 						</Route>
 
 					</Route>
-				{/* </Routes> */}
+					{/* </Routes> */}
 
-				{/* admin panel */}
-				
-				{/* <Routes location={background || location}> */}
-					<Route  path="/-/" element={<AdminLayout />}>
+					{/* admin panel */}
+					{/* <Routes location={background || location}> */}
+					<Route path="/-/" element={<AdminLayout />}>
 						<Route path="login-admin" element={<LoginAdmin />} />
+
 						<Route element={<RequireAdmin />}>
 							<Route path="admin-panel" element={<AdminPanel />} />
 							<Route path="admin-category" element={<CategoriesPage />} />
+							<Route path="admin-product" element={<ProductByCategory />} />
+							<Route path="product-settings" element={<EditCreateProduct />} />
+							<Route path="product-settings/:id" element={<EditCreateProduct />} />
 						</Route>
 					</Route>
 				</Routes>
 
-			
+
+
 
 				{background && (
 					<Routes>
@@ -86,7 +92,7 @@ function App() {
 
 
 						{/* sign up modal windows */}
-						<Route path="/signup" element={<SignUpAccount background={background}/>} />
+						<Route path="/signup" element={<SignUpAccount background={background} />} />
 						<Route path="/checkin" element={<EnterCodeFromGmail background={background} isPasswordReset={false} />} />
 						<Route path="/final-signup" element={<SignUpFinal background={background} />} />
 						<Route path="/congrats" element={<Congrats />} />
@@ -104,8 +110,8 @@ function App() {
 
 
 						{/*menu modal*/}
-						<Route path="/menu" element={<MainMenu background={background}/>} />
-						<Route path='/-/admin-panel/menu' element={<AdminMenu background={background}/>}/>
+						<Route path="/menu" element={<MainMenu background={background} />} />
+						<Route path='/-/admin-panel/menu' element={<AdminMenu background={background} />} />
 					</Routes >
 				)}
 			</AuthProvider>

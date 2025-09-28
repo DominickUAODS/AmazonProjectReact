@@ -1,3 +1,5 @@
+import type { PropertyKeyType } from "./PropertyCase";
+
 export interface Category {
 	id: string;
 	image: string | null;
@@ -8,4 +10,5 @@ export interface Category {
 	parent_id: string | null;
 	subcategories: Category[];
 	parentName?: string | null;
+	property_keys?: PropertyKeyType[];
 }
