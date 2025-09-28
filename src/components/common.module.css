@@ -415,4 +415,9 @@
 		color:rgba(14, 32, 66, 1);
 		
 	}
+
+	.fixedPagination{
+		width:100%;
+		min-width: 0 !important;
+	}
 }

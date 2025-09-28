@@ -61,6 +61,14 @@ export default function AccountSettings() {
 
 			<div className={styles.accSettings}>
 				<div className={styles.accSettingsTitle}>
+					<div className={styles.backButtonDiv}>
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M15.7501 2.87891L7.77605 11.1949C7.26605 11.7229 7.26605 12.5629 7.77605 13.0909L15.7501 21.3829" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+					<span className={styles.back}>Back</span>
+
+
+					</div>
 					<p>Account Settings</p>
 				</div>
 

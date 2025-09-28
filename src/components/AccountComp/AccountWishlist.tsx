@@ -5,28 +5,42 @@ import products from '../../data/product.json';
 import { useState } from 'react';
 import Pagination from '../Pagination/Pagination';
 import commonStyles from "../common.module.css"
-
+import { useMediaQuery } from "react-responsive";
 
 
 
 export default function AccountWishlist() {
-    const [currentPage, setCurrentPage] = useState(1);
-	const itemsPerPage = 10;
+	const isMobile = useMediaQuery({ maxWidth: 768 });
+	const [currentPage, setCurrentPage] = useState(1);
+  
+	const itemsPerPage = isMobile ? 4 : 10;
+  
 	const totalPages = Math.ceil(products.length / itemsPerPage);
-
+  
 	const startIndex = (currentPage - 1) * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
 	const visibleProducts = products.slice(startIndex, endIndex);
   
 	return (
 		<div className={styles.acWishBlock}>
-
+			<div className={styles.menu}>
 			<AccountMenu/>
+			</div>
 
+			
 			<div className={styles.accWishlist}>
 
 				<div className={styles.accWishlistTitle}>
-					<p>Wishlist</p>
+					<div className={styles.backButtonTitleDiv}>
+						<div className={styles.buttonBack}>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M15.7501 2.87891L7.77605 11.1949C7.26605 11.7229 7.26605 12.5629 7.77605 13.0909L15.7501 21.3829" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+							<span className={styles.back}>Back</span>
+						</div>
+						<p>Wishlist</p>
+					</div>
+					<p className={styles.pkP}>Wishlist</p>
                     <div className={styles.searchWishes} >
                         <input placeholder="Search..." type='text'>
                         </input>
