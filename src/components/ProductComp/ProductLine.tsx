@@ -4,9 +4,8 @@ import { ReactSVG } from 'react-svg';
 import { ProductCard } from './ProductCard';
 import type { LineScrollDirection } from '../../types/LineScrollDirection';
 import commonStyles from "../common.module.css";
-
-//import { products } from '../../data (temp)/products';
 import type { ProductsList } from '../../types/Product';
+//import { products } from '../../data (temp)/products';
 
 type Params = {
 	type: 'trending' | 'sale',
@@ -27,10 +26,22 @@ function ProductLine({ type, pageSize }: Params) {
 	useEffect(() => {
 		const loadProducts = async () => {
 			try {
-				const res = await fetch(`${API_SERVER}/product`);
+				let url = `${API_SERVER}/product?PageSize=${pageSize}`;
+
+				if (type === "trending") {
+					// товары, которые были в заказах за последние 7 дней
+					url = `${API_SERVER}/product?TrendingDays=7&PageSize=${pageSize}`;
+				}
+
+				if (type === "sale") {
+					// товары со скидкой
+					url = `${API_SERVER}/product?OnlyDiscounted=true&Sort=recent&PageSize=${pageSize}`;
+				}
+
+				const res = await fetch(url);
 				if (!res.ok) throw new Error("Ошибка при загрузке продуктов");
+
 				const data: ProductsList[] = await res.json();
-				//console.log("Полученные продукты:", data);
 				setProducts(data);
 			} catch (err) {
 				console.error("Ошибка загрузки:", err);
@@ -38,7 +49,7 @@ function ProductLine({ type, pageSize }: Params) {
 		};
 
 		loadProducts();
-	}, [API_SERVER]);
+	}, [API_SERVER, pageSize, type]);
 
 	const checkControls = () => {
 		if (lineRef.current === null) return;
@@ -87,14 +98,15 @@ function ProductLine({ type, pageSize }: Params) {
 			<p className='product-line-title text-minor header-2'>{type[0].toUpperCase() + type.slice(1)}</p>
 			<div className='product-line-container'>
 				<div className='product-line' ref={lineRef}>
-					{products.slice(pageSize * (type === 'trending' ? 0 : 1), Math.min(pageSize * (type === 'trending' ? 1 : 2), products.length)).map((value) =>
+					{/* {products.slice(pageSize * (type === 'trending' ? 0 : 1), Math.min(pageSize * (type === 'trending' ? 1 : 2), products.length)).map((value) => */}
+					{products.map((value) =>
 						<ProductCard
 							key={value.id}
 							display={value.display}
 							id={value.id}
 							name={value.name}
-							rating={0}
-							comments={0}
+							rating={value.rating}
+							comments={value.comments}
 							price={value.price}
 							discount={value.discount}
 							old_cost={value.discount ? value.price + value.discount : undefined} card_size={'big'} />

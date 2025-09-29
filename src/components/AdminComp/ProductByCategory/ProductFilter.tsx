@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import this_styles from './ProductFilter.module.css';
 import styles from '../Products/Filters.module.css'
 import type { Category } from '../../../types/Category';
-import AllCategoriesDropDown from '../Products/AllCatgoriesDropdown';
+import AllCategoriesDropDown from '../Products/AllCategoriesDropdown';
 
 interface ProductFilerProps {
 	categoryFilter: string;

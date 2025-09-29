@@ -1,11 +1,9 @@
-import { useNavigate, useLocation } from 'react-router-dom';
-import styles from './EmtyCategoryTree.module.css'
-import img from "../../../../public/img/admin_panel_img.png";
+import styles from './EmptyCategoryTree.module.css'
 
-export default function EmtyCategoryTree({ spanTitle }: { spanTitle: string }) {
+export default function EmptyCategoryTree({ spanTitle }: { spanTitle: string }) {
 	return (
 		<div className={styles.emtyCategoryTree}>
-            <img src={img}></img>
+            <img src="/img/admin_panel_img.png" alt="Admin panel" />
             <span>{spanTitle}</span>
 		</div>
 	);

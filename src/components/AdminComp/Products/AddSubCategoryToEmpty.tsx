@@ -1,13 +1,13 @@
 
-import styles from './EmtyCategoryTree.module.css'
-import this_styles from './AddSubCategoryToEmty.module.css'
+import styles from './EmptyCategoryTree.module.css'
+import this_styles from './AddSubCategoryToEmpty.module.css'
 import type { Category } from '../../../types/Category';
 
 type AddSubCategoryToEmtyProps ={
     parent:Category | null;
     addSub:(parent:Category)=> void;
 }
-export default function AddSubCategoryToEmty({addSub, parent}:AddSubCategoryToEmtyProps) {
+export default function AddSubCategoryToEmpty({addSub, parent}:AddSubCategoryToEmtyProps) {
 	return (
 		<div className={styles.emtyCategoryTree}>
             <div className={this_styles.addSubBlock} style={{"cursor":"pointer"}} onClick={() => parent && addSub(parent)}

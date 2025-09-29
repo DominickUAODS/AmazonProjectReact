@@ -5,7 +5,7 @@ import { IconOptions, type IconOption } from "../../../types/IconOptions";
 import type { CategoryFormData } from "./CategoriesPage";
 import type { Category } from "../../../types/Category";
 import { generateCloudinarySignature, type CloudinaryParams } from "../../Helpers/Signature";
-import AllCategoriesDropDown from "./AllCatgoriesDropdown";
+import AllCategoriesDropDown from "./AllCategoriesDropdown";
 import OnePropertyKey from "./OnePropertyKey";
 import type { PropertyKeyType } from "../../../types/PropertyCase";
 

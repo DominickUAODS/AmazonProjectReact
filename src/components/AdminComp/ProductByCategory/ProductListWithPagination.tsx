@@ -7,7 +7,7 @@ import styles from "./ProductByCategory.module.css";
 import commonStyles from "../../common.module.css";
 import type { OneProductProps } from "./OneProduct";
 import OneProduct from "./OneProduct";
-import EmtyCategoryTree from "../Products/EmptyCategoryTree";
+import EmptyCategoryTree from "../Products/EmptyCategoryTree";
 
 interface ProductListWithPaginationProps {
   products: OneProductProps[];
@@ -74,7 +74,7 @@ const ProductListWithPagination: React.FC<ProductListWithPaginationProps> = ({
       </div>
         </>):(
         <>
-        <EmtyCategoryTree spanTitle={"No products in the selected category"}/>
+        <EmptyCategoryTree spanTitle={"No products in the selected category"}/>
         </>)}
      
 

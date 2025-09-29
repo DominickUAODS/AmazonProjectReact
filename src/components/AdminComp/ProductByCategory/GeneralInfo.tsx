@@ -1,7 +1,7 @@
 import type { ProductFromApi } from "./ProductCardAdmin";
 import styles from "./GeneralInfo.module.css"
 import commonStyles from "../../common.module.css";
-import AllCategoriesDropDown from "../Products/AllCatgoriesDropdown";
+import AllCategoriesDropDown from "../Products/AllCategoriesDropdown";
 import { useEffect, useState } from "react";
 type Props = {
     product: ProductFromApi | null;

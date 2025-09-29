@@ -6,13 +6,13 @@ import { LoginBanner } from './ProductComp/LoginBanner';
 import { ScrollToTopButton } from './ProductComp/ScrollToTopButton';
 
 function Main() {
+	const categoriesPageSize = import.meta.env.VITE_MAIN_CATEGORIES_PAGE_SIZE;
+	const productsPageSize = import.meta.env.VITE_MAIN_PRODUCTS_PAGE_SIZE;
+
 	const banners = [
 		'/img/banner_1.png',
 		'/img/banner_2.png',
 	];
-
-	const categoriesPageSize = 6;
-	const productsPageSize = 6;
 
 	return (
 		<div className='main'>

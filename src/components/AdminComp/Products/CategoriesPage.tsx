@@ -6,9 +6,9 @@ import Filters from './Filters';
 import CreateEditCategoryModal from './CreateEditCategoryModal';
 import type { Category } from '../../../types/Category';
 import styles from './CategoriesPage.module.css';
-import EmtyCategoryTree from './EmptyCategoryTree';
+import EmptyCategoryTree from './EmptyCategoryTree';
 import EmtyCategoryCard from './EmptyCategoryCard';
-import AddSubCategoryToEmty from './AddSubCategoryToEmty';
+import AddSubCategoryToEmpty from './AddSubCategoryToEmpty';
 
 export interface CategoryFormData {
 	name: string;
@@ -303,7 +303,7 @@ const CategoriesPage = () => {
 
 						<div>
 						{categoryFilter === "" ? (
-							<EmtyCategoryTree spanTitle={"Subcategory not found"}/>
+							<EmptyCategoryTree spanTitle={"Subcategory not found"}/>
 						) : visibleCategories.length > 0 ? (
 							<CategoryTree
 							categories={visibleCategories}
@@ -314,7 +314,7 @@ const CategoriesPage = () => {
 							/>
 						) : (
 							<>
-								<AddSubCategoryToEmty parent = {selectedParent || null} addSub={openAddSubcategory}/>
+								<AddSubCategoryToEmpty parent = {selectedParent || null} addSub={openAddSubcategory}/>
 							</> 
 						)}
 						</div>
