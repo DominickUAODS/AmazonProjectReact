@@ -1,4 +1,4 @@
-import type { ProductDetail } from "./ProductCardAdmin";
+//import type { ProductDetail } from "./ProductCardAdmin";
 import styles from './OnePropertyKeyAdmin.module.css'
 import commonStyles from "../../common.module.css";
 
