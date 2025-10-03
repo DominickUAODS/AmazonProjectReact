@@ -1,9 +1,4 @@
-.tag{
-    background-color: rgba(224, 235, 255, 1);
-    padding: 8px 20px;
-    border-radius: 4px;
-    
-}
+
 
 .tagSpan{
     color:rgba(14, 32, 66, 1);
@@ -11,4 +6,17 @@
     font-size: 16;
     line-height: 24px;
     letter-spacing: 0.3px;
+}
+
+.tag{
+    background-color: rgba(224, 235, 255, 1);
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    
+}
+
+.activeTag{
+    background-color: rgba(204, 221, 255, 1);
+    cursor: pointer;
 }

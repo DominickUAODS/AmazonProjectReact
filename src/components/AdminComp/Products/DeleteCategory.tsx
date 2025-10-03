@@ -4,13 +4,15 @@ import commonStyles from '../../common.module.css';
 
 
 type DeleteCategoryProps={
-  parentId?:string | null;
+  mainSpan?:string;
+  addSpan:string;
   show: boolean;
   onClose: () => void;
+  onDelete?:()=>void;
 }
-export default function DeleteCategory({parentId,show, onClose}:DeleteCategoryProps) {
+export default function DeleteCategory({mainSpan, addSpan, show, onClose, onDelete}:DeleteCategoryProps) {
   if (!show) return null;
-  const isSubcategory = !!parentId;
+
       
 	return (
       <div className={over_styles.overlay}>
@@ -19,11 +21,12 @@ export default function DeleteCategory({parentId,show, onClose}:DeleteCategoryPr
             <span>Are you sure?</span>
           </div>
           <div className={styles.textDeleteCat}>
-            {isSubcategory ? (<span>You can't restore this category and its subcategories; the products will be deactivated.</span>) : (<span>You can't recover categories, subcategories; products will be deactivated.</span>) }
+            <span>{addSpan}</span>
+            {/* {isSubcategory ? (<span>You can't restore this category and its subcategories; the products will be deactivated.</span>) : (<span>You can't recover categories, subcategories; products will be deactivated.</span>) } */}
           </div>
           <div className={styles.btnGroup}>
             <button className={commonStyles.nextStepButton} onClick={onClose}>Cancel</button>
-            <button className={commonStyles.destructiveButton}>Delete</button>
+            <button className={commonStyles.destructiveButton} onClick={onDelete}>Delete</button>
           </div>
 
         </div>

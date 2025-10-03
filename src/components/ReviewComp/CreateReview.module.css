@@ -1,0 +1,117 @@
+.my_modal{
+    max-width: 828px;
+}
+
+.crModal{
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+}
+
+.crModalTitle{
+    padding-bottom: 14px;
+    border-bottom: 2.5px solid rgba(204, 221, 255, 1);
+}
+
+.crModalTitle span{
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 36px;
+    letter-spacing: -0.5px;
+}
+
+.crModalMain{
+    display: flex;
+    flex-direction: column;
+    gap:24px;
+    padding-top: 24px;
+}
+
+.crModalMainStars{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center
+}
+
+.tags{
+    display: flex;
+    flex-direction: column;
+    gap:14px;
+}
+
+.tagsSpan{
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    line-height: 28px !important;
+    letter-spacing: 0.3px !important;
+}
+
+.tagsCont{
+    display: flex;
+    flex-wrap: wrap;
+    gap:8px;
+}
+
+.actionButtons{
+    display: flex;
+    flex-direction: row;
+    gap:14px;
+    justify-content: flex-end;
+    align-self: flex-end;
+}
+
+.tag{
+    background-color: rgba(224, 235, 255, 1);
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    
+}
+
+.activeTag{
+    background-color: rgba(204, 221, 255, 1);
+    cursor: pointer;
+}
+
+
+@media (max-width: 400px) {
+    .my_modal{
+        width:390px;
+        padding: 16px !important;
+        height: 672px;
+        overflow: hidden;
+        display: flex;
+    }
+
+    .my_modal .crModal { 
+        flex: 1;              /* занимает всё пространство модалки */
+        overflow-y: auto;     /* вертикальный скролл */
+        -webkit-overflow-scrolling: touch; /* плавный скролл на мобильных */
+    }
+    .crModal{
+        gap:24px;
+    }
+
+    .crModalTitle span{
+        font-size: 28px;
+        line-height: 32px;
+    }
+
+    .crModalMain{
+        gap:16px;
+        padding-top: 16px;
+    }
+
+    .crModalMainStars svg{
+        width: 40px !important;
+        height: 40px !important;
+
+    }
+
+    .inputName{
+        height: 40px;
+        margin-bottom: 12px !important;
+    }
+       
+}

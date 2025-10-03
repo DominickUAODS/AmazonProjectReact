@@ -5,6 +5,8 @@ import PFTag from './PFTag';
 import { useState } from 'react';
 import { useAuth } from '../Helpers/AuthContext';
 import { reviewTagOptions } from '../../types/ReviewTagOptions';
+import CreateReview from '../ReviewComp/CreateReview';
+import DeleteCategory from '../AdminComp/Products/DeleteCategory';
 
 export type CommentType = {
 	id: string;
@@ -19,25 +21,69 @@ export type CommentType = {
 	user_lastname: string;
 	user_image: string;
 	helpful_count?: number;
+	user_id:string;
 }
 
+type OneCommentProps = CommentType & {
+	onDelete?: (id: string) => void;
+  };
 
-export default function OneComment({ id, stars, title, content, published, is_helpful = false, rewiew_tags, rewiew_images, user_firstname, user_lastname, user_image, helpful_count = 0 }: CommentType) {
+
+export default function OneComment({
+	user_id,
+	id,
+	stars,
+	title,
+	content,
+	published,
+	is_helpful = false,
+	rewiew_tags,
+	rewiew_images,
+	user_firstname,
+	user_lastname,
+	user_image,
+	helpful_count = 0,
+	onDelete, 
+  }: OneCommentProps) {
 	const { isAuthenticated, accessToken, user } = useAuth();
 	const [helpful, setHelpful] = useState<boolean>(is_helpful);
+	const [isOpen, setOpen] = useState<boolean>(false);
 	const [helpCount, setHelpCount] = useState<number>(helpful_count);
-	//const helCount = helpful_count ?? 0;
+	const [showModal, setShowModal] = useState(false);
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 
-	// const formatDate = (dateStr: string) => {
-	// 	const [day, month, year] = dateStr.split(".").map(Number);
-	// 	const date = new Date(year, month - 1, day);
-	// 	return date.toLocaleDateString("en-US", {
-	// 		month: "long",
-	// 		day: "numeric",
-	// 		year: "numeric",
-	// 	});
-	// };
+	const openDeleteReview = () =>{
+		setShowDeleteModal(true);
+	}
+
+	const handleDeleteReview = async () => {
+		if (!isAuthenticated || !accessToken) return;
+	
+		try {
+			const res = await fetch(`${import.meta.env.VITE_API_SERVER}/reviews/${id}`, {
+				method: "DELETE",
+				headers: {
+					"Authorization": `Bearer ${localStorage.getItem("accessToken")}`,
+				}
+			});
+	
+			if (res.status === 204) {
+				console.log("Review deleted");
+				setShowDeleteModal(false);
+				if (onDelete) {
+					onDelete(id); 
+				}
+	
+			} else if (res.status === 404) {
+				console.error("Review not found");
+			} else {
+				console.error("Failed to delete review");
+			}
+		} catch (err) {
+			console.error("Error deleting review", err);
+		}
+	};
 
 	const formatDate = (dateStr: string) => {
 		const date = new Date(dateStr);
@@ -47,6 +93,8 @@ export default function OneComment({ id, stars, title, content, published, is_he
 			year: "numeric",
 		});
 	};
+
+	const isMyComment = user?.last_name=== user_lastname;
 
 
 	const personWord = (n: number) => (n <= 1 ? "person" : "people");
@@ -89,47 +137,9 @@ export default function OneComment({ id, stars, title, content, published, is_he
 
 	const roundedStars = Array.from({ length: 5 }, (_, i) => i < stars);
 
-	// const FullStar = () => (
-	// 	<svg
-	// 		width="24"
-	// 		height="24"
-	// 		viewBox="0 0 17 16"
-	// 		fill="none"
-	// 		xmlns="http://www.w3.org/2000/svg"
-	// 		className={styles.star}
-	// 	>
-	// 		<path
-	// 			d="M5.63199 13.6048C5.08399 14.0008 4.35199 13.4688 4.55999 12.8248L5.44399 10.0968C5.56799 9.71281 5.43199 9.29281 5.10399 9.05681L2.78399 7.37281C2.23599 6.97681 2.51999 6.11281 3.19199 6.11281H6.05999C6.46399 6.11281 6.81999 5.85281 6.94399 5.46881L7.82799 2.74081C8.03599 2.09681 8.94399 2.09681 9.15599 2.74081L10.04 5.46881C10.164 5.85281 10.524 6.11281 10.924 6.11281H13.792C14.468 6.11281 14.748 6.97681 14.2 7.37281L11.88 9.05681C11.552 9.29281 11.416 9.71281 11.54 10.0968L12.424 12.8248C12.632 13.4688 11.896 14.0008 11.352 13.6048L9.17999 11.8648C8.85199 11.6008 8.38799 11.5928 8.04799 11.8368L5.61999 13.6048H5.63199Z"
-	// 			fill="#0E2042"
-	// 			stroke="#0E2042"
-	// 			strokeWidth="1.5"
-	// 			strokeLinecap="round"
-	// 			strokeLinejoin="round"
-	// 		/>
-	// 	</svg>
-	// );
-
-	// const EmptyStar = () => (
-	// 	<svg
-	// 		width="24"
-	// 		height="24"
-	// 		viewBox="0 0 17 16"
-	// 		fill="none"
-	// 		xmlns="http://www.w3.org/2000/svg"
-	// 		className={styles.star}
-	// 	>
-	// 		<path
-	// 			d="M8.1999 11.7408L5.6359 13.6048C5.0879 14.0008 4.3559 13.4688 4.5639 12.8248L5.4479 10.0968C5.5719 9.71281 5.4359 9.29281 5.1079 9.05681L2.7879 7.37281C2.2399 6.97681 2.5239 6.11281 3.1959 6.11281H6.0639C6.4679 6.11281 6.8239 5.85281 6.9479 5.46881L7.8319 2.74081C8.0399 2.09681 8.9479 2.09681 9.1599 2.74081L10.0439 5.46881C10.1679 5.85281 10.5279 6.11281 10.9279 6.11281H13.7959C14.4719 6.11281 14.7519 6.97681 14.2039 7.37281L11.8839 9.05681C11.5559 9.29281 11.4199 9.71281 11.5439 10.0968L12.4279 12.8248C12.6359 13.4688 11.8999 14.0008 11.3559 13.6048"
-	// 			stroke="#0E2042"
-	// 			strokeWidth="1.5"
-	// 			strokeLinecap="round"
-	// 			strokeLinejoin="round"
-	// 		/>
-	// 	</svg>
-	// );
 
 	return (
-		<div className={styles.comment}>
+		<div className={`${styles.comment} ${isMyComment ? styles.myComment : ""}`}>
 			<div className={styles.commentMainBlock}>
 				<div className={styles.userComment}>
 					<div className={styles.userDate}>
@@ -140,6 +150,36 @@ export default function OneComment({ id, stars, title, content, published, is_he
 
 						<div className={styles.date}>
 							{formatDate(published)}
+							{isMyComment && (
+								 <div className={styles.dropdownWrapper}>
+								 <div className={styles.deteteEditDD} onClick={() => setOpen(prev => !prev)}>
+								   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									 <path d="M5.3999 12.1992C5.3999 13.0265 4.72895 13.6992 3.89605 13.6992C3.06314 13.6992 2.3999 13.0265 2.3999 12.1992C2.3999 11.3719 3.07085 10.6992 3.89605 10.6992C4.72124 10.6992 5.3999 11.3719 5.3999 12.1992Z" fill="#0E2042"/>
+									 <path d="M13.23 12.1992C13.23 13.0265 12.559 13.6992 11.7261 13.6992C10.8932 13.6992 10.23 13.0265 10.23 12.1992C10.23 11.3719 10.9009 10.6992 11.7261 10.6992C12.5513 10.6992 13.23 11.3719 13.23 12.1992Z" fill="#0E2042"/>
+									 <path d="M21.0601 12.1992C21.0601 13.0265 20.3891 13.6992 19.5562 13.6992C18.7233 13.6992 18.0601 13.0265 18.0601 12.1992C18.0601 11.3719 18.731 10.6992 19.5562 10.6992C20.3814 10.6992 21.0601 11.3719 21.0601 12.1992Z" fill="#0E2042"/>
+								   </svg>
+								 </div>
+						   
+								 {isOpen && (
+								   <div className={styles.editDeleteDrop}>
+									 <div className={styles.dropOptions}>
+									   <div className={styles.option}  onClick={() => {
+											setShowModal(true);  // открыть модалку
+											setOpen(false);      // закрыть дропдаун
+										}}><span>Edit</span></div>
+									   <div
+										onClick={() => {
+											openDeleteReview();  
+											setOpen(false);
+										}}
+										className={styles.option}
+										>
+											<span style={{color:"rgba(234, 72, 72, 1)"}}>Delete</span></div>
+									 </div>
+								   </div>
+								 )}
+							   </div>
+							)}
 						</div>
 					</div>
 
@@ -209,7 +249,7 @@ export default function OneComment({ id, stars, title, content, published, is_he
 						{rewiew_tags.map((tagKey, index) => {
 							const tagOption = reviewTagOptions.find(t => t.key === tagKey.toString());
 							if (!tagOption) return null; // если ключ не найден
-							return <PFTag key={index} title={tagOption.title} className={styles.tag} />;
+							return <PFTag key={index} title={tagOption.title} isActive={false} />;
 						})}
 					</div>
 				)}
@@ -236,6 +276,34 @@ export default function OneComment({ id, stars, title, content, published, is_he
 				{getHelpfulText() && <span>{getHelpfulText()}</span>}
 
 			</div>
+
+			<CreateReview
+				show={showModal}
+				onClose={() => setShowModal(false)}
+				comment={{
+					id,
+					stars,
+					title,
+					content,
+					published,
+					is_helpful,
+					rewiew_tags,
+					rewiew_images,
+					user_firstname,
+					user_lastname,
+					user_image,
+					helpful_count,
+					user_id
+				  }}
+			/>
+
+			<DeleteCategory
+				onClose={()=>setShowDeleteModal(false)}
+				show={showDeleteModal}
+				addSpan='Your review will be impossible to recover.'
+				onDelete={handleDeleteReview}
+				/>
+				
 		</div>
 	);
 }

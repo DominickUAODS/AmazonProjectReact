@@ -2,14 +2,18 @@ import styles from './PFTag.module.css'
 
 export type PFTagProps = {
 	title: string;
-	className?: string;
+	isActive?: boolean;
 	onClick?: () => void;
-};
-
-export default function PFTag({ title, onClick, className }: PFTagProps) {
+  };
+  
+  export default function PFTag({ title, onClick, isActive }: PFTagProps) {
 	return (
-		<div className={className} onClick={onClick}>
-			<span className={styles.tagSpan}>{title}</span>
-		</div>
+	  <div
+		className={`${styles.tag} ${isActive ? styles.activeTag : ""}`}
+		onClick={onClick}
+	  >
+		<span className={styles.tagSpan}>{title}</span>
+	  </div>
 	);
-}
+  }
+  

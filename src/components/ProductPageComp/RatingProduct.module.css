@@ -179,3 +179,23 @@
     background-color: rgba(204, 221, 255, 1);
     cursor: pointer;
 }
+
+
+@media (max-width: 400px) {
+    .rp{
+        width:330px;
+        height: 500px !important;
+        max-height:100% ;
+        padding: 16px;
+        
+    }
+
+    .rp0{
+        width: auto !important;
+    }
+
+    .rpStarsBlock{
+        gap:0;
+        margin-left: 0;
+    }
+}

@@ -42,3 +42,11 @@
     background-color: rgba(224, 235, 255, 0.5);
   }
   
+
+
+  @media (max-width: 400px) {
+    .selectTrigger{
+      width: 140px;
+      height: 36px;
+    }
+}
