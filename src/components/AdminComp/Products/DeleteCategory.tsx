@@ -29,7 +29,7 @@ export default function DeleteCategory({mainSpan, addSpan, show, onClose, onDele
             <button className={commonStyles.destructiveButton} onClick={onDelete}>Delete</button>
           </div>
 
-        </div>
-      </div>
-    );
+			</div>
+		</div>
+	);
 }

@@ -1,22 +1,64 @@
-.oneProp{
-    display: flex;
-    width: 100%;
-    gap:14px;
-    align-items: center;
+.oneProp {
+	display: flex;
+	width: 100%;
+	gap: 14px;
+	align-items: center;
 }
 
-.inputPk{
-    background-color: transparent !important;
-    opacity: 50%;
-    width: 320px;
+.inputPk {
+	background-color: transparent !important;
+	/* opacity: 50%; */
+	width: 320px;
+	position: relative; 
 }
 
-.inputAtt{
-    display: flex;
-    flex: 1;
-    
+.inputAtt {
+	display: flex;
+	flex: 1;
+
 }
 
-.inputAtt input{
-    background-color: transparent !important;
+.inputAtt input {
+	background-color: transparent !important;
+}
+
+.deletePropButton {
+	margin-top: 10px;
+	width: 48px;
+	height: 48px;
+	align-self: center;
+	padding: 12px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.deletePropButton:hover {
+	background-color: rgba(255, 204, 204, 1);
+}
+
+.selectPk {
+	border: none;          
+	background: transparent;
+	outline: none;        
+	font-size: 18px; 
+	color: rgba(14, 32, 66, 1);    
+	padding: 4px 8px;    
+	padding: 4px 32px 4px 8px; 
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none; 
+	position: relative;
+  }
+
+
+.selectPk::after {
+	content: "▼"; 
+	font-size: 14px;
+	color: rgba(14, 32, 66, 1);
+	position: absolute;
+	right: 10px; 
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none; 
 }

@@ -1,0 +1,38 @@
+.oneProp {
+	display: flex;
+	width: 100%;
+	gap: 14px;
+	align-items: center;
+}
+
+.inputName {
+	background-color: transparent !important;
+	/* opacity: 50%; */
+	width: 320px;
+}
+
+.inputDesc {
+	display: flex;
+	flex: 1;
+	height: 48px;
+
+}
+
+.inputDesc input {
+	background-color: transparent !important;
+}
+
+.deletePropButton {
+	margin-top: 10px;
+	width: 48px;
+	height: 48px;
+	align-self: center;
+	padding: 12px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.deletePropButton:hover {
+	background-color: rgba(255, 204, 204, 1);
+}

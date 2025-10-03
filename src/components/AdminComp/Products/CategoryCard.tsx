@@ -11,7 +11,8 @@ interface CategoryCardProps {
 	onDelete: (categoryId: string) => void;
 }
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ category, parentCategoryName, onEdit, onDelete }) => {
+const CategoryCard: React.FC<CategoryCardProps> = ({ category, onEdit, onDelete }) => {
+	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const [fullCategory, setFullCategory] = useState<Category>(category);
 	const [parentName, setParentName] = useState<string | null>(null);
 	const [showModal, setShowModal] = useState(false);
@@ -20,37 +21,38 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, parentCategoryNam
 
 	const handleDeleteClick = () => {
 		if (isSubcategory) {
-		  setPendingParentId(category.parent_id ?? null);
+			setPendingParentId(category.parent_id ?? null);
 		} else {
-		  setPendingParentId(null);
+			setPendingParentId(null);
 		}
 		setShowModal(true);
-	  };
+	};
+
 	useEffect(() => {
 		if (!category.id) return;
 
 		const fetchCategoryDetails = async () => {
 			try {
-				const response = await fetch(`${import.meta.env.VITE_API_SERVER}/category/${category.id}`);
+				const response = await fetch(`${API_SERVER}/category/${category.id}`);
 				const data = await response.json();
 
 				setFullCategory(prev => ({ ...prev, ...data }));
 
-				console.log("Category details fetched:", data);
+				//console.log("Category details fetched:", data);
 				if (data.parent_id) {
-					const parentRes = await fetch(`${import.meta.env.VITE_API_SERVER}/category/${data.parent_id}`);
+					const parentRes = await fetch(`${API_SERVER}/category/${data.parent_id}`);
 					const parentData: Category = await parentRes.json();
 					setParentName(parentData.name);
-				  } else {
+				} else {
 					setParentName(null);
-				  }
+				}
 			} catch (err) {
 				console.error("Ошибка загрузки деталей категории:", err);
 			}
 		};
 
 		fetchCategoryDetails();
-	}, [category.id]);
+	}, [API_SERVER, category.id]);
 
 
 	return (
@@ -93,18 +95,18 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, parentCategoryNam
 							Role
 						</span>
 						<span className={styles.statusRoleSubSpan2}>
-						{isSubcategory ? 'Subcategory' : 'Parent category'}
+							{isSubcategory ? 'Subcategory' : 'Parent category'}
 						</span>
 					</div>
 					{isSubcategory && parentName && (
 						<div className={styles.statusSpans}>
-						<span className={styles.statusRoleSubSpan1}>
-							Parent
-						</span>
-						<span className={styles.statusRoleSubSpan2}>
-						{parentName}
-						</span>
-					</div>
+							<span className={styles.statusRoleSubSpan1}>
+								Parent
+							</span>
+							<span className={styles.statusRoleSubSpan2}>
+								{parentName}
+							</span>
+						</div>
 					)}
 				</div>
 			</div>
@@ -122,19 +124,20 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, parentCategoryNam
 					</svg>
 					<span className={styles.spanInfo}>Edit</span>
 				</button>
-				<button onClick={handleDeleteClick}  className={styles.deleteBtn}>
+				<button onClick={handleDeleteClick} className={styles.deleteBtn}>
 					<svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M22.9405 8.60938L21.0505 23.5194C20.9105 24.5694 20.0005 25.3394 18.9505 25.3394H10.5505C9.50055 25.3394 8.59055 24.5694 8.45055 23.5194L6.56055 8.60938" stroke="#EA4848" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
 						<path d="M22.9405 4.96973H6.56055" stroke="#EA4848" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
 						<path d="M11.5996 4.96984V4.68984C11.5996 3.56984 12.5096 2.58984 13.6996 2.58984H15.8696C16.9896 2.58984 17.9696 3.49984 17.9696 4.68984V4.96984" stroke="#EA4848" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
 					</svg>
-					<span  className={styles.spanInfo}>Delete</span>
+					<span className={styles.spanInfo}>Delete</span>
 				</button>
 			</div>
 			<DeleteCategory
 			show={showModal}
 			onClose={() => setShowModal(false)}
 			addSpan={isSubcategory ? "You can't restore this category and its subcategories; the products will be deactivated." : "You can't recover categories, subcategories; products will be deactivated."}
+			onDelete={handleDeleteClick}
 			/>
 		</div>
 	);

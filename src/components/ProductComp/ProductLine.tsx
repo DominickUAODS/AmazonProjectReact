@@ -42,6 +42,7 @@ function ProductLine({ type, pageSize }: Params) {
 				if (!res.ok) throw new Error("Ошибка при загрузке продуктов");
 
 				const data: ProductsList[] = await res.json();
+				console.log(data);
 				setProducts(data);
 			} catch (err) {
 				console.error("Ошибка загрузки:", err);
