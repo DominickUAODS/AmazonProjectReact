@@ -11,7 +11,8 @@ export type ProductFeature = {
 }
 
 export type ProductDetail = {
-	propertyKey: string;
+	property_key_id: string;
+	property_key: string;
 	attribute: string;
 };
 

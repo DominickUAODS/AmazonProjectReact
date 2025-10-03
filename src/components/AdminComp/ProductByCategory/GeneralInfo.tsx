@@ -12,31 +12,40 @@ type Props = {
 
 export default function GeneralInfo({ product, onCategoryChange }: Props) {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
-	const [name, setName] = useState(product?.name ?? "");
-	const [code, setCode] = useState(product?.code ?? "");
-	const [category, ] = useState("");
-	const [price, setPrice] = useState<number>(product?.price ?? 0);
-	const [discount, setDiscount] = useState<number>(product?.discount ?? 0);
-	const [number, setNumber] = useState<number>(product?.number ?? 0);
+	const [name, setName] = useState("");
+	const [code, setCode] = useState("");
+	//const [category,] = useState("");
+	const [price, setPrice] = useState<number>(0);
+	const [discount, setDiscount] = useState<number>(0);
+	const [number, setNumber] = useState<number>(0);
 	const [categoryName, setCategoryName] = useState<string>("");
 	const [, setCategoryId] = useState(product?.category_id || "");
-	const handleCategoryChange = (newValue: string) => {
-		setCategoryId(newValue);
-		onCategoryChange(newValue);
-	};
+	// const handleCategoryChange = (newValue: string) => {
+	// 	setCategoryId(newValue);
+	// 	onCategoryChange(newValue);
+	// };
 
-	console.log(product)
+	useEffect(() => {
+		if (product) {
+			setName(product.name ?? "");
+			setCode(product.code ?? "");
+			setPrice(product.price ?? 0);
+			setDiscount(product.discount ?? 0);
+			setNumber(product.number ?? 0);
+			setCategoryId(product.category_id || "");
+		}
+	}, [product]);
 
 	useEffect(() => {
 		if (product?.category_id) {
-			console.log("[GeneralInfo] Загружаем имя категории по id:", product.category_id);
+			//console.log("[GeneralInfo] Загружаем имя категории по id:", product.category_id);
 			fetch(`${API_SERVER}/category/${product.category_id}`)
 				.then((res) => {
 					if (!res.ok) throw new Error("Category not found");
 					return res.json();
 				})
 				.then((data) => {
-					console.log("[GeneralInfo] Пришли данные категории:", data);
+					//console.log("[GeneralInfo] Пришли данные категории:", data);
 					setCategoryName(data.name);
 				})
 				.catch((err) => {
@@ -46,10 +55,10 @@ export default function GeneralInfo({ product, onCategoryChange }: Props) {
 		}
 	}, [API_SERVER, product?.category_id]);
 
-	console.log(product)
-	console.log(product?.name)
+	//console.log(product)
+	//console.log(product?.name)
 
-	console.log(categoryName)
+	//console.log(categoryName)
 
 	return (
 		<div className={styles.genInfo}>
@@ -83,8 +92,8 @@ export default function GeneralInfo({ product, onCategoryChange }: Props) {
 			{/* Category dropdown */}
 			<AllCategoriesDropDown
 				isLegend={true}
-				my_value={product ? categoryName : category}
-				onChange={handleCategoryChange}
+				my_value={categoryName}
+				onChange={(value) => onCategoryChange(value)}
 			/>
 
 

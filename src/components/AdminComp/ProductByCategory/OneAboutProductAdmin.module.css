@@ -5,19 +5,20 @@
 	align-items: center;
 }
 
-.inputPk {
+.inputName {
 	background-color: transparent !important;
 	/* opacity: 50%; */
 	width: 320px;
 }
 
-.inputAtt {
+.inputDesc {
 	display: flex;
 	flex: 1;
+	height: 48px;
 
 }
 
-.inputAtt input {
+.inputDesc input {
 	background-color: transparent !important;
 }
 

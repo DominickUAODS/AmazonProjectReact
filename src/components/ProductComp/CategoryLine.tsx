@@ -1,4 +1,4 @@
-import './CategoryLine.module.css';
+import './CategoryLine.css';
 import { useEffect, useRef, useState } from 'react';
 import { ReactSVG } from 'react-svg';
 import { CategoryCard } from './CategoryCard';

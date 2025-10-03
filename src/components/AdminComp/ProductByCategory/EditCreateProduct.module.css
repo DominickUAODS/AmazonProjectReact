@@ -1,8 +1,85 @@
-.tabContent{
-    border-left: 1.5px solid rgba(204, 221, 255, 1);
-    padding-left: 40px;
-    width:100%;
-    padding-right: 100px;
-    flex: 1; 
-    overflow-y: auto;
+/* .panel {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+} */
+
+.tabContent {
+	flex: 1;
+	border-left: 1.5px solid rgba(204, 221, 255, 1);
+	padding-left: 40px;
+	width: 100%;
+	padding-right: 100px;
+	overflow-y: auto;
+}
+
+.footerNav {
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	padding-left: 100px;
+	/* width: 100%; */
+	/* background: #fff; */
+	/* border-top: 1px solid #e5e7eb; */
+	z-index: 1000;
+}
+
+.spnGroup {
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	flex-direction: row;
+	gap: 12px;
+	align-items: center;
+	bottom: 24px;
+	height: px;
+	width: 90%;
+}
+
+.spnGroup span {
+	font-size: 32px;
+	font-weight: 600;
+	letter-spacing: -1.5%
+}
+
+.btnGroup {
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	flex-direction: row;
+	gap: 12px;
+	bottom: 24px;
+	min-width: 90%;
+	padding-left: 42%;
+	justify-content: flex-start;
+}
+
+.secondaryButton {
+	width: 20%;
+	max-height: 47px;
+	background-color: transparent;
+	padding: 8px 12px;
+	border-radius: 4px;
+	border: 2.5px solid rgba(74, 123, 217, 1);
+	font-size: 16px;
+	color: rgba(14, 32, 66, 1);
+	line-height: 24px;
+	letter-spacing: 0.3px;
+
+}
+
+.nextStepButton {
+	width: 20%;
+	max-height: 47px;
+	background-color: rgba(184, 234, 72, 1);
+	padding: 8px 12px;
+	border-radius: 4px;
+	border: none;
+	font-size: 16px;
+	color: rgba(14, 32, 66, 1);
+	line-height: 24px;
+	letter-spacing: 0.3px;
 }
