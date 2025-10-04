@@ -3,6 +3,7 @@ import styles from "./GeneralInfo.module.css"
 import commonStyles from "../../common.module.css";
 import AllCategoriesDropDown from "../Products/AllCategoriesDropdown";
 import { useEffect, useState } from "react";
+import { generateCloudinarySignature, type CloudinaryParams } from "../../Helpers/Signature";
 
 type Props = {
 	product: ProductFromApi;
@@ -12,6 +13,9 @@ type Props = {
 
 export default function GeneralInfo({ product, onCategoryChange, onChange }: Props) {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
+	const CLOUD_NAME = import.meta.env.VITE_CLOUD_NAME;
+	const CLOUD_API = import.meta.env.VITE_CLOUD_API;
+	const CLOUD_SECRET = import.meta.env.VITE_CLOUD_SECRET;
 	//const [name, setName] = useState("");
 	//const [code, setCode] = useState("");
 	//const [category,] = useState("");
@@ -19,7 +23,10 @@ export default function GeneralInfo({ product, onCategoryChange, onChange }: Pro
 	//const [discount, setDiscount] = useState<number>(0);
 	//const [number, setNumber] = useState<number>(0);
 	const [, setCategoryName] = useState<string>("");
-	const [categoryId, setCategoryId] = useState(product?.category_id || "");
+	const [categoryId, setCategoryId] = useState(product.category_id || "");
+	//const [, setFile] = useState<File | null>(null);
+	const [, setUploading] = useState(false);
+	//const [, setImage] = useState<string | undefined>(undefined);
 	// const handleCategoryChange = (newValue: string) => {
 	// 	setCategoryId(newValue);
 	// 	onCategoryChange(newValue);
@@ -37,8 +44,19 @@ export default function GeneralInfo({ product, onCategoryChange, onChange }: Pro
 	// }, [product]);
 
 	useEffect(() => {
+		if (product.category_id) {
+			setCategoryId(product.category_id);
+		}
+	}, [product.category_id]);
+
+
+
+	console.log("categoryId")
+	console.log(categoryId)
+
+	useEffect(() => {
 		if (product?.category_id) {
-			//console.log("[GeneralInfo] Загружаем имя категории по id:", product.category_id);
+			console.log("[GeneralInfo] Загружаем имя категории по id:", product.category_id);
 			fetch(`${API_SERVER}/category/${product.category_id}`)
 				.then((res) => {
 					if (!res.ok) throw new Error("Category not found");
@@ -59,6 +77,121 @@ export default function GeneralInfo({ product, onCategoryChange, onChange }: Pro
 	//console.log(product?.name)
 
 	//console.log(categoryName)
+
+	const handleAddPhoto = async (event: React.ChangeEvent<HTMLInputElement>) => {
+		if (event.target.files) {
+			const files = Array.from(event.target.files);
+
+			// проверяем лимит
+			if ((product.displays?.length || 0) + files.length > 10) {
+				console.error("Максимум можно загрузить 10 фото");
+				event.target.value = "";
+				return;
+			}
+
+			for (const file of files) {
+				const timestamp = Math.floor(Date.now() / 1000);
+				const publicId = crypto.randomUUID();
+
+				const params: CloudinaryParams = { timestamp, public_id: publicId };
+				const signature = generateCloudinarySignature(params, CLOUD_SECRET);
+
+				const formData = new FormData();
+				formData.append("file", file);
+				formData.append("public_id", publicId);
+				formData.append("timestamp", timestamp.toString());
+				formData.append("api_key", CLOUD_API);
+				formData.append("signature", signature);
+
+				setUploading(true);
+
+				try {
+					const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+						{
+							method: "POST",
+							body: formData,
+						}
+					);
+
+					if (!response.ok) throw new Error("Upload failed");
+
+					const result = await response.json();
+
+					// Добавляем фото в product.displays (учитываем редактирование)
+					onChange({
+						displays: [...(product.displays || []), result.secure_url],
+					});
+				} catch (err) {
+					console.error("Ошибка загрузки:", err);
+				} finally {
+					setUploading(false);
+				}
+			}
+
+			// очищаем input (иначе нельзя выбрать те же файлы снова)
+			event.target.value = "";
+		}
+	};
+
+	// утилита: вытаскиваем public_id из secure_url
+	function getPublicIdFromUrl(url: string): string | null {
+		try {
+			const parts = url.split("/upload/");
+			if (parts.length < 2) return null;
+
+			// убираем версию (v123456) и расширение (.jpg)
+			const afterUpload = parts[1].replace(/^v[0-9]+\//, "");
+			return afterUpload.replace(/\.[^/.]+$/, "");
+		} catch {
+			return null;
+		}
+	}
+
+	const handleRemovePhoto = async (index: number) => {
+		if (!product?.displays) return;
+
+		const imageUrl = product.displays[index];
+		const publicId = getPublicIdFromUrl(imageUrl);
+
+		if (!publicId) {
+			console.error("Не удалось получить public_id для", imageUrl);
+			return;
+		}
+
+		try {
+			// 1. Удаляем локально из product.displays
+			onChange({
+				displays: product.displays.filter((_, i) => i !== index),
+			});
+
+			// 2. Подготавливаем подпись для Cloudinary
+			const timestamp = Math.floor(Date.now() / 1000);
+			const params: CloudinaryParams = { public_id: publicId, timestamp };
+			const signature = generateCloudinarySignature(params, CLOUD_SECRET);
+
+			const formData = new FormData();
+			formData.append("public_id", publicId);
+			formData.append("timestamp", timestamp.toString());
+			formData.append("api_key", CLOUD_API);
+			formData.append("signature", signature);
+
+			// 3. Отправляем запрос на Cloudinary для удаления
+			const response = await fetch(
+				`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/destroy`,
+				{
+					method: "POST",
+					body: formData,
+				}
+			);
+
+			if (!response.ok) throw new Error("Удаление из Cloudinary не удалось");
+
+			const result = await response.json();
+			console.log("✅ Результат удаления:", result);
+		} catch (err) {
+			console.error("Ошибка при удалении картинки:", err);
+		}
+	};
 
 	return (
 		<div className={styles.genInfo}>
@@ -93,12 +226,11 @@ export default function GeneralInfo({ product, onCategoryChange, onChange }: Pro
 			<AllCategoriesDropDown
 				isLegend={true}
 				my_value={categoryId}
-				//my_value={categoryName}   
 				onChange={(value) => {
-					setCategoryId(value);       
-					onCategoryChange(value);   
+					setCategoryId(value);
+					onCategoryChange(value);
 				}}
-				/>
+			/>
 
 
 			<div className={styles.photoBlock}>
@@ -114,42 +246,48 @@ export default function GeneralInfo({ product, onCategoryChange, onChange }: Pro
 					<span className={styles.counter}>{product?.displays.length} / 10</span>
 				</div>
 
-				{!product ? (
-					<div className={styles.gallery}>
-						<div className={styles.addPhoto}>
-							<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M24 5.92773V20.9157" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-								<path d="M41.9997 23.9277H27.0117" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-								<path d="M6 23.9277H20.988C22.656 23.9277 24 25.2717 24 26.9397V41.9277" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-							</svg>
-						</div>
-
-					</div>
-				) : (
-					<div className={styles.gallery}>
-						{product?.displays?.map((url, index) => (
-							<div
-								key={index}
-								className={styles.photoWrapper}
-								style={{ width: 118, height: 118 }}
+				<div className={styles.gallery}>
+					{product?.displays?.map((url, index) => (
+						<div
+							key={index}
+							className={styles.photoWrapper}
+							style={{ width: 118, height: 118, position: "relative" }}
+						>
+							<img
+								src={url}
+								alt={`product-${index}`}
+								style={{ width: "100%", height: "100%", objectFit: "cover" }}
+							/>
+							<button
+								type="button"
+								onClick={() => handleRemovePhoto(index)}
+								className={styles.deleteBtn}
 							>
-								<img
-									src={url}
-									alt={`product-${index}`}
-									style={{ width: "100%", height: "100%", objectFit: "cover" }}
-								/>
-							</div>
-						))}
-
-						<div className={styles.addPhoto}>
-							<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M24 5.92773V20.9157" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-								<path d="M41.9997 23.9277H27.0117" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-								<path d="M6 23.9277H20.988C22.656 23.9277 24 25.2717 24 26.9397V41.9277" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-							</svg>
+								X
+							</button>
 						</div>
-					</div>
-				)}
+					))}
+
+					{/* Кнопка добавления только если фото < 10 */}
+					{(product?.displays?.length || 0) < 10 && (
+						<label className={styles.addPhoto}>
+							<input
+								type="file"
+								accept="image/*"
+								multiple
+								onChange={handleAddPhoto}
+								style={{ display: "none" }}
+							/>
+							<svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+								<path d="M24 5.9V20.9" stroke="#4A7BD9" strokeWidth="1.5" strokeLinecap="round" />
+								<path d="M42 23.9H27" stroke="#4A7BD9" strokeWidth="1.5" strokeLinecap="round" />
+								<path d="M6 23.9H21C22.7 23.9 24 25.2 24 26.9V41.9" stroke="#4A7BD9" strokeWidth="1.5" strokeLinecap="round" />
+							</svg>
+						</label>
+					)}
+				</div>
+
+
 			</div>
 
 			<fieldset className={`${commonStyles.inputWrapper} ${styles.inputName}`}>

@@ -1,66 +1,83 @@
-.genInfo{
-    display: flex;
-    flex-direction: column;
-    gap:24px;
-    width: 100%;
+.genInfo {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	width: 100%;
 }
 
-.header{
-    padding-bottom: 18px;
-    border-bottom: 1.5px solid rgba(204, 221, 255, 1);
+.header {
+	padding-bottom: 18px;
+	border-bottom: 1.5px solid rgba(204, 221, 255, 1);
 }
 
-.header{
-    font-size: 32px;
-    line-height: 36px;
-    font-weight: 600;
-    letter-spacing: -0.3px;
+.header {
+	font-size: 32px;
+	line-height: 36px;
+	font-weight: 600;
+	letter-spacing: -0.3px;
 }
 
-.inputName input{
-    background-color: transparent !important;
-}
-
-
-.photoBlock{
-    display: flex;
-    flex-direction: column;
-    gap:14px;
-}
-
-.photoInfo{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.inputName input {
+	background-color: transparent !important;
 }
 
 
-.photoSpan{
-    display: flex;
-    align-items: center;
-    gap:12px;
+.photoBlock {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
 }
 
-.photoSpan span{
-    font-size: 18px;
-    line-height: 28px;
-    font-weight: 400;
-    letter-spacing: 0.3px;
+.photoInfo {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
-.gallery{
-    display: flex;
-    flex-wrap: wrap;
-    width:100%;
-    gap:16px;
+
+.photoSpan {
+	display: flex;
+	align-items: center;
+	gap: 12px;
 }
 
-.addPhoto{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(204, 221, 255, 1);
-    width:118px;
-    height: 118px;
-    cursor: pointer;
+.photoSpan span {
+	font-size: 18px;
+	line-height: 28px;
+	font-weight: 400;
+	letter-spacing: 0.3px;
+}
+
+.gallery {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	gap: 16px;
+}
+
+.addPhoto {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(204, 221, 255, 1);
+	width: 118px;
+	height: 118px;
+	cursor: pointer;
+}
+
+.deleteBtn {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	background: rgba(175, 0, 0, 0.6);
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	width: 16px;
+	height: 20px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	line-height: 1;
 }

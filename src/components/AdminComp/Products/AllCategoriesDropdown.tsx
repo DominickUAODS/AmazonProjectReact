@@ -17,10 +17,7 @@ type CategoryWithSubs = Category & {
 export default function AllCategoriesDropDown({ isLegend, my_value, onChange }: AllCategoriesDropDownProps) {
 	const [open, setOpen] = useState<boolean>(false);
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
-	//const SEARCH_DEBOUNCE = Number(import.meta.env.VITE_SEARCH_DEBOUNCE);
 	const [categories, setCategories] = useState<Category[]>([]);
-	// const onChangeInput = () =>{
-	// }
 
 	useEffect(() => {
 		const fetchCategories = async () => {
@@ -116,10 +113,10 @@ export default function AllCategoriesDropDown({ isLegend, my_value, onChange }: 
 		);
 	};
 	const selectedCategory = categories
-	.flatMap(function collect(c: CategoryWithSubs): CategoryWithSubs[] {
-	  return [c, ...c.subcategories.flatMap(collect)];
-	})
-	.find(c => c.id === my_value);
+		.flatMap(function collect(c: CategoryWithSubs): CategoryWithSubs[] {
+			return [c, ...c.subcategories.flatMap(collect)];
+		})
+		.find(c => c.id === my_value);
 
 	return (
 		<div className={styles.allCatDropDown}>
@@ -129,17 +126,17 @@ export default function AllCategoriesDropDown({ isLegend, my_value, onChange }: 
 					<input
 						type="text"
 						placeholder="Enter category name"
-						value={selectedCategory?.name || ""} 
+						value={selectedCategory?.name || ""}
 					/>
 					<div
 						className={styles.openArrow}
 						onClick={() => setOpen((prev) => !prev)}
 					>
 						{!open ? (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M6 8.5L12 14.5L18 8.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+							<path d="M6 8.5L12 14.5L18 8.5" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 						</svg>
 						) : (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M18 15.5L12 9.5L6 15.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+							<path d="M18 15.5L12 9.5L6 15.5" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 						</svg>
 						)}
 					</div>

@@ -75,12 +75,16 @@ export default function EditCreateProduct() {
 
 	const handleSubmit = async () => {
 		if (productId) {
+			const payload = {
+				...product,
+				category_id: product.category_id || null,
+			}
 			console.log("Сохраняем изменения продукта:", product);
 
 			await fetch(`${API_SERVER}/product/${productId}`, {
 				method: "PUT",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(product),
+				body: JSON.stringify(payload),
 			})
 				.then(res => res.json())
 				.then(data => {

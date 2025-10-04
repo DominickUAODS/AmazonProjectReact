@@ -290,6 +290,7 @@ const CategoriesPage = () => {
 	};
 
 	const handleDeleteCategory = async (categoryId: string) => {
+		console.log("i am here")
 		try {
 			const category = findById(categories, categoryId);
 			if (!category) return;

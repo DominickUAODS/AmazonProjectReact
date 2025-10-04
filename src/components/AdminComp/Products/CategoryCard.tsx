@@ -3,7 +3,6 @@ import type { Category } from '../../../types/Category';
 import styles from './CategoryCard.module.css'
 import DeleteCategory from './DeleteCategory';
 
-
 interface CategoryCardProps {
 	category: Category;
 	parentCategoryName?: string;
@@ -17,9 +16,10 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, onEdit, onDelete 
 	const [parentName, setParentName] = useState<string | null>(null);
 	const [showModal, setShowModal] = useState(false);
 	const isSubcategory = !!category.parent_id;
-	const [pendingParentId, setPendingParentId] = useState<string | null>(null);
+	const [, setPendingParentId] = useState<string | null>(null);
 
 	const handleDeleteClick = () => {
+		//console.log("i am here")
 		if (isSubcategory) {
 			setPendingParentId(category.parent_id ?? null);
 		} else {
@@ -134,10 +134,15 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, onEdit, onDelete 
 				</button>
 			</div>
 			<DeleteCategory
-			show={showModal}
-			onClose={() => setShowModal(false)}
-			addSpan={isSubcategory ? "You can't restore this category and its subcategories; the products will be deactivated." : "You can't recover categories, subcategories; products will be deactivated."}
-			onDelete={handleDeleteClick}
+				show={showModal}
+				onClose={() => setShowModal(false)}
+				addSpan={isSubcategory ?
+					"You can't restore this category and its subcategories; the products will be deactivated." :
+					"You can't recover categories, subcategories; products will be deactivated."}
+				onDelete={() => {
+					onDelete(category.id);
+					setShowModal(false);
+				}}
 			/>
 		</div>
 	);

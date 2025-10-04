@@ -4,6 +4,7 @@ import styles from './ProductCard.module.css'
 import type { OneProductProps } from './OneProduct';
 import ProductGallery from './ProductGallery';
 import { useNavigate } from 'react-router-dom';
+import DeleteCategory from '../Products/DeleteCategory';
 
 export type ProductFeature = {
 	name: string;
@@ -32,18 +33,24 @@ export type ProductFromApi = {
 interface ProductCardProps {
 	productId?: string | null;
 	onEdit?: (product: OneProductProps) => void;
-	onDelete?: (productId: string) => void;
+	onDelete: (productId: string) => void;
 }
 
-const ProductCardAdmin: React.FC<ProductCardProps> = ({ productId }) => {
+const ProductCardAdmin: React.FC<ProductCardProps> = ({ productId, onDelete }) => {
 	const [product, setProduct] = useState<ProductFromApi | null>(null);
 	const navigate = useNavigate();
+
+	const [showModal, setShowModal] = useState(false);
 
 	const handleEdit = () => {
 		if (productId) {
 			navigate(`/-/product-settings/${productId}`);
 		}
 	};
+
+	const handleDelete = () =>{
+		setShowModal(true);
+	}
 
 	useEffect(() => {
 		if (!productId) {
@@ -89,7 +96,7 @@ const ProductCardAdmin: React.FC<ProductCardProps> = ({ productId }) => {
 							</svg>
 							<span className={styles.spanInfo}>Edit</span>
 						</button>
-						<button className={styles.deleteBtn}>
+						<button className={styles.deleteBtn} onClick={handleDelete}>
 							<svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M22.9405 8.60938L21.0505 23.5194C20.9105 24.5694 20.0005 25.3394 18.9505 25.3394H10.5505C9.50055 25.3394 8.59055 24.5694 8.45055 23.5194L6.56055 8.60938" stroke="#EA4848" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
 								<path d="M22.9405 4.96973H6.56055" stroke="#EA4848" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
@@ -98,7 +105,15 @@ const ProductCardAdmin: React.FC<ProductCardProps> = ({ productId }) => {
 							<span className={styles.spanInfo}>Delete</span>
 						</button>
 					</div>
-
+					<DeleteCategory
+						show={showModal}
+						onClose={() => setShowModal(false)}
+						addSpan={"You can't restore this category and its subcategories; the products will be deactivated."}
+						onDelete={() => {
+							onDelete(productId);
+							setShowModal(false);
+						}}
+					/>
 				</div>
 				) : (
 					<div className={styles.mainPosition2}>
