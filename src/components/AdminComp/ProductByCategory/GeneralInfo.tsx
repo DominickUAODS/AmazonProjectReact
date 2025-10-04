@@ -5,36 +5,36 @@ import AllCategoriesDropDown from "../Products/AllCategoriesDropdown";
 import { useEffect, useState } from "react";
 
 type Props = {
-	product: ProductFromApi | null;
+	product: ProductFromApi;
 	onCategoryChange: (categoryId: string) => void;
+	onChange: (patch: Partial<ProductFromApi>) => void;
 };
 
-
-export default function GeneralInfo({ product, onCategoryChange }: Props) {
+export default function GeneralInfo({ product, onCategoryChange, onChange }: Props) {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
-	const [name, setName] = useState("");
-	const [code, setCode] = useState("");
+	//const [name, setName] = useState("");
+	//const [code, setCode] = useState("");
 	//const [category,] = useState("");
-	const [price, setPrice] = useState<number>(0);
-	const [discount, setDiscount] = useState<number>(0);
-	const [number, setNumber] = useState<number>(0);
+	//const [price, setPrice] = useState<number>(0);
+	//const [discount, setDiscount] = useState<number>(0);
+	//const [number, setNumber] = useState<number>(0);
 	const [categoryName, setCategoryName] = useState<string>("");
-	const [, setCategoryId] = useState(product?.category_id || "");
+	//const [, setCategoryId] = useState(product?.category_id || "");
 	// const handleCategoryChange = (newValue: string) => {
 	// 	setCategoryId(newValue);
 	// 	onCategoryChange(newValue);
 	// };
 
-	useEffect(() => {
-		if (product) {
-			setName(product.name ?? "");
-			setCode(product.code ?? "");
-			setPrice(product.price ?? 0);
-			setDiscount(product.discount ?? 0);
-			setNumber(product.number ?? 0);
-			setCategoryId(product.category_id || "");
-		}
-	}, [product]);
+	// useEffect(() => {
+	// 	if (product) {
+	// 		setName(product.name ?? "");
+	// 		setCode(product.code ?? "");
+	// 		setPrice(product.price ?? 0);
+	// 		setDiscount(product.discount ?? 0);
+	// 		setNumber(product.number ?? 0);
+	// 		setCategoryId(product.category_id || "");
+	// 	}
+	// }, [product]);
 
 	useEffect(() => {
 		if (product?.category_id) {
@@ -53,7 +53,7 @@ export default function GeneralInfo({ product, onCategoryChange }: Props) {
 					setCategoryName("Unknown category");
 				});
 		}
-	}, [API_SERVER, product?.category_id]);
+	}, [API_SERVER, product.category_id]);
 
 	//console.log(product)
 	//console.log(product?.name)
@@ -72,8 +72,8 @@ export default function GeneralInfo({ product, onCategoryChange }: Props) {
 				<input
 					type="text"
 					placeholder="Enter product name"
-					value={name}
-					onChange={e => setName(e.target.value)}
+					value={product.name}
+					onChange={(e) => onChange({ name: e.target.value })}
 				/>
 			</fieldset>
 
@@ -83,8 +83,8 @@ export default function GeneralInfo({ product, onCategoryChange }: Props) {
 				<input
 					type="text"
 					placeholder="Enter product code"
-					value={code}
-					onChange={e => setCode(e.target.value)}
+					value={product.code}
+					onChange={(e) => onChange({ code: e.target.value })}
 				/>
 			</fieldset>
 
@@ -151,30 +151,30 @@ export default function GeneralInfo({ product, onCategoryChange }: Props) {
 			<fieldset className={`${commonStyles.inputWrapper} ${styles.inputName}`}>
 				<legend>Price, $</legend>
 				<input
-					type="text"
+					type="number"
 					placeholder="Enter product price"
-					value={price}
-					onChange={e => setPrice(Number(e.target.value))}
+					value={product.price}
+					onChange={(e) => onChange({ price: Number(e.target.value) })}
 				/>
 			</fieldset>
 
 			<fieldset className={`${commonStyles.inputWrapper} ${styles.inputName}`}>
 				<legend>Discount, %</legend>
 				<input
-					type="text"
+					type="number"
 					placeholder="Enter product discount"
-					value={discount}
-					onChange={e => setDiscount(Number(e.target.value))}
+					value={product.discount}
+					onChange={(e) => onChange({ discount: Number(e.target.value) })}
 				/>
 			</fieldset>
 
 			<fieldset className={`${commonStyles.inputWrapper} ${styles.inputName}`}>
 				<legend>Number</legend>
 				<input
-					type="text"
+					type="number"
 					placeholder="Enter quantity of your product"
-					value={number}
-					onChange={e => setNumber(Number(e.target.value))}
+					value={product.number}
+					onChange={(e) => onChange({ number: Number(e.target.value) })}
 				/>
 			</fieldset>
 

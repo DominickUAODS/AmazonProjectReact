@@ -1,35 +1,34 @@
-import { useState } from "react";
-import type { ProductFeature, ProductFromApi } from "./ProductCardAdmin";
+import type { ProductFeature } from "./ProductCardAdmin";
 import styles from "./AboutProduct.module.css"
 import commonStyles from "../../common.module.css";
 import OneAboutProductAdmin from "./OneAboutProductAdmin";
 
-export default function AboutProduct({ product }: { product: ProductFromApi | null }) {
-	//const API_SERVER = import.meta.env.VITE_API_SERVER;
-	const [feature, setFeature] = useState<ProductFeature[]>(product?.features || []);
+type Props = {
+	features: ProductFeature[]
+	onChange: (features: ProductFeature[]) => void;
+};
 
-	
+export default function AboutProduct({ features, onChange }: Props) {
+	//const features = product.features ?? [];
+
 	const handleNameChange = (index: number, name: string) => {
-		setFeature((prev) =>
-			prev.map((d, i) => (i === index ? { ...d, name: name } : d))
-		);
+		const updated = [...features];
+		updated[index] = { ...updated[index], name };
+		onChange(updated);
 	};
 
 	const handleDescriptionChange = (index: number, desc: string) => {
-		setFeature((prev) =>
-			prev.map((d, i) => (i === index ? { ...d, description: desc } : d))
-		);
+		const updated = [...features];
+		updated[index] = { ...updated[index], description: desc };
+		onChange(updated);
 	};
 
 	const handleAddFeature = () => {
-		setFeature((prev) => [
-			...prev,
-			{ name: "", description: "" },
-		]);
+		onChange([...features, { name: "", description: "" }]);
 	};
 
-	const handleDeteleFeature = (index: number) => {
-		setFeature(prev => prev.filter((_, i) => i !== index));
+	const handleDeleteFeature = (index: number) => {
+		onChange(features.filter((_, i) => i !== index));
 	};
 
 	return (
@@ -39,13 +38,13 @@ export default function AboutProduct({ product }: { product: ProductFromApi | nu
 			</div>
 
 			<div className={styles.addProductFeature}>
-				{feature.map((fea, index) => (
+				{features.map((fea, index) => (
 					<OneAboutProductAdmin
 						key={index}
 						feature={fea}
 						onNameChange={(name) => handleNameChange(index, name)}
-						onDescriptionChange={(desc)=> handleDescriptionChange(index, desc) }
-						onDelete={() => handleDeteleFeature(index)}
+						onDescriptionChange={(desc) => handleDescriptionChange(index, desc)}
+						onDelete={() => handleDeleteFeature(index)}
 					/>
 				))}
 

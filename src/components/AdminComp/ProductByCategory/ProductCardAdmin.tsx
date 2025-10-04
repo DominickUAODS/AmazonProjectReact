@@ -17,6 +17,7 @@ export type ProductDetail = {
 };
 
 export type ProductFromApi = {
+	id?: string;
 	name: string;
 	code: string;
 	category_id: string;

@@ -14,19 +14,27 @@ export default function EditCreateProduct() {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const { id: productId } = useParams();
 	const navigate = useNavigate();
-	const [product, setProduct] = useState<ProductFromApi | null>(null);
-	const [activeTab, setActiveTab] = useState<"general" | "details" | "about">("general");
 	const generalRef = useRef<HTMLDivElement>(null);
 	const detailsRef = useRef<HTMLDivElement>(null);
 	const aboutRef = useRef<HTMLDivElement>(null);
+	const [activeTab, setActiveTab] = useState<"general" | "details" | "about">("general");
+
+	const [product, setProduct] = useState<ProductFromApi>({
+		id: undefined,
+		name: "",
+		code: "",
+		price: 0,
+		discount: 0,
+		number: 0,
+		category_id: "",
+		displays: [],
+		details: [],
+		features: [],
+	});
 	const [categoryId, setCategoryId] = useState<string | undefined>(undefined);
 
-
 	useEffect(() => {
-		if (!productId) {
-			setProduct(null);
-			return;
-		}
+		if (!productId) return;
 
 		fetch(`${API_SERVER}/product/${productId}`)
 			.then(async (res) => {
@@ -45,11 +53,14 @@ export default function EditCreateProduct() {
 			})
 			.catch((err) => {
 				console.error("[EditCreateProduct] Ошибка при загрузке продукта:", err);
-				setProduct(null);
+				//setProduct(null);
 			});
 
 	}, [API_SERVER, productId]);
 
+	const updateProduct = (patch: Partial<ProductFromApi>) => {
+		setProduct((prev) => ({ ...prev, ...patch }));
+	};
 
 	const handleTabClick = (tab: "general" | "details" | "about") => {
 		setActiveTab(tab);
@@ -62,13 +73,37 @@ export default function EditCreateProduct() {
 		element?.scrollIntoView({ behavior: "smooth" });
 	};
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		if (productId) {
 			console.log("Сохраняем изменения продукта:", product);
-			// fetch(`${API_SERVER}/product/${productId}`, { method: "PUT", ... })
+
+			await fetch(`${API_SERVER}/product/${productId}`, {
+				method: "PUT",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(product),
+			})
+				.then(res => res.json())
+				.then(data => {
+					console.log("Обновлено:", data);
+					navigate(-1);
+				});
 		} else {
-			console.log("Создаём новый продукт:", product);
-			// fetch(`${API_SERVER}/product`, { method: "POST", ... })
+			//console.log("Создаём новый продукт:", product);
+			const payload = {
+				...product,
+				category_id: product.category_id || null,
+			}
+			console.log("Создаём новый продукт:", payload);
+			await fetch(`${API_SERVER}/product`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload),
+			})
+				.then(res => res.json())
+				.then(data => {
+					console.log("Создано:", data);
+					navigate(-1);
+				});
 		}
 	};
 
@@ -79,13 +114,13 @@ export default function EditCreateProduct() {
 
 			<div className={styles.tabContent}>
 				<div ref={generalRef}>
-					<GeneralInfo product={product} onCategoryChange={setCategoryId} />
+					<GeneralInfo product={product} onCategoryChange={setCategoryId} onChange={updateProduct} />
 				</div>
 				<div ref={detailsRef}>
-					<ProductDetails product={product} categoryId={categoryId} />
+					<ProductDetails details={product.details} categoryId={categoryId} onChange={(details) => updateProduct({ details })} />
 				</div>
 				<div ref={aboutRef}>
-					<AboutProduct product={product} />
+					<AboutProduct features={product.features} onChange={(features) => updateProduct({ features })} />
 				</div>
 			</div>
 
