@@ -7,10 +7,10 @@ export interface ProductsList {
 	name: string;
 	price: number;
 	discount: number | null;
-	display: string;
-	rating: number;
+	displays: string;
 	comments: number;
 	old_cost?: number;
+	stars:number;
 }
 
 export interface ProductDetail {

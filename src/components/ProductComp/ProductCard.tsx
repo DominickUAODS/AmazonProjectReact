@@ -4,15 +4,15 @@ import type { ProductsList } from '../../types/Product';
 import { Link } from 'react-router-dom';
 import type { ProductCardSize } from '../../types/Product';
 
-type ProductCardProps = ProductsList & {
+export type ProductCardProps = ProductsList & {
   card_size: ProductCardSize;
 };
 
-function ProductCard({ id, display, name, rating, comments, price, old_cost, card_size }: ProductCardProps) {
+function ProductCard({ id, stars, displays, name, comments, price, old_cost, card_size }: ProductCardProps) {
 	return (
 		<Link className={`product-card ${card_size === 'big' ? 'product-card-big' : ''} bg-objects`} to={`/product/${id}`}>
 			<div className='product-card-image-frame'>
-				<img src={display} alt={name} />
+				<img src={displays} alt={name} />
 				{old_cost && <>
 					<ReactSVG className='product-card-discount-icon logo-primary' src='/img/discount_bubble.svg' />
 					<span className={`product-card-discount-percent text-minor ${card_size === 'big' ? 'text-1' : 'text-5'}`}>-{Math.round(((old_cost - price) / old_cost) * 100)}%</span>
@@ -22,7 +22,7 @@ function ProductCard({ id, display, name, rating, comments, price, old_cost, car
 			<div className='product-card-stats'>
 				<div className='product-card-stat-container'>
 					<ReactSVG className='product-card-stat-icon icon-minor-text logo-minor-text' src='/icons/star_full.svg' />
-					<span className={`product-card-stat text-minor ${card_size === 'big' ? 'text-2' : 'text-5'}`}>{Math.round(rating)}</span>
+					<span className={`product-card-stat text-minor ${card_size === 'big' ? 'text-2' : 'text-5'}`}>{Math.round(stars)}</span>
 				</div>
 				<div className='product-card-stat-container'>
 					<ReactSVG className='product-card-stat-icon icon-minor-text' src='/icons/comments.svg' />

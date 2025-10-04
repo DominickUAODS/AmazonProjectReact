@@ -103,10 +103,10 @@ function ProductLine({ type, pageSize }: Params) {
 					{products.map((value) =>
 						<ProductCard
 							key={value.id}
-							display={value.display}
+							displays={value.displays}
 							id={value.id}
 							name={value.name}
-							rating={value.rating}
+							stars={value.stars}
 							comments={value.comments}
 							price={value.price}
 							discount={value.discount}
