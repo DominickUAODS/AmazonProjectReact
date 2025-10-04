@@ -5,3 +5,14 @@
     border-bottom: 2.5px solid rgba(204, 221, 255, 1);
     padding-bottom: 48px;
 }
+
+@media (max-width: 400px) {
+    .ppfb{
+        display: flex;
+        gap:12px;
+        margin-bottom: 12px;
+        border-bottom: 2.5px solid rgba(204, 221, 255, 1);
+        padding-bottom: 12px;
+        flex-direction: column;
+    }
+}

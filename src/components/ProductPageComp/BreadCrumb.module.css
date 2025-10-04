@@ -2,6 +2,7 @@
     display: flex;
     max-height: 24px;
     align-items: center;
+    flex-wrap: wrap;
 
 }
 
@@ -13,4 +14,21 @@
     margin: 0 !important;
     text-align: center;
     margin-left:6px !important;
+}
+
+.onebread{
+    color:rgba(14, 32, 66, 1) !important;
+    text-decoration: none !important;
+    margin-left:6px !important;
+}
+
+@media (max-width: 400px) {
+    .onebread{
+        color:rgba(14, 32, 66, 1) !important;
+        text-decoration: none !important;
+        margin-left:4px !important;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.3px;
+    }
 }

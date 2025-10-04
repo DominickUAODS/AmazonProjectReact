@@ -110,9 +110,7 @@ function ProductLine({ type, pageSize }: Params) {
 							comments={value.comments}
 							price={value.price}
 							discount={value.discount}
-							old_cost={value.discount ? value.price + value.discount : undefined} 
-							card_size={'small'} 
-						/>
+							old_cost={value.discount ? value.price + value.discount : undefined} card_size={'small'} />
 					)}
 				</div>
 

@@ -27,19 +27,41 @@ export default function ProductPage() {
 
 	useEffect(() => {
 		async function fetchProduct() {
-			try {
-				const res = await fetch(`${API_SERVER}/product/${id}`);
-				if (!res.ok) throw new Error("Failed to fetch product");
-				const data = await res.json();
-				setProduct(data);
-			} catch (err) {
-				console.error(err);
-			} finally {
-				setLoading(false);
+		  console.log("[fetchProduct] start");
+		  console.log("[fetchProduct] id:", id);
+		  console.log("[fetchProduct] API_SERVER:", API_SERVER);
+		  console.log("[fetchProduct] url:", `${API_SERVER}/product/${id}`);
+	  
+		  try {
+			const res = await fetch(`${API_SERVER}/product/${id}`);
+	  
+			console.log("[fetchProduct] response status:", res.status);
+	  
+			if (!res.ok) {
+			  const text = await res.text();
+			  console.error("[fetchProduct] response not ok:", text);
+			  throw new Error("Failed to fetch product");
 			}
+	  
+			const data = await res.json();
+			console.log("[fetchProduct] response body:", data);
+	  
+			setProduct(data);
+		  } catch (err) {
+			console.error("[fetchProduct] error:", err);
+		  } finally {
+			console.log("[fetchProduct] finished");
+			setLoading(false);
+		  }
 		}
-		if (id) fetchProduct();
-	}, [id, API_SERVER]);
+	  
+		if (id) {
+		  console.log("[useEffect] id exists, calling fetchProduct()");
+		  fetchProduct();
+		} else {
+		  console.warn("[useEffect] id is missing!");
+		}
+	  }, [id, API_SERVER]);
 
 	useEffect(() => {
 		fetch(`${API_SERVER}/category`)

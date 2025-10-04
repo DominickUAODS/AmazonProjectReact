@@ -46,3 +46,13 @@
 .cBlock > div:last-of-type {
     border-bottom: none;
 }
+
+@media (max-width: 400px) {
+    .sorting{
+        height: auto;
+        justify-content: flex-start;
+        width: auto;
+        gap:12px;
+    }
+       
+}

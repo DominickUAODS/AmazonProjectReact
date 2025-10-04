@@ -18,8 +18,8 @@ export default function GeneralInfo({ product, onCategoryChange, onChange }: Pro
 	//const [price, setPrice] = useState<number>(0);
 	//const [discount, setDiscount] = useState<number>(0);
 	//const [number, setNumber] = useState<number>(0);
-	const [categoryName, setCategoryName] = useState<string>("");
-	//const [, setCategoryId] = useState(product?.category_id || "");
+	const [, setCategoryName] = useState<string>("");
+	const [categoryId, setCategoryId] = useState(product?.category_id || "");
 	// const handleCategoryChange = (newValue: string) => {
 	// 	setCategoryId(newValue);
 	// 	onCategoryChange(newValue);
@@ -92,9 +92,13 @@ export default function GeneralInfo({ product, onCategoryChange, onChange }: Pro
 			{/* Category dropdown */}
 			<AllCategoriesDropDown
 				isLegend={true}
-				my_value={categoryName}
-				onChange={(value) => onCategoryChange(value)}
-			/>
+				my_value={categoryId}
+				//my_value={categoryName}   
+				onChange={(value) => {
+					setCategoryId(value);       
+					onCategoryChange(value);   
+				}}
+				/>
 
 
 			<div className={styles.photoBlock}>

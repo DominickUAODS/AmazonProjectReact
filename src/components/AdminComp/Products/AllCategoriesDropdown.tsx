@@ -115,7 +115,11 @@ export default function AllCategoriesDropDown({ isLegend, my_value, onChange }: 
 			</div>
 		);
 	};
-
+	const selectedCategory = categories
+	.flatMap(function collect(c: CategoryWithSubs): CategoryWithSubs[] {
+	  return [c, ...c.subcategories.flatMap(collect)];
+	})
+	.find(c => c.id === my_value);
 
 	return (
 		<div className={styles.allCatDropDown}>
@@ -125,8 +129,7 @@ export default function AllCategoriesDropDown({ isLegend, my_value, onChange }: 
 					<input
 						type="text"
 						placeholder="Enter category name"
-						value={my_value || ""}
-						readOnly
+						value={selectedCategory?.name || ""} 
 					/>
 					<div
 						className={styles.openArrow}

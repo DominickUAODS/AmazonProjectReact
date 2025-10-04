@@ -29,3 +29,17 @@
     display: flex;
     gap:24px;
 }
+
+@media (max-width: 400px) {
+    .ppcb{
+        flex-direction: column;
+    }
+
+    .ppcb0{
+        flex-direction: column;
+    }
+
+    .ppcbB{
+        flex-direction: column;
+    }
+}

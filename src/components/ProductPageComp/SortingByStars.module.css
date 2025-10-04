@@ -15,3 +15,25 @@
 .sortingByStars button.active{
     background-color: rgba(204, 221, 255, 1);
 }
+
+@media (max-width: 400px) {
+    .sortingByStars button{
+        display: flex !important;
+        height: 36px;
+        width: 65px;
+        justify-content: center;
+        align-items: center;
+        gap:2px;
+        flex: 0 0 auto;
+
+       }
+
+       .sortingByStars{
+        gap:6px;
+        width:206px;
+        overflow-x: auto;     /* включаем горизонтальный скролл */
+        overflow-y: hidden;   /* убираем вертикальный */
+        scrollbar-width: none; 
+       }
+       
+}

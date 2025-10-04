@@ -134,13 +134,10 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, onEdit, onDelete 
 				</button>
 			</div>
 			<DeleteCategory
-				show={showModal}
-				onClose={() => setShowModal(false)}
-				parentId={category?.id ?? pendingParentId ?? null}
-				onConfirmDelete={() => {
-					onDelete(category.id);
-					setShowModal(false);
-				}}
+			show={showModal}
+			onClose={() => setShowModal(false)}
+			addSpan={isSubcategory ? "You can't restore this category and its subcategories; the products will be deactivated." : "You can't recover categories, subcategories; products will be deactivated."}
+			onDelete={handleDeleteClick}
 			/>
 		</div>
 	);

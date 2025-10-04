@@ -39,7 +39,7 @@ export default function BreadCrumb({ category, categoriesMap }: BreadCrumbProps)
 
 			{breadcrumbs.map((crumb, idx) => (
 				<span key={crumb.id}>
-					<Link to={`/catalog/${crumb.id}`}>{crumb.name}</Link>
+					<Link className={styles.onebread} to={`/catalog/${crumb.id}`}>{crumb.name}</Link>
 					{idx < breadcrumbs.length - 1 && <span>  /  </span>}
 				</span>
 			))}
