@@ -11,6 +11,8 @@ export interface ProductsList {
 	comments: number;
 	old_cost?: number;
 	stars:number;
+	rating?:number | 0;
+	display?:string;
 }
 
 export interface ProductDetail {

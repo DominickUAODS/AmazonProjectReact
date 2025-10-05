@@ -420,4 +420,33 @@
 		width:100%;
 		min-width: 0 !important;
 	}
+
+	.modal{
+		max-width: 390px;
+		max-height: 618px;
+		padding: 16px;
+	}
+
+	.infoSpan0{
+		font-size: 24px;
+		line-height: 28px;
+		font-weight: 500;
+	}
+
+	.infoSpan1{
+		font-size: 16px;
+		line-height: 20px;
+		font-weight: 400;
+	}
+
+	.inputWrapper{
+		padding: 10px 20px !important;
+	}
+
+	.nextStepButton{
+		padding: 8px 24px;
+		height: 40px;
+		max-width: 310px;
+
+	}
 }

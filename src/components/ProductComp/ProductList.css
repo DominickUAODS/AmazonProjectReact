@@ -147,7 +147,8 @@
 }
 
 
-.option-value input[type="checkbox"] {
+.option-value input[type="checkbox"],
+.rating-filter input[type="checkbox"] {
     appearance: none;
     width: 20px;
     height: 20px;
@@ -159,7 +160,8 @@
     outline: none;
 }
   
-.option-value input[type="checkbox"]:checked {
+.option-value input[type="checkbox"]:checked,
+.rating-filter input[type="checkbox"]:checked {
     background-color: rgba(184, 234, 72, 1);
     border-color: rgba(184, 234, 72, 1);
 }
@@ -214,4 +216,207 @@
 
 .product-list select{
     background-color: transparent;
+}
+
+
+.custom-select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 220px;
+}
+
+.custom-select-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px 20px;
+    background: transparent;
+    border: 2px solid rgba(14, 32, 66, 0.5);;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.custom-select-header:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.arrow {
+    transition: transform 0.2s;
+}
+
+.arrow.open {
+    transform: rotate(180deg);
+}
+
+.custom-select-list {
+    display: flex;
+    flex-direction: column;
+    gap:14px;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 2px solid rgba(14, 32, 66, 0.5);
+    border-radius: 8px;
+    box-shadow: 0 4px 16px 0 rgba(8, 8, 8, 0.25);
+    max-height: 180px;
+    overflow-y: auto;
+    padding: 20px;
+    z-index: 10;
+}
+
+.custom-select-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 20px;
+    background-color: rgba(224, 235, 255, 1);
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.custom-select-item:hover {
+    background: #f0f0f0;
+}
+
+.remove-btn {
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 14px;
+    cursor: pointer;
+    padding-right: 0;
+}
+
+.remove-btn:hover {
+    color: #333;
+}
+
+.tags-in-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap:4px;
+    padding-bottom: 14px;
+    border-bottom: 1.5px solid rgba(204, 221, 255, 1);
+}
+
+.price-inputs-button{
+    width: 334px;
+    display: flex;
+    justify-content: space-between;
+}
+.price-inputs{
+    display: flex;
+    gap:12px;
+
+}
+
+.input-min-max{
+    max-width: 80px;
+    height: 40px;
+    padding: 8px 12px !important;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.3px;
+    color:rgba(14, 32, 66, 1) !important;
+    font-family: 'Mulish';
+    box-sizing: border-box;
+    text-align: center;
+    background-color: rgba(244, 250, 255, 1) !important;
+    border: 2px solid rgba(14, 32, 66, 0.5) !important;
+
+}
+.price-filter input[type="range"] {
+    width: 334px;
+    height: 20px;
+    accent-color: rgba(184, 234, 72, 1);
+  }
+  
+  .price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .save-btn {
+    background-color: rgba(184, 234, 72, 1);
+    border: none;
+    padding: 8px 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 80px;
+  }
+  
+  .rating-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 4px 0;
+  }
+  
+  .star {
+    font-size: 18px;
+    color: #ccc;
+  }
+  
+  .star.filled {
+    color: #0E2042;
+  }
+  
+
+  .slider-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+input[type="range"] {
+    position: absolute;
+    width: 100%;
+    border: none;
+    pointer-events: none;
+    -webkit-appearance: none;
+    background: transparent;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    pointer-events: all;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #0E2042;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+.slider {
+    position: absolute;
+    top: 18px;
+    height: 8px;
+    width: 100%;
+}
+
+.slider-track {
+    position: absolute;
+    height: 8px;
+    width: 100%;
+    background: rgba(14, 32, 66, 1);
+    border-radius: 24px;
+}
+
+.slider-range {
+    position: absolute;
+    height: 8px;
+    background: rgba(141, 211, 52, 1);
+    max-width: 334px;
+}
+
+.thumb .thumb--right{
+    background: rgba(141, 211, 52, 1);
 }

@@ -29,3 +29,24 @@
 .tAp{
     margin-top: 32px;
 }
+
+
+
+@media (max-width: 400px) {
+    img{
+        display:none;
+    }
+
+    .modalSignUpBlock{
+        margin-top: 42px;
+    }
+    .modalSignUpBlock0{
+        padding: 0;
+    }
+
+    .tAp{
+        margin-top: 12px;
+        font-size: 12px;
+        line-height: 16px;
+    }
+}
