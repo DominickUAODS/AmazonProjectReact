@@ -1,16 +1,51 @@
 import styles from './CartModal.module.css';
 import commonStyles from '../common.module.css';
-import products from '../../data/product.json';
 import CartModalProduct from './CartModalProduct';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getCart } from './CartHelpers';
 
 type CartModalProps = {
     onClose: () => void;
 };
 
 export default function CartModal({onClose}: CartModalProps) {
-    const [isBottom, setIsBottom] = useState(false);
-    const [isTop, setIsTop] = useState(true);
+    const [isBottom, setIsBottom] = useState<boolean>(false);
+    const [isTop, setIsTop] = useState<boolean>(true);
+    const [cart, setCart] = useState<Record<string, number>>({});
+    const [cartProducts, setCartProducts] = useState<any[]>([]);
+    const [totalPrice, setTotalPrice] = useState<number>(0);
+
+    useEffect(() => {
+        setCart(getCart());
+        console.log('Cart from localStorage:', getCart());
+    }, []);
+
+    useEffect(() => {
+        async function loadProducts() {
+            const newCartProducts = await Promise.all(
+                Object.keys(cart).map(async (productId) => {
+                    const response = await fetch(`${import.meta.env.VITE_API_SERVER}/product/${productId}`);
+                    const data = await response.json();
+                    console.log(data);
+                    return {
+                        id: data.id,
+                        title: data.title,
+                        image: data.images[0],
+                        price: data.price,
+                        quantity: cart[productId],
+                    };
+                })
+            );
+            setCartProducts(newCartProducts);
+            setTotalPrice(
+                newCartProducts.reduce((total, product) => total + product.price * product.quantity, 0)
+            );
+        }
+        if (Object.keys(cart).length > 0) {
+            loadProducts();
+        }
+        console.log('Cart from [cart, setCart]:', cart);
+    }, [cart]);
 
     const onScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
         if (e.currentTarget.scrollTop === 0) {
@@ -48,14 +83,15 @@ export default function CartModal({onClose}: CartModalProps) {
                     </div>
                     <hr className={isTop ? styles.firstHr : styles.bottomShadow} />
                     <div className={styles.productsInCart} onScroll={onScroll}>
-                        {products.slice(0, 10).map((product: any, i: number) => (
+                        {cartProducts.map((product: any, i: number) => (
                             <CartModalProduct
                                 key={i}
-                                id={0}
+                                id={product.id}
                                 title={product.title}
                                 image={product.image}
                                 cost={product.price}
-                                quantity={1}
+                                quantity={product.quantity}
+                                setCart={setCart}
                                 />
                         ))}
                     </div>
@@ -64,7 +100,7 @@ export default function CartModal({onClose}: CartModalProps) {
                         <button onClick={onClose} className={commonStyles.secondaryButton}>Continue shopping</button>
                         <div className={styles.checkoutGap} />
                         <span className='header-2'>Total:</span>
-                        <span className='header-2'>${999}<sup>99</sup></span>
+                        <span className='header-2'>${Math.floor(totalPrice)}<sup>{Math.round((totalPrice % 1) * 100)}</sup></span>
                         <button className={commonStyles.nextStepButton}>Checkout</button>
                     </div>
                 </div>

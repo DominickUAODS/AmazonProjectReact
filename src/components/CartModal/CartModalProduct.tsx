@@ -1,17 +1,16 @@
-import { useState } from 'react';
 import styles from './CartModalProduct.module.css';
+import { addToCart, removeFromCart } from './CartHelpers';
 
 type CartModalProductProps = {
-    id: number;
+    id: string;
     title: string;
     image: string;
     cost: number;
     quantity: number;
+    setCart: React.Dispatch<React.SetStateAction<Record<string, number>>>;
 }
 
 export default function CartModalProduct(product: CartModalProductProps) {
-    const [count, setCount] = useState(product.quantity);
-
     return (
         <div className={styles.cartProductFrame}>
             <img src={product.image} alt='image' className={styles.cartProductImage} />
@@ -23,11 +22,11 @@ export default function CartModalProduct(product: CartModalProductProps) {
                     <path d="M15.5 7.1002V6.7002C15.5 5.1002 16.8 3.7002 18.5 3.7002H21.6C23.2 3.7002 24.6 5.0002 24.6 6.7002V7.1002" stroke="#0E2042" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 <div className={styles.cartProductQuantityChange}>
-                    <svg onClick={() => setCount(prev => Math.max(1, prev - 1))} width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg onClick={() => product.setCart(removeFromCart(product.id))} width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 19.9399H35" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    {count}
-                    <svg onClick={() => setCount(prev => prev + 1)} width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {product.quantity}
+                    <svg onClick={() => product.setCart(addToCart(product.id))} width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 4.93994V17.4299" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M34.9998 19.9399H22.5098" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M5 19.9399H17.49C18.88 19.9399 20 21.0599 20 22.4499V34.9399" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -35,11 +34,11 @@ export default function CartModalProduct(product: CartModalProductProps) {
                 </div>
                 <div className={styles.cartProductCalculatedCost}>
                     <div>
-                        <span className='text-3'>${Math.floor(product.cost * count)}</span>
-                        <sup className='text-3'>{Math.round(((product.cost * count) % 1) * 100)}</sup>
+                        <span className='text-3'>${Math.floor(product.cost * product.quantity)}</span>
+                        <sup className='text-3'>{Math.round(((product.cost * product.quantity) % 1) * 100)}</sup>
                     </div>
                     <div className={styles.cartProductCalculatedUnitCost}>
-                        <span className='text-5'>{count} x ${Math.floor(product.cost)}</span>
+                        <span className='text-5'>{product.quantity} x ${Math.floor(product.cost)}</span>
                         <sup className='text-5'>{Math.round(((product.cost) % 1) * 100)}</sup>
                     </div>
                 </div>
