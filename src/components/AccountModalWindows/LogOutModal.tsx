@@ -4,11 +4,10 @@ import commonStyles from '../common.module.css';
 import { useAuth } from '../Helpers/AuthContext';
 import { useState } from 'react';
 
-
 export default function LogOutModal() {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const navigate = useNavigate();
-	const { accessToken, refreshToken, logout } = useAuth();
+	const { accessToken, refreshToken, logout, authFetch } = useAuth();
 	const closeModal = () => navigate("/settings");
 
 	const [errors, setErrors] = useState<{ general?: string }>({});
@@ -30,7 +29,7 @@ export default function LogOutModal() {
 		}
 
 		try {
-			const response = await fetch(`${API_SERVER}/auth/logout`, {
+			const response = await authFetch(`${API_SERVER}/auth/logout`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${accessToken}` },
 				body: JSON.stringify({ refresh_token: refreshToken }),

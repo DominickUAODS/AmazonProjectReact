@@ -8,10 +8,12 @@ interface FiltersProps {
 	setSearch: (value: string) => void;
 }
 
-const Filters: React.FC<FiltersProps> = ({ roleFilter, setRoleFilter, search, setSearch}) => {
+const Filters: React.FC<FiltersProps> = ({ roleFilter, setRoleFilter, search, setSearch }) => {
 	return (
 		<div className={styles.filters}>
 			<select
+				id="roleFilter"
+				name="role"
 				value={roleFilter}
 				onChange={(e) => setRoleFilter(e.target.value as FiltersProps['roleFilter'])}
 				className={styles.select}
@@ -21,6 +23,8 @@ const Filters: React.FC<FiltersProps> = ({ roleFilter, setRoleFilter, search, se
 				<option value="Customer">Customer</option>
 			</select>
 			<input
+				id="searchInput"
+				name="search"
 				type="text"
 				placeholder="Search..."
 				className={styles.input}

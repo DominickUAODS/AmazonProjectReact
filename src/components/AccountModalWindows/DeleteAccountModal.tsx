@@ -4,13 +4,11 @@ import styles from './DeleteAccountModal.module.css'
 import commonStyles from '../common.module.css';
 import { useAuth } from '../Helpers/AuthContext';
 
-
 export default function DeleteAccountModal() {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const navigate = useNavigate();
 	const closeModal = () => navigate("/settings");
-	const { accessToken, logout } = useAuth();
-
+	const { accessToken, logout, authFetch } = useAuth();
 	const [errors, setErrors] = useState<{ general?: string }>({});
 
 	let staySignedIn = false;
@@ -41,7 +39,7 @@ export default function DeleteAccountModal() {
 		}
 
 		try {
-			const response = await fetch(`${API_SERVER}/users/${user.id}`, {
+			const response = await authFetch(`${API_SERVER}/users/${user.id}`, {
 				method: 'DELETE',
 				headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${accessToken}` },
 			});
@@ -59,7 +57,6 @@ export default function DeleteAccountModal() {
 			setErrors({ general: 'Ошибка подключения к серверу' });
 		}
 	}
-
 
 	return (
 		<div className={commonStyles.modalBackdrop}>

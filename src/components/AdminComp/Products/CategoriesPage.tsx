@@ -54,7 +54,7 @@ const CategoriesPage = () => {
 					url += `query=${encodeURIComponent(debouncedSearch)}&`;
 				}
 				if (categoryFilter) {
-					url += `parentId=${categoryFilter}&`;
+					url += `ParentId=${categoryFilter}&`;
 				}
 				url = url.replace(/&$/, "");
 			}
@@ -245,7 +245,7 @@ const CategoriesPage = () => {
 				property_keys: data.propertyKeys || [],
 			};
 
-			console.log(`payload: ${payload}`);
+			console.log(`payload: ${data.propertyKeys}`);
 			console.log(modalCategory?.id)
 
 			if (modalCategory) {

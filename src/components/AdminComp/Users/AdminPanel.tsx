@@ -15,70 +15,67 @@ export type ColumnVisibility = {
 	email: boolean;
 };
 
-
 const AdminPanel = () => {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const PAGE_SIZE = Number(import.meta.env.VITE_PAGE_SIZE);
 	const SEARCH_DEBOUNCE = Number(import.meta.env.VITE_SEARCH_DEBOUNCE);
+	//const pageSize = import.meta.env.VITE_CHANKE_SIZE;
 	const [users, setUsers] = useState<UserType[]>([]);
 	const [roleFilter, setRoleFilter] = useState<'All' | 'Customer' | 'Administrator'>('All');
 	const [search, setSearch] = useState<string>('');
 	const [columns, setColumns] = useState<ColumnVisibility>({ status: true, registered: true, email: true, });
 	const [selectedUserIds, setSelectedUserIds] = useState<Set<string>>(new Set());
-
 	const [currentPage, setCurrentPage] = useState<number>(1);
-
 	const [debouncedSearch, setDebouncedSearch] = useState<string>('');
-
 	const { accessToken, authFetch } = useAuth();
-
 	const [modalOpen, setModalOpen] = useState(false);
 	const [modalAction, setModalAction] = useState<"delete" | "restore" | null>(null);
-
-
-	useEffect(() => {
-		const timeout = setTimeout(() => setDebouncedSearch(search), SEARCH_DEBOUNCE);
-		return () => clearTimeout(timeout);
-	}, [search, SEARCH_DEBOUNCE]);
-
-	// useEffect(() => {
-	// 	const timeout = setTimeout(() => setRoleFilter(roleFilter), SEARCH_DEBOUNCE);
-	// 	return () => clearTimeout(timeout);
-	// }, [roleFilter, SEARCH_DEBOUNCE]);
-
 
 	useEffect(() => {
 		const fetchUsers = async () => {
 			try {
 				const params = new URLSearchParams();
-				if (roleFilter !== 'All') params.append('role', roleFilter);
-				if (debouncedSearch) params.append('search', debouncedSearch);
 
-				const url = `${API_SERVER}/users?${params.toString()}`;
+				// Поиск
+				if (debouncedSearch) params.append('Search', debouncedSearch);
+
+				// Фильтр по роли
+				if (roleFilter && roleFilter !== 'All') params.append('Role', roleFilter);
+
+				// Пагинация — можно сохранять в state или всегда page=1 при изменении фильтров
+				//params.append('Page', String(currentPage));
+				//params.append('PageSize', String(PAGE_SIZE)); // или любое значение, которое нужно
+
+				const url = `${API_SERVER}/Users?${params.toString()}`;
+				//console.log("Fetching users:", url);
+
 				const response = await authFetch(url, {
-					headers: { Authorization: `Bearer ${accessToken}` }
+					headers: { Authorization: `Bearer ${accessToken}` },
 				});
 
 				const data: UserType[] = await response.json();
 
 				setUsers(
-					data.map((u) => ({
+					data.map(u => ({
 						...u,
 						id: String(u.id),
 						status: u.isActive ? 'Active' : 'Deleted',
 					}))
 				);
 
-				setCurrentPage(1);
+				setCurrentPage(1); // сброс на первую страницу при изменении фильтров
 			} catch (err) {
-				console.error(err);
+				console.error("Error fetching users:", err);
 			}
 		};
 
 		fetchUsers();
-	}, [API_SERVER, accessToken, authFetch, debouncedSearch, roleFilter]);
+	}, [API_SERVER, accessToken, authFetch, debouncedSearch, roleFilter])
 
-
+	useEffect(() => {
+		const timeout = setTimeout(() => setDebouncedSearch(search), SEARCH_DEBOUNCE);
+		return () => clearTimeout(timeout);
+	}, [search, SEARCH_DEBOUNCE]);
 
 	const toggleUserSelect = (id: string) => {
 		setSelectedUserIds((prev) => {
@@ -94,18 +91,6 @@ const AdminPanel = () => {
 		setModalAction(action);
 		setModalOpen(true);
 	};
-
-
-	// const handleBulkAction = (action: 'delete' | 'deactivate' | 'restore') => {
-	// 	setUsers((prev) =>
-	// 		prev.map((u) =>
-	// 			selectedUserIds.has(u.id)
-	// 				? { ...u, status: action === 'delete' || action === 'deactivate' ? 'Deleted' : 'Active' }
-	// 				: u
-	// 		)
-	// 	);
-	// 	setSelectedUserIds(new Set());
-	// };
 
 	const handleConfirmAction = async () => {
 		if (!modalAction) return;
@@ -149,20 +134,10 @@ const AdminPanel = () => {
 
 
 	const handleUserAction = async (userId: string, action: 'toggleRole' | 'toggleStatus') => {
-		// setUsers((prev) =>
-		// 	prev.map((u) => {
-		// 		if (u.id !== userId) return u;
-		// 		if (action === 'toggleRole') return { ...u, role: u.role === 'Administrator' ? 'Customer' : 'Administrator' };
-		// 		if (action === 'toggleStatus') return { ...u, status: u.isActive ? 'Active' : 'Deleted' };
-		// 		return u;
-		// 	})
-		// );
 		try {
 			// Найдем пользователя в текущем списке
 			const user = users.find(u => u.id === userId);
 			if (!user) return;
-
-			console.log(userId);
 
 			let togglePath = '';
 			if (action === 'toggleRole') {
@@ -191,11 +166,8 @@ const AdminPanel = () => {
 		}
 	};
 
-
 	const totalPages = Math.ceil(users.length / PAGE_SIZE);
 	const paginatedUsers = users.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
-
-	//console.log(setSearch)
 
 	return (
 		<div className={styles.panel}>
@@ -231,7 +203,6 @@ const AdminPanel = () => {
 				onConfirm={handleConfirmAction}
 				onCancel={() => setModalOpen(false)}
 			/>
-
 
 		</div>
 	);

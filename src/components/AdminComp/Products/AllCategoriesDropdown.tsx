@@ -126,7 +126,7 @@ export default function AllCategoriesDropDown({ isLegend, my_value, onChange }: 
 					<input
 						type="text"
 						placeholder="Enter category name"
-						value={selectedCategory?.name || ""}
+						defaultValue={selectedCategory?.name || ""}
 					/>
 					<div
 						className={styles.openArrow}

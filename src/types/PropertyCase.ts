@@ -1,5 +1,4 @@
 export type PropertyKeyType = {
-    id?: string;
-    name: string;
+	property_key_id?: string;
+	property_key: string;
 }
-  

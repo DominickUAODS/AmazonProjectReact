@@ -51,8 +51,8 @@ export default function GeneralInfo({ product, onCategoryChange, onChange }: Pro
 
 
 
-	console.log("categoryId")
-	console.log(categoryId)
+	// console.log("categoryId")
+	// console.log(categoryId)
 
 	useEffect(() => {
 		if (product?.category_id) {

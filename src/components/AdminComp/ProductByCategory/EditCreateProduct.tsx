@@ -77,7 +77,7 @@ export default function EditCreateProduct() {
 		if (productId) {
 			const payload = {
 				...product,
-				category_id: product.category_id || null,
+				category_id: categoryId || null,
 			}
 			console.log("Сохраняем изменения продукта:", product);
 
@@ -95,7 +95,7 @@ export default function EditCreateProduct() {
 			//console.log("Создаём новый продукт:", product);
 			const payload = {
 				...product,
-				category_id: product.category_id || null,
+				category_id: categoryId || null,
 			}
 			console.log("Создаём новый продукт:", payload);
 			await fetch(`${API_SERVER}/product`, {
@@ -110,6 +110,8 @@ export default function EditCreateProduct() {
 				});
 		}
 	};
+console.log("setCategoryId");
+	console.log(categoryId);
 
 	return (
 		<div className={cmStyles.panel}>

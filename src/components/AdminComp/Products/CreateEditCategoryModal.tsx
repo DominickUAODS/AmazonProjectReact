@@ -41,12 +41,12 @@ const CreateEditCategoryModal: React.FC<CreateEditCategoryModalProps> = ({ show,
 
 
 	const addPropertyKey = () => {
-		setPropertyKeys(prev => [...prev, { name: "" }]);
+		setPropertyKeys(prev => [...prev, { property_key: "" }]);
 	};
 
 	const handlePropertyKeyChange = (index: number, newName: string) => {
 		setPropertyKeys(prev =>
-			prev.map((pk, i) => (i === index ? { ...pk, name: newName } : pk))
+			prev.map((pk, i) => (i === index ? { ...pk, property_key: newName } : pk))
 		);
 	};
 
@@ -92,7 +92,7 @@ const CreateEditCategoryModal: React.FC<CreateEditCategoryModalProps> = ({ show,
 
 				setPropertyKeys(
 					(data.property_keys || []).map(pk =>
-						typeof pk === "string" ? { name: pk } : pk
+						typeof pk === "string" ? { property_key: pk } : pk
 					)
 				);
 
@@ -129,8 +129,8 @@ const CreateEditCategoryModal: React.FC<CreateEditCategoryModalProps> = ({ show,
 		}
 
 		const cleanedPropertyKeys = propertyKeys
-			.map(pk => ({ id: pk.id, name: (pk.name ?? "").trim() })) // безопасно
-			.filter(pk => pk.name !== "");
+			.map(pk => ({ property_key_id: pk.property_key_id, property_key: (pk.property_key ?? "").trim() })) // безопасно
+			.filter(pk => pk.property_key !== "");
 
 		// let resolvedParentId: string | null = null;
 
@@ -533,7 +533,7 @@ const CreateEditCategoryModal: React.FC<CreateEditCategoryModalProps> = ({ show,
 							<div className={styles.formGroup}>
 								<AllCategoriesDropDown
 									isLegend={true}
-									my_value={parentName || "Choose category"}
+									my_value={parentName ?? ""}
 									onChange={(value) => setParentName(value)}
 								/>
 							</div>
@@ -546,8 +546,8 @@ const CreateEditCategoryModal: React.FC<CreateEditCategoryModalProps> = ({ show,
 								<div className={styles.pkList}>
 									{propertyKeys.map((pk, idx) => (
 										<OnePropertyKey
-											key={pk.id ?? idx}
-											name={pk.name}
+											key={pk.property_key_id ?? idx}
+											name={pk.property_key}
 											isReadOnly={!category ? false : false}
 											// если всегда можно редактировать — оставляем false
 											// если при создании — редактируем, при редактировании — только просмотр:
