@@ -30,9 +30,13 @@
 
 .product-list-output-settings {
     display: flex;
+    flex-direction: row !important;
     align-items: center;
-    gap: 24px;
+    gap: 24px !important;
+    box-shadow: none !important;
     margin-bottom: 23px;
+    width: 100% !important;
+    padding: 0 !important;
 }
 
 .product-list-card-size-choice button {
@@ -75,4 +79,139 @@
 
 .product-list-filter-tags-select option:first-child {
     display: none;
+}
+
+
+.input-container{
+    width:382px;
+    max-height: 416px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 11.5px -5px rgba(32, 80, 173, 0.25);
+}
+
+.input-container label{
+    background-color: none;
+    color: none;
+    padding: 0;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.option-name{
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 28px;
+    color:rgba(14, 32, 66, 1);
+    letter-spacing: -0.3px;
+}
+
+.name-drop{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.option-values {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 272px; 
+    overflow-y: auto;
+    scrollbar-width: none; 
+}
+
+
+.option-value{
+    display: flex;
+    gap:8px;
+}
+
+.option-values::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+
+.option-values {
+    scroll-behavior: smooth;
+}
+
+.option-value input{
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+}
+
+
+.option-value input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    padding: 0 !important;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+    outline: none;
+}
+  
+.option-value input[type="checkbox"]:checked {
+    background-color: rgba(184, 234, 72, 1);
+    border-color: rgba(184, 234, 72, 1);
+}
+  
+.option-value input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+  
+.option-text {
+    user-select: none;
+}
+
+
+.input-search-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 334px; 
+}
+  
+.input-search-wrapper svg {
+    position: absolute;
+    left: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; 
+}
+  
+.input-search-wrapper input {
+    width: 100%;
+    padding: 8px 8px 8px 36px; 
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+}
+  
+.arrow.open {
+    transform: rotate(180deg);
+}
+
+.product-list select{
+    background-color: transparent;
 }

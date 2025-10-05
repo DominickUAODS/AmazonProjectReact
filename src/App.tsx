@@ -51,7 +51,7 @@ function App() {
 
 						{/* main pages */}
 						<Route index element={<Main />} />
-						<Route path="products" element={<ProductList />} />
+						<Route path="products/:id" element={<ProductList />} />
 						<Route path="product/:id" element={<ProductPage />} />
 
 						{/* private routes */}

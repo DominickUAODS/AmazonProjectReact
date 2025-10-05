@@ -59,6 +59,7 @@ export default function ProductCatalog(){
                             key={i}
                             name={f.name}
                             icon={f.icon ?? undefined}
+                            id={f.id}
                         />
                     ))}
                     {hasMore && (
