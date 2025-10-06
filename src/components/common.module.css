@@ -419,6 +419,7 @@
 	.fixedPagination{
 		width:100%;
 		min-width: 0 !important;
+		margin-left: 40%;
 	}
 
 	.modal{
