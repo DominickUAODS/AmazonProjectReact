@@ -17,7 +17,6 @@ export default function CartModal({onClose}: CartModalProps) {
 
     useEffect(() => {
         setCart(getCart());
-        console.log('Cart from localStorage:', getCart());
     }, []);
 
     useEffect(() => {
@@ -29,8 +28,8 @@ export default function CartModal({onClose}: CartModalProps) {
                     console.log(data);
                     return {
                         id: data.id,
-                        title: data.title,
-                        image: data.images[0],
+                        title: data.name,
+                        image: data.displays[0],
                         price: data.price,
                         quantity: cart[productId],
                     };
@@ -44,21 +43,25 @@ export default function CartModal({onClose}: CartModalProps) {
         if (Object.keys(cart).length > 0) {
             loadProducts();
         }
-        console.log('Cart from [cart, setCart]:', cart);
     }, [cart]);
 
     const onScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
-        if (e.currentTarget.scrollTop === 0) {
+        if (e.currentTarget.scrollHeight === e.currentTarget.clientHeight) {
+            setIsBottom(true);
+            setIsTop(true);
+        } else if (e.currentTarget.scrollTop === 0) {
             setIsTop(true);
             setIsBottom(false);
-        } else if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === e.currentTarget.clientHeight) {
+        } else if (e.currentTarget.scrollHeight - Math.round(e.currentTarget.scrollTop) === e.currentTarget.clientHeight) {
             setIsBottom(true);
             setIsTop(false);
         } else {
             setIsBottom(false);
             setIsTop(false);
         };
-        console.log(e.currentTarget.scrollTop)
+        console.log(e.currentTarget.scrollTop);
+        console.log(e.currentTarget.scrollHeight);
+        console.log(e.currentTarget.clientHeight);
     };
     
     return (
@@ -82,7 +85,7 @@ export default function CartModal({onClose}: CartModalProps) {
                         </svg>
                     </div>
                     <hr className={isTop ? styles.firstHr : styles.bottomShadow} />
-                    <div className={styles.productsInCart} onScroll={onScroll}>
+                    <div className={styles.productsInCart} onScroll={onScroll} onLoad={onScroll}>
                         {cartProducts.map((product: any, i: number) => (
                             <CartModalProduct
                                 key={i}
@@ -100,7 +103,7 @@ export default function CartModal({onClose}: CartModalProps) {
                         <button onClick={onClose} className={commonStyles.secondaryButton}>Continue shopping</button>
                         <div className={styles.checkoutGap} />
                         <span className='header-2'>Total:</span>
-                        <span className='header-2'>${Math.floor(totalPrice)}<sup>{Math.round((totalPrice % 1) * 100)}</sup></span>
+                        <span className='header-2'>${Math.floor(totalPrice)}<sup>{String(Math.round((totalPrice % 1) * 100)).padStart(2, '0')}</sup></span>
                         <button className={commonStyles.nextStepButton}>Checkout</button>
                     </div>
                 </div>

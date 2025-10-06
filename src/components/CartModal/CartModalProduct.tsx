@@ -35,11 +35,11 @@ export default function CartModalProduct(product: CartModalProductProps) {
                 <div className={styles.cartProductCalculatedCost}>
                     <div>
                         <span className='text-3'>${Math.floor(product.cost * product.quantity)}</span>
-                        <sup className='text-3'>{Math.round(((product.cost * product.quantity) % 1) * 100)}</sup>
+                        <sup className='text-3'>{String(Math.round(((product.cost * product.quantity) % 1) * 100)).padStart(2, '0')}</sup>
                     </div>
                     <div className={styles.cartProductCalculatedUnitCost}>
                         <span className='text-5'>{product.quantity} x ${Math.floor(product.cost)}</span>
-                        <sup className='text-5'>{Math.round(((product.cost) % 1) * 100)}</sup>
+                        <sup className='text-5'>{String(Math.round(((product.cost) % 1) * 100)).padStart(2, '0')}</sup>
                     </div>
                 </div>
             </div>
