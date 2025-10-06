@@ -3,6 +3,7 @@ import commonStyles from '../common.module.css';
 import CartModalProduct from './CartModalProduct';
 import { useEffect, useState } from 'react';
 import { getCart } from './CartHelpers';
+import { products } from '../../data (temp)/products';
 
 type CartModalProps = {
     onClose: () => void;
@@ -21,28 +22,38 @@ export default function CartModal({onClose}: CartModalProps) {
 
     useEffect(() => {
         async function loadProducts() {
-            const newCartProducts = await Promise.all(
-                Object.keys(cart).map(async (productId) => {
-                    const response = await fetch(`${import.meta.env.VITE_API_SERVER}/product/${productId}`);
-                    const data = await response.json();
-                    console.log(data);
+            let newCartProducts: any[];
+            if (Object.keys(cart).sort().join(',') !== cartProducts.map(product => product.id).sort().join(',')) {
+                newCartProducts = await Promise.all(
+                    Object.keys(cart).map(async (productId) => {
+                        const response = await fetch(`${import.meta.env.VITE_API_SERVER}/product/${productId}`);
+                        const data = await response.json();
+                        return {
+                            id: data.id,
+                            title: data.name,
+                            image: data.displays[0],
+                            price: data.price,
+                            quantity: cart[productId],
+                        };
+                    })
+                );
+            } else {
+                newCartProducts = cartProducts.map(product => {
                     return {
-                        id: data.id,
-                        title: data.name,
-                        image: data.displays[0],
-                        price: data.price,
-                        quantity: cart[productId],
+                        id: product.id,
+                        title: product.title,
+                        image: product.image,
+                        price: product.price,
+                        quantity: cart[product.id],
                     };
-                })
-            );
+                });
+            }
             setCartProducts(newCartProducts);
             setTotalPrice(
                 newCartProducts.reduce((total, product) => total + product.price * product.quantity, 0)
             );
         }
-        if (Object.keys(cart).length > 0) {
-            loadProducts();
-        }
+        loadProducts();
     }, [cart]);
 
     const onScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
@@ -59,9 +70,6 @@ export default function CartModal({onClose}: CartModalProps) {
             setIsBottom(false);
             setIsTop(false);
         };
-        console.log(e.currentTarget.scrollTop);
-        console.log(e.currentTarget.scrollHeight);
-        console.log(e.currentTarget.clientHeight);
     };
     
     return (
