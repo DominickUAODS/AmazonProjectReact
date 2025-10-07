@@ -10,7 +10,7 @@ export type ProductCardProps = ProductsList & {
 
 function ProductCard({ id, stars, displays, name, comments, price, old_cost, card_size }: ProductCardProps) {
 	return (
-		<Link className={`product-card ${card_size === 'big' ? 'product-card-big' : ''} bg-objects`} to={`/product/${id}`}>
+		<Link className={`product-card ${card_size === 'big' ? 'product-card-big' : 'product-card-small'} bg-objects`} to={`/product/${id}`}>
 			<div className='product-card-image-frame'>
 				<img src={displays} alt={name} />
 				{old_cost && <>

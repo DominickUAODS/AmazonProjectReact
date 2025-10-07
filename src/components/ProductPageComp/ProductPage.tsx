@@ -9,7 +9,6 @@ import type Product from '../../types/Product';
 import type ProductList from '../../interfaces/_ProductInterface';
 import type { Category } from '../../types/Category';
 
-
 export default function ProductPage() {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const { id } = useParams<{ id: string }>();

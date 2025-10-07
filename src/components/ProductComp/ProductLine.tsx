@@ -18,10 +18,8 @@ function ProductLine({ type, pageSize }: Params) {
 	const [products, setProducts] = useState<ProductsList[]>([]);
 	const [canScrollLeft, setCanScrollLeft] = useState(false);
 	const [canScrollRight, setCanScrollRight] = useState(false);
-
 	const lineRef = useRef<HTMLDivElement>(null);
 	const scrollRef = useRef<number | null>(null);
-
 
 	useEffect(() => {
 		const loadProducts = async () => {
@@ -92,7 +90,6 @@ function ProductLine({ type, pageSize }: Params) {
 			scrollRef.current = null;
 		}
 	}
-
 
 	return (
 		<div className="product-line-div">

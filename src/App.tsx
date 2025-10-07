@@ -33,6 +33,11 @@ import LoginAdmin from './components/AdminComp/Users/LoginAdmin';
 import CategoriesPage from './components/AdminComp/Products/CategoriesPage';
 import ProductByCategory from './components/AdminComp/ProductByCategory/ProductByCategory';
 import EditCreateProduct from './components/AdminComp/ProductByCategory/EditCreateProduct';
+import LegalNoticeInfo from './components/LegalNotice/LegalNoticeInfo';
+import Terms from './components/LegalNotice/Terms';
+import License from './components/LegalNotice/License';
+import Policy from './components/LegalNotice/Policy';
+import LegalMenuMobile from './components/LegalNotice/LegalMenuMobile';
 
 function App() {
 	const location = useLocation();
@@ -60,6 +65,14 @@ function App() {
 							<Route path="wishlist" element={<AccountWishlist />} />
 							<Route path="orders" element={<AccountOrders />} />
 						</Route>
+
+						{/* Экран выбора для мобильных */}
+						<Route path="/legal" element={<LegalMenuMobile />} />
+
+						{/* Основной контейнер для desktop */}
+						<Route path="/legal/terms" element={<LegalNoticeInfo><Terms /></LegalNoticeInfo>} />
+						<Route path="/legal/license" element={<LegalNoticeInfo><License /></LegalNoticeInfo>} />
+						<Route path="/legal/policy" element={<LegalNoticeInfo><Policy /></LegalNoticeInfo>} />
 
 					</Route>
 					{/* </Routes> */}

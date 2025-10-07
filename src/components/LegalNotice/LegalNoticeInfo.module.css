@@ -1,0 +1,93 @@
+.panel {
+	padding: 64px;
+	display: flex;
+	flex-direction: row;
+	gap: 40px;
+}
+
+.tabContent {
+	flex: 1;
+	border-left: 1.5px solid rgba(204, 221, 255, 1);
+	padding-left: 40px;
+	width: 100%;
+	padding-right: 100px;
+	overflow-y: auto;
+}
+
+.mobilePage {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.backBtn {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	background: transparent;
+	border: none;
+	padding: 0;
+	font-size: 18px;
+	line-height: 24px;
+	font-weight: 400;
+	cursor: pointer;
+}
+
+.mobileContent {
+	padding-top: 10px;
+}
+
+/* --- планшеты и мобильные (до 1024px) --- */
+@media (max-width: 1024px) {
+	.panel {
+		flex-direction: column;
+		padding: 32px;
+		gap: 20px;
+	}
+
+	/* Скрываем панель вкладок */
+	.panel> :first-child {
+		display: block;
+	}
+
+	/* Контент теперь без левой границы и с меньшими отступами */
+	.tabContent {
+		border-left: none;
+		padding: 0;
+		width: 100%;
+	}
+
+	.tabContent * {
+		font-size: 0.95rem;
+		line-height: 1.4rem;
+	}
+}
+
+/* --- мобильные (до 768px) --- */
+@media (max-width: 768px) {
+	.panel {
+		padding: 20px;
+	}
+
+	.panel> :first-child {
+		display: block;
+	}
+
+	.tabContent * {
+		font-size: 0.9rem;
+		line-height: 1.3rem;
+	}
+}
+
+/* --- очень маленькие экраны (до 480px) --- */
+@media (max-width: 480px) {
+	.panel {
+		padding: 16px;
+	}
+
+	.tabContent * {
+		font-size: 0.85rem;
+		line-height: 1.2rem;
+	}
+}
