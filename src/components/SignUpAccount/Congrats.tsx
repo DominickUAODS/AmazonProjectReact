@@ -33,10 +33,12 @@ export default function Congrats() {
 								</span>
 							</div>
 
-
+							<div className={styles.buttons}>
 							<button className={commonStyles.nextStepButton} onClick={openMain}>
 								Let`s start shopping
 							</button>
+							</div>
+						
 						</div>
 					</div>
 

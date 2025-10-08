@@ -4,6 +4,7 @@ import commonStyles from "../common.module.css";
 import { useParams } from "react-router-dom";
 import { useAuth } from '../Helpers/AuthContext';
 import type Product from "../../interfaces/ProductInterface";
+import { addToCart } from "../CartModal/CartHelpers";
 
 interface QuantityProductPriceProps {
 	price: number;
@@ -160,7 +161,11 @@ export default function QuantityProductPrice({ price, status }: QuantityProductP
 					{/* Кнопки */}
 					<div className={styles.buttonGroup}>
 						<button className={commonStyles.nextStepButton}>Buy now</button>
-						<button className={commonStyles.secondaryButton}>Add to cart</button>
+						<button className={commonStyles.secondaryButton} onClick={() => {
+							for (let i = 0; i < quantity; i++) {
+								addToCart(productId!);
+							}
+						}}>Add to cart</button>
 						<button
 							onClick={handleToggleWishlist}
 							disabled={loading}

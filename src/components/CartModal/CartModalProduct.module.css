@@ -55,3 +55,38 @@
 .cartProductCalculatedUnitCost sup {
     font-size: 10px;
 }
+
+
+@media (max-width: 768px) {
+    .cartProductFrame{
+        padding: 12px;
+        gap:8px;
+    }
+
+    .cartProductImage{
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+    }
+
+    .cartProductFrame p{
+        font-size: 14px !important;
+    }
+
+    .cartProductQuantity svg{
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    .cartProductQuantityChange svg{
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    .cartProductQuantityChange{
+        font-size: 12px;
+        gap:8px;
+    }
+
+    
+}

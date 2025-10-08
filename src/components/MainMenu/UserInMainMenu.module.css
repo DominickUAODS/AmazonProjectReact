@@ -70,5 +70,9 @@
     .customerBlock{
         padding-bottom: 16px;
     }
+
+    .myBtn{
+        max-width: 100%;
+    }
     
 }

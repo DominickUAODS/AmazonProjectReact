@@ -27,3 +27,30 @@
 }
 
 
+
+@media (max-width: 400px) {
+    .imgReactangle{
+        display:none;
+    }
+
+
+    .modalFSBlock0{
+        padding: 0;
+        margin: 0;
+    }
+    
+    .inpurFS{
+        width: 310px;
+    }
+
+
+    .enterFSblock{
+
+    }
+
+    .btnBlock{
+        display: flex;
+        justify-content: center;
+    }
+
+}

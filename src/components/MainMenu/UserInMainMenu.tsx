@@ -68,7 +68,7 @@ export default function UserInMainMenu({
             </div>
             {user ? null : (
             <div className={styles.authButtons}>
-                <button className={commonStyles.nextStepButton} onClick={openSignUp}>Sign up</button>
+                <button className={`${commonStyles.nextStepButton} ${styles.myBtn}`} onClick={openSignUp}>Sign up</button>
                 <button className={commonStyles.secondaryButton} onClick={openLogIn}>Log in</button>
             </div>
         )}

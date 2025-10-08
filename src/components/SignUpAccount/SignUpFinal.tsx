@@ -84,7 +84,7 @@ export default function SignUpFinal({ background }: { background: Location }) {
 
 							<div className={styles.enterFSblock}>
 								<div className={commonStyles.inputWrappersBlock}>
-									<fieldset className={commonStyles.inputWrapper}>
+									<fieldset className={`${commonStyles.inputWrapper} ${styles.inpurFS}`}>
 										<legend className={errors.firstName ? commonStyles.errorLegend : ''}>First name</legend>
 										<input
 											type="text"
@@ -101,7 +101,7 @@ export default function SignUpFinal({ background }: { background: Location }) {
 									{errors.firstName && <div className={commonStyles.errorText}>{errors.firstName}</div>}
 
 
-									<fieldset className={commonStyles.inputWrapper}>
+									<fieldset className={`${commonStyles.inputWrapper} ${styles.inpurFS}`}>
 										<legend className={errors.lastName ? commonStyles.errorLegend : ''}>Last name</legend>
 										<input
 											type="text"
@@ -119,10 +119,12 @@ export default function SignUpFinal({ background }: { background: Location }) {
 
 								</div>
 							</div>
-
+							
+							<div className={styles.btnBlock}>
 							<button className={commonStyles.nextStepButton} onClick={handleSubmit}>
 								Create account
 							</button>
+							</div>
 						</div>
 					</div>
 

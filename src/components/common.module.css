@@ -400,6 +400,11 @@
 }
 
 @media (max-width: 768px) {
+	.modalBlock{
+        gap:0;
+		flex-direction: column;
+    }
+
 	.cusPhoto img{
 		width: 60px;
 		height: 60px;
@@ -453,5 +458,9 @@
 		height: 40px;
 		max-width: 310px;
 
+	}
+
+	.inputWrappersBlock{
+		max-width: 310px;
 	}
 }

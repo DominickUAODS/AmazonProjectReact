@@ -1,30 +1,97 @@
 import styles from './CartModal.module.css';
 import commonStyles from '../common.module.css';
-import products from '../../data/product.json';
 import CartModalProduct from './CartModalProduct';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getCart } from './CartHelpers';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../Helpers/AuthContext';
 
 type CartModalProps = {
     onClose: () => void;
 };
 
 export default function CartModal({onClose}: CartModalProps) {
-    const [isBottom, setIsBottom] = useState(false);
-    const [isTop, setIsTop] = useState(true);
+    const [isBottom, setIsBottom] = useState<boolean>(false);
+    const [isTop, setIsTop] = useState<boolean>(true);
+    const [cart, setCart] = useState<Record<string, number>>({});
+    const [cartProducts, setCartProducts] = useState<any[]>([]);
+    const [totalPrice, setTotalPrice] = useState<number>(0);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { isAuthenticated } = useAuth();
+
+    useEffect(() => {
+        setCart(getCart());
+        console.log("Cart in cm", cart)
+    }, []);
+
+    useEffect(() => {
+        async function loadProducts() {
+            console.log('Current cart:', cart);
+            console.log('Current cartProducts:', cartProducts);
+            const cartKeysString = Object.keys(cart).sort().join(',');
+        const cartProductsIdsString = cartProducts.map(product => product.id).sort().join(',');
+
+        console.log('Serialized cart keys:', cartKeysString);
+        console.log('Serialized cartProducts ids:', cartProductsIdsString);
+            let newCartProducts: any[];
+            if (Object.keys(cart).sort().join(',') !== cartProducts.map(product => product.id).sort().join(',')) {
+                newCartProducts = await Promise.all(
+                    Object.keys(cart).map(async (productId) => {
+                        const response = await fetch(`${import.meta.env.VITE_API_SERVER}/product/${productId}`);
+                        const data = await response.json();
+                        return {
+                            id: data.id,
+                            title: data.name,
+                            image: data.displays[0],
+                            price: data.price,
+                            quantity: cart[productId],
+                        };
+                    })
+                );
+            } else {
+                newCartProducts = cartProducts.map(product => {
+                    console.log(`Using cached product ${product.id}`);
+                    return {
+                        id: product.id,
+                        title: product.title,
+                        image: product.image,
+                        price: product.price,
+                        quantity: cart[product.id],
+                    };
+                });
+            }
+            setCartProducts(newCartProducts);
+            setTotalPrice(newCartProducts.reduce((total, product) => total + product.price * product.quantity, 0));
+        }
+        loadProducts();
+    }, [cart]);
 
     const onScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
-        if (e.currentTarget.scrollTop === 0) {
+        if (e.currentTarget.scrollHeight === e.currentTarget.clientHeight) {
+            setIsBottom(true);
+            setIsTop(true);
+        } else if (e.currentTarget.scrollTop === 0) {
             setIsTop(true);
             setIsBottom(false);
-        } else if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === e.currentTarget.clientHeight) {
+        } else if (e.currentTarget.scrollHeight - Math.round(e.currentTarget.scrollTop) === e.currentTarget.clientHeight) {
             setIsBottom(true);
             setIsTop(false);
         } else {
             setIsBottom(false);
             setIsTop(false);
         };
-        console.log(e.currentTarget.scrollTop)
     };
+
+    const checkout = () => {
+        onClose();
+        if (isAuthenticated) {
+            navigate('/checkout')
+        } else {
+            navigate("/signUp", { state: { background: location } });
+        }
+    }
     
     return (
         <div className={commonStyles.modalBackdrop} onClick={onClose}>
@@ -47,15 +114,16 @@ export default function CartModal({onClose}: CartModalProps) {
                         </svg>
                     </div>
                     <hr className={isTop ? styles.firstHr : styles.bottomShadow} />
-                    <div className={styles.productsInCart} onScroll={onScroll}>
-                        {products.slice(0, 10).map((product: any, i: number) => (
+                    <div className={styles.productsInCart} onScroll={onScroll} onLoad={onScroll}>
+                        {cartProducts.map((product: any, i: number) => (
                             <CartModalProduct
                                 key={i}
-                                id={0}
+                                id={product.id}
                                 title={product.title}
                                 image={product.image}
                                 cost={product.price}
-                                quantity={1}
+                                quantity={product.quantity}
+                                setCart={setCart}
                                 />
                         ))}
                     </div>
@@ -64,8 +132,8 @@ export default function CartModal({onClose}: CartModalProps) {
                         <button onClick={onClose} className={commonStyles.secondaryButton}>Continue shopping</button>
                         <div className={styles.checkoutGap} />
                         <span className='header-2'>Total:</span>
-                        <span className='header-2'>${999}<sup>99</sup></span>
-                        <button className={commonStyles.nextStepButton}>Checkout</button>
+                        <span className='header-2'>${Math.floor(totalPrice)}<sup>{String(Math.round((totalPrice % 1) * 100)).padStart(2, '0')}</sup></span>
+                        <button className={commonStyles.nextStepButton} onClick={checkout}>Checkout</button>
                     </div>
                 </div>
 			</div>

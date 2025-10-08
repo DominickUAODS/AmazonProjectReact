@@ -168,12 +168,15 @@ export default function EnterCodeFromGmail({ background, isPasswordReset }: { ba
 								)}
 							</div>
 
-							<button
-								className={commonStyles.nextStepButton}
-								onClick={isPasswordReset ? handlePasswordReset : handleVerify}
-							>
-								Continue
-							</button>
+							<div className={styles.btnDiv}>
+
+								<button
+									className={commonStyles.nextStepButton}
+									onClick={isPasswordReset ? handlePasswordReset : handleVerify}
+								>
+									Continue
+								</button>
+							</div>
 						</div>
 					</div>
 					<img className={styles.imgReactangle} src='public\img\Rectangle 413.png'></img>
