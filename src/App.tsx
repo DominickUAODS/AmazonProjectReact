@@ -31,6 +31,7 @@ import AdminLayout from './components/AdminLayout';
 import RequireAdmin from './components/Helpers/RequireAdmin';
 import LoginAdmin from './components/AdminComp/Users/LoginAdmin';
 import CategoriesPage from './components/AdminComp/Products/CategoriesPage';
+import Checkout from './components/Checkout/Checkout';
 
 function App() {
 	const location = useLocation();
@@ -57,6 +58,7 @@ function App() {
 							<Route path="settings" element={<AccountSettings />} />
 							<Route path="wishlist" element={<AccountWishlist />} />
 							<Route path="orders" element={<AccountOrders />} />
+							<Route path="checkout" element={<Checkout />} />
 						</Route>
 
 					</Route>
@@ -91,7 +93,6 @@ function App() {
 						<Route path="/final-signup" element={<SignUpFinal background={background} />} />
 						<Route path="/congrats" element={<Congrats />} />
 
-
 						{/* user settings modal windows */}
 						<Route element={<RequireAuth />}>
 							<Route path="/change-photo" element={<ChangePhotoModal />} />
@@ -101,7 +102,6 @@ function App() {
 							<Route path="/logout" element={<LogOutModal />} />
 							<Route path="/delete" element={<DeleteAccountModal />} />
 						</Route>
-
 
 						{/*menu modal*/}
 						<Route path="/menu" element={<MainMenu background={background}/>} />

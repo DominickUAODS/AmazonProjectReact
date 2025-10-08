@@ -3,7 +3,8 @@ import commonStyles from '../common.module.css';
 import CartModalProduct from './CartModalProduct';
 import { useEffect, useState } from 'react';
 import { getCart } from './CartHelpers';
-import { products } from '../../data (temp)/products';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../Helpers/AuthContext';
 
 type CartModalProps = {
     onClose: () => void;
@@ -15,6 +16,10 @@ export default function CartModal({onClose}: CartModalProps) {
     const [cart, setCart] = useState<Record<string, number>>({});
     const [cartProducts, setCartProducts] = useState<any[]>([]);
     const [totalPrice, setTotalPrice] = useState<number>(0);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { isAuthenticated } = useAuth();
 
     useEffect(() => {
         setCart(getCart());
@@ -49,9 +54,7 @@ export default function CartModal({onClose}: CartModalProps) {
                 });
             }
             setCartProducts(newCartProducts);
-            setTotalPrice(
-                newCartProducts.reduce((total, product) => total + product.price * product.quantity, 0)
-            );
+            setTotalPrice(newCartProducts.reduce((total, product) => total + product.price * product.quantity, 0));
         }
         loadProducts();
     }, [cart]);
@@ -71,6 +74,15 @@ export default function CartModal({onClose}: CartModalProps) {
             setIsTop(false);
         };
     };
+
+    const checkout = () => {
+        onClose();
+        if (isAuthenticated) {
+            navigate('/checkout')
+        } else {
+            navigate("/signUp", { state: { background: location } });
+        }
+    }
     
     return (
         <div className={commonStyles.modalBackdrop} onClick={onClose}>
@@ -112,7 +124,7 @@ export default function CartModal({onClose}: CartModalProps) {
                         <div className={styles.checkoutGap} />
                         <span className='header-2'>Total:</span>
                         <span className='header-2'>${Math.floor(totalPrice)}<sup>{String(Math.round((totalPrice % 1) * 100)).padStart(2, '0')}</sup></span>
-                        <button className={commonStyles.nextStepButton}>Checkout</button>
+                        <button className={commonStyles.nextStepButton} onClick={checkout}>Checkout</button>
                     </div>
                 </div>
 			</div>
