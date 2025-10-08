@@ -33,6 +33,7 @@ import LoginAdmin from './components/AdminComp/Users/LoginAdmin';
 import CategoriesPage from './components/AdminComp/Products/CategoriesPage';
 import ProductByCategory from './components/AdminComp/ProductByCategory/ProductByCategory';
 import EditCreateProduct from './components/AdminComp/ProductByCategory/EditCreateProduct';
+import AccountMenu from './components/AccountMenu/AccountMenu';
 
 function App() {
 	const location = useLocation();
@@ -59,6 +60,7 @@ function App() {
 							<Route path="settings" element={<AccountSettings />} />
 							<Route path="wishlist" element={<AccountWishlist />} />
 							<Route path="orders" element={<AccountOrders />} />
+							<Route path="account-menu" element={<AccountMenu/>}/>
 						</Route>
 
 					</Route>

@@ -235,10 +235,13 @@ button span{
 .backButtonDiv{
     display: none;
 }
+
+
 @media (max-width: 768px) {
 
     .backButtonDiv{
         display: flex;
+        cursor: pointer;
         gap:8px;
     }
     .menu{

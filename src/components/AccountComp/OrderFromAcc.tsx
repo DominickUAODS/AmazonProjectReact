@@ -5,7 +5,9 @@ import type Order from '../../interfaces/OrderInterface';
 
 
 export default function OrderFromAccount({ order, isEven, }: { order: Order; isEven: boolean; }) {
-	const [dollars, cents] = order.total.toFixed(2).split('.');
+	const total = order.total ?? 0;
+	const [dollars, cents] = total.toFixed(2).split('.');
+
 
 	return (
 		<div className={`${styles.order} ${isEven ? styles.evenOrder : ''}`}>

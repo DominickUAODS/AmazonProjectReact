@@ -33,7 +33,7 @@
 
 
 @media (max-width: 400px) {
-    img{
+    .imgReactangle{
         display:none;
     }
 

@@ -401,10 +401,14 @@
 
 @media (max-width: 768px) {
 	.cusPhoto img{
-		width: 48px;
-		height: 48px;
+		width: 60px;
+		height: 60px;
 
 	}
+
+	.cusPhoto img{
+        display: flex;
+    }
 
 	.secondaryButton{
 		border-radius: 8px;

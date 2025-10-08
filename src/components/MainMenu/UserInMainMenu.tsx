@@ -21,11 +21,30 @@ export default function UserInMainMenu({
 		navigate("/logIn", { state: { background } });
 
 	};
+
+
+    const handleClick = () => {
+      navigate(`/settings`);
+    };
+
+    const handleMobileClick = () =>{
+        navigate(`/account-menu`);
+    };
+
+    const isMobile = window.innerWidth <= 768;
+
+    const handleResponsiveClick = () => {
+        if (isMobile) {
+          handleMobileClick();
+        } else {
+          handleClick();
+        }
+      };
     
     return(
         <div className={styles.customerBlock}>
 
-            <div className={commonStyles.cusPhoto}>
+            <div className={commonStyles.cusPhoto} onClick={user && handleResponsiveClick}>
                 <div className={styles.phMobile}>
                     <img
                         src={user?.profile_photo || "/img/default-user.svg"}
