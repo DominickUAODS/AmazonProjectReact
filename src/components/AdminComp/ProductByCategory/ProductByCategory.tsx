@@ -60,9 +60,9 @@ export default function ProductByCategory() {
 	}, [API_SERVER, categoryFilter, search]);
 
 	const handleDeleteProduct = async (productId: string) => {
-		console.log("i am here")
+		//console.log("i am here")
 		try {
-			console.log(productId)
+			//console.log(productId)
 
 			const responce = await fetch(`${API_SERVER}/product/${productId}`, {
 				method: "DELETE",
