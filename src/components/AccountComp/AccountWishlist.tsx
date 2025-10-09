@@ -7,6 +7,7 @@ import Pagination from '../Pagination/Pagination';
 import { useAuth } from '../Helpers/AuthContext';
 import { useMediaQuery } from "react-responsive";
 import DeleteCategory from '../AdminComp/Products/DeleteCategory';
+import { useNavigate } from 'react-router-dom';
 
 export default function AccountWishlist() {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
@@ -16,6 +17,7 @@ export default function AccountWishlist() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [loading, setLoading] = useState(true);
 	const [search, setSearch] = useState("");
+	const navigate = useNavigate();
 	const { authFetch, accessToken } = useAuth();
 	const isMobile = useMediaQuery({ maxWidth: 768 });
 	const itemsPerPage = isMobile ? 4 : 10;
@@ -71,6 +73,10 @@ export default function AccountWishlist() {
 	const endIndex = startIndex + itemsPerPage;
 	const visibleProducts = filteredProducts.slice(startIndex, endIndex);
 
+	const handleMobileClick = () =>{
+        navigate(`/account-menu`);
+    };
+
 	return (
 		<div className={styles.acWishBlock}>
 
@@ -81,7 +87,7 @@ export default function AccountWishlist() {
 			<div className={styles.accWishlist}>
 
 				<div className={styles.accWishlistTitle}>
-					<div className={styles.backButtonTitleDiv}>
+					<div className={styles.backButtonTitleDiv} onClick={handleMobileClick}>
 						<div className={styles.buttonBack}>
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M15.7501 2.87891L7.77605 11.1949C7.26605 11.7229 7.26605 12.5629 7.77605 13.0909L15.7501 21.3829" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />

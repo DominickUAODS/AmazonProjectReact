@@ -400,11 +400,20 @@
 }
 
 @media (max-width: 768px) {
+	.modalBlock{
+        gap:0;
+		flex-direction: column;
+    }
+
 	.cusPhoto img{
-		width: 48px;
-		height: 48px;
+		width: 60px;
+		height: 60px;
 
 	}
+
+	.cusPhoto img{
+        display: flex;
+    }
 
 	.secondaryButton{
 		border-radius: 8px;
@@ -419,5 +428,39 @@
 	.fixedPagination{
 		width:100%;
 		min-width: 0 !important;
+		margin-left: 40%;
+	}
+
+	.modal{
+		max-width: 390px;
+		max-height: 618px;
+		padding: 16px;
+	}
+
+	.infoSpan0{
+		font-size: 24px;
+		line-height: 28px;
+		font-weight: 500;
+	}
+
+	.infoSpan1{
+		font-size: 16px;
+		line-height: 20px;
+		font-weight: 400;
+	}
+
+	.inputWrapper{
+		padding: 10px 20px !important;
+	}
+
+	.nextStepButton{
+		padding: 8px 24px;
+		height: 40px;
+		max-width: 310px;
+
+	}
+
+	.inputWrappersBlock{
+		max-width: 310px;
 	}
 }

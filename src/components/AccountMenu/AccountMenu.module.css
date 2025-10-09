@@ -95,3 +95,27 @@
     background-color:rgba(224, 235, 255, 1);
     border-radius: 4px;
   }
+
+@media (max-width: 768px) {
+
+    .breadCrumbs{
+        margin-top: 24px;
+    }
+
+    .menuBlock{
+        gap:12px;
+    }
+
+    .AMblock0{
+        padding: 12px;
+    }
+
+    .menuChoice{
+        padding: 16px 12px;
+    }
+
+    .cusPhoto{
+        display: flex;
+    }
+
+}

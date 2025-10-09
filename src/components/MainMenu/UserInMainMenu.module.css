@@ -5,7 +5,14 @@
     border-bottom: 2.5px solid rgba(204, 221, 255, 1);
     padding-bottom: 24px;
 }
-
+.customerBlock {
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+  
+.customerBlock:hover {
+	transform: scale(1.03);
+}
 .phMobile{
     display: flex;
     justify-content: space-between;
@@ -62,6 +69,10 @@
 
     .customerBlock{
         padding-bottom: 16px;
+    }
+
+    .myBtn{
+        max-width: 100%;
     }
     
 }

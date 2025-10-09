@@ -46,3 +46,23 @@
 
 
 
+
+
+@media (max-width: 400px) {
+    .imgReactangle{
+        display:none;
+    }
+
+    .modalCodeBlock0{
+        padding: 0;
+    }
+
+    .modalCodeBlock{
+        margin: 0;
+    }
+
+    .btnDiv{
+        display: flex;
+    align-items: center;  
+justify-content: center;  }
+}

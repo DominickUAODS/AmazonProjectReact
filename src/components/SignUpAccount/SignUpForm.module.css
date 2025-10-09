@@ -25,3 +25,20 @@
 .wantToLogIn a{
   cursor: pointer;
 }
+
+
+
+
+@media (max-width: 400px) {
+  .buttonBlock{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .wantToLogIn span{
+    font-size: 12px;
+    line-height: 16px;
+  }
+}

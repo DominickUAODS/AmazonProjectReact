@@ -177,6 +177,7 @@
 		width:100%;
 		height: 270px;
 		border-radius: 4px;
+		padding: 14px;
 		gap: 6px;
 		justify-content: center;
 		align-items: center;
@@ -199,6 +200,12 @@
 		text-wrap: wrap;
 		width: 141px;
 
+	}
+
+	.header-3{
+		font-size: 14px;
+		line-height: 18px;
+		text-wrap: wrap;
 	}
 	
 

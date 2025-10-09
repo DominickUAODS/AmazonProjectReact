@@ -189,3 +189,44 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+
+
+  @media (max-width: 768px) {
+
+    .order{
+      width: 358px;
+      height: 140px;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .orderNum{
+      font-size: 16px;
+      line-height: 20px;
+      width: 118px;
+      text-wrap: wrap;
+    }
+
+    .orderStatus,
+    .orderDate,
+    .numOrder{
+      font-size: 14px;
+    }
+
+    .orderPrice{
+      align-self: flex-end;
+    }
+
+    .dollar,
+    .main{
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .cents{
+      font-size: 12px;
+    }
+
+ 
+}

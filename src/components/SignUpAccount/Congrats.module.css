@@ -17,3 +17,34 @@
     gap:120px;
 }
 
+@media (max-width: 400px) {
+    .imgReactangle{
+        display:none;
+    }
+
+    .modalFSBlock{
+        margin-top: 58px;
+        margin-bottom: 58px;
+    }
+
+    .modalFSBlock0{
+        padding: 0;
+        margin: 0;
+    }
+    
+    .inpurFS{
+        width: 310px;
+    }
+
+
+    .enterFSblock{
+
+    }
+
+    .buttons{
+        display: flex;
+        justify-content: center;
+    }
+
+}
+

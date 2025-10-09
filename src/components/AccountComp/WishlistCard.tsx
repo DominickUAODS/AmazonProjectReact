@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import type ProductList from '../../interfaces/_ProductInterface';
 import styles from './WishlistCard.module.css'
 
@@ -8,6 +9,7 @@ interface WishlistCardProps {
 
 export default function WishlistCard({ product, actionSlot }: WishlistCardProps) {
 	const [dollars, cents] = product.price.toFixed(2).split('.');
+
 	//console.log(product.image);
 	return (
 		<div className={styles.wishlistCard}>

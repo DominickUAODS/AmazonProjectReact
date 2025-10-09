@@ -104,6 +104,8 @@ function ProductLine({ type, pageSize }: Params) {
 							id={value.id}
 							name={value.name}
 							stars={value.stars}
+							rating={value.rating}
+							display={value.display}
 							comments={value.comments}
 							price={value.price}
 							discount={value.discount}

@@ -48,3 +48,56 @@
     box-sizing: border-box;
     flex: 1 1 auto;
 }
+
+.backButtonDiv{
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    .backButtonDiv{
+        display: flex;
+        cursor: pointer;
+        gap:8px;
+    }
+    .menu{
+        display: none;
+    }
+
+    .back{
+        font-size: 16px;
+    }
+
+    .accOrdersTitle p{
+        font-size: 28px;
+
+    }
+
+    .accOrders{
+        display: flex;
+        flex-direction: column;
+        padding-top: 0;
+        padding-left: 0;
+    
+    }
+
+    .accOrdersPage{
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-bottom: 72px;
+    }
+
+    .accountOrdersSet{
+        width: 358px;
+    }
+
+    .accOrdersTitle {
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        padding-left: 16px;
+        border-bottom: none;
+        gap:12px;
+    }
+
+ 
+}

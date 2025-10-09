@@ -76,3 +76,48 @@
 .checkout sup {
     font-size: 18px;
 }
+
+@media (max-width: 768px) {
+    .modal{
+        width:390px;
+    }
+    
+    .cartModal{
+        padding: 16px;
+    }
+
+    .cartModalHeader{
+        margin-bottom: 16px;
+    }
+
+    .cartModalHeaderTitle{
+        gap:8px;
+    }
+
+    .cartModalHeaderTitle h2{
+        font-size: 20px !important;
+        line-height: 24px;
+        margin: 0;
+    }
+    .cartModalHeader svg{
+        width:24px !important ;
+        height: 24px !important;
+    }
+
+    .checkout{
+        gap:12px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .checkout button{
+        width:150px;
+        align-self: flex-end;
+    }
+
+    .checkout .header-2{
+        font-size: 20px;
+       
+    }
+}
