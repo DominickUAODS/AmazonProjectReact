@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import type { ProductCardSize } from '../../types/Product';
 
 export type ProductCardProps = ProductsList & {
-  card_size: ProductCardSize;
+	card_size: ProductCardSize;
 };
 
-function ProductCard({ id, stars, displays, display,rating,name, comments, price, old_cost, card_size }: ProductCardProps) {
+function ProductCard({ id, stars, displays, display, rating, name, comments, price, old_cost, card_size }: ProductCardProps) {
 	return (
 		<Link className={`product-card ${card_size === 'big' ? 'product-card-big' : 'product-card-small'} bg-objects`} to={`/product/${id}`}>
 			<div className='product-card-image-frame'>
-				<img src={displays? displays : display} alt={name} />
+				<img src={displays ? displays : display} alt={name} />
 				{old_cost && <>
 					<ReactSVG className='product-card-discount-icon logo-primary' src='/img/discount_bubble.svg' />
 					<span className={`product-card-discount-percent text-minor ${card_size === 'big' ? 'text-1' : 'text-5'}`}>-{Math.round(((old_cost - price) / old_cost) * 100)}%</span>
