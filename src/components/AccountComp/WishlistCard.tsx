@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import type ProductList from '../../interfaces/_ProductInterface';
 import styles from './WishlistCard.module.css'
 

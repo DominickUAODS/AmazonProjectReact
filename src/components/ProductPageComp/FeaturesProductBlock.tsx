@@ -1,4 +1,5 @@
-import type { Product, ProductFeature } from '../../types/Product';
+import type Product from '../../types/Product';
+import type { ProductFeature } from '../../types/Product';
 import styles from './FeaturesProductBlock.module.css'
 import OneFeatureProduct from './OneFeatureProduct';
 

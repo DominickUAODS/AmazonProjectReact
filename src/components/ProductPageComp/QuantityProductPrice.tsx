@@ -3,8 +3,8 @@ import styles from "./QuantityProductPrice.module.css";
 import commonStyles from "../common.module.css";
 import { useParams } from "react-router-dom";
 import { useAuth } from '../Helpers/AuthContext';
-import type Product from "../../interfaces/ProductInterface";
 import { addToCart } from "../CartModal/CartHelpers";
+import type Product from "../../types/Product";
 
 interface QuantityProductPriceProps {
 	price: number;

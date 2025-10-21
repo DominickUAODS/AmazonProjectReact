@@ -1,12 +1,9 @@
 import styles from "./ProductCatalog.module.css";
 import commonStyles from '../common.module.css';
 import { fetchRootCategories } from "../../services/categoryService";
-
-import type { ProductCategoryMain } from "../../types/ProductCategoryMain";
 import OneProductCategory from "./OneProductCategory";
 import { useEffect, useState } from "react";
 import type { Category } from "../../types/Category";
-
 
 export default function ProductCatalog(){
     

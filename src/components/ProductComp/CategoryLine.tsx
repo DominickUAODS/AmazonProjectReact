@@ -4,7 +4,6 @@ import { ReactSVG } from 'react-svg';
 import { CategoryCard } from './CategoryCard';
 import type { LineScrollDirection } from '../../types/LineScrollDirection';
 import type { Category } from '../../types/Category';
-//import { categories } from '../../data (temp)/categories';
 
 type Params = {
 	page: number,
@@ -14,10 +13,8 @@ type Params = {
 function CategoryLine({ page, pageSize }: Params) {
 	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const [categories, setCategories] = useState<Category[]>([]);
-	//const [loading, setLoading] = useState(true);
 	const [canScrollLeft, setCanScrollLeft] = useState(false);
 	const [canScrollRight, setCanScrollRight] = useState(false);
-
 	const lineRef = useRef<HTMLDivElement>(null);
 	const scrollRef = useRef<number | null>(null);
 
@@ -86,8 +83,12 @@ function CategoryLine({ page, pageSize }: Params) {
 						key={index}
 						image={value.image}
 						id={value.id}
-						title={value.name}
+						name={value.name}
 						description={value.description}
+						icon={null}
+						is_active={true}
+						parent_id={null}
+						subcategories={[]}
 					/>
 				)}
 			</div>

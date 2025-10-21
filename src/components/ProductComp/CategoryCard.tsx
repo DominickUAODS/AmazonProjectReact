@@ -1,18 +1,19 @@
 import './CategoryCard.css';
 import { ReactSVG } from 'react-svg';
-import type { Category } from '../types/Category';
 import { Link, useNavigate } from 'react-router-dom';
+import type { Category } from '../../types/Category';
 
-function CategoryCard({ id, image, title, description }: Category) {
+function CategoryCard({ id, image, name, description }: Category) {
     const navigate = useNavigate();
 
     const handleClick = () => {
       navigate(`/products/${id}`);
     };
+    
     return (
         <div className='category-card bg-objects' onClick={handleClick}>
-            <img src={image} alt={title} />
-            <p className='text-minor text-2'>{title}: {description}</p>
+            <img src={image || "public/img/Rectangle 413.png"} alt={name} />
+            <p className='text-minor text-2'>{name}: {description}</p>
             <div className='category-card-see-all-container'>
                 <span className='text-minor text-5'>See all</span>
                 <Link className='button button-tertiary' to={`/products?category=${id}`}>

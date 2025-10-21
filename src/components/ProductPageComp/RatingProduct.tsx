@@ -11,7 +11,7 @@ export default function RatingProduct({ onTagSelect, selectedTags, }: { onTagSel
 
 	const [commentsInfo, setCommentsInfo] = useState<ReviewsInfo | null>(null);
 	const [loading, setLoading] = useState(true);
-	
+
 
 	useEffect(() => {
 		async function fetchCommentsInfo() {
@@ -190,7 +190,7 @@ export default function RatingProduct({ onTagSelect, selectedTags, }: { onTagSel
 						<PFTag
 							key={tag.key}
 							title={tag.title}
-							className={`${styles.tag} ${selectedTags.includes(tag.key) ? styles.activeTag : ""}`}
+							//className={`${styles.tag} ${selectedTags.includes(tag.key) ? styles.activeTag : ""}`}
 							onClick={() => toggleTag(tag.key)}
 						/>
 					))}

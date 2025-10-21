@@ -1,13 +1,13 @@
 import styles from "./MainMenu.module.css";
 import commonStyles from '../common.module.css';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import UserInMainMenu from "./UserInMainMenu";
 import ProductCatalog from "./ProductCatalog";
 import MenuSettingsBlock from "./MenuSettingsBlock";
 import LogOut from "./LogOut";
 
 export default function MainMenu({ background }: { background: Location }){
-    const location = useLocation();
+
     const navigate = useNavigate();
     const isMobile = window.innerWidth <= 768;
 

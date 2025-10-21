@@ -15,7 +15,7 @@ export default function EnterCodeFromGmail({ background, isPasswordReset }: { ba
 
 	// Таймер и состояние кнопки
 	const [timeLeft, setTimeLeft] = useState(0);
-	const [isSending, setIsSending] = useState(false);
+	//const [isSending, setIsSending] = useState(false);
 	const [sendCodeClicked, setSendCodeClicked] = useState(false);
 
 	useEffect(() => {
@@ -58,7 +58,6 @@ export default function EnterCodeFromGmail({ background, isPasswordReset }: { ba
 		startTimer(); // Сразу перезапускаем таймер
 		await handleSendCode(); // Отправляем код заново
 	};
-
 
 	const handleVerify = async () => {
 		const newErrors: typeof errors = {};
@@ -152,18 +151,18 @@ export default function EnterCodeFromGmail({ background, isPasswordReset }: { ba
 
 								{!sendCodeClicked && (
 									<button className={commonStyles.sendCodeAgainBtn} onClick={handleSendCode}>
-									<span>Send Code</span>
+										<span>Send Code</span>
 									</button>
 								)}
 
-								
+
 								{sendCodeClicked && (
 									<button
 										className={commonStyles.sendCodeAgainBtn}
 										onClick={handleResendCode}
 										disabled={timeLeft > 0}
 									>
-									{timeLeft > 0 ? `Resend code 0:${timeLeft.toString().padStart(2, '0')}` : 'Resend code'}
+										{timeLeft > 0 ? `Resend code 0:${timeLeft.toString().padStart(2, '0')}` : 'Resend code'}
 									</button>
 								)}
 							</div>
