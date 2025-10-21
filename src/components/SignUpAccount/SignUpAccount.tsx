@@ -40,7 +40,7 @@ export default function SignUpAccount({background}:{background:Location}) {
 							</span>
 						</div>
 					</div>
-					<img className={styles.imgReactangle} src='public\img\Rectangle 413.png'></img>
+					<img className={styles.imgReactangle} src='public\img\Rectangle_413.png'></img>
 				</div>
 			</div>
 		</div>

@@ -178,7 +178,7 @@ export default function EnterCodeFromGmail({ background, isPasswordReset }: { ba
 							</div>
 						</div>
 					</div>
-					<img className={styles.imgReactangle} src='public\img\Rectangle 413.png'></img>
+					<img className={styles.imgReactangle} src='public\img\Rectangle_413.png'></img>
 				</div>
 			</div>
 		</div>
