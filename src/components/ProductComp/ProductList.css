@@ -373,11 +373,25 @@
   .slider-container {
     position: relative;
     width: 100%;
+    max-width: 382px;
     padding-bottom: 40px;
+    margin: 0 auto;
 }
 
+input[type="range"],
+.slider,
+.slider-track,
+.slider-range {
+    width: 100%;
+    max-width: 382px;
+    left: 0;
+    right: 0;
+}
+
+
+
 input[type="range"] {
-    position: absolute;
+    position: relative;
     width: 100%;
     border: none;
     pointer-events: none;
@@ -396,10 +410,11 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .slider {
-    position: absolute;
+    position: relative;
     top: 18px;
     height: 8px;
     width: 100%;
+    max-width: 382px;
 }
 
 .slider-track {

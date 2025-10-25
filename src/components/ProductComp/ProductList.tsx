@@ -134,6 +134,12 @@ function ProductList() {
         fetchProductsWithDetails();
     }, [API_SERVER, categoryId]);
 
+    useEffect(() => {
+        if (products.length === 0) return;
+        const prices = products.map(p => p.price);
+        setPriceRange([Math.min(...prices), Math.max(...prices)]);
+    }, [products]);
+
     const handleFilterChange = (key: string, selected: string[]) => {
         setFilters(prev => ({ ...prev, [key]: selected }));
     };
@@ -197,6 +203,7 @@ function ProductList() {
     ? categoryChain[categoryChain.length - 1].name 
     : '';
     const currentProducts = sortedProducts.slice(startIndex, startIndex + productsPerPage);
+    console.log("Current",currentProducts)
     
     return (
         <div className='product-list'>
