@@ -40,6 +40,7 @@ import License from './components/LegalNotice/License';
 import Policy from './components/LegalNotice/Policy';
 import LegalMenuMobile from './components/LegalNotice/LegalMenuMobile';
 import AccountMenu from './components/AccountMenu/AccountMenu';
+import NotFound from './components/LegalNotice/NotFound';
 
 function App() {
 	const location = useLocation();
@@ -54,6 +55,7 @@ function App() {
 		<>
 			<AuthProvider>
 				<Routes location={background || location}>
+					<Route path = "not-found" element={<NotFound/>}/>
 					<Route path="/" element={<Layout />}>
 
 						{/* main pages */}
