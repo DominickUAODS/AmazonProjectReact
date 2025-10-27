@@ -2,7 +2,7 @@ import './ProductList.css';
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { ProductCard, type ProductCardProps } from './ProductCard';
 import { ReactSVG } from 'react-svg';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import commonStyles from "../common.module.css";
 import { ScrollToTopButton } from './ScrollToTopButton';
 import type { Category } from '../../types/Category';
@@ -29,6 +29,7 @@ function ProductList() {
     const [currentPage, setCurrentPage] = useState(1);
     const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    
 
 
     useEffect(() => {
