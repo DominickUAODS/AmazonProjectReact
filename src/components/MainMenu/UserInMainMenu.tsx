@@ -20,7 +20,9 @@ export default function UserInMainMenu({
     const openLogIn = () => {
         navigate("/logIn", { state: { background } });
 
-    };
+	};
+
+
 
     const handleClick = () => {
         navigate(`/settings`);
@@ -38,9 +40,9 @@ export default function UserInMainMenu({
         } else {
             handleClick();
         }
-    };
-
-    return (
+      };
+    
+    return(<>
         <div className={styles.customerBlock}>
 
             <div className={commonStyles.cusPhoto} onClick={user && handleResponsiveClick}>
@@ -66,11 +68,15 @@ export default function UserInMainMenu({
                 </div>
             </div>
             {user ? null : (
-                <div className={styles.authButtons}>
-                    <button className={`${commonStyles.nextStepButton} ${styles.myBtn}`} onClick={openSignUp}>Sign up</button>
-                    <button className={commonStyles.secondaryButton} onClick={openLogIn}>Log in</button>
-                </div>
-            )}
-        </div>
-    );
+            <div className={styles.authButtons}>
+                <button className={`${commonStyles.nextStepButton} ${styles.myBtn}`} onClick={openSignUp}>Sign up</button>
+                <button className={commonStyles.secondaryButton} onClick={openLogIn}>Log in</button>
+            </div>
+        )}
+    </div>
+
+			
+        </>
+    
+	);
 }

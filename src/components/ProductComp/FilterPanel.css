@@ -1,6 +1,18 @@
+.slider {
+    max-width: 382px;
+    width: 100%;
+}
 
+.slider.slider-horizontal {
+    width: 100% !important;
+    height: 20px;
+}
 
+.slider-selection{
+    background-color: green !important;
+}
 @media (min-width: 768px) {
     .custom-select-wrapper-mobile { display: none; }
 
 }
+

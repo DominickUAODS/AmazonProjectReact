@@ -49,7 +49,6 @@ function ProductList() {
 	const totalPages = Math.ceil(products.length / productsPerPage);
 	const startIndex = (currentPage - 1) * productsPerPage;
 
-
 	const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newMin = Math.min(+e.target.value, priceRange[1] - 10);
 		setPriceRange([newMin, priceRange[1]]);
@@ -105,7 +104,7 @@ function ProductList() {
 					})
 				);
 
-				console.log("Products", productsWithDetails);
+				//console.log("Products", productsWithDetails);
 
 				setProducts(productsWithDetails);
 
@@ -125,6 +124,12 @@ function ProductList() {
 
 		fetchProductsWithDetails();
 	}, [API_SERVER, categoryId]);
+
+	useEffect(() => {
+		if (products.length === 0) return;
+		const prices = products.map(p => p.price);
+		setPriceRange([Math.min(...prices), Math.max(...prices)]);
+	}, [products]);
 
 	const handleFilterChange = (key: string, selected: string[]) => {
 		setFilters(prev => ({ ...prev, [key]: selected }));
@@ -149,7 +154,7 @@ function ProductList() {
 
 		return matchesFilters && matchesPrice && matchesRating;
 	});
-	
+
 	const sortedProducts = [...filteredProducts].sort((a, b) => {
 		switch (sortOption) {
 			case 'By rating':
@@ -162,7 +167,6 @@ function ProductList() {
 				return 0;
 		}
 	});
-
 
 	const breadcrumb = (
 		<div className='breadcrumb text-minor text-4'>
@@ -180,19 +184,17 @@ function ProductList() {
 		</div>
 	);
 
-
 	const currentCategoryName = categoryChain.length > 0
 		? categoryChain[categoryChain.length - 1].name
 		: '';
 	const currentProducts = sortedProducts.slice(startIndex, startIndex + productsPerPage);
-
-	console.log("filtered Products:", filteredProducts);
+	//console.log("Current", currentProducts)
 
 	return (
 		<div className='product-list'>
-			<div className=''>
+			<p className='breadcrumb text-minor text-4'>
 				{breadcrumb}
-			</div>
+			</p>
 			<h1 className='product-list-title text-minor header-1'> {currentCategoryName}</h1>
 			<div className='product-list-container'>
 				<div className='dekstop-only'>
@@ -365,6 +367,7 @@ function ProductList() {
 					</div>
 				</div>
 			</div>
+
 			<ScrollToTopButton />
 			{isFilterModalOpen && (
 				<div className="filter-modal-overlay" onClick={() => setIsFilterModalOpen(false)}>
