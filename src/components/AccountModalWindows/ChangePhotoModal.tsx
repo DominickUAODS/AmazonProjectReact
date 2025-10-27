@@ -32,7 +32,7 @@ export default function ChangeNameModal() {
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const handleUploadComplete = async (responseUpload: any) => {
-		console.log('Upload success:', responseUpload);
+		//'Upload success:', responseUpload);
 		
 		try {
 			const response = await authFetch(`${API_SERVER}/users/`, {
@@ -52,7 +52,7 @@ export default function ChangeNameModal() {
 			}
 
 			const data = await response.json();
-			console.log(data);
+			//console.log(data);
 
 			// Сохраняем токены
 			//storage.setItem('accessToken', data.access_token);

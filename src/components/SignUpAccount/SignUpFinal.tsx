@@ -51,7 +51,7 @@ export default function SignUpFinal({ background }: { background: Location }) {
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ email, first_name: firstName, last_name: lastName }),
 			});
-			console.log(response)
+			//console.log(response)
 			if (!response.ok) {
 				const err = await response.json();
 				setErrors({ general: err.message || 'Sign up failed' });
@@ -128,7 +128,7 @@ export default function SignUpFinal({ background }: { background: Location }) {
 						</div>
 					</div>
 
-					<img className={styles.imgReactangle} src='public\img\Rectangle_413.png'></img>
+					<img className={styles.imgReactangle} src='public\img\rectangle.png'></img>
 				</div>
 			</div>
 		</div>

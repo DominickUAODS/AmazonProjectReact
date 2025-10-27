@@ -94,7 +94,7 @@ export default function ForgotPassword({ background }: { background: Location })
 							</button>
 						</div>
 					</div>
-					<img className={styles.imgReactangle} src='public\img\Rectangle_413.png'></img>
+					<img className={styles.imgReactangle} src='public\img\rectangle.png'></img>
 				</div>
 			</div>
 		</div>

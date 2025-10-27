@@ -2,11 +2,11 @@ import { useState } from 'react';
 import styles from './CarouselCategory.module.css'
 import commonStyles from "../common.module.css";
 import WishlistCard from '../AccountComp/WishlistCard';
-import type ProductList from '../../interfaces/_ProductInterface';
+import type { ProductsList } from '../../types/Product';
 
 export type CarouselCategoryType = {
 	categoryName: string;
-	products?: ProductList[];
+	products?: ProductsList[];
 	actionSlot?: React.ReactNode;
 };
 

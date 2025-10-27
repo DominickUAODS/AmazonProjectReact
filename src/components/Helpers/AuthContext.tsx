@@ -90,7 +90,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 				return null;
 			}
 
-			console.log(data.access_token);
+			//console.log(data.access_token);
 
 			setAccessToken(data.access_token);
 

@@ -6,7 +6,7 @@ export interface ProductsList {
 	id: string;
 	name: string;
 	price: number;
-	discount: number | null;
+	discount: number;
 	displays: string;
 	comments: number;
 	old_cost?: number;
