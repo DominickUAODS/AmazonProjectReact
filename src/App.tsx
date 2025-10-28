@@ -63,7 +63,7 @@ function App() {
 						<Route path="products/:id" element={<ProductList />} />
 						<Route path="product/:id" element={<ProductPage />} />
 						
-						<Route path="*" element={<NotFound />} />
+						{/* <Route path="*" element={<NotFound />} /> */}
 
 						{/* private routes */}
 						<Route element={<RequireAuth />}>

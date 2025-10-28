@@ -152,7 +152,7 @@ export default function LoginAdmin() {
 
 						</div>
 					</div>
-					{/* <img className={styles.imgReactangle} src='public\img\rectangle.png'></img> */}
+					{/* <img className={styles.imgReactangle} src='/img/rectangle.png'></img> */}
 				</div>
 			// </div>
 		//</div>
