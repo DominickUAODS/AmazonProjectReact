@@ -44,7 +44,7 @@
 .removeBtn {
 	position: absolute;
 	top: 12px;
-	right: 8px;
+	left: 8px;
 	background-color: rgba(244, 250, 255, 1);
 	border: 1.5px solid rgba(74, 123, 217, 1);
 	border-radius: 2px;

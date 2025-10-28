@@ -67,7 +67,7 @@ export default function AccountWishlist() {
 		}
 	};
 
-	const filteredProducts = wishlist.filter(p => p.title.toLowerCase().includes(search.toLowerCase()));
+	const filteredProducts = wishlist.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
 	const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 	const startIndex = (currentPage - 1) * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
