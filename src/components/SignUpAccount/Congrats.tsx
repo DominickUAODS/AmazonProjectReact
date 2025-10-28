@@ -42,7 +42,7 @@ export default function Congrats() {
 						</div>
 					</div>
 
-					<img className={styles.imgReactangle} src='public\img\Rectangle 413.png'></img>
+					<img className={styles.imgReactangle} src="/img/Rectangle 413.png"></img>
 				</div>
 			</div>
 		</div>
