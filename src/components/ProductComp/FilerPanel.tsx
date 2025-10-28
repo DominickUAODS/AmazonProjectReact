@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./FilterPanel.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-slider/dist/css/bootstrap-slider.min.css';
+import Slider from 'bootstrap-slider';
 import type { FilterOption } from "../../services/filterOptions";
 
 export interface FiltersPanelProps {
@@ -30,10 +33,36 @@ export function FiltersPanel({
 	setPriceRange,
 	setSelectedRating,
 	handleFilterChange,
+	//filterTags,
+	//selectTagOpen,
+	//setSelectTagOpen,
 	setFilters,
-	handleMinChange,
-	handleMaxChange,
+	//handleMinChange,
+	//handleMaxChange,
 }: FiltersPanelProps) {
+	const sliderRef = useRef<HTMLInputElement | null>(null);
+
+
+	useEffect(() => {
+		if (!sliderRef.current) return;
+
+		const slider = new Slider(sliderRef.current as HTMLElement, {
+			min: priceRange[0],
+			max: priceRange[1],
+			value: priceRange,
+			tooltip: "hide",
+			range: true,
+		});
+
+		slider.on("slide", (val: number | [number, number]) => {
+			if (Array.isArray(val)) {
+				setPriceRange(val);
+			}
+		});
+
+		return () => slider.destroy();
+	}, [priceRange, setPriceRange]);
+
 	return (
 		<div className='product-list-filters-container'>
 			<div className="custom-select-wrapper-mobile">
@@ -158,7 +187,7 @@ export function FiltersPanel({
 									onChange={(e) => setPriceRange([+e.target.value, priceRange[1]])}
 								/>
 								<svg width="18" height="2" viewBox="0 0 18 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M1 1H17" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" />
+									<path d="M1 1H17" stroke="#0E2042" strokeWidth="1.5" strokeLinecap="round" />
 								</svg>
 
 								<input
@@ -178,37 +207,14 @@ export function FiltersPanel({
 						</div>
 
 
-						<div className="slider-container">
-							<input
-								type="range"
-								min="0"
-								max="1000"
-								value={priceRange[0]}
-								onChange={handleMinChange}
-								className="thumb thumb-left"
-							/>
-							<input
-								type="range"
-								min="0"
-								max="1000"
-								value={priceRange[1]}
-								onChange={handleMaxChange}
-								className="thumb thumb-right"
-							/>
-
-							<div className="slider">
-								<div
-									className="slider-track"
-								></div>
-								<div
-									className="slider-range"
-									style={{
-										left: `${(priceRange[0] / 1000) * 100}%`,
-										right: `${100 - (priceRange[1] / 1000) * 100}%`
-									}}
-								></div>
-							</div>
-						</div>
+						<input
+							ref={sliderRef}
+							type="text"
+							className="slider"
+							data-slider-min={priceRange[0]}
+							data-slider-max={priceRange[1]}
+							data-slider-value={JSON.stringify(priceRange)}
+						/>
 					</div>
 				)}
 			</div>

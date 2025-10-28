@@ -21,12 +21,12 @@ export type CommentType = {
 	user_lastname: string;
 	user_image: string;
 	helpful_count?: number;
-	user_id:string;
+	user_id: string;
 }
 
 type OneCommentProps = CommentType & {
 	onDelete?: (id: string) => void;
-  };
+};
 
 
 export default function OneComment({
@@ -43,8 +43,9 @@ export default function OneComment({
 	user_lastname,
 	user_image,
 	helpful_count = 0,
-	onDelete, 
-  }: OneCommentProps) {
+	onDelete,
+}: OneCommentProps) {
+	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const { isAuthenticated, accessToken, user } = useAuth();
 	const [helpful, setHelpful] = useState<boolean>(is_helpful);
 	const [isOpen, setOpen] = useState<boolean>(false);
@@ -53,28 +54,28 @@ export default function OneComment({
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 
-	const openDeleteReview = () =>{
+	const openDeleteReview = () => {
 		setShowDeleteModal(true);
 	}
 
 	const handleDeleteReview = async () => {
 		if (!isAuthenticated || !accessToken) return;
-	
+
 		try {
-			const res = await fetch(`${import.meta.env.VITE_API_SERVER}/reviews/${id}`, {
+			const res = await fetch(`${API_SERVER}/reviews/${id}`, {
 				method: "DELETE",
 				headers: {
 					"Authorization": `Bearer ${localStorage.getItem("accessToken")}`,
 				}
 			});
-	
+
 			if (res.status === 204) {
-				console.log("Review deleted");
+				//console.log("Review deleted");
 				setShowDeleteModal(false);
 				if (onDelete) {
-					onDelete(id); 
+					onDelete(id);
 				}
-	
+
 			} else if (res.status === 404) {
 				console.error("Review not found");
 			} else {
@@ -94,7 +95,7 @@ export default function OneComment({
 		});
 	};
 
-	const isMyComment = user?.last_name=== user_lastname;
+	const isMyComment = user?.last_name === user_lastname;
 
 
 	const personWord = (n: number) => (n <= 1 ? "person" : "people");
@@ -151,34 +152,34 @@ export default function OneComment({
 						<div className={styles.date}>
 							{formatDate(published)}
 							{isMyComment && (
-								 <div className={styles.dropdownWrapper}>
-								 <div className={styles.deteteEditDD} onClick={() => setOpen(prev => !prev)}>
-								   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-									 <path d="M5.3999 12.1992C5.3999 13.0265 4.72895 13.6992 3.89605 13.6992C3.06314 13.6992 2.3999 13.0265 2.3999 12.1992C2.3999 11.3719 3.07085 10.6992 3.89605 10.6992C4.72124 10.6992 5.3999 11.3719 5.3999 12.1992Z" fill="#0E2042"/>
-									 <path d="M13.23 12.1992C13.23 13.0265 12.559 13.6992 11.7261 13.6992C10.8932 13.6992 10.23 13.0265 10.23 12.1992C10.23 11.3719 10.9009 10.6992 11.7261 10.6992C12.5513 10.6992 13.23 11.3719 13.23 12.1992Z" fill="#0E2042"/>
-									 <path d="M21.0601 12.1992C21.0601 13.0265 20.3891 13.6992 19.5562 13.6992C18.7233 13.6992 18.0601 13.0265 18.0601 12.1992C18.0601 11.3719 18.731 10.6992 19.5562 10.6992C20.3814 10.6992 21.0601 11.3719 21.0601 12.1992Z" fill="#0E2042"/>
-								   </svg>
-								 </div>
-						   
-								 {isOpen && (
-								   <div className={styles.editDeleteDrop}>
-									 <div className={styles.dropOptions}>
-									   <div className={styles.option}  onClick={() => {
-											setShowModal(true);  // открыть модалку
-											setOpen(false);      // закрыть дропдаун
-										}}><span>Edit</span></div>
-									   <div
-										onClick={() => {
-											openDeleteReview();  
-											setOpen(false);
-										}}
-										className={styles.option}
-										>
-											<span style={{color:"rgba(234, 72, 72, 1)"}}>Delete</span></div>
-									 </div>
-								   </div>
-								 )}
-							   </div>
+								<div className={styles.dropdownWrapper}>
+									<div className={styles.deteteEditDD} onClick={() => setOpen(prev => !prev)}>
+										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M5.3999 12.1992C5.3999 13.0265 4.72895 13.6992 3.89605 13.6992C3.06314 13.6992 2.3999 13.0265 2.3999 12.1992C2.3999 11.3719 3.07085 10.6992 3.89605 10.6992C4.72124 10.6992 5.3999 11.3719 5.3999 12.1992Z" fill="#0E2042" />
+											<path d="M13.23 12.1992C13.23 13.0265 12.559 13.6992 11.7261 13.6992C10.8932 13.6992 10.23 13.0265 10.23 12.1992C10.23 11.3719 10.9009 10.6992 11.7261 10.6992C12.5513 10.6992 13.23 11.3719 13.23 12.1992Z" fill="#0E2042" />
+											<path d="M21.0601 12.1992C21.0601 13.0265 20.3891 13.6992 19.5562 13.6992C18.7233 13.6992 18.0601 13.0265 18.0601 12.1992C18.0601 11.3719 18.731 10.6992 19.5562 10.6992C20.3814 10.6992 21.0601 11.3719 21.0601 12.1992Z" fill="#0E2042" />
+										</svg>
+									</div>
+
+									{isOpen && (
+										<div className={styles.editDeleteDrop}>
+											<div className={styles.dropOptions}>
+												<div className={styles.option} onClick={() => {
+													setShowModal(true);  // открыть модалку
+													setOpen(false);      // закрыть дропдаун
+												}}><span>Edit</span></div>
+												<div
+													onClick={() => {
+														openDeleteReview();
+														setOpen(false);
+													}}
+													className={styles.option}
+												>
+													<span style={{ color: "rgba(234, 72, 72, 1)" }}>Delete</span></div>
+											</div>
+										</div>
+									)}
+								</div>
 							)}
 						</div>
 					</div>
@@ -294,16 +295,16 @@ export default function OneComment({
 					user_image,
 					helpful_count,
 					user_id
-				  }}
+				}}
 			/>
 
 			<DeleteCategory
-				onClose={()=>setShowDeleteModal(false)}
+				onClose={() => setShowDeleteModal(false)}
 				show={showDeleteModal}
 				addSpan='Your review will be impossible to recover.'
 				onDelete={handleDeleteReview}
-				/>
-				
+			/>
+
 		</div>
 	);
 }

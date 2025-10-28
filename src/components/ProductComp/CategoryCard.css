@@ -63,7 +63,7 @@
 }
 
 .category-card a svg * {
-	stroke-width: 4px;
+	strokeWidth: 4px;
 }
 
 @media (max-width: 400px) {

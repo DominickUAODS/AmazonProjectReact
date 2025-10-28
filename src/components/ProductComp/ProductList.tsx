@@ -11,8 +11,8 @@ import { getFilterOptionsFromProducts, type FilterOption, type ProductDetailDto 
 import Pagination from '../Pagination/Pagination';
 import { FiltersPanel } from './FilerPanel';
 
-
 function ProductList() {
+	const API_SERVER = import.meta.env.VITE_API_SERVER;
 	const { id: categoryId } = useParams<{ id: string }>();
 	const [products, setProducts] = useState<(ProductCardProps & { details: ProductDetailDto[] })[]>([]);
 	const [, setCategoryProps] = useState<PropertyKeyType[]>([]);
@@ -30,7 +30,6 @@ function ProductList() {
 	const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 	const [isMobile, setIsMobile] = useState(false);
 
-
 	useEffect(() => {
 		if (isFilterModalOpen) {
 			document.body.classList.add("modal-open");
@@ -38,7 +37,6 @@ function ProductList() {
 			document.body.classList.remove("modal-open");
 		}
 	}, [isFilterModalOpen]);
-
 
 	useEffect(() => {
 		const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -50,13 +48,6 @@ function ProductList() {
 	const productsPerPage = 12;
 	const totalPages = Math.ceil(products.length / productsPerPage);
 	const startIndex = (currentPage - 1) * productsPerPage;
-
-
-
-
-
-
-	const API_SERVER = import.meta.env.VITE_API_SERVER;
 
 	const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newMin = Math.min(+e.target.value, priceRange[1] - 10);
@@ -99,7 +90,7 @@ function ProductList() {
 			try {
 				const res = await fetch(`${API_SERVER}/product?categoryId=${categoryId}`);
 				const productsSummary: ProductCardProps[] = await res.json();
-				console.log("Products summary:", productsSummary);
+				//console.log("Products summary:", productsSummary);
 
 				const productsWithDetails = await Promise.all(
 					productsSummary.map(async product => {
@@ -113,7 +104,7 @@ function ProductList() {
 					})
 				);
 
-				console.log("Products", productsWithDetails);
+				//console.log("Products", productsWithDetails);
 
 				setProducts(productsWithDetails);
 
@@ -134,13 +125,17 @@ function ProductList() {
 		fetchProductsWithDetails();
 	}, [API_SERVER, categoryId]);
 
+	useEffect(() => {
+		if (products.length === 0) return;
+		const prices = products.map(p => p.price);
+		setPriceRange([Math.min(...prices), Math.max(...prices)]);
+	}, [products]);
+
 	const handleFilterChange = (key: string, selected: string[]) => {
 		setFilters(prev => ({ ...prev, [key]: selected }));
 	};
 
-	const filterTags = Object.entries(filters)
-		.flatMap(([key, values]) => values.map(v => `${key}: ${v}`));
-
+	const filterTags = Object.entries(filters).flatMap(([key, values]) => values.map(v => `${key}: ${v}`));
 
 	const filteredProducts = products.filter(product => {
 		// обычные фильтры по свойствам
@@ -160,8 +155,6 @@ function ProductList() {
 		return matchesFilters && matchesPrice && matchesRating;
 	});
 
-
-
 	const sortedProducts = [...filteredProducts].sort((a, b) => {
 		switch (sortOption) {
 			case 'By rating':
@@ -175,12 +168,12 @@ function ProductList() {
 		}
 	});
 
-
 	const breadcrumb = (
-		<p className='breadcrumb text-minor text-4'>
+		<div className='breadcrumb text-minor text-4'>
 			<Link to='/'><ReactSVG src='/icons/home.svg' /></Link>
 			{categoryChain.map((cat, idx) => (
-				<span key={cat.id}>
+				// <span key={cat.id}>
+				<span key={idx}>
 					{' / '}
 					{idx < categoryChain.length - 1 ? (
 						<Link to={`/products/${cat.id}`}>{cat.name}</Link>
@@ -189,20 +182,20 @@ function ProductList() {
 					)}
 				</span>
 			))}
-		</p>
+		</div>
 	);
-
 
 	const currentCategoryName = categoryChain.length > 0
 		? categoryChain[categoryChain.length - 1].name
 		: '';
 	const currentProducts = sortedProducts.slice(startIndex, startIndex + productsPerPage);
+	//console.log("Current", currentProducts)
 
 	return (
 		<div className='product-list'>
-			<p className='breadcrumb text-minor text-4'>
+			<div className=''>
 				{breadcrumb}
-			</p>
+			</div>
 			<h1 className='product-list-title text-minor header-1'> {currentCategoryName}</h1>
 			<div className='product-list-container'>
 				<div className='dekstop-only'>
@@ -230,7 +223,7 @@ function ProductList() {
 						{window.innerWidth < 768 && (
 							<div style={{ cursor: "pointer" }} className="" onClick={() => setIsFilterModalOpen(true)}>
 								<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M18.3838 18.2876V23.7276C18.3838 24.4796 17.9998 25.1756 17.3598 25.5756L15.9838 26.4316C14.5358 27.3356 12.6558 26.2956 12.6558 24.5836V17.7996C12.6558 16.5996 11.6798 15.6236 10.4798 15.6236H7.91181C6.7118 15.6236 5.9998 14.6236 5.7358 13.4476L4.7998 7.77561C4.7998 6.57561 5.7758 5.59961 6.9758 5.59961H25.0158C26.2158 5.59961 27.1918 6.57561 27.1918 7.77561L26.2558 13.4476C26.0398 14.7036 25.2798 15.6236 24.0798 15.6236H18.3598" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+									<path d="M18.3838 18.2876V23.7276C18.3838 24.4796 17.9998 25.1756 17.3598 25.5756L15.9838 26.4316C14.5358 27.3356 12.6558 26.2956 12.6558 24.5836V17.7996C12.6558 16.5996 11.6798 15.6236 10.4798 15.6236H7.91181C6.7118 15.6236 5.9998 14.6236 5.7358 13.4476L4.7998 7.77561C4.7998 6.57561 5.7758 5.59961 6.9758 5.59961H25.0158C26.2158 5.59961 27.1918 6.57561 27.1918 7.77561L26.2558 13.4476C26.0398 14.7036 25.2798 15.6236 24.0798 15.6236H18.3598" stroke="#0E2042" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 								</svg>
 							</div>
 						)}
@@ -242,7 +235,7 @@ function ProductList() {
 							>
 								<span>{filterTags.length} filters applied</span>
 								<svg className={`arrow ${selectTagOpen ? 'open' : ''}`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M21.252 15.8702L12.936 7.89617C12.408 7.38617 11.568 7.38617 11.04 7.89617L2.74805 15.8702" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+									<path d="M21.252 15.8702L12.936 7.89617C12.408 7.38617 11.568 7.38617 11.04 7.89617L2.74805 15.8702" stroke="#0E2042" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 								</svg>
 
 							</button>
@@ -353,7 +346,7 @@ function ProductList() {
 							<ProductCard
 								card_size={isMobile ? "small" : bigCards ? "big" : "small"}
 								key={index}
-								displays={value.displays}
+								displays={value.displays[0]}
 								id={value.id}
 								name={value.name}
 								comments={value.comments}
@@ -375,6 +368,7 @@ function ProductList() {
 					</div>
 				</div>
 			</div>
+
 			<ScrollToTopButton />
 			{isFilterModalOpen && (
 				<div className="filter-modal-overlay" onClick={() => setIsFilterModalOpen(false)}>

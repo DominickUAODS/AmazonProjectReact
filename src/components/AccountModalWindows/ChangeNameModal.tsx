@@ -63,7 +63,7 @@ export default function ChangeNameModal() {
 			}
 
 			const data = await response.json();
-			console.log(data);
+			//console.log(data);
 
 			// Сохраняем токены
 			//storage.setItem('accessToken', data.access_token);

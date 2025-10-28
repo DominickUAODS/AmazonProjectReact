@@ -40,9 +40,9 @@ export default function ResetPassword({ background }: { background: Location }) 
 				body: JSON.stringify({ email, code, new_password: newPassword }),
 			});
 
-			console.log(location.state);
-			console.log(background);
-			console.log(`${email} + ${code} + ${newPassword}`);
+			//console.log(location.state);
+			//console.log(background);
+			//console.log(`${email} + ${code} + ${newPassword}`);
 
 			if (!response.ok) {
 				const err = await response.json();
@@ -108,7 +108,7 @@ export default function ResetPassword({ background }: { background: Location }) 
 						</div>
 					</div>
 
-					<img className={styles.imgReactangle} src='public\img\Rectangle_413.png'></img>
+					<img className={styles.imgReactangle} src='public\img\rectangle.png'></img>
 				</div>
 			</div>
 		</div>

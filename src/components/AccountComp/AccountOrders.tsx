@@ -23,10 +23,10 @@ export default function AccountOrders() {
 					method: 'GET',
 					headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${accessToken}` },
 				});
-				console.log(responce.json);
+				//console.log(responce.json);
 				if (!responce.ok) throw new Error('Failed to fetch wishlist');
 				const data = await responce.json();
-				console.log(data);
+				//console.log(data);
 				serOrders(data);
 
 			} catch (err) {
@@ -52,7 +52,7 @@ export default function AccountOrders() {
 				<div className={styles.accOrdersTitle}>
 					<div className={styles.backButtonDiv} onClick={handleMobileClick}>
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M15.7501 2.87891L7.77605 11.1949C7.26605 11.7229 7.26605 12.5629 7.77605 13.0909L15.7501 21.3829" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M15.7501 2.87891L7.77605 11.1949C7.26605 11.7229 7.26605 12.5629 7.77605 13.0909L15.7501 21.3829" stroke="#4A7BD9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
 					</svg>
 					<span className={styles.back}>Back</span>
 					</div>

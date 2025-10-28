@@ -69,7 +69,7 @@ export default function AccountSettings() {
 				<div className={styles.accSettingsTitle}>
 					<div className={styles.backButtonDiv} onClick={handleMobileClick}>
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M15.7501 2.87891L7.77605 11.1949C7.26605 11.7229 7.26605 12.5629 7.77605 13.0909L15.7501 21.3829" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M15.7501 2.87891L7.77605 11.1949C7.26605 11.7229 7.26605 12.5629 7.77605 13.0909L15.7501 21.3829" stroke="#4A7BD9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
 					</svg>
 					<span className={styles.back}>Back</span>
 
@@ -107,8 +107,8 @@ export default function AccountSettings() {
 								>
 									{isOpen ? (
 										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M12.0001 20.9632C16.9508 20.9632 20.9641 16.9498 20.9641 11.9992C20.9641 7.04848 16.9508 3.03516 12.0001 3.03516C7.04945 3.03516 3.03613 7.04848 3.03613 11.9992C3.03613 16.9498 7.04945 20.9632 12.0001 20.9632Z" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-											<path d="M14.178 15.2539L13.572 15.7099C12.678 16.3819 11.406 15.7459 11.406 14.6299V11.1919C11.406 11.0299 11.22 10.9699 11.1 11.0779C10.656 11.4679 10.698 11.5579 9.82202 11.9779" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+											<path d="M12.0001 20.9632C16.9508 20.9632 20.9641 16.9498 20.9641 11.9992C20.9641 7.04848 16.9508 3.03516 12.0001 3.03516C7.04945 3.03516 3.03613 7.04848 3.03613 11.9992C3.03613 16.9498 7.04945 20.9632 12.0001 20.9632Z" stroke="#0E2042" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+											<path d="M14.178 15.2539L13.572 15.7099C12.678 16.3819 11.406 15.7459 11.406 14.6299V11.1919C11.406 11.0299 11.22 10.9699 11.1 11.0779C10.656 11.4679 10.698 11.5579 9.82202 11.9779" stroke="#0E2042" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 											<path d="M12.1922 9.05471C12.1202 9.34871 11.8742 9.58871 11.5802 9.65471C11.2562 9.72671 10.9562 9.61271 10.7642 9.39671C10.5962 9.20471 10.5182 8.94071 10.5782 8.65871C10.6442 8.35871 10.8842 8.11271 11.1782 8.04071C11.7962 7.89071 12.3362 8.43671 12.1922 9.05471Z" fill="#0E2042" />
 										</svg>
 

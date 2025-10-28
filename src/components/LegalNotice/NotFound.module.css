@@ -1,0 +1,62 @@
+.notfound {
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(74, 123, 217, 1);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.notfound0 {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}
+
+
+.notfound_photo {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	justify-content: center;
+	align-items: center;
+}
+
+.notfound_photo img {
+	width: 800px;
+	height: 550px;
+}
+
+.notfound_photo p {
+	color: rgba(242, 244, 248, 1);
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 28px;
+	letter-spacing: -0.3px;
+	font-family: 'Mulish';
+}
+
+.mainPage {
+	width: 400px;
+	font-family: 'Mulish';
+}
+
+@media (max-width: 480px) {
+	.notfound_photo img {
+		width: 340px;
+		height: 430px;
+		object-fit: cover;
+	}
+
+	.notfound_photo p {
+		color: rgba(242, 244, 248, 1);
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 18px;
+		letter-spacing: 0.3px;
+		font-family: 'Mulish';
+	}
+}

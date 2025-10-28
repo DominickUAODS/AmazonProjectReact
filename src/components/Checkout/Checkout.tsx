@@ -40,7 +40,7 @@ export default function Checkout() {
 	}, [])
 
 	const placeOrder = () => {
-		console.log('✅ Выбран способ оплаты:', paymentMethod);
+		//console.log('✅ Выбран способ оплаты:', paymentMethod);
 		console.log('📦 Данные заказа:', {
 			firstName: fName,
 			lastName: lName,

@@ -245,12 +245,12 @@ const CategoriesPage = () => {
 				property_keys: data.propertyKeys || [],
 			};
 
-			console.log(`payload: ${data.propertyKeys}`);
-			console.log(modalCategory?.id)
+			//console.log(`payload: ${data.propertyKeys}`);
+			//console.log(modalCategory?.id)
 
 			if (modalCategory) {
 				// UPDATE
-				console.log("i am here");
+				//console.log("i am here");
 				response = await fetch(`${API_SERVER}/category/${modalCategory.id}`, {
 					method: "PUT",
 					headers: { "Content-Type": "application/json" },
@@ -290,7 +290,7 @@ const CategoriesPage = () => {
 	};
 
 	const handleDeleteCategory = async (categoryId: string) => {
-		console.log("i am here")
+		//console.log("i am here")
 		try {
 			const category = findById(categories, categoryId);
 			if (!category) return;
@@ -298,7 +298,7 @@ const CategoriesPage = () => {
 			// если есть подкатегории → собираем все ids
 			const idsToDelete = [categoryId, ...collectChildIds(category)];
 
-			console.log(idsToDelete);
+			//console.log(idsToDelete);
 
 			// делаем батч-удаление (можно циклом, можно отдельным API)
 			for (const id of idsToDelete) {

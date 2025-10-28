@@ -38,7 +38,7 @@ export default function EditCreateProduct() {
 
 		fetch(`${API_SERVER}/product/${productId}`)
 			.then(async (res) => {
-				console.log("[EditCreateProduct] Response status:", res.status, res.statusText);
+				//console.log("[EditCreateProduct] Response status:", res.status, res.statusText);
 				if (!res.ok) {
 					const text = await res.text();
 					console.error("[EditCreateProduct] Response body:", text);
@@ -47,7 +47,7 @@ export default function EditCreateProduct() {
 				return res.json();
 			})
 			.then((data) => {
-				console.log("[EditCreateProduct] Продукт с сервера:", data);
+				//console.log("[EditCreateProduct] Продукт с сервера:", data);
 				setProduct(data);
 				if (data.category_id) setCategoryId(data.category_id);
 			})
@@ -79,39 +79,39 @@ export default function EditCreateProduct() {
 				...product,
 				category_id: categoryId || null,
 			}
-			console.log("Сохраняем изменения продукта:", product);
+			//console.log("Сохраняем изменения продукта:", product);
 
 			await fetch(`${API_SERVER}/product/${productId}`, {
 				method: "PUT",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(payload),
 			})
-				.then(res => res.json())
-				.then(data => {
-					console.log("Обновлено:", data);
-					navigate(-1);
-				});
+				.then(res => res.json()).then(() => { navigate(-1) })
+			// .then(data => {
+			// 	console.log("Обновлено:", data);
+			// 	navigate(-1);
+			// });
 		} else {
 			//console.log("Создаём новый продукт:", product);
 			const payload = {
 				...product,
 				category_id: categoryId || null,
 			}
-			console.log("Создаём новый продукт:", payload);
+			//console.log("Создаём новый продукт:", payload);
 			await fetch(`${API_SERVER}/product`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(payload),
 			})
-				.then(res => res.json())
-				.then(data => {
-					console.log("Создано:", data);
-					navigate(-1);
-				});
+				.then(res => res.json()).then(() => { navigate(-1) })
+			// .then(data => {
+			// 	console.log("Создано:", data);
+			// 	navigate(-1);
+			// });
 		}
 	};
-console.log("setCategoryId");
-	console.log(categoryId);
+	//console.log("setCategoryId");
+	//	console.log(categoryId);
 
 	return (
 		<div className={cmStyles.panel}>
@@ -130,17 +130,14 @@ console.log("setCategoryId");
 				</div>
 			</div>
 
-
-
-
 			{/* Нижний бар */}
 			<div className={styles.footerNav}>
 				<div className={styles.spnGroup}>
 					<span className={styles.stn}>
 						<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M20 4.93945V17.4295" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-							<path d="M34.9998 19.9395H22.5098" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-							<path d="M5 19.9395H17.49C18.88 19.9395 20 21.0595 20 22.4495V34.9395" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+							<path d="M20 4.93945V17.4295" stroke="#4A7BD9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+							<path d="M34.9998 19.9395H22.5098" stroke="#4A7BD9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+							<path d="M5 19.9395H17.49C18.88 19.9395 20 21.0595 20 22.4495V34.9395" stroke="#4A7BD9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 						</svg>
 						{productId ? "Edit product" : "Create product"}
 					</span>

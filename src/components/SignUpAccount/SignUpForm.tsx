@@ -27,14 +27,14 @@ export default function SignUpForm({ background }: { background: Location }) {
 			const emailError = emailFilter(email);
 			if (emailError) newErrors.email = emailError;
 		}
-		
+
 		if (!password) {
 			newErrors.password = 'Missing password';
 		} else {
 			const passwordError = passwordFilter(password);
 			if (passwordError) newErrors.password = passwordError;
 		}
-	
+
 		// Проверка confirmPassword
 		if (!confirmPassword) {
 			newErrors.confirmPassword = 'Missing confirm password';
@@ -67,7 +67,7 @@ export default function SignUpForm({ background }: { background: Location }) {
 			navigate('/checkin', { state: { background, email } });
 		} catch (err) {
 			console.error(err);
-			console.log(err);
+			//console.log(err);
 			setErrors({ general: 'Ошибка подключения к серверу' });
 		}
 	};

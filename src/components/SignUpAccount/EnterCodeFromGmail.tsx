@@ -114,7 +114,7 @@ export default function EnterCodeFromGmail({ background, isPasswordReset }: { ba
 				<div className={commonStyles.modalBlock}>
 					<div className={styles.backButtonBlock} onClick={handleBack}>
 						<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M26.2498 4.80078L12.9598 18.6608C12.1098 19.5408 12.1098 20.9408 12.9598 21.8208L26.2498 35.6408" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+							<path d="M26.2498 4.80078L12.9598 18.6608C12.1098 19.5408 12.1098 20.9408 12.9598 21.8208L26.2498 35.6408" stroke="#4A7BD9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 						</svg>
 						<button className={styles.backButton} >
 							Back
@@ -178,7 +178,7 @@ export default function EnterCodeFromGmail({ background, isPasswordReset }: { ba
 							</div>
 						</div>
 					</div>
-					<img className={styles.imgReactangle} src='public\img\Rectangle_413.png'></img>
+					<img className={styles.imgReactangle} src='public\img\rectangle.png'></img>
 				</div>
 			</div>
 		</div>

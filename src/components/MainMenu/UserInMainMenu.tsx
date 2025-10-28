@@ -20,7 +20,9 @@ export default function UserInMainMenu({
     const openLogIn = () => {
         navigate("/logIn", { state: { background } });
 
-    };
+	};
+
+
 
     const handleClick = () => {
         navigate(`/settings`);
@@ -38,9 +40,9 @@ export default function UserInMainMenu({
         } else {
             handleClick();
         }
-    };
-
-    return (
+      };
+    
+    return(<>
         <div className={styles.customerBlock}>
 
             <div className={commonStyles.cusPhoto} onClick={user && handleResponsiveClick}>
@@ -51,8 +53,8 @@ export default function UserInMainMenu({
                     />
                     <div className={styles.closeMenuMobile} onClick={onClose}>
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.3999 10.4004L21.2045 21.205" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" />
-                            <path d="M21.2046 10.4004L10.4 21.205" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" />
+                            <path d="M10.3999 10.4004L21.2045 21.205" stroke="black" strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" />
+                            <path d="M21.2046 10.4004L10.4 21.205" stroke="black" strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" />
                         </svg>
                     </div>
                 </div>
@@ -66,11 +68,15 @@ export default function UserInMainMenu({
                 </div>
             </div>
             {user ? null : (
-                <div className={styles.authButtons}>
-                    <button className={`${commonStyles.nextStepButton} ${styles.myBtn}`} onClick={openSignUp}>Sign up</button>
-                    <button className={commonStyles.secondaryButton} onClick={openLogIn}>Log in</button>
-                </div>
-            )}
-        </div>
-    );
+            <div className={styles.authButtons}>
+                <button className={`${commonStyles.nextStepButton} ${styles.myBtn}`} onClick={openSignUp}>Sign up</button>
+                <button className={commonStyles.secondaryButton} onClick={openLogIn}>Log in</button>
+            </div>
+        )}
+    </div>
+
+			
+        </>
+    
+	);
 }

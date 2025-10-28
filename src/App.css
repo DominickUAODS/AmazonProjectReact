@@ -23,7 +23,7 @@
 }
 
 .breadcrumb svg * {
-	stroke-width: 2px;
+	strokeWidth: 2px;
 }
 
 .text-main {

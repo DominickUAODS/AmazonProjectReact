@@ -12,7 +12,7 @@ function CategoryCard({ id, image, name, description }: Category) {
     
     return (
         <div className='category-card bg-objects' onClick={handleClick}>
-            <img src={image || "public/img/Rectangle_413.png"} alt={name} />
+            <img src={image || "public/img/rectangle.png"} alt={name} />
             <p className='text-minor text-2'>{name}: {description}</p>
             <div className='category-card-see-all-container'>
                 <span className='text-minor text-5'>See all</span>

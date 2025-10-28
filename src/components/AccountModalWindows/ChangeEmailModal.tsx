@@ -70,8 +70,8 @@ export default function ChangeEmailModal() {
 				return;
 			}
 
-			const data = await response.json();
-			console.log(data);
+			//const data = await response.json();
+			//console.log(data);
 
 		} catch (err) {
 			console.error(err);

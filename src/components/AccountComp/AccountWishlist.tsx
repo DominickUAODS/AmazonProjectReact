@@ -35,7 +35,7 @@ export default function AccountWishlist() {
 
 				if (!responce.ok) throw new Error('Failed to fetch wishlist');
 				const data = await responce.json();
-				console.log(data);
+				//console.log(data);
 				setWishlist(data);
 
 			} catch (err) {
@@ -67,7 +67,7 @@ export default function AccountWishlist() {
 		}
 	};
 
-	const filteredProducts = wishlist.filter(p => p.title.toLowerCase().includes(search.toLowerCase()));
+	const filteredProducts = wishlist.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
 	const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 	const startIndex = (currentPage - 1) * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
@@ -90,7 +90,7 @@ export default function AccountWishlist() {
 					<div className={styles.backButtonTitleDiv} onClick={handleMobileClick}>
 						<div className={styles.buttonBack}>
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M15.7501 2.87891L7.77605 11.1949C7.26605 11.7229 7.26605 12.5629 7.77605 13.0909L15.7501 21.3829" stroke="#4A7BD9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+								<path d="M15.7501 2.87891L7.77605 11.1949C7.26605 11.7229 7.26605 12.5629 7.77605 13.0909L15.7501 21.3829" stroke="#4A7BD9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 							</svg>
 							<span className={styles.back}>Back</span>
 						</div>
@@ -107,8 +107,8 @@ export default function AccountWishlist() {
 							/>
 							<button className={styles.searchButton}>
 								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M13.986 14.1076C12.906 15.5236 10.416 16.2016 9.3 16.2016C5.82 16.2016 3 13.3816 3 9.90156C3 6.42156 5.82 3.60156 9.3 3.60156C12.78 3.60156 15.6 6.42156 15.6 9.90156C15.6 10.5856 15.492 11.2456 15.288 11.8636" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-									<path d="M21.0001 20.3995L13.9861 14.1055" stroke="#0E2042" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+									<path d="M13.986 14.1076C12.906 15.5236 10.416 16.2016 9.3 16.2016C5.82 16.2016 3 13.3816 3 9.90156C3 6.42156 5.82 3.60156 9.3 3.60156C12.78 3.60156 15.6 6.42156 15.6 9.90156C15.6 10.5856 15.492 11.2456 15.288 11.8636" stroke="#0E2042" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+									<path d="M21.0001 20.3995L13.9861 14.1055" stroke="#0E2042" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 								</svg>
 							</button>
 						</div>

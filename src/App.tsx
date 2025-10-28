@@ -40,6 +40,7 @@ import License from './components/LegalNotice/License';
 import Policy from './components/LegalNotice/Policy';
 import LegalMenuMobile from './components/LegalNotice/LegalMenuMobile';
 import AccountMenu from './components/AccountMenu/AccountMenu';
+import NotFound from './components/LegalNotice/NotFound';
 
 function App() {
 	const location = useLocation();
@@ -54,12 +55,15 @@ function App() {
 		<>
 			<AuthProvider>
 				<Routes location={background || location}>
+					<Route path="not-found" element={<NotFound />} />
 					<Route path="/" element={<Layout />}>
 
 						{/* main pages */}
 						<Route index element={<Main />} />
 						<Route path="products/:id" element={<ProductList />} />
 						<Route path="product/:id" element={<ProductPage />} />
+						
+						<Route path="*" element={<NotFound />} />
 
 						{/* private routes */}
 						<Route element={<RequireAuth />}>
@@ -67,7 +71,7 @@ function App() {
 							<Route path="wishlist" element={<AccountWishlist />} />
 							<Route path="orders" element={<AccountOrders />} />
 							<Route path="checkout" element={<Checkout />} />
-							<Route path="account-menu" element={<AccountMenu/>}/>
+							<Route path="account-menu" element={<AccountMenu />} />
 						</Route>
 
 						{/* Экран выбора для мобильных */}
