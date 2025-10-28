@@ -91,6 +91,10 @@
     text-align: left;
 }
 
+a{
+	text-decoration: none;
+}
+
 .active {
     background-color:rgba(224, 235, 255, 1);
     border-radius: 4px;
