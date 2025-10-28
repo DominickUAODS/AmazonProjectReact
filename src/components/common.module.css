@@ -247,10 +247,12 @@
 	height: 58px;
 	margin: 0 !important;
 	padding: 20px 18px 20px !important;
-	display: flex;
 	align-items: center;
+	display: flex;
 	box-sizing: border-box;
 }
+
+
 
 .inputWrapper2 {
 	border: 1.5px solid rgba(14, 32, 66, 0.5);
@@ -266,10 +268,15 @@
 
 
 .inputWrapper legend {
-	padding: 0 4px;
+	position: absolute;
+	top: -10px;
+	left: 12px;
+	background-color: rgba(244, 250, 255, 1);
+	padding: 0 6px;
 	font-size: 16px;
 	font-family: 'Mulish';
 	line-height: 24px;
+	max-width: 100px;
 	letter-spacing: 0.3px;
 	color: rgba(14, 32, 66, 1);
 }
@@ -315,6 +322,8 @@
 	margin-left: 74px;
 	margin-right: 74px;
 }
+
+
 
 .codeInput,
 .codeInput:active {
