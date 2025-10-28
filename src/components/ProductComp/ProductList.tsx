@@ -172,7 +172,8 @@ function ProductList() {
 		<div className='breadcrumb text-minor text-4'>
 			<Link to='/'><ReactSVG src='/icons/home.svg' /></Link>
 			{categoryChain.map((cat, idx) => (
-				<span key={cat.id}>
+				// <span key={cat.id}>
+				<span key={idx}>
 					{' / '}
 					{idx < categoryChain.length - 1 ? (
 						<Link to={`/products/${cat.id}`}>{cat.name}</Link>
@@ -192,9 +193,9 @@ function ProductList() {
 
 	return (
 		<div className='product-list'>
-			<p className='breadcrumb text-minor text-4'>
+			<div className=''>
 				{breadcrumb}
-			</p>
+			</div>
 			<h1 className='product-list-title text-minor header-1'> {currentCategoryName}</h1>
 			<div className='product-list-container'>
 				<div className='dekstop-only'>

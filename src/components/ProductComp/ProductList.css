@@ -336,71 +336,71 @@
 }
 
 .price-filter input[type="range"] {
-    width: 334px;
-    height: 20px;
-    accent-color: rgba(184, 234, 72, 1);
-  }
-  
-  .price-inputs {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-  
-  .save-btn {
-    background-color: rgba(184, 234, 72, 1);
-    border: none;
-    padding: 8px 32px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 40px;
-  }
-  
-  .rating-option {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin: 4px 0;
-  }
-  
-  .star {
-    font-size: 18px;
-    color: #ccc;
-  }
-  
-  .star.filled {
-    color: #0E2042;
-  }
-  
+	width: 334px;
+	height: 20px;
+	accent-color: rgba(184, 234, 72, 1);
+}
 
-  .slider-container {
-    position: relative;
-    width: 100%;
-    max-width: 382px;
-    padding-bottom: 40px;
-    margin: 0 auto;
+.price-inputs {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+
+.save-btn {
+	background-color: rgba(184, 234, 72, 1);
+	border: none;
+	padding: 8px 32px;
+	border-radius: 4px;
+	cursor: pointer;
+	margin-left: 40px;
+}
+
+.rating-option {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 4px 0;
+}
+
+.star {
+	font-size: 18px;
+	color: #ccc;
+}
+
+.star.filled {
+	color: #0E2042;
+}
+
+
+.slider-container {
+	position: relative;
+	width: 100%;
+	max-width: 382px;
+	padding-bottom: 40px;
+	margin: 0 auto;
 }
 
 input[type="range"],
 .slider,
 .slider-track,
 .slider-range {
-    width: 100%;
-    max-width: 382px;
-    left: 0;
-    right: 0;
+	width: 100%;
+	max-width: 382px;
+	left: 0;
+	right: 0;
 }
 
 
 
 input[type="range"] {
-    position: relative;
-    width: 100%;
-    border: none;
-    pointer-events: none;
-    -webkit-appearance: none;
-    background: transparent;
+	position: relative;
+	width: 100%;
+	border: none;
+	pointer-events: none;
+	-webkit-appearance: none;
+	background: transparent;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -414,11 +414,11 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .slider {
-    position: relative;
-    top: 18px;
-    height: 8px;
-    width: 100%;
-    max-width: 382px;
+	position: relative;
+	top: 18px;
+	height: 8px;
+	width: 100%;
+	max-width: 382px;
 }
 
 .slider-track {
@@ -505,6 +505,15 @@ input[type="range"]::-moz-focus-outer {
 	.breadcrumb span {
 		display: inline;
 		white-space: nowrap;
+	}
+
+	.breadcrumb a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.breadcrumb a:hover {
+		text-decoration: underline;
 	}
 
 	.dekstop-only {

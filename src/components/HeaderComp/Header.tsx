@@ -5,10 +5,12 @@ import { useState } from 'react';
 import CartModal from '../CartModal/CartModal';
 
 export default function Header() {
+	const API_SERVER = import.meta.env.VITE_API_SERVER;
+	const { isAuthenticated } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
-	const { isAuthenticated } = useAuth();
 	const [isCartOpen, setIsCartOpen] = useState(false);
+	const [searchText, setSearchText] = useState("");
 
 	const openSignUp = () => {
 		if (isAuthenticated) {
@@ -34,6 +36,32 @@ export default function Header() {
 		setIsCartOpen(false);
 	}
 
+	const handleSearch = async () => {
+		if (!searchText.trim()) return;
+
+		try {
+			const response = await fetch(`${API_SERVER}/category/search?query=${encodeURIComponent(searchText)}`);
+
+			if (!response.ok) throw new Error("Failed to fetch categories");
+
+			const categories = await response.json();
+
+			if (categories.length > 0) {
+				const firstRootCat = categories[0].id;
+				navigate(`/products/${firstRootCat}`);
+			} else {
+				navigate("/not-found");
+			}
+
+		} catch (error) {
+			console.error("Search error:", error);
+		}
+	};
+
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === "Enter") handleSearch();
+	};
+
 	return <>
 		<div className={styles.header}>
 			<div className={styles.mainLogoCont}>
@@ -53,8 +81,8 @@ export default function Header() {
 			</div>
 
 			<div className={styles.searchCont}>
-				<input type="text" placeholder="Search..." className={styles.input} id="searchInput" name="search" />
-				<button className={styles.searchButton}>
+				<input type="text" placeholder="Search..." className={styles.input} id="searchInput" name="search" value={searchText} onChange={(e) => setSearchText(e.target.value)} onKeyDown={handleKeyDown} />
+				<button className={styles.searchButton} onClick={handleSearch}>
 					<svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M14.6857 14.1056C13.6057 15.5216 11.1157 16.1996 9.99971 16.1996C6.51971 16.1996 3.69971 13.3796 3.69971 9.89961C3.69971 6.41961 6.51971 3.59961 9.99971 3.59961C13.4797 3.59961 16.2997 6.41961 16.2997 9.89961C16.2997 10.5836 16.1917 11.2436 15.9877 11.8616" stroke="#0E2042" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 						<path d="M21.6998 20.3995L14.6858 14.1055" stroke="#0E2042" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
